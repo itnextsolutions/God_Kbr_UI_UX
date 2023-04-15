@@ -1,0 +1,52 @@
+<div class="form-group row" style="    color: #080808;">
+    <div class="col-sm-6 mb-3 mb-sm-0">
+        <label class="control-label col-sm-6" for="clientName">Client Name:</label>
+        <select>
+            <option value="">Client Name</option>
+            <option *ngFor="let name of clientName">{{name}}</option>
+        </select>
+    </div>
+    <div class="col-sm-6 mb-3 mb-sm-0">
+        <label class="control-label col-sm-6" for="clientName">Page Name:</label>
+        <select>
+            <option value="">Page Name</option>
+            <option *ngFor="let page of pageName">{{page}}</option>
+        </select>
+    </div>
+    <div class="col-sm-6 mb-3 mb-sm-0">
+        <label class="control-label col-sm-6" for="clientName">Database Table:</label>
+        <select>
+            <option value="">Database Table</option>
+            <option *ngFor="let tablename of databaseTable">{{tablename}}</option>
+        </select>
+    </div>
+</div>
+
+<form [formGroup]="tableConfigForm">
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Coloumn Name</th>
+                <th>Display Text</th>
+                <th>Display Type</th>
+                <th>Is Required</th>
+                <th>Readonly</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>PRODUCT</td>
+                <td><input type="text"></td>
+                <td>
+                    <select>
+                        <option>tablename</option>
+                    </select>
+                </td>
+                <td><input type="checkbox"></td>
+                <td><input type="checkbox"></td>
+            </tr>
+        </tbody>
+    </table>
+</form>

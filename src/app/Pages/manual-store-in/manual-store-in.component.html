@@ -1,0 +1,202 @@
+
+<div clas="container" style="position:fixed; left: 100px; top:20px">
+    <h2>MANUAL STORE IN REQUEST</h2>
+    <h3>Request Details:</h3>
+    <form [formGroup]="storeInForm">
+        <div class="grid formgrid p-fluid">
+            <div class="field mb-4 col-12">
+                <label [for]="materialCategory" class="font-medium text-900"> Material Category:</label>
+                <input type="radio" [(ngModel)]="materialCategory" value="2" formControlName="materialCategory" />Dip
+                Roll
+                <input type="radio" [(ngModel)]="materialCategory" value="1" formControlName="materialCategory" />Wire
+
+                <!-- <label *ngFor="let radiobutton of radioItems">
+            <input type="radio" name="options" (click)="materialCategory = radiobutton" 
+                [checked]="radiobutton === materialCategory" formControlName="materialCategory">{{radiobutton}}
+             </label> -->
+                <span class="error"
+                    *ngIf="storeInForm.controls['materialCategory'].touched && storeInForm.controls['materialCategory'].invalid">
+                    Material Category required</span>
+            </div>
+            <br>
+            <div class="row">
+                <label [for]="materialBarcode" class="font-medium text-900"> Material Barcode:</label>
+                <input type="text" [(ngModel)]="materialBarcode" formControlName="materialBarcode" />
+                <span class="error"
+                    *ngIf="storeInForm.controls['materialBarcode'].touched && storeInForm.controls['materialBarcode'].invalid">
+                    Material Code required</span> &nbsp;
+
+                <label [for]="materialCode" class="font-medium text-900"> Material Code:</label>
+                <input type="text" [(ngModel)]="materialCode" formControlName="materialCode" />
+                <span class="error"
+                    *ngIf="storeInForm.controls['materialCode'].touched && storeInForm.controls['materialCode'].invalid">
+                    Material Code required</span>
+                    &nbsp;
+                <label [for]="uomKG" class="font-medium text-900">UOM:</label>
+                <input type="text" [(ngModel)]="uomKG" formControlName="uomKG" />
+                <span class="error"
+                    *ngIf="storeInForm.controls['uomKG'].touched && storeInForm.controls['uomKG'].invalid">
+                    UOM is required</span>
+            </div>
+            <br>
+            <div class="row">
+                <label [for]="materialDesc" class="font-medium text-900"> Material Description:</label>
+                <input type="text" [(ngModel)]="materialDesc" formControlName="materialDesc" />
+                <span class="error"
+                    *ngIf="storeInForm.controls['materialDesc'].touched && storeInForm.controls['materialDesc'].invalid">
+                    Material Description required</span>
+                    &nbsp;
+                <label [for]="materialType" class="font-medium text-900"> Material Type:</label>
+                <input type="text" [(ngModel)]="materialType" formControlName="materialType" />
+                <span class="error"
+                    *ngIf="storeInForm.controls['materialType'].touched && storeInForm.controls['materialType'].invalid">
+                    Material Type required</span>
+                    &nbsp;
+                <label [for]="uomMeter" class="font-medium text-900">UOM:</label>
+                <input type="text" [(ngModel)]="uomMeter" formControlName="uomMeter" />
+                <span class="error"
+                    *ngIf="storeInForm.controls['uomMeter'].touched && storeInForm.controls['uomMeter'].invalid">
+                    UOM is required</span>
+            </div>
+            <div class="row">
+                <label [for]="dom" class="font-medium text-900"> DOM:</label>
+                <input type="text" [(ngModel)]="dom" formControlName="dom" />
+                <span class="error" *ngIf="storeInForm.controls['dom'].touched && storeInForm.controls['dom'].invalid">
+                    DOE required</span>
+                    &nbsp;
+                <label [for]="doe" class="font-medium text-900"> DOE:</label>
+                <input type="text" [(ngModel)]="doe" formControlName="doe" />
+                <span class="error" *ngIf="storeInForm.controls['doe'].touched && storeInForm.controls['doe'].invalid">
+                    Vendor Code required</span>
+                    &nbsp;
+                <label [for]="uomNos" class="font-medium text-900">UOM:</label>
+                <input type="text" [(ngModel)]="uomNos" formControlName="uomNos" />
+                <span class="error"
+                    *ngIf="storeInForm.controls['uomNos'].touched && storeInForm.controls['uomNos'].invalid">
+                    UOM is required</span>
+            </div>
+            <div class="row">
+                <label [for]="vendorCode" class="font-medium text-900"> Vendor Code:</label>
+                <input type="text" [(ngModel)]="vendorCode" formControlName="vendorCode" />
+                <span class="error"
+                    *ngIf="storeInForm.controls['vendorCode'].touched && storeInForm.controls['vendorCode'].invalid">
+                    Vendor Code required</span>
+                    &nbsp;
+                <label [for]="vendordesc" class="font-medium text-900"> Vendor Description:</label>
+                <input type="text" [(ngModel)]="vendordesc" formControlName="vendordesc" />
+                <span class="error"
+                    *ngIf="storeInForm.controls['vendordesc'].touched && storeInForm.controls['vendordesc'].invalid">
+                    Vendor Description required</span>
+            </div>
+            <div class="row">
+                <label [for]="dipRollNo" class="font-medium text-900">Deep Roll No:</label>
+                <input type="text" [(ngModel)]="dipRollNo" formControlName="dipRollNo" />
+                <span class="error"
+                    *ngIf="storeInForm.controls['dipRollNo'].touched && storeInForm.controls['dipRollNo'].invalid">
+                    Deep Roll No required</span>
+                    &nbsp;
+                <label [for]="weight" class="font-medium text-900">Weight:</label>
+                <input type="text" [(ngModel)]="weight" formControlName="weight" />
+                <span class="error"
+                    *ngIf="storeInForm.controls['weight'].touched && storeInForm.controls['weight'].invalid">
+                    Weight is required</span>
+            </div>
+            <div class="row">
+                <label [for]="length" class="font-medium text-900">Length:</label>
+                <input type="text" [(ngModel)]="length" formControlName="length" />
+                <span class="error"
+                    *ngIf="storeInForm.controls['length'].touched && storeInForm.controls['length'].invalid">
+                    Length is required</span>
+                    &nbsp;
+                <label [for]="noOfSpool" class="font-medium text-900">No Of Spool/Box:</label>
+                <input type="text" [(ngModel)]="noOfSpool" formControlName="noOfSpool" />
+                <span class="error"
+                    *ngIf="storeInForm.controls['noOfSpool'].touched && storeInForm.controls['noOfSpool'].invalid">
+                    No Of Spool/Box is required</span>
+            </div>
+            <div class="row">
+                <label [for]="materialStatus" class="font-medium text-900"> Material Status:</label>
+                <!-- <input type="radio" [(ngModel)]="materialStatus" value="1" formControlName="materialStatus" />OK
+                <input type="radio" [(ngModel)]="materialStatus" value="2" formControlName="materialStatus" />HOLD
+                <input type="radio" [(ngModel)]="materialStatus" value="3" formControlName="materialStatus" />NCM HOLD
+                <input type="radio" [(ngModel)]="materialStatus" value="4" formControlName="materialStatus" />OVERAGED
+                <input type="radio" [(ngModel)]="materialStatus" value="5" formControlName="materialStatus" />SCRAP -->
+                <select>
+                    <option value="">Select</option>
+                    <option *ngFor="let tablename of m_StatusItems" [(ngModel)]="materialStatus" formControlName="materialStatus" >{{tablename}}</option>
+                </select>
+                <span class="error"
+                    *ngIf="storeInForm.controls['materialStatus'].touched && storeInForm.controls['materialStatus'].invalid">
+                    Material Status required</span>
+                    &nbsp;
+                <label [for]="partial" class="font-medium text-900">Partial:</label>
+                <label *ngFor="let chkBox of chkBox">
+                    <input type="checkbox" name="options" (click)="partial = chkBox" [checked]="chkBox === partial"
+                        formControlName="partial">{{chkBox}}
+                </label>
+                <span class="error"
+                    *ngIf="storeInForm.controls['partial'].touched && storeInForm.controls['partial'].invalid">
+                    Partial is required</span>
+            </div>
+            <div class="row">
+                <label [for]="transactionID" class="font-medium text-900">Transaction ID:</label>
+                <input type="text" [(ngModel)]="transactionID" formControlName="transactionID" />
+                <span class="error"
+                    *ngIf="storeInForm.controls['transactionID'].touched && storeInForm.controls['transactionID'].invalid">
+                    Transaction ID is required</span>
+
+                    &nbsp;
+
+                <label [for]="projectID" class="font-medium text-900">Project ID:</label>
+                <input type="text" [(ngModel)]="projectID" formControlName="projectID" />
+                <span class="error"
+                    *ngIf="storeInForm.controls['projectID'].touched && storeInForm.controls['projectID'].invalid">
+                    Project ID required</span>
+            </div>
+            <div class="row">
+                <label [for]="dor" class="font-medium text-900">Project ID:</label>
+                <input type="text" [(ngModel)]="dor" formControlName="dor" />
+                <span class="error" *ngIf="storeInForm.controls['dor'].touched && storeInForm.controls['dor'].invalid">
+                    DOR is required</span>
+                    &nbsp;
+                <label [for]="grnNo" class="font-medium text-900">GRN No:</label>
+                <input type="text" [(ngModel)]="grnNo" formControlName="grnNo" />
+                <span class="error"
+                    *ngIf="storeInForm.controls['grnNo'].touched && storeInForm.controls['grnNo'].invalid">
+                    GRN No is required</span>
+            </div>
+        </div>
+        <div class="grid">
+            <button type="submit" class="col-6 col-offset-6" (click)="Add()">Add</button>
+            <button type="submit" class="col-6 col-offset-6" (click)="Reset()">Reset</button>
+        </div>
+    </form>
+<br><br>
+    <table>
+        <thead>
+            <tr>
+                <th> Trans ID</th>
+                <th> Material Code </th>
+                <th> Pallet ID </th>
+                <th> QTY </th>
+                <th> DOM </th>
+                <th> DOE </th>
+                <th> Status </th>
+                <th> Material Type </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

@@ -27,7 +27,11 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/vendor/chart/Chart.min.js",
+              "src/assets/js/demo/chart-area-demo.js",
+              "src/assets/js/demo/chart-pie-demo.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -89,10 +93,17 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/vendor/chart/Chart.min.js",
+              "src/assets/js/demo/chart-area-demo.js",
+              "src/assets/js/demo/chart-pie-demo.js"
+            ]
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "25f84acd-8f13-4584-b774-0539f31c8d4f"
   }
 }

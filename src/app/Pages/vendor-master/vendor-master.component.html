@@ -1,0 +1,79 @@
+<div class="container" style ="position:fixed; left:400px; top:20px;">
+    <div>
+      <h3>Vendor Data Entry</h3>
+    </div> 
+    <div>
+      <h3>Vendor Master Data Entry</h3>
+    </div> 
+    
+      <form [formGroup]="vendorForm" >
+        <div class="grid formgrid p-fluid">
+    
+          <div class="field mb-4 col-12">
+            <label [for]="materialCategory" class="font-medium text-900"> Material Category</label>
+            <input  type="radio"  [(ngModel)]="materialCategory"  value ="1"  formControlName="materialCategory"/>Wire
+            <input  type="radio"  [(ngModel)]="materialCategory"  value ="2"  formControlName="materialCategory"/>Roll
+            <div class="error"
+              *ngIf="vendorForm.controls['materialCategory'].touched && vendorForm.controls['materialCategory'].invalid">Material Category required</div>
+          </div>
+    
+          <div class="field mb-4 col-12">
+            <label [for]="materialCode" class="font-medium text-900"> Material Code</label>
+            <input type="text" [(ngModel)]="materialCode"  formControlName="materialCode" (keyup)="filterData($event)" (click)="hidden()"/>
+            <div class="error"
+              *ngIf="vendorForm.controls['materialCode'].touched && vendorForm.controls['materialCode'].invalid">
+              Material Code required
+            </div>
+          </div>
+    
+    
+          
+    
+          <div class="field mb-4 col-12">
+            <label [for]="materialDesc" class="font-medium text-900"> Material Description</label>
+            <input type="text" [(ngModel)]="materialDesc" formControlName="materialDesc" />
+            <div class="error"
+              *ngIf="vendorForm.controls['materialDesc'].touched && vendorForm.controls['materialDesc'].invalid">Material Description required</div>
+          </div>
+    
+          <div class="field mb-4 col-12">
+            <label [for]="vendorCode" class="font-medium text-900"> Vendor Code</label>
+            <input type="text" [(ngModel)]="vendorCode" formControlName="vendorCode"  />
+            <div class="error"
+              *ngIf="vendorForm.controls['vendorCode'].touched && vendorForm.controls['vendorCode'].invalid">Vendor Code required</div>
+          </div>
+    
+          <div class="field mb-4 col-12">
+            <label [for]="vendorDesc" class="font-medium text-900">Vendor Description</label>
+            <input type="text" [(ngModel)]="vendorDesc" formControlName="vendorDesc"  />
+            <div class="error"
+              *ngIf="vendorForm.controls['vendorDesc'].touched && vendorForm.controls['vendorDesc'].invalid">Vendor Description required</div>
+          </div>
+    
+          <div class="grid">
+            <button  type="submit"  class="col-6 col-offset-6" (click)="add()">Add</button>
+            <button  type="submit" class="col-6 col-offset-6" (click)="resetForm()">Reset</button>
+          </div>
+    
+        </div>
+        
+       
+        
+      </form>
+    
+      <table   [hidden]="ishidden">
+        <tr>
+          <th>Company</th>
+          <th>Contact</th>
+          <th>Country</th>
+        </tr>
+        <tr>
+          <td>Alfreds Futterkiste</td>
+          <td>Maria Anders</td>
+          <td>Germany</td>
+        </tr>
+      </table>  
+    </div>
+      
+    
+    

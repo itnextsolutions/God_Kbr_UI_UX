@@ -1,0 +1,20 @@
+.error {
+    font-size: 12px;
+    color: red;
+  }
+
+
+  .container{
+    display: flex;
+    flex-direction: column;
+}
+
+.search-container{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.e-multi-column.e-ddl.e-popup.e-popup-open td { 
+  border: 1px solid rgba(0, 0, 0, 0.125); 
+  } 

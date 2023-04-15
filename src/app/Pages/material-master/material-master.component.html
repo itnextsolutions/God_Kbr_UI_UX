@@ -1,0 +1,83 @@
+<div style ="position:fixed; left:400px; top:20px;">
+    <h2>Master Data Entry</h2>
+    <h3>Material Master Data Entry</h3>
+    <div>
+        <form [formGroup]="masterForm">
+            <div class="grid formgrid p-fluid">
+                <div class="field mb-4 col-12">
+                    <label [for]="materialCategory" class="font-medium text-900"> Material Category:</label>
+                    <input type="radio" [(ngModel)]="materialCategory" value="2"
+                        formControlName="materialCategory" />Dip
+                    Roll
+                    <input type="radio" [(ngModel)]="materialCategory" value="1"
+                        formControlName="materialCategory" />Wire
+
+                    <!-- <label *ngFor="let radiobutton of radioItems">
+                    <input type="radio" name="options" (click)="materialCategory = radiobutton"
+                        [checked]="radiobutton === materialCategory" formControlName="materialCategory">{{radiobutton}}
+                </label> -->
+                    <span class="error"
+                        *ngIf="masterForm.controls['materialCategory'].touched && masterForm.controls['materialCategory'].invalid">
+                        Material Category required</span>
+                </div>
+
+                <div class="field mb-4 col-12">
+                    <label [for]="materialCode" class="font-medium text-900"> Material Code:</label>
+                    <input type="text" [(ngModel)]="materialCode" formControlName="materialCode" />
+                    <span class="error"
+                        *ngIf="masterForm.controls['materialCode'].touched && masterForm.controls['materialCode'].invalid">
+                        Material Code required</span>
+                </div>
+
+                <div class="field mb-4 col-12">
+                    <label [for]="materialDesc" class="font-medium text-900"> Material Description:</label>
+                    <input type="text" [(ngModel)]="materialDesc" formControlName="materialDesc" />
+                    <span class="error"
+                        *ngIf="masterForm.controls['materialDesc'].touched && masterForm.controls['materialDesc'].invalid">
+                        Material Description required</span>
+                </div>
+
+                <div class="field mb-4 col-12">
+                    <label [for]="shelfLife" class="font-medium text-900">Shelf Life:</label>
+                    <input type="text" [(ngModel)]="shelfLife" formControlName="shelfLife" />
+                    <span class="error"
+                        *ngIf="masterForm.controls['shelfLife'].touched && masterForm.controls['shelfLife'].invalid">
+                        Shelf Life required</span>
+                </div>
+
+                <div class="field mb-4 col-12">
+                    <label [for]="vendorContinuity" class="font-medium text-900">Vendor Continuity:</label>
+
+                    <label *ngFor="let chkBox of chkBox">
+                        <input type="checkbox" name="options" (click)="vendorContinuity = chkBox"
+                            [checked]="chkBox === vendorContinuity" formControlName="vendorContinuity">{{chkBox}}
+                    </label>
+
+                    <span class="error"
+                        *ngIf="masterForm.controls['vendorContinuity'].touched && masterForm.controls['vendorContinuity'].invalid">
+                        Vendor Continuity required</span>
+                </div>
+
+                <div class="field mb-4 col-12">
+                    <label [for]="noOfSpool" class="font-medium text-900">Number Off Spool/Box:</label>
+                    <input type="text" [(ngModel)]="noOfSpool" formControlName="noOfSpool" />
+                    <span class="error"
+                        *ngIf="masterForm.controls['noOfSpool'].touched && masterForm.controls['noOfSpool'].invalid">
+                        Number Off Spool/Box required</span>
+                </div>
+
+                <div class="field mb-4 col-12">
+                    <label [for]="uom" class="font-medium text-900">UOM:</label>
+                    <input type="text" [(ngModel)]="uom" formControlName="uom" />
+                    <span class="error" *ngIf="masterForm.controls['uom'].touched && masterForm.controls['uom'].invalid">
+                        UOM required</span>
+                </div>
+
+            </div>
+            <div class="grid">
+                <button type="submit" class="col-6 col-offset-6" (click)="Add()">Add</button>
+                <button type="submit" class="col-6 col-offset-6" (click)="Reset()">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>
