@@ -23,6 +23,7 @@ export class DynamicHtmlTableConfigurationComponent {
   isRequired : any=[];
   readonly : any=[];
 
+  
   constructor(public fb: UntypedFormBuilder, private router: Router, private ser: MyService) {
   }
 
