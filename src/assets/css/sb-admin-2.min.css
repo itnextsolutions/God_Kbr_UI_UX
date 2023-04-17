@@ -260,7 +260,11 @@ th {
 }
 label {
     display: inline-block;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    font-size: 14px;
+    color: #0a0a0a;
+    font-weight: 600;
 }
 button {
     border-radius: 0;
@@ -298,7 +302,7 @@ select {
 }
 input[type=checkbox], input[type=radio] {
     box-sizing: border-box;
-    padding: 0;
+    margin-right: 5px;
 }
 textarea {
     overflow: auto;
@@ -1202,13 +1206,16 @@ pre code {
     margin-left: 83.33333%}
 .offset-xl-11 {
     margin-left: 91.66667%}
-}.table {
+}
+
+.table {
     width: 100%;
     margin-bottom: 1rem;
     color: #27272d;
+    font-size:12px;
 }
 .table td, .table th {
-    padding: .75rem;
+    padding: .25rem;
     vertical-align: top;
     border-top: 1px solid #e3e6f0;
 }
@@ -8193,7 +8200,7 @@ a:focus {
 }
 .sidebar {
     width: 6.5rem;
-    min-height: 100vh;
+    min-height: 100%;
 }
 .sidebar .nav-item {
     position: relative;
@@ -8299,7 +8306,6 @@ a:focus {
     font-weight: 800;
     padding: 1.5rem 1rem;
     text-align: center;
-    text-transform: uppercase;
     letter-spacing: .05rem;
     z-index: 1;
 }
@@ -8344,7 +8350,7 @@ a:focus {
 }
 @media (min-width:768px) {
     .sidebar {
-    width: 14rem!important;
+    width: 12rem!important;
 }
 .sidebar .nav-item .collapse {
     position: relative;
@@ -8370,7 +8376,7 @@ a:focus {
     width: 100%;
     text-align: left;
     padding: 1rem;
-    width: 14rem;
+    width: 11rem;
 }
 .sidebar .nav-item .nav-link i {
     font-size: .85rem;
@@ -8509,9 +8515,6 @@ a:focus {
     color: rgba(255, 255, 255, .3);
 }
 .sidebar-dark .nav-item .nav-link:active, .sidebar-dark .nav-item .nav-link:focus, .sidebar-dark .nav-item .nav-link:hover {
-    color: #56226a  !important;
-    
-    background: white;
    
     border-radius: 40px;
 }

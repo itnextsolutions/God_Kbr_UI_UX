@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialMasterComponent } from './Pages/material-master/material-master.component';
 import { VendorMasterComponent } from './Pages/vendor-master/vendor-master.component';
 import { DynamicHtmlTableConfigurationComponent } from './Pages/dynamic-html-table-configuration/dynamic-html-table-configuration.component';
+import { SidebarComponent } from './SharedPages/sidebar/sidebar.component';
+import { NavbarComponent } from './SharedPages/navbar/navbar.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { DynamicHtmlTableConfigurationComponent } from './Pages/dynamic-html-tab
     ManualStoreInComponent,
     MaterialMasterComponent,
     VendorMasterComponent,
-    DynamicHtmlTableConfigurationComponent
+    DynamicHtmlTableConfigurationComponent,
+    SidebarComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -7,10 +7,9 @@
     width: 40%;
   }
 
-  label {
+  .label {
     display: inline-block;
-  
-    font-size: 16px;
+    font-size: 14px;
     color: #0a0a0a;
     font-weight: 600;
 }
