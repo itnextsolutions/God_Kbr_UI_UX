@@ -18,3 +18,21 @@
 .e-multi-column.e-ddl.e-popup.e-popup-open td { 
   border: 1px solid rgba(0, 0, 0, 0.125); 
   } 
+
+
+  label {
+    display: inline-block;
+  
+    font-size: 16px;
+    color: #0a0a0a;
+    font-weight: 600;
+}
+
+button#submit{
+    white-space: normal;
+    width:auto;
+    background: #6b47df;
+    color: #ffffff;
+    font-weight: 600;
+    width: 25%;
+  }
