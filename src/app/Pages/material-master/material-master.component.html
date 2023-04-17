@@ -3,79 +3,55 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+   <!-- Sidebar -->
+   <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
   
-        <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-            </div>
-            <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-        </a>
-  
-        <!-- Divider -->
-        <hr class="sidebar-divider my-0">
-  
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <a class="nav-link" href="home">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span></a>
-        </li>
-  
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <a class="nav-link" href="storein">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Demo Page</span></a>
-        </li>
-  <!-- Divider -->
-  <hr class="sidebar-divider">
-        <li class="nav-item active">
-            <a class="nav-link" href="manualStoreIn">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Manual Storein</span></a>
-        </li>
-  
-          <!-- Divider -->
-  <hr class="sidebar-divider">
-  <li class="nav-item active">
-      <a class="nav-link" href="materialMaster">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Material Master</span></a>
-  </li>
-  
-  
-  <hr class="sidebar-divider">
-  <li class="nav-item active">
-      <a class="nav-link" href="vendorMaster">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Vendor Master</span></a>
-  </li>
-  
-  
-  
-  <hr class="sidebar-divider">
-  <li class="nav-item active">
-      <a class="nav-link" href="tableConfiguration">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>table Configuration</span></a>
-  </li>
-  
-  
-  <!-- Divider -->
-  <hr class="sidebar-divider">
-        <!-- Heading -->
-        <!-- <div class="sidebar-heading">
-            Interface
-        </div> -->
-  
-       
-       
-  
-    </ul>
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+            <li class="nav-item active">
+                <a class="nav-link" href="manualStoreIn">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Manual Storein</span></a>
+            </li>
+    
+            <!-- Divider -->
+    <hr class="sidebar-divider">
+    <li class="nav-item active">
+        <a class="nav-link" href="materialMaster">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Material Master</span></a>
+    </li>
+    
+    
+    <hr class="sidebar-divider">
+    <li class="nav-item active">
+        <a class="nav-link" href="vendorMaster">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Vendor Master</span></a>
+    </li>
+    
+    
+    
+    <hr class="sidebar-divider">
+    <li class="nav-item active">
+        <a class="nav-link" href="tableConfiguration">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>table Configuration</span></a>
+    </li>
+    
+    
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+   
+</ul>
     <!-- End of Sidebar -->
   
     <!-- Content Wrapper -->
@@ -522,313 +498,19 @@
             <!-- /.container-fluid -->
 
 
-            <!-- data table -->
+            <!--Details grid start-->
             <div class="container-fluid">
-                <div class="card-header1 d-sm-flex justify-content-between ">
-                    <h6 class="m-0 font-weight-bold " style="color:#fff; padding: 5px 0 0 0;">Overview - 12 Orders</h6>
-                    
-                </div>
                 <div class="tab-content">
-                    <div id="storein" class="tab-pane fade in active">
+                    <div id="storeout" class="">
                         <div class="card shadow mb-4">
                             <div class="card-header d-sm-flex py-3 justify-content-between ">
-                                <h6 class="m-0 font-weight-bold " style="color:#fff; padding: 5px 0 0 0;">Store IN - All Requests</h6>
-                                <a style="margin-left: 70%;" href="#" data-toggle="modal" data-target="#DetailsModal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    class="fas fa-save fa-sm text-white-50"></i> Add Store In</a>
-                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    class="fas fa-download fa-sm text-white-50"></i> Export Excel</a>
+                                <h6 class="m-0 font-weight-bold" style="color:#fff; padding: 5px 0 0 0;">Master Data</h6>
+                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i Class="fas fa-download fa-sm text-white-50"></i> Export Excel</a>
                             </div>
-                            
-                        
+
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr style="background-color:  #eeebf6; color: #361374;">
-                                                <th>Action</th>
-                                                <th>Order Ref No</th>
-                                                <th>Order Type</th>
-                                                <th>SKU Code</th>
-                                                <th>Batch No</th>
-                                                <th>Quantity</th>
-                                                <th>SKU_Wt</th>
-                                                <th>UOM</th>
-                                                <th>MFG Date</th>
-                                                <th>Supplier Code</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr style="background-color: #eeebf6; color: #361374;">
-                                                <th>Action</th>
-                                                <th>Order Ref No</th>
-                                                <th>Order Type</th>
-                                                <th>SKU Code</th>
-                                                <th>Batch No</th>
-                                                <th>Quantity</th>
-                                                <th>SKU_Wt</th>
-                                                <th>UOM</th>
-                                                <th>MFG Date</th>
-                                                <th>Supplier Code</th>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122334</td>
-                                                <td>IN</td>
-                                                <td>FG100034</td>
-                                                <td>B001</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>51378940567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>132334</td>
-                                                <td>IN</td>
-                                                <td>FG100035</td>
-                                                <td>B002</td>
-                                                <td>500</td>
-                                                <td>70kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>51378990567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122336</td>
-                                                <td>IN</td>
-                                                <td>FG100036</td>
-                                                <td>B003</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122338</td>
-                                                <td>IN</td>
-                                                <td>FG100037</td>
-                                                <td>B004</td>
-                                                <td>400</td>
-                                                <td>100kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122334</td>
-                                                <td>IN</td>
-                                                <td>FG100034</td>
-                                                <td>B001</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122334</td>
-                                                <td>IN</td>
-                                                <td>FG100034</td>
-                                                <td>B001</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122334</td>
-                                                <td>IN</td>
-                                                <td>FG100034</td>
-                                                <td>B001</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122334</td>
-                                                <td>IN</td>
-                                                <td>FG100034</td>
-                                                <td>B001</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122334</td>
-                                                <td>IN</td>
-                                                <td>FG100034</td>
-                                                <td>B001</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122334</td>
-                                                <td>IN</td>
-                                                <td>FG100034</td>
-                                                <td>B001</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>51378940567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>132334</td>
-                                                <td>IN</td>
-                                                <td>FG100035</td>
-                                                <td>B002</td>
-                                                <td>500</td>
-                                                <td>70kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>51378990567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122336</td>
-                                                <td>IN</td>
-                                                <td>FG100036</td>
-                                                <td>B003</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122338</td>
-                                                <td>IN</td>
-                                                <td>FG100037</td>
-                                                <td>B004</td>
-                                                <td>400</td>
-                                                <td>100kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122334</td>
-                                                <td>IN</td>
-                                                <td>FG100034</td>
-                                                <td>B001</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="storeout" class="tab-pane fade">
-                        <div class="card shadow mb-4">
-                            <div class="card-header d-sm-flex py-3 justify-content-between ">
-                                <h6 class="m-0 font-weight-bold" style="color:#fff; padding: 5px 0 0 0;">Store Out - All Requests</h6>
-                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    class="fas fa-download fa-sm text-white-50"></i> Export Excel</a>
-                            </div>
-                            
-                        
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    
+
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr style="background-color:  #eeebf6; color: #361374;">
@@ -860,9 +542,10 @@
                                         </tfoot>
                                         <tbody>
                                             <tr>
-                                                <td> 
+                                                <td>
                                                     <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="customCheck">
                                                         <label class="custom-control-label" for="customCheck"></label>
                                                     </div>
                                                 </td>
@@ -877,9 +560,10 @@
                                                 <td>51378940567</td>
                                             </tr>
                                             <tr>
-                                                <td> 
+                                                <td>
                                                     <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="customCheck">
                                                         <label class="custom-control-label" for="customCheck"></label>
                                                     </div>
                                                 </td>
@@ -892,210 +576,6 @@
                                                 <td>--</td>
                                                 <td>12-03-2021</td>
                                                 <td>51378990567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122336</td>
-                                                <td>IN</td>
-                                                <td>FG100036</td>
-                                                <td>B003</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122338</td>
-                                                <td>IN</td>
-                                                <td>FG100037</td>
-                                                <td>B004</td>
-                                                <td>400</td>
-                                                <td>100kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122334</td>
-                                                <td>IN</td>
-                                                <td>FG100034</td>
-                                                <td>B001</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122334</td>
-                                                <td>IN</td>
-                                                <td>FG100034</td>
-                                                <td>B001</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122334</td>
-                                                <td>IN</td>
-                                                <td>FG100034</td>
-                                                <td>B001</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122334</td>
-                                                <td>IN</td>
-                                                <td>FG100034</td>
-                                                <td>B001</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122334</td>
-                                                <td>IN</td>
-                                                <td>FG100034</td>
-                                                <td>B001</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122334</td>
-                                                <td>IN</td>
-                                                <td>FG100034</td>
-                                                <td>B001</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>51378940567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>132334</td>
-                                                <td>IN</td>
-                                                <td>FG100035</td>
-                                                <td>B002</td>
-                                                <td>500</td>
-                                                <td>70kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>51378990567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122336</td>
-                                                <td>IN</td>
-                                                <td>FG100036</td>
-                                                <td>B003</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122338</td>
-                                                <td>IN</td>
-                                                <td>FG100037</td>
-                                                <td>B004</td>
-                                                <td>400</td>
-                                                <td>100kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
-                                            </tr>
-                                            <tr>
-                                                <td> 
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td>122334</td>
-                                                <td>IN</td>
-                                                <td>FG100034</td>
-                                                <td>B001</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>5137890567</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -1105,11 +585,7 @@
                     </div>
                 </div>
             </div>
-            <!-- secon table -->
-
-           <!-- DataTales Example -->
-
-
+            <!-- Details grid end -->
   
         </div>
         <!-- End of Main Content -->
