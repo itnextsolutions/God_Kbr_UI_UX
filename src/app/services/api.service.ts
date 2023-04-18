@@ -24,5 +24,9 @@ export class MyService {
      GetMatrial(){
       return this.http.get(this.apiEndpoint + 'MaterialMaster/GetProduct');
       }
+
+      public getVendorMaster(){
+        return this.http.get(this.apiEndpoint + 'vendor/GetVendorMaster');
+      }
       
 }

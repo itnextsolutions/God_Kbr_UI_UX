@@ -46,7 +46,7 @@
                               <div clas="container" style="">
                                 <div id="form-content" class="col-md-8">
             
-                                  <form id="survey-form" onsubmit="return false;"> <!-- open form -->
+                                  <form  [formGroup]="vendorForm" id="survey-form" onsubmit="return false;"> <!-- open form -->
                                           
                                     
                                     <div class="form-group row"> 
@@ -65,30 +65,22 @@
 
 
                                         <div class="form-check form-check-inline">
-                                          <input  type="radio"  [(ngModel)]="materialCategory"  value ="1"  formControlName="materialCategory"/>
-                                          <label class="form-check-label" for="five-star">Wire</label>
+                                          <input  type="radio"  [(ngModel)]="materialCategory"  value ="1"  formControlName="materialCategory"/>Steel Wire &nbsp;
+                                          <input  type="radio"  [(ngModel)]="materialCategory"  value ="2"  formControlName="materialCategory"/>Dip Roll
+                                          <!-- <label class="form-check-label" for="five-star">Wire</label> -->
                                           <div class="error"
                                           *ngIf="vendorForm.controls['materialCategory'].touched && vendorForm.controls['materialCategory'].invalid">Material Category required</div>
                                        </div>
 
 
-                                       <div class="form-check form-check-inline">
+                                       <!-- <div class="form-check form-check-inline">
                                         <input  type="radio"  [(ngModel)]="materialCategory"  value ="2"  formControlName="materialCategory"/>
                                         <label class="form-check-label" for="five-star">Roll</label>
                                         <div class="error"
                                         *ngIf="vendorForm.controls['materialCategory'].touched && vendorForm.controls['materialCategory'].invalid">Material Category required</div>
-                                     </div>
+                                     </div> -->
                                       
-                                       
-                                       
-                   
-                   
-
-                                     
-                                      
-                                              
-                                    
-                                     </div>
+                                    </div>
                    
                                  </div>
 
@@ -102,17 +94,21 @@
                                     
                                     </div>
                                    
-                                    <div class="input-group col-sm-9">
+                                    <!-- <div class="input-group col-sm-9">
                                                        
-                                        <!-- <input type="text" class="form-control"(ngModel)]="materialCode"  formControlName="materialCode" (keyup)="filterData($event)" (click)="hidden()"/>
+                                        <input type="text" class="form-control"(ngModel)]="materialCode"  formControlName="materialCode" (keyup)="filterData($event)" (click)="hidden()"/>
                                         <div class="error"
                                           *ngIf="vendorForm.controls['materialCode'].touched && vendorForm.controls['materialCode'].invalid">
                                           Material Code required
-                                        </div> -->
+                                        </div>
+                                    </div> -->
 
-
-                                      
-                                     
+                                    <div class="input-group col-sm-9">
+                                                                   
+                                      <input id="name" type="text" [(ngModel)]="materialCode" formControlName="materialCode"  class="form-control" name="Material Code" required>
+                                      <span class="error"
+                                      *ngIf="vendorForm.controls['materialCode'].touched && vendorForm.controls['materialCode'].invalid">
+                                      Material Code required</span>
                                     </div>
                                  </div>
                                       <div class="row form-group">
@@ -144,53 +140,26 @@
 
                                           
                                         </div>
-                                     </div>
-
-
-
-
-                                     <div class="row form-group">
-                                      <div class="col-sm-3">
-                                     
-                                      
-
-                                       <label [for]="vendorDesc" class="font-medium text-900 control-label">Vendor Description :</label>
                                       </div>
-                                     
-                                      <div class="input-group col-sm-9">
-                                        <input type="text" class="form-control" [(ngModel)]="vendorDesc" formControlName="vendorDesc"  />
-                <div class="error"
-                  *ngIf="vendorForm.controls['vendorDesc'].touched && vendorForm.controls['vendorDesc'].invalid">Vendor Description required</div>
 
-                                        
+                                      <div class="row form-group">
+                                        <div class="col-sm-3">
+                                          <label [for]="vendorDesc" class="font-medium text-900 control-label">Vendor Description :</label>
+                                        </div>
+                                        <div class="input-group col-sm-9">
+                                          <input type="text" class="form-control" [(ngModel)]="vendorDesc" formControlName="vendorDesc"  />
+                                          <div class="error"
+                                            *ngIf="vendorForm.controls['vendorDesc'].touched && vendorForm.controls['vendorDesc'].invalid">Vendor Description required</div>
+                                        </div>
                                       </div>
-                                   </div>
 
-
-                                    
-                                    
-                                       
-                                     
-                                       
-                                     
-                                       
-                                  
-                                 
-                                  
-                                       
-                                   
-                                       
-                                   
-                                      
-                                   <div class="form-group row">
-                                    <div class="col-sm-3 "></div>
-                                    <div class="col-sm-9   submit-button">
-                                      <button type="submit"  class="btn btn-primary " style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;"  aria-pressed="true" (click)="add()">Add</button>
-
-                                      <button type="submit" class=" btn btn-info" style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="resetForm()"> Reset</button>
-                                      
-                                    </div>
-                                  </div>
+                                      <div class="form-group row">
+                                        <div class="col-sm-3 "></div>
+                                        <div class="col-sm-9   submit-button">
+                                          <button type="submit"  class="btn btn-primary " style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;"  aria-pressed="true" (click)="add()">Add</button>
+                                          <button type="submit" class=" btn btn-info" style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="resetForm()"> Reset</button>
+                                        </div>
+                                      </div>
                                                      
                                   </form> <!-- close form -->
 
@@ -226,55 +195,56 @@
                 <div class="card-body">
                     <div class="table-responsive">
 
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
                             <thead>
                                 <tr style="background-color:  #eeebf6; color: #361374;">
-                                    <th>Action</th>
-                                    <th>Order Ref No</th>
-                                    <th>Order Type</th>
-                                    <th>SKU Code</th>
-                                    <th>Batch No</th>
-                                    <th>Quantity</th>
-                                    <th>SKU_Wt</th>
-                                    <th>UOM</th>
+                                    <th>Sr.No</th>
+                                    <th>Material Code</th>
+                                    <th>Material Category</th>
+                                    <th>Material Description</th>
+                                    <th>Vendor Code</th>
+                                    <th>Vendor Description</th>
+                                    <th>DOE</th>
+                                    <!-- <th>UOM</th>
                                     <th>MFG Date</th>
-                                    <th>Supplier Code</th>
+                                    <th>Supplier Code</th> -->
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr style="background-color:  #eeebf6; color: #361374;">
-                                    <th>Action</th>
-                                    <th>Order Ref No</th>
-                                    <th>Order Type</th>
-                                    <th>SKU Code</th>
-                                    <th>Batch No</th>
-                                    <th>Quantity</th>
-                                    <th>SKU_Wt</th>
-                                    <th>UOM</th>
+                                    <!-- <th>Action</th> -->
+                                    <th>Material Code</th>
+                                    <th>Material Category</th>
+                                    <th>Material Description</th>
+                                    <th>Vendor Code</th>
+                                    <th>Vendor Description</th>
+                                    <th>DOE</th>
+                                    <!-- <th>UOM</th>
                                     <th>MFG Date</th>
-                                    <th>Supplier Code</th>
+                                    <th>Supplier Code</th> -->
                                 </tr>
                             </tfoot>
-                            <tbody>
+                            <tbody *ngFor="let data of vendor_list; let i=index">
                                 <tr>
-                                    <td>
+                                    <!-- <td>
                                         <div class="custom-control custom-checkbox small">
                                             <input type="checkbox" class="custom-control-input"
                                                 id="customCheck">
                                             <label class="custom-control-label" for="customCheck"></label>
                                         </div>
-                                    </td>
-                                    <td>122334</td>
-                                    <td>IN</td>
-                                    <td>FG100034</td>
-                                    <td>B001</td>
-                                    <td>400</td>
-                                    <td>50kg</td>
-                                    <td>--</td>
+                                    </td> -->
+                                    <td>{{i + 1}}</td>
+                                    <td>{{data.VED_PRD_COD}}</td>
+                                    <td>{{data.VED_PRD_GRP_COD}}</td>
+                                    <td>{{data.VED_PRD_DESC}}</td>
+                                    <td>{{data.VED_COD}}</td>
+                                    <td>{{data.VED_DESC}}</td>
+                                    <td>{{data.VED_DT_FIRST_IN|date}}</td>
+                                    <!-- <td>--</td>
                                     <td>12-03-2021</td>
-                                    <td>51378940567</td>
+                                    <td>51378940567</td> -->
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td>
                                         <div class="custom-control custom-checkbox small">
                                             <input type="checkbox" class="custom-control-input"
@@ -291,7 +261,7 @@
                                     <td>--</td>
                                     <td>12-03-2021</td>
                                     <td>51378990567</td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>

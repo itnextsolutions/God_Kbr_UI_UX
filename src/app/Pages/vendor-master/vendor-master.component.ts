@@ -18,6 +18,8 @@ export class VendorMasterComponent {
    materialDesc : string="";
    vendorCode : string="";
    vendorDesc : string="";
+
+   vendor_list:any=[];
   
     constructor(
       private fb: FormBuilder,
@@ -38,6 +40,12 @@ export class VendorMasterComponent {
          //this.dataSource.paginator = this.paginator;
         // this.dataSource.sort = this.matSort;
     })
+
+      this.MyService.getVendorMaster().subscribe(resp =>{
+        this.vendor_list =resp;
+        console.log(this.vendor_list);
+      })
+
     }
   
     filterData($event : any){
@@ -49,7 +57,7 @@ export class VendorMasterComponent {
       if (this.vendorForm.valid) {
        // alert('valid form');
         var data ={
-          material_cat : this.materialCategory,
+          material_category : this.materialCategory,
           material_code : this.materialCode,
           material_desc : this.materialDesc,
           vendor_code : this.vendorCode,
