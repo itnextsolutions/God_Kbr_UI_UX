@@ -24,12 +24,13 @@ export class MaterialMasterComponent {
   vendorContinuity: any;
   noOfSpool: string = "";
   uom: string = "";
+  material: any;
 
-  constructor(public fb: UntypedFormBuilder, private router: Router, private ser: MyService) {
+  constructor(public fb: UntypedFormBuilder, private router: Router, private service: MyService) {
     this.radioItems = ['Dip Roll', 'Wire'];
     this.chkBox = ['Yes', 'No'];
   }
-  
+
   form: FormGroup<{}> | undefined;
 
   ngOnInit(): void {
@@ -43,6 +44,12 @@ export class MaterialMasterComponent {
       noOfSpool: ['', [Validators.required]],
       uom: ['', [Validators.required]],
     });
+
+    this.service.GetMatrial().subscribe(data => {
+      this.material = data;
+      console.log(this.material)
+    });
+
   }
 
   get formControl() {
@@ -50,7 +57,7 @@ export class MaterialMasterComponent {
   }
 
   Add() {
-
+    debugger
     if (this.masterForm.valid) {
       var val = {
         materialCategory: this.materialCategory,
@@ -62,18 +69,18 @@ export class MaterialMasterComponent {
         uom: this.uom,
       };
 
-      this.ser.insertMaterial(val).subscribe(res => {
+      this.service.insertMaterial(val).subscribe(res => {
         alert(res.toString());
       })
     }
-      else {
+    else {
       this.masterForm.markAllAsTouched();
     }
- 
-}
 
-Reset() {
-  this.masterForm.reset();
-}
-// html code dynamic based on table configuration with ng model bind in angular 
+  }
+
+  Reset() {
+    this.masterForm.reset();
+  }
+  // html code dynamic based on table configuration with ng model bind in angular 
 }

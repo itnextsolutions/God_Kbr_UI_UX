@@ -20,4 +20,9 @@ export class MyService {
     getUserData(){
       return this.http.get('https://jsonplaceholder.typicode.com/users')
     }
+
+     GetMatrial(){
+      return this.http.get(this.apiEndpoint + 'MaterialMaster/GetProduct');
+      }
+      
 }

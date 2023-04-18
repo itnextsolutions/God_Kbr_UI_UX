@@ -1,246 +1,283 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-       <app-sidebar></app-sidebar>
+    <app-sidebar></app-sidebar>
     <!-- End of Sidebar -->
-    
-      <!-- Content Wrapper -->
-      <div id="content-wrapper" class="d-flex flex-column">
-    
-          <!-- Main Content -->
-          <div id="content">
-    
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
             <!-- Topbar -->
             <app-navbar></app-navbar>
             <!-- End of Topbar -->
-  
+
             <!-- Begin Page Content -->
             <div class="container-fluid">
-  
+
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Master Data Entry</h1>
-                   
+
                 </div>
-                
-            
-  
+
+
+
                 <!-- Content Row -->
-  
+
                 <div class="row">
-  
+
                     <!-- Area Chart -->
                     <div class="col-xl-12 col-lg-12">
                         <div class="card shadow mb-4">
                             <!-- Card Header - Dropdown -->
-                            <div
-                                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                 <h6 class="m-0 font-weight-bold text-primary">Material Master Data Entry</h6>
-                                
-  
-  
+
+
+
                             </div>
-                            
+
                             <!-- Card Body -->
                             <div class="card-body">
                                 <div clas="container" style="">
 
 
-                                   
+
                                     <div id="form-content" class="col-md-8">
-            
-                                        <form id="survey-form" onsubmit="return false;">
+
+                                        <form id="survey-form" [formGroup]="masterForm" >
 
 
 
-                                            <div class="form-group row"> 
-                  
+                                            <!-- <div class="form-group row">
+
                                                 <div class="col-sm-3">
-                                                    <label [for]="materialCategory" class="font-medium text-900"> Material Category:</label>
+                                                    <label [for]="materialCategory" class="font-medium text-900">
+                                                        Material Category:</label>
                                                 </div>
-                             
+
                                                 <div class="col-sm-9">
-                                                  
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="star-rating" id="five-star" value="five-star">
-                                                     <label class="form-check-label" for="five-star">Dip
-                                                        Roll</label>
-          
-                                                    
-                                                  </div>
-                             
-                                                  <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="star-rating" id="four-star" value="four-star">
-                                                    <label class="form-check-label" for="four-star">Wire</label>
-                                                  </div>
-                             
-                                                
-                             
-                                                      
-                                              
-                                               </div>
-                             
-                                           </div>
-                                                            
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" [(ngModel)]="materialCategory" name="star-rating"
+                                                            id="five-star" value="five-star">
+                                                        <label class="form-check-label" for="five-star">Dip
+                                                            Roll</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" [(ngModel)]="materialCategory" name="star-rating"
+                                                            id="four-star" value="four-star">
+                                                        <label class="form-check-label" for="four-star">Wire</label>
+                                                    </div>
+                                                </div>
+
+                                            </div> -->
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <label [for]="materialCategory" class="font-medium text-900">
+                                                        Material Category:</label>
+                                                </div>
+
+                                                <div class="col-sm-9">
+                                                    <!-- <input type="radio" [(ngModel)]="materialCategory" value="2"
+                                                        formControlName="materialCategory" />Dip
+                                                    Roll
+                                                    <input type="radio" [(ngModel)]="materialCategory" value="1"
+                                                        formControlName="materialCategory" />Wire -->
+
+                                                    <label *ngFor="let radiobutton of radioItems" formControlName="materialCategory" name="options" ngDefaultControl>
+                                                    <input type="radio"  (click)="materialCategory = radiobutton" 
+                                                        [checked]="radiobutton === materialCategory" >{{radiobutton}}
+                                                     </label>
+                                                    <span class="error"
+                                                        *ngIf="masterForm.controls['materialCategory'].touched && masterForm.controls['materialCategory'].invalid">
+                                                        Material Category required</span>
+                                                </div>
+                                            </div>
+
                                             <div class="row form-group">
 
-                     
-                     
-                                                <div class="col-sm-3">
-                                                 <label [for]="materialCode" class="font-medium text-900"> Material Code:</label>
-                                                </div>
-                                               
-                                                <div class="input-group col-sm-9">
-                                                                   
-                                                  <input id="name" type="text" [(ngModel)]="materialCode" formControlName="materialCode"  class="form-control" name="Material Code" required>
-                                                  <span class="error"
-                                                  *ngIf="masterForm.controls['materialCode'].touched && masterForm.controls['materialCode'].invalid">
-                                                  Material Code required</span>
-                                                </div>
-                                             </div>
-                                         
-                                             <div class="form-group row">
-                                                <div class="col-sm-3">
-                                                
-                           
-                           
-                                                  <label id="email-label" [for]="materialDesc" class=" control-label font-medium text-900" name="Material Description"> Material Description:</label>
-                                                  
-                                                </div>
-                                                
-                                              
-                                                <div class="input-group col-sm-9">
-                                                  <div class="input-group-prepend">
-                                                    
-                                                  </div>
-                                                  
-                                                     <input type="text" class="form-control " name="Material Description"  [(ngModel)]="materialDesc" formControlName="materialDesc" />
-                                                  <span class="error"
-                                                      *ngIf="masterForm.controls['materialDesc'].touched && masterForm.controls['materialDesc'].invalid">
-                                                      Material Description required</span>
-                                               
-                                                  
-                                                </div>
-                                             </div>
-                                              
-                                             <div class="form-group row">
-                                                <div class="col-sm-3">
-                                                 
-                                                  <label [for]="shelfLife" class="font-medium text-900 control-label" >Shelf Life:</label>
-                                                </div>
-                                              
-                                                <div class="input-group col-sm-9">
-                                             
-                                               
-                                                 <input type="text" [(ngModel)]="shelfLife" formControlName="shelfLife"  class="form-control"/>
-                                                 <span class="error"
-                                                     *ngIf="masterForm.controls['shelfLife'].touched && masterForm.controls['shelfLife'].invalid">
-                                                     Shelf Life required</span>
-                                                
-                                                </div>
-                                              </div>
 
 
-                                              <div class="form-group row"> 
-                  
                                                 <div class="col-sm-3">
-                                                    <label [for]="vendorContinuity" class="font-medium text-900">Vendor Continuity:</label>
+                                                    <label [for]="materialCode" class="font-medium text-900"> Material
+                                                        Code:</label>
                                                 </div>
-                             
-                                                <div class="col-sm-9">
-                                                  
-                                                  <div class="form-check form-check-inline">
-                                                    <label *ngFor="let chkBox of chkBox">
-                                                        <input type="checkbox" class="form-control" name="options" (click)="vendorContinuity = chkBox"
-                                                            [checked]="chkBox === vendorContinuity" formControlName="vendorContinuity">{{chkBox}}
-                                                    </label>
-                                
+
+                                                <div class="input-group col-sm-9">
+
+                                                    <input id="name" type="text" [(ngModel)]="materialCode"
+                                                        formControlName="materialCode" class="form-control"
+                                                        name="Material Code" required>
                                                     <span class="error"
-                                                        *ngIf="masterForm.controls['vendorContinuity'].touched && masterForm.controls['vendorContinuity'].invalid">
-                                                        Vendor Continuity required</span>
-                                                  </div>
-                             
-                                             
-                                              
-                                               </div>
-                             
-                                           </div>
-                          
-                                           
-                          
-                                             <div class="form-group row">
-                                                <div class="col-sm-3">
-                                                 
-                                                  <!-- <label [for]="shelfLife" class="font-medium text-900 control-label" >Shelf Life:</label> -->
-                                                  <label [for]="noOfSpool" class="font-medium text-900 control-label">Number Off Spool/Box:</label>
+                                                        *ngIf="masterForm.controls['materialCode'].touched && masterForm.controls['materialCode'].invalid">
+                                                        Material Code required</span>
                                                 </div>
-                                              
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+
+
+
+                                                    <label id="email-label" [for]="materialDesc"
+                                                        class=" control-label font-medium text-900"
+                                                        name="Material Description"> Material Description:</label>
+
+                                                </div>
+
+
                                                 <div class="input-group col-sm-9">
-                                             
-                                               
-                                                    <input class="form-control" type="text" [(ngModel)]="noOfSpool" formControlName="noOfSpool" />
+                                                    <div class="input-group-prepend">
+
+                                                    </div>
+
+                                                    <input type="text" class="form-control " name="Material Description"
+                                                        [(ngModel)]="materialDesc" formControlName="materialDesc" />
+                                                    <span class="error"
+                                                        *ngIf="masterForm.controls['materialDesc'].touched && masterForm.controls['materialDesc'].invalid">
+                                                        Material Description required</span>
+
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+
+                                                    <label [for]="shelfLife"
+                                                        class="font-medium text-900 control-label">Shelf Life:</label>
+                                                </div>
+
+                                                <div class="input-group col-sm-9">
+
+
+                                                    <input type="text" [(ngModel)]="shelfLife"
+                                                        formControlName="shelfLife" class="form-control" />
+                                                    <span class="error"
+                                                        *ngIf="masterForm.controls['shelfLife'].touched && masterForm.controls['shelfLife'].invalid">
+                                                        Shelf Life required</span>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group row">
+
+                                                <div class="col-sm-3">
+                                                    <label [for]="vendorContinuity" class="font-medium text-900">Vendor
+                                                        Continuity:</label>
+                                                </div>
+
+                                                <div class="col-sm-9">
+
+                                                    <div class="form-check form-check-inline">
+                                                        <label *ngFor="let chkBox of chkBox"  formControlName="vendorContinuity" ngDefaultControl>
+                                                            <input type="checkbox" 
+                                                                (click)="vendorContinuity = chkBox"
+                                                                [checked]="chkBox === vendorContinuity"
+                                                                class="form-control" name="options">{{chkBox}}
+                                                        </label>
+
+                                                        <span class="error"
+                                                            *ngIf="masterForm.controls['vendorContinuity'].touched && masterForm.controls['vendorContinuity'].invalid">
+                                                            Vendor Continuity required</span>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                            </div>
+
+
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+
+                                                    <!-- <label [for]="shelfLife" class="font-medium text-900 control-label" >Shelf Life:</label> -->
+                                                    <label [for]="noOfSpool"
+                                                        class="font-medium text-900 control-label">Number Off
+                                                        Spool/Box:</label>
+                                                </div>
+
+                                                <div class="input-group col-sm-9">
+
+
+                                                    <input class="form-control" type="text" [(ngModel)]="noOfSpool"
+                                                        formControlName="noOfSpool" />
                                                     <span class="error"
                                                         *ngIf="masterForm.controls['noOfSpool'].touched && masterForm.controls['noOfSpool'].invalid">
                                                         Number Off Spool/Box required</span>
-                                                
-                                                </div>
-                                              </div>
 
-                                              <div class="form-group row">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
                                                 <div class="col-sm-3">
-                                                 
-                                                
-                                                  <label [for]="uom" class="font-medium text-900 control-label">UOM:</label>
+
+
+                                                    <label [for]="uom"
+                                                        class="font-medium text-900 control-label">UOM:</label>
                                                 </div>
-                                              
+
                                                 <div class="input-group col-sm-9">
-                                             
-                          
-                                                        <input  class="form-control" type="text" [(ngModel)]="uom" formControlName="uom" />
-                                                <span class="error" *ngIf="masterForm.controls['uom'].touched && masterForm.controls['uom'].invalid">
-                                                    UOM required</span>
-                                                
+
+
+                                                    <input class="form-control" type="text" [(ngModel)]="uom"
+                                                        formControlName="uom" />
+                                                    <span class="error"
+                                                        *ngIf="masterForm.controls['uom'].touched && masterForm.controls['uom'].invalid">
+                                                        UOM required</span>
+
                                                 </div>
-                                               
-                                                
-                                              </div>
-                                           
-                                             
-                                          
-                                             
-                                        
-                                              <div class="form-group row">
+
+
+                                            </div>
+
+
+
+
+
+                                            <div class="form-group row">
                                                 <div class="col-sm-3 "></div>
                                                 <div class="col-sm-9   submit-button">
-                                                  <button type="submit"  class=" btn btn-primary" style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="Add()" aria-pressed="true">Add</button>
-                                                  <button type="submit" class="btn btn-info" style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;"  (click)="Reset()"> Reset</button>
-                                                  <!-- <button type="submit" class="col-6 col-offset-6" (click)="Add()">Add</button>
+                                                    <button type="submit" class=" btn btn-primary"
+                                                        style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;"
+                                                        (click)="Add()" aria-pressed="true">Add</button>
+                                                    <button type="submit" class="btn btn-info"
+                                                        style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;"
+                                                        (click)="Reset()"> Reset</button>
+                                                    <!-- <button type="submit" class="col-6 col-offset-6" (click)="Add()">Add</button>
                                                   <button type="submit" class="col-6 col-offset-6" (click)="Reset()">Reset</button> -->
                                                 </div>
-                                              </div>
-                                     
-                                             
-                                         
-                                             
-                                        
-                                            
-                                           
+                                            </div>
+
+
+
+
+
+
+
                                         </form> <!-- close form -->
-                                    
-                                        </div> <!-- close form content div -->
-  
-  
-                             
+
+                                    </div> <!-- close form content div -->
+
+
+
                                 </div>
                             </div>
                         </div>
                     </div>
-  
-                
+
+
                 </div>
-  
-               
-  
+
+
+
             </div>
             <!-- /.container-fluid -->
 
@@ -251,8 +288,10 @@
                     <div id="storeout" class="">
                         <div class="card shadow mb-4">
                             <div class="card-header d-sm-flex py-3 justify-content-between ">
-                                <h6 class="m-0 font-weight-bold" style="color:#fff; padding: 5px 0 0 0;">Master Data</h6>
-                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i Class="fas fa-download fa-sm text-white-50"></i> Export Excel</a>
+                                <h6 class="m-0 font-weight-bold" style="color:#fff; padding: 5px 0 0 0;">Master Data
+                                </h6>
+                                <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                        Class="fas fa-download fa-sm text-white-50"></i> Export Excel</a> -->
                             </div>
 
                             <div class="card-body">
@@ -262,32 +301,28 @@
                                         <thead>
                                             <tr style="background-color:  #eeebf6; color: #361374;">
                                                 <th>Action</th>
-                                                <th>Order Ref No</th>
-                                                <th>Order Type</th>
-                                                <th>SKU Code</th>
-                                                <th>Batch No</th>
-                                                <th>Quantity</th>
-                                                <th>SKU_Wt</th>
+                                                <th>Material Code</th>
+                                                <th>Material Category</th>
+                                                <th>Material Description</th>
+                                                <th>SHELF LIFE</th>
+                                                <th>VENDOR CONTINUITY</th>
+                                                <th>SPOOL/BOX</th>
                                                 <th>UOM</th>
-                                                <th>MFG Date</th>
-                                                <th>Supplier Code</th>
                                             </tr>
                                         </thead>
-                                        <tfoot>
+                                        <!-- <tfoot>
                                             <tr style="background-color:  #eeebf6; color: #361374;">
                                                 <th>Action</th>
-                                                <th>Order Ref No</th>
-                                                <th>Order Type</th>
-                                                <th>SKU Code</th>
-                                                <th>Batch No</th>
-                                                <th>Quantity</th>
-                                                <th>SKU_Wt</th>
+                                                <th>Material Code</th>
+                                                <th>Material Category</th>
+                                                <th>Material Description</th>
+                                                <th>SHELF LIFE</th>
+                                                <th>VENDOR CONTINUITY</th>
+                                                <th>SPOOL/BOX</th>
                                                 <th>UOM</th>
-                                                <th>MFG Date</th>
-                                                <th>Supplier Code</th>
                                             </tr>
-                                        </tfoot>
-                                        <tbody>
+                                        </tfoot> -->
+                                        <tbody *ngFor="let data of material">
                                             <tr>
                                                 <td>
                                                     <div class="custom-control custom-checkbox small">
@@ -296,17 +331,15 @@
                                                         <label class="custom-control-label" for="customCheck"></label>
                                                     </div>
                                                 </td>
-                                                <td>122334</td>
-                                                <td>IN</td>
-                                                <td>FG100034</td>
-                                                <td>B001</td>
-                                                <td>400</td>
-                                                <td>50kg</td>
-                                                <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>51378940567</td>
+                                                <td>{{data.PRD_COD}}</td>
+                                                <td>{{data.PRD_GRP_COD}}</td>
+                                                <td>{{data.PRD_DESC}}</td>
+                                                <td>{{data.PRD_LENG}}</td>
+                                                <td>{{data.PRD_CTRL_TYPE}}</td>
+                                                <td>{{data.PRD_PACK_QTY}}</td>
+                                                <td>{{data.PRD_MEAS_UNIT}} </td>
                                             </tr>
-                                            <tr>
+                                            <!-- <tr>
                                                 <td>
                                                     <div class="custom-control custom-checkbox small">
                                                         <input type="checkbox" class="custom-control-input"
@@ -321,9 +354,7 @@
                                                 <td>500</td>
                                                 <td>70kg</td>
                                                 <td>--</td>
-                                                <td>12-03-2021</td>
-                                                <td>51378990567</td>
-                                            </tr>
+                                            </tr> -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -333,10 +364,10 @@
                 </div>
             </div>
             <!-- Details grid end -->
-  
+
         </div>
         <!-- End of Main Content -->
-  
+
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
@@ -346,17 +377,14 @@
             </div>
         </footer>
         <!-- End of Footer -->
-  
+
     </div>
     <!-- End of Content Wrapper -->
-  
-  </div>
-  <!-- End of Page Wrapper -->
-  
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
-  </a>
-  
-  
-  
+</a>
