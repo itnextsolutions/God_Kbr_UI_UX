@@ -15,6 +15,8 @@ import { VendorMasterComponent } from './Pages/vendor-master/vendor-master.compo
 import { DynamicHtmlTableConfigurationComponent } from './Pages/dynamic-html-table-configuration/dynamic-html-table-configuration.component';
 import { SidebarComponent } from './SharedPages/sidebar/sidebar.component';
 import { NavbarComponent } from './SharedPages/navbar/navbar.component';
+import { StoreInOrderViewComponent } from './Pages/store-in-order-view/store-in-order-view.component';
+import { PalletizationProcessComponent } from './Pages/palletization-process/palletization-process.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { NavbarComponent } from './SharedPages/navbar/navbar.component';
     VendorMasterComponent,
     DynamicHtmlTableConfigurationComponent,
     SidebarComponent,
-    NavbarComponent
+    NavbarComponent,
+    StoreInOrderViewComponent,
+    PalletizationProcessComponent
   ],
   imports: [
     BrowserModule,
