@@ -3,179 +3,237 @@
     <!-- Sidebar -->
     <app-sidebar></app-sidebar>
     <!-- End of Sidebar -->
-    <div>
 
-        <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+        <!-- Main Content -->
+        <div id="content">
 
-                <!-- Topbar -->
-                <app-navbar></app-navbar>
-                <!-- End of Topbar -->
+            <!-- Topbar -->
+            <app-navbar></app-navbar>
+            <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Store IN Order View</h1>
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800"> Store IN Order View</h1>
+                </div>
 
-                    </div>
+                <!-- Content Row -->
+                <div class="row">
 
-                    <!--Details grid start-->
-                    <div class="container-fluid">
-                        <div class="tab-content">
-                            <div id="storeout" class="">
-                                <div class="card shadow mb-4">
-                                    <div class="card-header d-sm-flex py-3 justify-content-between ">
-                                        <h6 class="m-0 font-weight-bold" style="color:#fff; padding: 5px 0 0 0;">Order
-                                            details
-                                        </h6>
-                                        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i Class="fas fa-download fa-sm text-white-50"></i> Export Excel</a> -->
-                                    </div>
+                    <!-- Area Chart -->
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Order Details :</h6>
+                            </div>
 
-                                    <div class="card-body">
-                                        <div class="table-responsive">
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div clas="container">
+                                    <form>
+                                        <div class="grid formgrid p-fluid">
+                                            <!-- <div class="field mb-4 col-12">
+                                                <label [for]="materialCategory" class="font-medium text-900"> Material Category:</label>
+                                                <input type="radio" [(ngModel)]="materialCategory" value="2" formControlName="materialCategory" />Dip
+                                                Roll
+                                                <input type="radio" [(ngModel)]="materialCategory" value="1" formControlName="materialCategory" />Wire
+                                
+                                              
+                                                <span class="error"
+                                                    *ngIf="storeInForm.controls['materialCategory'].touched && storeInForm.controls['materialCategory'].invalid">
+                                                    Material Category required</span>
+                                            </div> -->
 
-                                            <table class="table table-bordered" id="dataTable" width="100%"
-                                                cellspacing="0">
-                                                <thead>
-                                                    <tr style="background-color:  #eeebf6; color: #361374;">
-                                                        <!-- <th>Action</th>
-                                                <th>Order Ref No</th>
-                                                <th>Order Type</th>
-                                                <th>SKU Code</th>
-                                                <th>Batch No</th>
-                                                <th>Quantity</th>
-                                                <th>SKU_Wt</th>
-                                                <th>UOM</th>
-                                                <th>MFG Date</th>
-                                                <th>Supplier Code</th> -->
+                                           
 
-                                                        <th>Action</th>
-                                                        <th>Trans ID</th>
-                                                        <th>Material Code</th>
-                                                        <th>Pallet ID</th>
-                                                        <th>QTY</th>
-                                                        <th>DOM</th>
-                                                        <th>DOE</th>
-                                                        <th>Status</th>
-                                                        <th>Material Type</th>
-                                                    </tr>
-                                                </thead>
-                                                
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox small">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    id="customCheck">
-                                                                <label class="custom-control-label"
-                                                                    for="customCheck"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox small">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    id="customCheck">
-                                                                <label class="custom-control-label"
-                                                                    for="customCheck"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-
-                                                    </tr>
-                                                </tbody>
-                                            </table>
                                         </div>
-                                    </div>
+
+                                        <div class="row">
+                                          
+
+
+                                            <div class="col-lg-12">
+
+                                                <div class="row form-group">
+                                                    <div class="col-lg-2">
+                                                        <label for="" class="font-medium text-900 control-label">Order Validity (in HR)</label>
+
+                                                       
+                                                    </div>
+
+                                                    <div class="input-group col-lg-4">
+                                                       
+                                                            <input type="text" class="form-control"/>
+                                                        <span class="error"></span>
+                                                          
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12">
+
+                                                <div class="row form-group">
+                                                    <div class="col-lg-2">
+                                                        <label for="" class="font-medium text-900 control-label">Order Validity (in HR)</label>
+
+                                                       
+                                                    </div>
+
+                                                    <div class="input-group col-lg-4">
+                                                       
+                                                            <input type="text" class="form-control"/>
+                                                        <span class="error"></span>
+                                                          
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                         
+                                        </div>
+
+                                      
+                                      
+                                      
+
+                                        <div class="form-group row">
+                                            <div class="col-sm-2 "></div>
+                                            <div class="col-sm-10   submit-button">
+                                                <button type="submit" class="btn btn-primary "
+                                                    style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;"
+                                                     >Add</button>
+
+                                                <button type="submit" class=" btn btn-info"
+                                                    style="padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;">
+                                                     Reset</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Details grid end -->
-
-                </div>    
+                </div>
             </div>
+
+              <!--Details grid start-->
+              <div class="container-fluid">
+                <div class="tab-content">
+                    <div id="storeout" class="">
+                        <div class="card shadow mb-4">
+                            <div class="card-header d-sm-flex py-3 justify-content-between ">
+                                <h6 class="m-0 font-weight-bold" style="color:#fff; padding: 5px 0 0 0;">Order
+                                    details
+                                </h6>
+                                <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i Class="fas fa-download fa-sm text-white-50"></i> Export Excel</a> -->
+                            </div>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+
+                                    <table class="table table-bordered" id="dataTable" width="100%"
+                                        cellspacing="0">
+                                        <thead>
+                                            <tr style="background-color:  #eeebf6; color: #361374;">
+                                                <!-- <th>Action</th>
+                                        <th>Order Ref No</th>
+                                        <th>Order Type</th>
+                                        <th>SKU Code</th>
+                                        <th>Batch No</th>
+                                        <th>Quantity</th>
+                                        <th>SKU_Wt</th>
+                                        <th>UOM</th>
+                                        <th>MFG Date</th>
+                                        <th>Supplier Code</th> -->
+
+                                                <th>Action</th>
+                                                <th>Trans ID</th>
+                                                <th>Material Code</th>
+                                                <th>Pallet ID</th>
+                                                <th>QTY</th>
+                                                <th>DOM</th>
+                                                <th>DOE</th>
+                                                <th>Status</th>
+                                                <th>Material Type</th>
+                                            </tr>
+                                        </thead>
+                                        
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="custom-control custom-checkbox small">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="customCheck">
+                                                        <label class="custom-control-label"
+                                                            for="customCheck"></label>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="custom-control custom-checkbox small">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="customCheck">
+                                                        <label class="custom-control-label"
+                                                            for="customCheck"></label>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Details grid end -->
+
         </div>
-          
-        <div id="content-wrapper" class="d-flex flex-column">
+        <!-- End of Main Content -->
 
-            <!-- Main Content -->
-            <div id="content">
-    
-               
-    
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-    
-                    
-    
-                    <!-- Content Row -->
-                    <div class="row">
-    
-                        <!-- Area Chart -->
-                        <div class="col-xl-12 col-lg-12">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <!--<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Request Details :</h6>
-                                </div>-->
-    
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div clas="container">
-                                        <form >
-                                            <div class="grid formgrid p-fluid">
-                                             </div>
-                                            <div class="col-lg-4">
-                                            <div class="row form-group">
-                                            <div class="col-lg-3">
-                                            <div class="input-group col-lg-9">
-                                           <label for=""> Order Validity (in HR)</label>
-                                        <input type="text"/>
-                                            <label for=""> (By default validity 48 hrs for each order)</label>
-                                            </div>
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2021</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
 
-                                            <!--Button submit and reset-->
-                                            <div class="form-group row">
-                                                <div class="col-sm-2 "></div>
-                                                <div class="col-sm-10   submit-button">
-                                                    <button type="submit" class="btn btn-primary "
-                                                        style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;"
-                                                        >Add</button>
-    
-                                <button type="submit">
+    </div>
+    <!-- End of Content Wrapper -->
 
-                                    <button type="Reset" class="btn btn-primary "
-                                    style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;"
-                                    >Reset</button>
-                                                       
-                                                
-                                               
-                                            
-                <!-- End of Page Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
 
-                <!-- Scroll to Top Button-->
-                <a class="scroll-to-top rounded" href="#page-top">
-                    <i class="fas fa-angle-up"></i>
-                </a>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>

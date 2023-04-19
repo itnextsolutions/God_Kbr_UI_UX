@@ -9,6 +9,8 @@ import { MaterialMasterComponent } from './Pages/material-master/material-master
 import { VendorMasterComponent } from './Pages/vendor-master/vendor-master.component';
 import { DynamicHtmlTableConfigurationComponent } from './Pages/dynamic-html-table-configuration/dynamic-html-table-configuration.component';
 import { StoreInOrderViewComponent } from './Pages/store-in-order-view/store-in-order-view.component';
+import { PalletizationProcessComponent } from './Pages/palletization-process/palletization-process.component';
+
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'storein',component:StoreInComponent},
@@ -17,7 +19,8 @@ const routes: Routes = [
   {path:'materialMaster',component:MaterialMasterComponent},
   {path:'vendorMaster',component:VendorMasterComponent},
   {path:'tableConfiguration',component:DynamicHtmlTableConfigurationComponent},
-  {path:'StoreInOrderview',component:StoreInOrderViewComponent}
+  {path:'storeInOrderview',component:StoreInOrderViewComponent},
+  {path:'palletizationProcess',component:PalletizationProcessComponent}
 ];
 
 @NgModule({
