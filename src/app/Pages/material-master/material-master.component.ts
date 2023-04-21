@@ -14,21 +14,31 @@ export class MaterialMasterComponent {
   });
 
 
-  radioItems: Array<string> = [];
-  chkBox: Array<string> = [];
+  radioItems: any = [];
+  chkBox: any = [
+    { Value: 1, Name: 'Yes', disabled: false }
+    // { Value: 0, Name: 'No', disabled: false }
+  ];
 
-  materialCategory: string = "";
-  materialCode: string = "";
-  materialDesc: string = "";
-  shelfLife: string = "";
-  vendorContinuity: any;
-  noOfSpool: string = "";
-  uom: string = "";
   material: any;
 
+  palletType: any = [
+    { "Id": 11, "Type": "Type 1" },
+    { "Id": 12, "Type": "Type 2" }
+  ];
+
+  PRD_COD: string = "";
+  PRD_GRP_COD: string = "";
+  PRD_DESC: string = "";
+  PRD_LENG: number=0;
+  PRD_CTRL_TYPE: number=0;
+  PRD_PACK_QTY: number=0 ;
+  PRD_MEAS_UNIT: string = "";
+  PRD_HUPT_ID: number =0;
+  disable: boolean = false;
+
+
   constructor(public fb: UntypedFormBuilder, private router: Router, private service: MyService) {
-    this.radioItems = ['Dip Roll', 'Wire'];
-    this.chkBox = ['Yes', 'No'];
   }
 
   form: FormGroup<{}> | undefined;
@@ -36,19 +46,24 @@ export class MaterialMasterComponent {
   ngOnInit(): void {
 
     this.masterForm = this.fb.group({
-      materialCategory: ['', [Validators.required]],
-      materialCode: ['', [Validators.required]],
-      materialDesc: ['', [Validators.required]],
-      shelfLife: ['', [Validators.required]],
-      vendorContinuity: ['', [Validators.required]],
-      noOfSpool: ['', [Validators.required]],
-      uom: ['', [Validators.required]],
+      PRD_COD: ['', [Validators.required]],
+      PRD_GRP_COD: ['', [Validators.required]],
+      PRD_DESC: ['', [Validators.required]],
+      PRD_LENG: ['', [Validators.required]],
+      // PRD_CTRL_TYPE: ['', [Validators.required]],
+      PRD_PACK_QTY: ['', [Validators.required]],
+      PRD_MEAS_UNIT: ['', [Validators.required]],
+      // PRD_HUPT_ID: ['', [Validators.required]],
     });
 
     this.service.GetMatrial().subscribe(data => {
       this.material = data;
-      console.log(this.material)
     });
+
+    this.service.GetMaterialCategory().subscribe(res => {
+      this.radioItems = res;
+    });
+
 
   }
 
@@ -59,14 +74,16 @@ export class MaterialMasterComponent {
   Add() {
     debugger
     if (this.masterForm.valid) {
+
       var val = {
-        materialCategory: this.materialCategory,
-        materialCode: this.materialCode,
-        materialDescription: this.materialDesc,
-        shelfLife: this.shelfLife,
-        vendorContinuity: this.vendorContinuity,
-        numberOfSpool: this.noOfSpool,
-        uom: this.uom,
+        PRD_COD: this.PRD_COD,
+        PRD_GRP_COD: this.PRD_GRP_COD,
+        PRD_DESC: this.PRD_DESC,
+        PRD_LENG: this.PRD_LENG,
+        PRD_CTRL_TYPE: this.PRD_CTRL_TYPE,
+        PRD_PACK_QTY: this.PRD_PACK_QTY,
+        PRD_MEAS_UNIT: this.PRD_MEAS_UNIT,
+        // PRD_HUPT_ID: this.PRD_HUPT_ID,
       };
 
       this.service.insertMaterial(val).subscribe(res => {
@@ -81,6 +98,23 @@ export class MaterialMasterComponent {
 
   Reset() {
     this.masterForm.reset();
+
+  }
+
+  handleOptionClick(selectedOption: any) {
+    debugger
+    // this.chkBox.forEach((option: { disabled: any; }) => {
+    //   if (option !== selectedOption) {
+    //     option.disabled = selectedOption.value;
+    //   }
+    // });
+
+    if (selectedOption.Value = 1) {
+      this.disable = true;
+    }
+    if (selectedOption.Value = 2) {
+      this.disable = true;
+    }
   }
   // html code dynamic based on table configuration with ng model bind in angular 
 }
