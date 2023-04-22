@@ -26,7 +26,7 @@
                             </div>
                             <!-- Card Body -->
                             <div class="card-body">
-                                <div clas="container" style="">
+                                <div clas="container">
                                     <div id="form-content" class="col-md-8">
                                         <form id="survey-form" [formGroup]="masterForm">
 
@@ -106,13 +106,16 @@
                                                         Continuity:</label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <div >
+                                                    <div>
                                                         <label *ngFor="let chkBox of chkBox"
                                                             class="form-check form-check-inline"
                                                             [(ngModel)]="PRD_CTRL_TYPE" formControlName="PRD_CTRL_TYPE"
                                                             ngDefaultControl>
-                                                            <input type="checkbox" [checked]="chkBox.Value === PRD_CTRL_TYPE"
-                                                                class="form-control" name="options" [value]="chkBox.Value" [disabled]="chkBox.disabled"  (click)="handleOptionClick(chkBox)">{{chkBox.Name}}
+                                                            <input type="checkbox"
+                                                                [checked]="chkBox.Value === PRD_CTRL_TYPE"
+                                                                class="form-control" name="options"
+                                                                [value]="chkBox.Value" [disabled]="chkBox.disabled"
+                                                                (click)="handleOptionClick(chkBox)">{{chkBox.Name}}
                                                         </label>
                                                         <!-- <span class="error"
                                                             *ngIf="masterForm.controls['PRD_CTRL_TYPE'].touched && masterForm.controls['PRD_CTRL_TYPE'].invalid">
@@ -153,22 +156,23 @@
                                             <div class="row form-group">
                                                 <div class="col-lg-3">
                                                     <label [for]="PRD_HUPT_ID"
-                                                        class="font-medium text-900 control-label"> Pallet 
+                                                        class="font-medium text-900 control-label"> Pallet
                                                         Type:</label>
                                                 </div>
 
-                                                <!-- <div class="input-group col-lg-6">
+                                                <div class="input-group col-lg-6">
 
-                                                    <select class="form-control" name="Name" formControlName="PRD_HUPT_ID"
-                                                        [(ngModel)]="PRD_HUPT_ID">
+                                                    <select class="form-control" name="Name"
+                                                        formControlName="PRD_HUPT_ID" [(ngModel)]="PRD_HUPT_ID">
                                                         <option value="0" disabled selected>Select</option>
-                                                        <option *ngFor="let tablename of palletType" [value]="tablename.Id">
+                                                        <option *ngFor="let tablename of palletType"
+                                                            [value]="tablename.Id">
                                                             {{tablename.Type}}</option>
                                                     </select>
                                                     <span class="error"
                                                         *ngIf="masterForm.controls['PRD_HUPT_ID'].touched && masterForm.controls['PRD_HUPT_ID'].invalid">
                                                         Pallet Type required</span>
-                                                </div> -->
+                                                </div>
                                             </div>
 
                                             <div class="form-group row">

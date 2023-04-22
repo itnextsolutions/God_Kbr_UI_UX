@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MyService } from 'src/app/services/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-material-master',
@@ -23,8 +24,8 @@ export class MaterialMasterComponent {
   material: any;
 
   palletType: any = [
-    { "Id": 11, "Type": "Type 1" },
-    { "Id": 12, "Type": "Type 2" }
+    { Id: 11, Type: 'Type 1' },
+    { Id: 12, Type: 'Type 2' }
   ];
 
   PRD_COD: string = "";
@@ -53,19 +54,23 @@ export class MaterialMasterComponent {
       // PRD_CTRL_TYPE: ['', [Validators.required]],
       PRD_PACK_QTY: ['', [Validators.required]],
       PRD_MEAS_UNIT: ['', [Validators.required]],
-      // PRD_HUPT_ID: ['', [Validators.required]],
+       PRD_HUPT_ID: ['', [Validators.required]],
     });
 
-    this.service.GetMatrial().subscribe(data => {
-      this.material = data;
-    });
 
+this.GetMaterialData();
     this.service.GetMaterialCategory().subscribe(res => {
       this.radioItems = res;
     });
 
 
   }
+
+GetMaterialData(){
+  this.service.GetMatrial().subscribe(data => {
+    this.material = data;
+  });
+}
 
   get formControl() {
     return this.masterForm.controls;
@@ -87,7 +92,15 @@ export class MaterialMasterComponent {
       };
 
       this.service.insertMaterial(val).subscribe(res => {
-        alert(res.toString());
+       
+        if(res == "Sucess"){
+          this.sucessAlert();
+          this.GetMaterialData();
+          this.GetMaterialData();
+        }
+        else{
+          this.errorAlert()
+        }
       })
     }
     else {
@@ -116,5 +129,30 @@ export class MaterialMasterComponent {
       this.disable = true;
     }
   }
+
+  
+  sucessAlert(){
+
+    Swal.fire({  
+      position: 'top',  
+      icon: 'success',  
+      title: 'Data has been saved',  
+      showConfirmButton: true,  
+       timer: 3000
+    })
+    
+  }
+
+  errorAlert(){  
+ 
+    Swal.fire({  
+      position: 'top', 
+      icon: 'error',  
+      title: 'Oops...',  
+      text: 'Something went wrong!',  
+      showConfirmButton: true,  
+      timer: 3000 
+    })  
+  } 
   // html code dynamic based on table configuration with ng model bind in angular 
 }
