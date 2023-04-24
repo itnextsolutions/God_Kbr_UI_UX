@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./palletization-process.component.css']
 })
 export class PalletizationProcessComponent {
-
+  public pageName: string = "Palletization Process";
 }

@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./store-in-order-view.component.css']
 })
 export class StoreInOrderViewComponent {
+  public pageName: string = "StoreIN Order View";
 
 }

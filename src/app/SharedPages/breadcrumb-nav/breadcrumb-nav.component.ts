@@ -18,13 +18,26 @@ export class BreadcrumbNavComponent {
     if(this.child_page === "Vendor Master" || this.child_page === "Material Master" ){
 
       this.current_page = "Master";
+      return;
     }
 
     if(this.child_page === "Manual StoreIN"){
 
       this.current_page = "Manual Request";
+      return
     }
 
+    if(this.child_page === "StoreIN Order View"){
+
+      this.current_page = "Store In";
+      return
+    }
+
+    if(this.child_page === "Palletization Process"){
+
+      this.current_page = "Palletization";
+      return
+    }
 
   }
 }
