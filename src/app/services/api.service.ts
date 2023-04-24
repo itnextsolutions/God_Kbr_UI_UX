@@ -13,6 +13,11 @@ export class MyService {
     return this.http.post(this.apiEndpoint + 'MaterialMaster/InsertMaterial', val);
   }
 
+ updateMaterial(val: any) {
+    debugger
+    return this.http.post(this.apiEndpoint + 'MaterialMaster/UpdateMaterial', val);
+  }
+
   public vendorDataEntry(data: any) {
     return this.http.post(this.apiEndpoint + 'vendor/InsertVendorMaster', data);
   }
@@ -21,7 +26,7 @@ export class MyService {
     return this.http.get('https://jsonplaceholder.typicode.com/users')
   }
 
-  GetMatrial() {
+  GetMaterialData() {
     return this.http.get(this.apiEndpoint + 'MaterialMaster/GetProduct');
   }
   
