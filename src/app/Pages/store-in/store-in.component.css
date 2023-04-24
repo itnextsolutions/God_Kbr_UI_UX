@@ -58,7 +58,7 @@
 .nav-tabs.nav-justified>.active>a, .nav-tabs.nav-justified>.active>a:focus {
     background-color:  #c90e0e;
 }
-, .nav-tabs.nav-justified>.active>a:hover {
+.nav-tabs.nav-justified>.active>a:hover {
     border-bottom-color: #fff;
 }
 }.nav-pills>li {

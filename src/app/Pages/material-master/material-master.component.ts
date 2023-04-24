@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 
 export class MaterialMasterComponent {
-
+  public pageName: string = "Material Master";
 
   public masterForm = new UntypedFormGroup({
   });

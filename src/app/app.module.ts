@@ -18,6 +18,14 @@ import { NavbarComponent } from './SharedPages/navbar/navbar.component';
 import { StoreInOrderViewComponent } from './Pages/store-in-order-view/store-in-order-view.component';
 import { PalletizationProcessComponent } from './Pages/palletization-process/palletization-process.component';
 
+import { NgSelectModule } from '@ng-select/ng-select';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+import { BreadcrumbNavComponent } from './SharedPages/breadcrumb-nav/breadcrumb-nav.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -32,7 +40,10 @@ import { PalletizationProcessComponent } from './Pages/palletization-process/pal
     SidebarComponent,
     NavbarComponent,
     StoreInOrderViewComponent,
-    PalletizationProcessComponent
+    PalletizationProcessComponent,
+   
+    BreadcrumbNavComponent
+  
   ],
   imports: [
     BrowserModule,
@@ -41,6 +52,10 @@ import { PalletizationProcessComponent } from './Pages/palletization-process/pal
     FormsModule,
     ReactiveFormsModule,
      BrowserAnimationsModule,
+     NgSelectModule,
+     MatPaginatorModule,
+     MatTableModule,
+     MatSortModule
   ],
   providers: [MyService],
   bootstrap: [AppComponent]

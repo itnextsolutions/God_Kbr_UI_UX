@@ -14,14 +14,17 @@
       <app-navbar></app-navbar>
       <!-- End of Topbar -->
 
+      <app-breadcrumb-nav [child_page]="pageName"></app-breadcrumb-nav>      
+
       <!-- Begin Page Content -->
       <div class="container-fluid">
 
         <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 class="h3 mb-0 text-gray-800">Vendor Data Entry</h1>
-
-        </div>
+          Breadcrumb
+          <app-breadcrumb-nav [child_page]="pageName"></app-breadcrumb-nav>
+        </div> -->
 
         <!-- Content Row -->
 
@@ -37,7 +40,7 @@
 
               <!-- Card Body -->
               <div class="card-body">
-                <div clas="container" style="">
+                <div clas="container">
                   <div id="form-content" class="col-md-8">
 
                     <form [formGroup]="vendorForm" id="survey-form" onsubmit="return false;"> <!-- open form -->
@@ -47,26 +50,37 @@
                           <label [for]="materialCategory" class=" control-labelfont-medium text-900"> Material Category : </label>
                         </div>
 
-                        <div class="col-sm-9">
+                        <!-- <div class="col-sm-9">
                           <div class="form-check form-check-inline">
                             <input type="radio" [(ngModel)]="materialCategory" value="SW"
                               formControlName="materialCategory"  (change)="onClick($event)"/>Steel Wire &nbsp;
                             <input type="radio" [(ngModel)]="materialCategory" value="DF"
                               formControlName="materialCategory" (change)="onClick($event)" />Dip Roll
-                            <!-- <label class="form-check-label" for="five-star">Wire</label> -->
+                           
                             <div class="error"
                               *ngIf="vendorForm.controls['materialCategory'].touched && vendorForm.controls['materialCategory'].invalid">
                               Material Category required</div>
                           </div>
 
+                        </div> -->
 
-                          <!-- <div class="form-check form-check-inline">
-                                        <input  type="radio"  [(ngModel)]="materialCategory"  value ="2"  formControlName="materialCategory"/>
-                                        <label class="form-check-label" for="five-star">Roll</label>
-                                        <div class="error"
-                                        *ngIf="vendorForm.controls['materialCategory'].touched && vendorForm.controls['materialCategory'].invalid">Material Category required</div>
-                                     </div> -->
-                          </div>
+
+                          <div class="col-sm-9">
+                            <!-- <input type="radio" [(ngModel)]="materialCategory" value="2"
+                                formControlName="materialCategory" />Dip
+                            Roll
+                            <input type="radio" [(ngModel)]="materialCategory" value="1"
+                                formControlName="materialCategory" />Wire -->
+
+                            <label *ngFor="let radiobutton of radioItems"
+                                formControlName="materialCategory" name="options" ngDefaultControl>
+                                <input type="radio" (click)="materialCategory = radiobutton.GRP_COD"
+                                    [checked]="radiobutton.GRP_COD === materialCategory">{{radiobutton.GRP_DESC}}
+                            </label>
+                            <span class="error"
+                                *ngIf="vendorForm.controls['materialCategory'].touched && vendorForm.controls['materialCategory'].invalid">
+                                Material Category required</span>
+                        </div>
                       </div>
 
 
@@ -120,7 +134,7 @@
                           </label>
                       </div>
 
-                        <div class="input-group col-sm-9">
+                        <div class="input-group col-sm-6">
                           <input type="text" class="form-control" [(ngModel)]="materialDesc"
                             formControlName="materialDesc" readonly />
                           <div class="error"
@@ -138,7 +152,7 @@
                           <label [for]="vendorCode" class="font-medium text-900 control-label"> Vendor Code :</label>
                         </div>
 
-                        <div class="input-group col-sm-9">
+                        <div class="input-group col-sm-6">
                           <input type="text" class="form-control" [(ngModel)]="vendorCode"
                             formControlName="vendorCode" />
                           <div class="error"
@@ -154,7 +168,7 @@
                           <label [for]="vendorDesc" class="font-medium text-900 control-label">Vendor Description :
                             </label>
                         </div>
-                        <div class="input-group col-sm-9">
+                        <div class="input-group col-sm-6">
                           <input type="text" class="form-control" [(ngModel)]="vendorDesc"
                             formControlName="vendorDesc" />
                           <div class="error"

@@ -27,6 +27,8 @@ import { MyService } from 'src/app/services/api.service';
 // })
 export class ManualStoreInComponent {
 
+  public pageName: string = "Manual StoreIN";
+
   public storeInForm = new UntypedFormGroup({
   });
 

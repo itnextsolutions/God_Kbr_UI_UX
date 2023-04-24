@@ -11,8 +11,9 @@ import { DynamicHtmlTableConfigurationComponent } from './Pages/dynamic-html-tab
 import { StoreInOrderViewComponent } from './Pages/store-in-order-view/store-in-order-view.component';
 import { PalletizationProcessComponent } from './Pages/palletization-process/palletization-process.component';
 
+
 const routes: Routes = [
-  {path:'',component:HomeComponent},
+  {path:'Dashboard',component:HomeComponent},
   {path:'storein',component:StoreInComponent},
   {path:'login',component:LoginComponent},
   {path:'manualStoreIn',component:ManualStoreInComponent},

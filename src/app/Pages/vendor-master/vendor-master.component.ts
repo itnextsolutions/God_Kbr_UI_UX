@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./vendor-master.component.css']
 })
 export class VendorMasterComponent {
+  public pageName: string = "Vendor Master";
 
   dataSource!:MatTableDataSource<any>;
   @ViewChild('paginator') paginator! : MatPaginator; 
@@ -27,7 +28,9 @@ export class VendorMasterComponent {
    vendorCode : string="";
    vendorDesc : string="";
 
-    vendor_list:any=[];
+   radioItems: any = [];
+
+   vendor_list:any=[];
 
    isSubmitted=false;
    
@@ -48,7 +51,7 @@ export class VendorMasterComponent {
       
 
       });
-
+      this.getMaterialCategory();
       this.getVendorData();
 
     //   this.MyService.getUserData().subscribe((response:any) =>{
@@ -57,12 +60,24 @@ export class VendorMasterComponent {
     //      this.dataSource.paginator = this.paginator;
     //     this.dataSource.sort = this.matSort;
     // })
-    
+    this.getMaterialCategory();
     }
   
     filterData($event : any){
       //this.dataSource.filter = $event.target.value;
     }
+
+    
+  getMaterialCategory(){
+    debugger;
+      this.MyService.GetMaterialCategory().subscribe(resp =>{
+        if(resp != undefined && resp != null){
+          this.radioItems = resp;
+        }
+        
+    })
+  }
+  
   
     getVendorData(){
       this.MyService.getVendorMaster().subscribe((resp:any)=>{
