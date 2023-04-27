@@ -22,6 +22,10 @@ export class MyService {
     return this.http.post(this.apiEndpoint + 'vendor/InsertVendorMaster', data);
   }
 
+  public insertHostToWms(val :any){
+    return this.http.post(this.apiEndpoint + 'HostToWms/InsertInToHostToWms',val);
+  }
+
   getUserData() {
     return this.http.get('https://jsonplaceholder.typicode.com/users')
   }

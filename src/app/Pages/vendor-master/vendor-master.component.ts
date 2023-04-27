@@ -29,7 +29,7 @@ export class VendorMasterComponent {
    vendorDesc : string="";
 
    radioItems: any = [];
-
+   materialData_list:any =[];
    vendor_list:any=[];
 
    isSubmitted=false;
@@ -51,6 +51,7 @@ export class VendorMasterComponent {
       
 
       });
+      this.getMaterialData();
       this.getMaterialCategory();
       this.getVendorData();
 
@@ -67,6 +68,19 @@ export class VendorMasterComponent {
       //this.dataSource.filter = $event.target.value;
     }
 
+    getMaterialData(){
+
+      this.MyService.GetMaterialData().subscribe(resp =>{
+
+        this.materialData_list = resp;
+        // this.materialData_list=this.materialData_list.filter((x: any) => x.PRD_GRP_COD === "SW")
+
+        // console.log(this.materialData_list)
+      })
+
+    }
+
+
     
   getMaterialCategory(){
     debugger;
@@ -78,8 +92,7 @@ export class VendorMasterComponent {
     })
   }
   
-  
-    getVendorData(){
+  getVendorData(){
       this.MyService.getVendorMaster().subscribe((resp:any)=>{
     // this.dataSource = new MatTableDataSource(resp);
       if(resp != undefined && resp !=null){
@@ -89,21 +102,24 @@ export class VendorMasterComponent {
       })
     }
     
-    addVendor() {
-    
+  addVendor() {
+   
       if (this.vendorForm.valid) {
        // alert('valid form');
         var data ={
-          material_category : this.materialCategory,
-          material_code : this.materialCode.VED_PRD_COD,
-          material_desc : this.materialDesc,
-          vendor_code : this.vendorCode,
-          vendor_desc : this.vendorDesc
+          MSG_MATERIAL_CATEGORY : this.materialCategory,
+          MSG_MATERIAL_CODE : this.materialCode.PRD_COD,
+          MSG_DESCRIPTION : this.materialDesc,
+          MSG_VENDOR_CODE : this.vendorCode,
+          MSG_VENDOR_DESC : this.vendorDesc,
+          MSG_TRANS_TYPE :"MASTER_V",
+          MSG_PART_FLAG :"y"
+
         }
   
-        this.MyService.vendorDataEntry(data).subscribe((resp) =>{
+        this.MyService.insertHostToWms(data).subscribe((resp) =>{
 
-          if(resp == "Sucess"){
+          if(resp == "Success"){
             this.sucessAlert();
             this.getVendorData();
           }
@@ -165,9 +181,36 @@ export class VendorMasterComponent {
     debugger;
     // this.materialCode=val.VED_PRD_COD;
     
-    this.materialDesc =val.VED_PRD_DESC;
+    this.materialDesc =val.PRD_DESC;
 
     // console.log(this.materialDesc);
+  }
+
+
+  // onCategoryChange(val:any){
+  //   debugger;
+  //   console.log(val.GRP_COD);
+  //    this.materialData_list=this.materialData_list.filter((x: any) => x.PRD_GRP_COD === val.GRP_COD)
+  //    console.log(this.materialData_list)
+
+  // }
+
+  onCategoryChange(){
+    debugger;
+    console.log(this.materialCategory);
+    //  this.materialData_list=this.materialData_list.filter((x: any) => x.PRD_GRP_COD === val.GRP_COD)
+    //  console.log(this.materialData_list)
+
+  }
+
+  onCategoryClick(val:any){
+    this.materialCategory = val.GRP_COD;
+
+    this.MyService.GetMaterialData().subscribe(resp =>{
+      this.materialData_list = resp;
+      this.materialData_list=this.materialData_list.filter((x: any) => x.PRD_GRP_COD === val.GRP_COD)
+      console.log(this.materialData_list);
+    })
   }
 
 

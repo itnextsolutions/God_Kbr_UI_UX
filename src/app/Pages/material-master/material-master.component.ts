@@ -108,17 +108,20 @@ export class MaterialMasterComponent {
     if (this.masterForm.valid) {
 
       var val = {
-        PRD_COD: this.PRD_COD,
-        PRD_GRP_COD: this.PRD_GRP_COD,
-        PRD_DESC: this.PRD_DESC,
-        PRD_LENG: this.PRD_LENG,
-        PRD_CTRL_TYPE: this.PRD_CTRL_TYPE,
-        PRD_PACK_QTY: this.PRD_PACK_QTY,
-        PRD_MEAS_UNIT: this.PRD_MEAS_UNIT,
-        PRD_HUPT_ID: this.PRD_HUPT_ID,
+       
+        MSG_MATERIAL_CODE: this.PRD_COD,
+        MSG_MATERIAL_CATEGORY: this.PRD_GRP_COD,
+        MSG_DESCRIPTION: this.PRD_DESC,
+        MSG_SHELF_LIFE: this.PRD_LENG,
+        MSG_VENDOR_CON: this.PRD_CTRL_TYPE,
+        MSG_NO_OF_SP_BOX: this.PRD_PACK_QTY,
+        MSG_UOM: this.PRD_MEAS_UNIT,
+        MSG_PAL_TYPE: this.PRD_HUPT_ID,
+        MSG_TRANS_TYPE :"MASTER",
+        MSG_PART_FLAG :"y"
       };
 
-      this.service.insertMaterial(val).subscribe(res => {
+      this.service.insertHostToWms(val).subscribe(res => {
 
         if (res == "Success") {
           this.sucessAlert();

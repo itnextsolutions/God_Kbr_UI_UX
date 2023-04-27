@@ -72,11 +72,20 @@
                             <input type="radio" [(ngModel)]="materialCategory" value="1"
                                 formControlName="materialCategory" />Wire -->
 
-                            <label *ngFor="let radiobutton of radioItems"
+                            <!-- <label *ngFor="let radiobutton of radioItems;"
                                 formControlName="materialCategory" name="options" ngDefaultControl>
                                 <input type="radio" (click)="materialCategory = radiobutton.GRP_COD"
+                                
                                     [checked]="radiobutton.GRP_COD === materialCategory">{{radiobutton.GRP_DESC}}
-                            </label>
+                            </label> -->
+
+                            <label *ngFor="let radiobutton of radioItems;"
+                            formControlName="materialCategory" name="options" ngDefaultControl>
+                            <input type="radio" (click)=onCategoryClick(radiobutton)
+                            [checked]="radiobutton.GRP_COD === materialCategory">{{radiobutton.GRP_DESC}}
+                        </label>
+
+                           
                             <span class="error"
                                 *ngIf="vendorForm.controls['materialCategory'].touched && vendorForm.controls['materialCategory'].invalid">
                                 Material Category required</span>
@@ -113,10 +122,10 @@
                             <label [for]="materialCode" class="font-medium text-900"> Material Code : </label>
                           </div> -->
                          
-                          <div class="input-group col-sm-9">
-                          <ng-select class="input-group col-sm-6"  formControlName="materialCode" [(ngModel)]="materialCode"   (change)="onChange($event)">
-                            <ng-option *ngFor="let item of vendor_list"  [value]="item"   >
-                              {{item.VED_PRD_COD}}
+                          <div class="input-group col-sm-6">
+                          <ng-select class="form-control"  formControlName="materialCode" [(ngModel)]="materialCode"   (change)="onChange($event)">
+                            <ng-option *ngFor="let item of materialData_list"  [value]="item"   >
+                              {{item.PRD_COD}}
                             </ng-option>
                            
                           </ng-select>
@@ -130,7 +139,7 @@
 
                     <div class="row form-group">
                       <div class="col-sm-3">
-                        <label [for]="vendorDesc" class="font-medium text-900 control-label">Material Description :
+                        <label [for]="vendorDesc" class="font-medium text-900 control-label">Material Description:
                           </label>
                       </div>
 
