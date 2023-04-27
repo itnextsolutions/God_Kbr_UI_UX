@@ -25,6 +25,10 @@ import {MatSortModule} from '@angular/material/sort';
 import { BreadcrumbNavComponent } from './SharedPages/breadcrumb-nav/breadcrumb-nav.component';
 
 
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+
+
 
 
 @NgModule({
@@ -43,6 +47,7 @@ import { BreadcrumbNavComponent } from './SharedPages/breadcrumb-nav/breadcrumb-
     PalletizationProcessComponent,
    
     BreadcrumbNavComponent
+         
   
   ],
   imports: [
@@ -55,7 +60,9 @@ import { BreadcrumbNavComponent } from './SharedPages/breadcrumb-nav/breadcrumb-
      NgSelectModule,
      MatPaginatorModule,
      MatTableModule,
-     MatSortModule
+     MatSortModule,
+     NgxPaginationModule,
+     Ng2OrderModule
   ],
   providers: [MyService],
   bootstrap: [AppComponent]

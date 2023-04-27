@@ -10,7 +10,7 @@
             <app-navbar></app-navbar>
             <!-- End of Topbar -->
 
-            <app-breadcrumb-nav [child_page]="pageName"></app-breadcrumb-nav> 
+            <app-breadcrumb-nav [child_page]="pageName"></app-breadcrumb-nav>
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -109,13 +109,11 @@
                                                     <div>
                                                         <label *ngFor="let chkBox of chkBox"
                                                             class="form-check form-check-inline"
-                                                            [(ngModel)]="PRD_CTRL_TYPE" formControlName="PRD_CTRL_TYPE"
-                                                            ngDefaultControl>
+                                                            [(ngModel)]="PRD_CTRL_TYPE">
                                                             <div>
 
                                                             </div>
-                                                            <input type="checkbox" [checked]="PRD_CTRL_TYPE=='1'"
-                                                                class="form-control" name="options"
+                                                            <input type="checkbox" [checked]="isChecked" name="options"
                                                                 [value]="chkBox.Value"
                                                                 [disabled]="chkBox.disabled">{{chkBox.Name}}
                                                         </label>
@@ -148,8 +146,8 @@
                                                         class="font-medium text-900 control-label">UOM:</label>
                                                 </div>
                                                 <div class="input-group col-sm-6">
-                                                    <input [readonly]='readOnly' class="form-control" type="text" [(ngModel)]="PRD_MEAS_UNIT "
-                                                        formControlName="PRD_MEAS_UNIT" />
+                                                    <input [readonly]='readOnly' class="form-control" type="text"
+                                                        [(ngModel)]="PRD_MEAS_UNIT " formControlName="PRD_MEAS_UNIT" />
                                                     <span class="error"
                                                         *ngIf="masterForm.controls['PRD_MEAS_UNIT'].touched && masterForm.controls['PRD_MEAS_UNIT'].invalid">
                                                         UOM required</span>
@@ -216,7 +214,7 @@
             <!--Details grid start-->
             <div class="container-fluid">
                 <div class="tab-content">
-                    <div id="storeout" class="">
+                    <div id="storein" class="">
                         <div class="card shadow mb-4">
                             <div class="card-header d-sm-flex py-3 justify-content-between ">
                                 <h6 class="m-0 font-weight-bold" style="color:#fff; padding: 5px 0 0 0;">Material Master
@@ -224,46 +222,38 @@
                                 </h6>
                                 <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                         Class="fas fa-download fa-sm text-white-50"></i> Export Excel</a> -->
+
                             </div>
                             <div class="card-body">
+                              
+
+                                <label>Show:
+                                <select [(ngModel)]="itemsPerPage">
+                                    <option *ngFor="let option of pageSizeOptions" [value]="option">{{option}}</option>
+                                </select>
+                                entries
+                            </label>
+
+                                <input type="text" placeholder="search" style="margin-left: 709px" (keyup)="filterData($event)">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <table class="table table-bordered" id="" width="100%" cellspacing="0">
                                         <thead>
                                             <tr style="background-color:  #eeebf6; color: #361374;">
-                                                <th>Action</th>
-                                                <th>Material Code</th>
-                                                <th>Material Category</th>
-                                                <th>Material Description</th>
-                                                <th>SHELF LIFE</th>
-                                                <th>VENDOR CONTINUITY</th>
-                                                <th>SPOOL/BOX</th>
-                                                <th>UOM</th>
-                                                <th>Pallet Type</th>
+                                                <th >Action</th>
+                                                <th (click)="sort('id')">  Material Code&nbsp;<i class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">Material Category&nbsp;<i class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">Material Description&nbsp;<i class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">Shelf Life&nbsp;<i class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">Vendor continuity&nbsp;<i class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">Spool/Box&nbsp;<i class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">Uom&nbsp;<i class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">pallet Type&nbsp;<i class="fa fa-sort"></i></th>
                                             </tr>
                                         </thead>
-                                        <!-- <tfoot>
-                                            <tr style="background-color:  #eeebf6; color: #361374;">
-                                                <th>Action</th>
-                                                <th>Material Code</th>
-                                                <th>Material Category</th>
-                                                <th>Material Description</th>
-                                                <th>SHELF LIFE</th>
-                                                <th>VENDOR CONTINUITY</th>
-                                                <th>SPOOL/BOX</th>
-                                                <th>UOM</th>
-                                            </tr>
-                                        </tfoot> -->
-                                        <tbody *ngFor="let data of material">
+                                        <tbody
+                                            *ngFor="let data of material_list| orderBy : key : reverse | paginate:{itemsPerPage:itemsPerPage, currentPage: pageSize }">
                                             <tr>
-                                                <!-- <td>
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td> -->
-
-                                                <td class="text-center">
+                                                <td>
                                                     <button type="button" class="btn btn-primary" class="btn btn-link"
                                                         (click)="Edit(data)"><i
                                                             class="material-icons text-sm me-2"></i>Edit</button>
@@ -275,10 +265,19 @@
                                                 <td>{{data.PRD_CTRL_TYPE}}</td>
                                                 <td>{{data.PRD_PACK_QTY}}</td>
                                                 <td>{{data.PRD_MEAS_UNIT}} </td>
-                                                <td>{{data.PRD_HUPT_ID}} </td>
+                                                <td *ngIf="data.PRD_HUPT_ID > 0; else elseBlock">
+                                                    {{data.PRD_HUPT_ID}}
+                                                </td>
+                                                <ng-template #elseBlock>
+                                                    <td>
+                                                        NULL
+                                                    </td>
+                                                </ng-template>
                                             </tr>
                                         </tbody>
+
                                     </table>
+                                    <pagination-controls (pageChange)="pageSize  =  $event"></pagination-controls>
                                 </div>
                             </div>
                         </div>

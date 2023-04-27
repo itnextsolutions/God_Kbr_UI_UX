@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { MyService } from 'src/app/services/api.service';
 import Swal from 'sweetalert2';
@@ -34,7 +35,7 @@ export class MaterialMasterComponent {
   PRD_GRP_COD: string = "";
   PRD_DESC: string = "";
   PRD_LENG: number | undefined;
-  PRD_CTRL_TYPE: String = "0";
+  PRD_CTRL_TYPE: String = "1";
   PRD_PACK_QTY: number | undefined;
   PRD_MEAS_UNIT: string = "";
   PRD_HUPT_ID: number | undefined;
@@ -42,6 +43,12 @@ export class MaterialMasterComponent {
 
   radio1 = false;
   readOnly = false;
+  isChecked = false;
+  material_list: any=[];
+  pageSize : number =1;
+  itemsPerPage : number=10;
+  pageSizeOptions = [5, 10, 25, 50];
+ 
 
 
 
@@ -76,7 +83,20 @@ export class MaterialMasterComponent {
   GetMaterialData() {
     this.service.GetMaterialData().subscribe(data => {
       this.material = data;
+      this.material_list = this.material;
     });
+  }
+
+  filterData(val : any){
+  this.material_list =this.material.filter((res : any)=>{return res.PRD_COD.toLocaleLowerCase().match(val.target.value.toLocaleLowerCase()) ||
+                                  res.PRD_GRP_COD.toLocaleLowerCase().match(val.target.value.toLocaleLowerCase())})                               
+  }
+
+  key:string='id';
+  reverse: boolean= false;
+  sort(key: any){
+    this.key=key;
+    this.reverse =! this.reverse
   }
 
   get formControl() {
@@ -130,12 +150,17 @@ export class MaterialMasterComponent {
 
     this.readOnly = true;
     this.radio1 = true;
+    if (this.PRD_CTRL_TYPE ==="1") {
+      this.isChecked = true;
+    }
+    else {
+      this.isChecked = false;
+    }
 
 
   }
 
   Update() {
-    debugger
     if (this.masterForm.valid) {
       var val = {
         PRD_COD: this.PRD_COD,
@@ -167,7 +192,6 @@ export class MaterialMasterComponent {
 
   Reset() {
     this.masterForm.reset();
-
   }
 
   // handleOptionClick(selectedOption: any) {
