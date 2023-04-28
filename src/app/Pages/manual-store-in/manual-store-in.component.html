@@ -59,17 +59,23 @@
                                                         Material Category:</label>
                                                 </div>
 
-                                                <div class="col-lg-3">
+                                                <!-- <div class="col-lg-3">
                                                     <input type="radio" [(ngModel)]="materialCategory" value="2"
                                                         formControlName="materialCategory" />Dip
                                                     Roll
                                                     <input type="radio" [(ngModel)]="materialCategory" value="1"
                                                         formControlName="materialCategory" />Wire
-
-                                                    <!-- <label *ngFor="let radiobutton of radioItems">
-                                                    <input type="radio" name="options" (click)="materialCategory = radiobutton" 
-                                                        [checked]="radiobutton === materialCategory" formControlName="materialCategory">{{radiobutton}}
-                                                     </label> -->
+                                                    <span class="error"
+                                                        *ngIf="storeInForm.controls['materialCategory'].touched && storeInForm.controls['materialCategory'].invalid">
+                                                        Material Category required</span>
+                                                </div> -->
+                                                <div class="col-sm-9">
+                                                    <label *ngFor="let radiobutton of radioItems"
+                                                        formControlName="materialCategory" name="options" ngDefaultControl>
+                                                        <input type="radio" 
+                                                            (click)="materialCategory = radiobutton.GRP_COD"
+                                                            [checked]="radiobutton.GRP_COD === materialCategory">{{radiobutton.GRP_DESC}}
+                                                    </label>
                                                     <span class="error"
                                                         *ngIf="storeInForm.controls['materialCategory'].touched && storeInForm.controls['materialCategory'].invalid">
                                                         Material Category required</span>
@@ -278,12 +284,25 @@
                                                             Type:</label>
                                                     </div>
 
-                                                    <div class="input-group col-lg-7">
+                                                    <!-- <div class="input-group col-lg-7">
                                                         <input type="text" class="form-control"
                                                             [(ngModel)]="materialType" formControlName="materialType" />
                                                         <span class="error"
                                                             *ngIf="storeInForm.controls['materialType'].touched && storeInForm.controls['materialType'].invalid">
                                                             Material Type required</span>
+                                                    </div> -->
+                                                    <div class="input-group col-lg-7">
+
+                                                        <select class="form-control" name="Name"
+                                                            formControlName="materialType" [(ngModel)]="materialType">
+                                                            <option value="0" disabled selected>Select</option>
+                                                            <option *ngFor="let tablename of materialTypeList"
+                                                                [value]="tablename.GPARM_VALUE">
+                                                                {{tablename.GPARM_VALUE}}</option>
+                                                        </select>
+                                                        <span class="error"
+                                                            *ngIf="storeInForm.controls['materialType'].touched && storeInForm.controls['materialType'].invalid">
+                                                            Pallet Type required</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -303,8 +322,9 @@
                                                         <select class="form-control" formControlName="materialStatus"
                                                             [(ngModel)]="materialStatus">
                                                             <option value="">Select</option>
-                                                            <option *ngFor="let tablename of m_StatusItems">
-                                                                {{tablename}}</option>
+                                                            <option *ngFor="let tablename of m_StatusItems"
+                                                            [value]="tablename.GPARM_VALUE">
+                                                                {{tablename.GPARM_VALUE}}</option>
                                                         </select>
                                                         <span class="error"
                                                             *ngIf="storeInForm.controls['materialStatus'].touched && storeInForm.controls['materialStatus'].invalid">

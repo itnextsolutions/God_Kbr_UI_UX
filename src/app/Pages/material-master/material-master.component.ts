@@ -26,10 +26,7 @@ export class MaterialMasterComponent {
 
   material: any;
 
-  palletType: any = [
-    { Id: 11, Type: 'Type 1' },
-    { Id: 12, Type: 'Type 2' }
-  ];
+
 
   PRD_COD: string = "";
   PRD_GRP_COD: string = "";
@@ -49,6 +46,7 @@ export class MaterialMasterComponent {
   itemsPerPage : number=10;
   pageSizeOptions = [5, 10, 25, 50];
   update: number=0;
+  palletType: any=[];
  
 
 
@@ -79,7 +77,11 @@ export class MaterialMasterComponent {
       this.radioItems = res;
     });
 
+  
 
+    this.service.getPalletType().subscribe(res =>{
+      this.palletType=res;
+    })
   }
 
   GetMaterialData() {

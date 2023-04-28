@@ -34,7 +34,7 @@ export class ManualStoreInComponent {
 
   radioItems: any = [];
   chkBox: any= [];
-  m_StatusItems: any = ['OK','HOLD','NCM HOLD','OVER RAGED','SCRAP'];
+  m_StatusItems: any = [];
 
   materialCategory: string = "";
   materialBarcode: string = "";
@@ -59,10 +59,13 @@ export class ManualStoreInComponent {
   uomKG: string = "";
   uomMeter: string = "";
   uomNos: string = "";
+  materialTypeList: any=[];
 
 
-  constructor(public fb: UntypedFormBuilder, private router: Router, private ser: MyService) {
-    this.radioItems = ['Dip Roll', 'Wire'];
+
+
+  constructor(public fb: UntypedFormBuilder, private router: Router, private service: MyService) {
+
     this.chkBox = ['Yes', 'No'];
   }
 
@@ -95,6 +98,21 @@ export class ManualStoreInComponent {
       uomNos: ['', [Validators.required]],
 
     });
+
+    this.service.GetMaterialCategory().subscribe(res => {
+      this.radioItems = res;
+    });
+
+    this.service.getMaterialType().subscribe(res => {
+      debugger
+      this.materialTypeList = res;
+    });
+
+    this.service.getMaterialStatus().subscribe(res => {
+      debugger
+      this.m_StatusItems = res;
+    });
+ 
   }
 
   get formControl() {
@@ -129,7 +147,7 @@ export class ManualStoreInComponent {
         uomNos: this.uomNos,
       };
 
-      this.ser.insertHostToWms(val).subscribe(res => {
+      this.service.insertHostToWms(val).subscribe(res => {
         alert(res.toString());
       })
     }

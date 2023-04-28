@@ -166,8 +166,8 @@
                                                         formControlName="PRD_HUPT_ID" [(ngModel)]="PRD_HUPT_ID">
                                                         <option value="0" disabled selected>Select</option>
                                                         <option *ngFor="let tablename of palletType"
-                                                            [value]="tablename.Id">
-                                                            {{tablename.Type}}</option>
+                                                            [value]="tablename.HUT_PT_ID">
+                                                            {{tablename.HUT_DESC}}</option>
                                                     </select>
                                                     <span class="error"
                                                         *ngIf="masterForm.controls['PRD_HUPT_ID'].touched && masterForm.controls['PRD_HUPT_ID'].invalid">
