@@ -41,6 +41,7 @@ export class MyService {
     return this.http.get(this.apiEndpoint + 'MaterialMaster/GetPalletType');
   }
 
+  
 
   public getMaterialStatus() {
     return this.http.get(this.apiEndpoint + 'MaterialMaster/GetMaterialStatus');
