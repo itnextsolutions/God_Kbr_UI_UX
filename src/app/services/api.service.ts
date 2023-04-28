@@ -8,19 +8,7 @@ export class MyService {
 
   apiEndpoint = 'https://localhost:44363/api/';
 
-  insertMaterial(val: any) {
-    debugger
-    return this.http.post(this.apiEndpoint + 'MaterialMaster/InsertMaterial', val);
-  }
-
- updateMaterial(val: any) {
-    debugger
-    return this.http.post(this.apiEndpoint + 'MaterialMaster/UpdateMaterial', val);
-  }
-
-  public vendorDataEntry(data: any) {
-    return this.http.post(this.apiEndpoint + 'vendor/InsertVendorMaster', data);
-  }
+  
 
   public insertHostToWms(val :any){
     return this.http.post(this.apiEndpoint + 'HostToWms/InsertInToHostToWms',val);
@@ -38,8 +26,25 @@ export class MyService {
     return this.http.get(this.apiEndpoint + 'MaterialMaster/GetMaterialCategory');
     }
 
+    
   public getVendorMaster() {
     return this.http.get(this.apiEndpoint + 'vendor/GetVendorMaster');
   }
+
+
+  public getMaterialType() {
+    return this.http.get(this.apiEndpoint + 'MaterialMaster/GetMaterialType');
+  }
+
+
+  public getPalletType() {
+    return this.http.get(this.apiEndpoint + 'MaterialMaster/GetPalletType');
+  }
+
+
+  public getMaterialStatus() {
+    return this.http.get(this.apiEndpoint + 'MaterialMaster/GetMaterialStatus');
+  }
+
 
 }

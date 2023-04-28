@@ -129,7 +129,7 @@ export class ManualStoreInComponent {
         uomNos: this.uomNos,
       };
 
-      this.ser.insertMaterial(val).subscribe(res => {
+      this.ser.insertHostToWms(val).subscribe(res => {
         alert(res.toString());
       })
     }
