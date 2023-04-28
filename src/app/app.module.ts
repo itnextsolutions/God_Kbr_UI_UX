@@ -23,10 +23,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import { BreadcrumbNavComponent } from './SharedPages/breadcrumb-nav/breadcrumb-nav.component';
-
-
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2OrderModule } from 'ng2-order-pipe';
+import { MaterialCodeDescriptionComponent } from './Pages/material-code-description/material-code-description.component';
 
 
 
@@ -46,7 +45,8 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
     StoreInOrderViewComponent,
     PalletizationProcessComponent,
    
-    BreadcrumbNavComponent
+    BreadcrumbNavComponent,
+    MaterialCodeDescriptionComponent
          
   
   ],

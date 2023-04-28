@@ -1,4 +1,4 @@
-<div id="wrapper">
+<div id="wrapper"  (click)="onContainerClick()">
 
   <!-- Sidebar -->
   <app-sidebar></app-sidebar>
@@ -97,30 +97,10 @@
 
 
 
-                        <div class="col-sm-3">
+                        <!-- <div class="col-sm-3">
                           <label [for]="materialCode" class="font-medium text-900"> Material Code : </label>
 
                         </div>
-                        
-                        <!-- <div class="input-group col-sm-9">
-                            <ng-select class="input-group col-sm-6"  style="border-radius: 20%;" [items]="vendor_list"
-                                          bindLabel="VED_PRD_COD"
-                                          bindValue="VED_SEQ"
-                                          [(ngModel)]="materialCode"
-                                          (change)="onChange_Click($event)"
-                                          [searchable]="true"
-                                         >
-                            </ng-select>
-                            <span class="error"
-                            *ngIf="vendorForm.controls['materialCode'].touched && vendorForm.controls['materialCode'].invalid">
-                            Material Code required</span>
-                        </div> -->
-
-                       
-                        <!-- <div class="auto-container" >
-                          <div class="col-sm-3">
-                            <label [for]="materialCode" class="font-medium text-900"> Material Code : </label>
-                          </div> -->
                          
                           <div class="input-group col-sm-6">
                           <ng-select class="form-control"  formControlName="materialCode" [(ngModel)]="materialCode"   (change)="onChange($event)">
@@ -132,6 +112,19 @@
                           <span class="error"
                           *ngIf="vendorForm.controls['materialCode'].touched && vendorForm.controls['materialCode'].invalid">
                           Material Code required</span>
+                        </div> -->
+
+                        <div class="col-sm-3">
+                          <p *ngIf="notFoundMessage">{{ notFoundMessage }}</p>
+                          <label [for]="materialCode" class="font-medium text-900"> Material Code : </label>
+                          
+                          <input type="text" class="form-control" (input)="applyfilter($event)" formControlName="materialCode" (keydown)="onKeyDown($event)" (click)="Onclick()" [readonly]="isFieldreadonly"  (keydown.enter)="onKeyEnter($event)" [(ngModel)]="selectedRowDataCOD">
+                         
+                          <span class="error"
+                          *ngIf="vendorForm.controls['materialCode'].touched && vendorForm.controls['materialCode'].invalid">
+                          Material Code required</span>
+
+                          <app-material-code-description  #material [category]="materialCategory" [dataSource]="dataSource" (bookTitleCreated)="onKeyEnter($event)" (selectedRow)="onSelectedRow($event)"></app-material-code-description>
                         </div>
 
                         <!-- </div> -->
@@ -144,7 +137,7 @@
                       </div>
 
                         <div class="input-group col-sm-6">
-                          <input type="text" class="form-control" [(ngModel)]="materialDesc"
+                          <input type="text" class="form-control" [(ngModel)]="selectedRowDataDESC"
                             formControlName="materialDesc" readonly />
                           <div class="error"
                             *ngIf="vendorForm.controls['materialDesc'].touched && vendorForm.controls['materialDesc'].invalid">

@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2';
+import { MaterialCodeDescriptionComponent } from 'src/app/Pages/material-code-description/material-code-description.component';
 @Component({
   selector: 'app-vendor-master',
   templateUrl: './vendor-master.component.html',
@@ -17,6 +18,70 @@ export class VendorMasterComponent {
   @ViewChild('paginator') paginator! : MatPaginator; 
   displayedColumns = ['name','username'];
   @ViewChild(MatSort) matSort! : MatSort;
+  isFieldreadonly=true;
+ 
+ //yogesh start
+  
+ @ViewChild(MaterialCodeDescriptionComponent) materialComponent!: MaterialCodeDescriptionComponent;
+
+
+//  onKeyDown() {
+//    debugger
+//    const data =this.materialComponent.callmateial();
+//    console.log(data);
+//  }
+
+ Onclick(){
+   debugger
+   const data =this.materialComponent.onclick();
+   console.log(data);
+ }
+
+ filterTable(searchTerm: string) {
+   this.materialComponent.dataSource.filter = searchTerm.trim().toLowerCase();
+ 
+ }
+
+ @ViewChild('material') material!: MaterialCodeDescriptionComponent;
+ notFoundMessage:any;
+ applyfilter(event:Event){
+   debugger
+   const filtervalue=(event.target as HTMLInputElement).value
+   this.material.dataSource.filter=filtervalue.trim().toLowerCase();
+   if(this.material.dataSource.paginator)
+   {
+     this.material.dataSource.paginator.firstPage();
+   }
+   if(this.material.dataSource.filteredData.length==0)
+   {
+   this.notFoundMessage = 'No matching data found';
+   }
+   else {
+     this.notFoundMessage = '';
+   }
+
+ }
+ 
+ onContainerClick(){
+  debugger
+  this.material.closeTable();
+ }
+ 
+
+ onCategoryClick(val:any){
+  debugger
+  this.materialCategory = val.GRP_COD;
+  this.MyService.GetMaterialData().subscribe(resp =>{
+    this.materialData_list = resp;
+    this.materialData_list=this.materialData_list.filter((x: any) => x.PRD_GRP_COD === val.GRP_COD)
+    this.isFieldreadonly=false
+    //console.log(this.materialData_list);
+    // this.material.dataSource=this.materialData_list
+    // this.materialComponent.callmateial();
+  })
+}
+
+ //end
 
   ishidden=true;
   hide=true;
@@ -27,11 +92,11 @@ export class VendorMasterComponent {
    materialDesc : string="";
    vendorCode : string="";
    vendorDesc : string="";
-
+   selectedRowDataCOD: any;
+   selectedRowDataDESC: any;
    radioItems: any = [];
    materialData_list:any =[];
    vendor_list:any=[];
-
    isSubmitted=false;
    
    onPost= ()=>this.isSubmitted=true;
@@ -64,8 +129,47 @@ export class VendorMasterComponent {
     this.getMaterialCategory();
     }
   
+    onSelectedRow(selectedRowData: any) {
+      debugger
+      console.log (selectedRowData);
+      this.selectedRowDataCOD = selectedRowData.PRD_COD;
+      this.selectedRowDataDESC = selectedRowData.PRD_DESC;
+      // do something with the selected row data
+    }
+    material_data:any;
+    material_list:any;
+
+    onKeyEnter(event: any) {
+      debugger;
+      console.log(event.target.value);
+      this.material_list =event.material.filter( (res : any) =>{
+        return res.materialCode.toLocaleLowerCase().match(event.target.value.toLocaleLowerCase())
+       })
+       this.selectedRowDataCOD = event.materialCode;
+      this.selectedRowDataDESC = event.materialDesc;
+      this.ishidden=true;
+
+      this.materialComponent.onKeyEnter;
+      
+    }
+
+    
     filterData($event : any){
       //this.dataSource.filter = $event.target.value;
+    }
+
+    onKeyDown(event: KeyboardEvent) {
+      debugger
+      switch (event.key) {
+        case 'ArrowDown':
+          this.material.selectNextRow();
+          break;
+        case 'ArrowUp':
+          this.material.selectPreviousRow();
+          break;
+        default:
+          break;
+      }
     }
 
     getMaterialData(){
@@ -136,11 +240,10 @@ export class VendorMasterComponent {
     }
   
     resetForm(){
-      
-      this.vendorForm.reset();
-      this.ishidden=true;
-    }
-
+     // this.vendorForm.reset();
+    window.location.reload();
+  }
+    
     sucessAlert(){
 
       Swal.fire({  
@@ -203,15 +306,7 @@ export class VendorMasterComponent {
 
   }
 
-  onCategoryClick(val:any){
-    this.materialCategory = val.GRP_COD;
-
-    this.MyService.GetMaterialData().subscribe(resp =>{
-      this.materialData_list = resp;
-      this.materialData_list=this.materialData_list.filter((x: any) => x.PRD_GRP_COD === val.GRP_COD)
-      console.log(this.materialData_list);
-    })
-  }
+  
 
 
   onChange_Click(val:any){
