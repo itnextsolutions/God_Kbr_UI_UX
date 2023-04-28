@@ -25,6 +25,7 @@ export class VendorMasterComponent {
  @ViewChild(MaterialCodeDescriptionComponent) materialComponent!: MaterialCodeDescriptionComponent;
 
 
+
 //  onKeyDown() {
 //    debugger
 //    const data =this.materialComponent.callmateial();
@@ -98,6 +99,10 @@ export class VendorMasterComponent {
    materialData_list:any =[];
    vendor_list:any=[];
    isSubmitted=false;
+   vendor_Filterlist: any=[];
+   pageSize : number =1;
+   itemsPerPage : number=10;
+   pageSizeOptions = [5, 10, 25, 50];
    
    onPost= ()=>this.isSubmitted=true;
 
@@ -153,11 +158,6 @@ export class VendorMasterComponent {
       
     }
 
-    
-    filterData($event : any){
-      //this.dataSource.filter = $event.target.value;
-    }
-
     onKeyDown(event: KeyboardEvent) {
       debugger
       switch (event.key) {
@@ -202,6 +202,7 @@ export class VendorMasterComponent {
       if(resp != undefined && resp !=null){
 
         this.vendor_list =resp;
+        this.vendor_Filterlist=this.vendor_list
         }
       })
     }
@@ -319,5 +320,20 @@ export class VendorMasterComponent {
     this.vendor_list.filter((x: { VED_PRD_GRP_COD: any; }) => x.VED_PRD_GRP_COD == e.target.value)
     // console.log(this.vendor_list);
   }
+
+
+  
+  filterData(val : any){
+    this.vendor_Filterlist =this.vendor_list.filter((res : any)=>{return res.VED_PRD_COD.toLocaleLowerCase().match(val.target.value.toLocaleLowerCase()) ||
+                                    res.VED_PRD_DESC.toLocaleLowerCase().match(val.target.value.toLocaleLowerCase())})                               
+    }
+  
+    key:string='id';
+    reverse: boolean= false;
+    sort(key: any){
+      this.key=key;
+      this.reverse =! this.reverse
+    }
+  
 
 }

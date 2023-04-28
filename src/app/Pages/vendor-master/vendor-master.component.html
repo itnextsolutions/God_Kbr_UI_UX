@@ -201,52 +201,66 @@
       </div>
       <!-- /.container-fluid -->
 
+            <!--Details grid start-->
+            <div class="container-fluid">
+              <div class="tab-content">
+                  <div id="storein" class="">
+                      <div class="card shadow mb-4">
+                          <div class="card-header d-sm-flex py-3 justify-content-between ">
+                              <h6 class="m-0 font-weight-bold" style="color:#fff; padding: 5px 0 0 0;">Vendor Master
+                                  Data
+                              </h6>
+                              <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                      Class="fas fa-download fa-sm text-white-50"></i> Export Excel</a> -->
 
-      <!--Details grid start-->
-      <div class="container-fluid">
-        <div class="tab-content">
-          <div id="storeout" class="">
-            <div class="card shadow mb-4">
-              <div class="card-header d-sm-flex py-3 justify-content-between ">
-                <h6 class="m-0 font-weight-bold" style="color:#fff; padding: 5px 0 0 0;">Vendor Data</h6>
-                <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    Class="fas fa-download fa-sm text-white-50"></i> Export Excel</a> -->
+                          </div>
+                          <div class="card-body">
+                            
+
+                              <label>Show:
+                              <select [(ngModel)]="itemsPerPage">
+                                  <option *ngFor="let option of pageSizeOptions" [value]="option">{{option}}</option>
+                              </select>
+                              entries
+                          </label>
+
+                              <input type="text" placeholder="search" style="margin-left: 709px" (keyup)="filterData($event)">
+                              <div class="table-responsive">
+                                  <table class="table table-bordered" id="" width="100%" cellspacing="0">
+                                      <thead>
+                                          <tr style="background-color:  #eeebf6; color: #361374;">
+                                              <th >Id</th>
+                                              <th (click)="sort('id')">  Material Code&nbsp;<i class="fa fa-sort"></i></th>
+                                              <th (click)="sort('id')">Material Category&nbsp;<i class="fa fa-sort"></i></th>
+                                              <th (click)="sort('id')">Material Description&nbsp;<i class="fa fa-sort"></i></th>
+                                              <th (click)="sort('id')">Vendor Code&nbsp;<i class="fa fa-sort"></i></th>
+                                              <th (click)="sort('id')">Vendor Description&nbsp;<i class="fa fa-sort"></i></th>
+                                              <th (click)="sort('id')">DOE&nbsp;<i class="fa fa-sort"></i></th>
+                                          </tr>
+                                      </thead>
+                                      <tbody
+                                          *ngFor="let data of vendor_Filterlist | orderBy : key : reverse | paginate:{itemsPerPage:itemsPerPage, currentPage: pageSize }; let i=index ">
+                                          <tr>
+                                            <tr>
+                                              <td>{{i + 1}}</td>
+                                              <td>{{data.VED_PRD_COD}}</td>
+                                              <td>{{data.VED_PRD_GRP_COD}}</td>
+                                              <td>{{data.VED_PRD_DESC}}</td>
+                                              <td>{{data.VED_COD}}</td>
+                                              <td>{{data.VED_DESC}}</td>
+                                              <td>{{data.VED_DT_FIRST_IN|date}}</td>
+                                            </tr>
+                                      </tbody>
+
+                                  </table>
+                                  <pagination-controls (pageChange)="pageSize  =  $event"></pagination-controls>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
               </div>
-
-              <div class="card-body">
-                <div class="table-responsive">
-
-                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                      <tr style="background-color:  #eeebf6; color: #361374;">
-                        <th>Sr.No</th>
-                        <th>Material Code</th>
-                        <th>Material Category</th>
-                        <th>Material Description</th>
-                        <th>Vendor Code</th>
-                        <th>Vendor Description</th>
-                        <th>DOE</th>
-                      </tr>
-                    </thead>
-                    <tbody *ngFor="let data of vendor_list; let i=index">
-                      <tr>
-                        <td>{{i + 1}}</td>
-                        <td>{{data.VED_PRD_COD}}</td>
-                        <td>{{data.VED_PRD_GRP_COD}}</td>
-                        <td>{{data.VED_PRD_DESC}}</td>
-                        <td>{{data.VED_COD}}</td>
-                        <td>{{data.VED_DESC}}</td>
-                        <td>{{data.VED_DT_FIRST_IN|date}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
-      </div>
-      <!-- Details grid end -->
+          <!-- Details grid end -->
 
 
     </div>

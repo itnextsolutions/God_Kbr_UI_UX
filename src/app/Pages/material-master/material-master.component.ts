@@ -48,6 +48,7 @@ export class MaterialMasterComponent {
   pageSize : number =1;
   itemsPerPage : number=10;
   pageSizeOptions = [5, 10, 25, 50];
+  update: number=0;
  
 
 
@@ -73,6 +74,7 @@ export class MaterialMasterComponent {
 
 
     this.GetMaterialData();
+    
     this.service.GetMaterialCategory().subscribe(res => {
       this.radioItems = res;
     });
@@ -142,6 +144,8 @@ export class MaterialMasterComponent {
 
 
   Edit(item: any) {
+
+    this.update =1;
     this.PRD_COD = item.PRD_COD;
     this.PRD_GRP_COD = item.PRD_GRP_COD;
     this.PRD_DESC = item.PRD_DESC;

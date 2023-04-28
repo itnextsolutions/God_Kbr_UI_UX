@@ -179,7 +179,7 @@
                                                 <div class="col-sm-3 "></div>
                                                 <div class="col-sm-9   submit-button">
 
-                                                    <div *ngIf="PRD_COD.length <= 0; else elseBlock">
+                                                    <div *ngIf="update <= 0; else elseBlock">
                                                         <button type="submit" class="btn btn-primary"
                                                             style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;"
                                                             (click)="Add()" aria-pressed="true">Add</button>

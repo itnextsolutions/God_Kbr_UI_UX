@@ -8,7 +8,7 @@ export class MyService {
 
   apiEndpoint = 'https://localhost:44363/api/';
 
-  
+
 
   public insertHostToWms(val :any){
     return this.http.post(this.apiEndpoint + 'HostToWms/InsertInToHostToWms',val);
