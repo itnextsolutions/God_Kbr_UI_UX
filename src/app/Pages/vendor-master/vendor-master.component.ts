@@ -208,13 +208,13 @@ export class VendorMasterComponent {
     }
     
   addVendor() {
-   
+        debugger
       if (this.vendorForm.valid) {
        // alert('valid form');
         var data ={
           MSG_MATERIAL_CATEGORY : this.materialCategory,
-          MSG_MATERIAL_CODE : this.materialCode.PRD_COD,
-          MSG_DESCRIPTION : this.materialDesc,
+          MSG_MATERIAL_CODE : this.selectedRowDataCOD,
+          MSG_DESCRIPTION : this.selectedRowDataDESC,
           MSG_VENDOR_CODE : this.vendorCode,
           MSG_VENDOR_DESC : this.vendorDesc,
           MSG_TRANS_TYPE :"MASTER_V",
@@ -223,7 +223,9 @@ export class VendorMasterComponent {
         }
   
         this.MyService.insertHostToWms(data).subscribe((resp) =>{
+          debugger
 
+          console.log(resp);
           if(resp == "Success"){
             this.sucessAlert();
             this.getVendorData();
@@ -232,7 +234,7 @@ export class VendorMasterComponent {
             this.errorAlert()
           }
         }) 
-
+        console.log("sUCCESS");
         this.resetForm();   
   
       } else {
@@ -241,9 +243,9 @@ export class VendorMasterComponent {
     }
   
     resetForm(){
-     // this.vendorForm.reset();
-    window.location.reload();
-  }
+     this.vendorForm.reset();
+    // window.location.reload();
+    }
     
     sucessAlert(){
 

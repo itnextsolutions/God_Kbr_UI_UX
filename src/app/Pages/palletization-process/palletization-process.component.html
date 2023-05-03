@@ -42,23 +42,13 @@
                             <div class="card-body">
                                 <div class="table-responsive">
 
-                                    <table class="table table-bordered" id="dataTable" width="100%"
+                                    <table class="table table-bordered" id="" width="100%"
                                         cellspacing="0">
                                         <thead>
                                             <tr style="background-color:  #eeebf6; color: #361374;">
-                                                <!-- <th>Action</th>
-                                        <th>Order Ref No</th>
-                                        <th>Order Type</th>
-                                        <th>SKU Code</th>
-                                        <th>Batch No</th>
-                                        <th>Quantity</th>
-                                        <th>SKU_Wt</th>
-                                        <th>UOM</th>
-                                        <th>MFG Date</th>
-                                        <th>Supplier Code</th> -->
-
-                                                <th>Action</th>
-                                                <th>Trans ID</th>
+                                                
+                                                <!-- <th>Action</th> -->
+                                              <th>Trans ID</th>
                                                 <th>Material Code</th>
                                                 <th>Pallet ID</th>
                                                 <th>QTY</th>
@@ -69,44 +59,24 @@
                                             </tr>
                                         </thead>
                                         
-                                        <tbody>
-                                            <tr>
-                                                <td>
+                                        <tbody *ngFor="let data of orderData">
+                                            <tr   (click)="onSelect(data)">
+                                                <!-- <td>
                                                     <div class="custom-control custom-checkbox small">
                                                         <input type="checkbox" class="custom-control-input"
                                                             id="customCheck">
                                                         <label class="custom-control-label"
                                                             for="customCheck"></label>
                                                     </div>
-                                                </td>
+                                                </td> -->
+                                                <td>{{data.ORD_ID}}</td>
+                                                <td>{{data.ORD_PRD_COD}}</td>
                                                 <td></td>
+                                                <td>{{data.ORD_REQ_QTY}}</td>
+                                                <td>{{data.ORD_DT_PRD}}</td>
+                                                <td>{{data.ORD_DT_EXPIRAT}}</td>
                                                 <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="customCheck">
-                                                        <label class="custom-control-label"
-                                                            for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-
+                                                <td>{{data.ORD_PRD_COD_TYPE}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -148,7 +118,7 @@
                            </div>
                         <div class="input-group col-lg-8">
                                              
-                          <input id="name" type="text" class="form-control" placeholder="Please Enter Your Name" name="name" required>
+                          <input id="name" type="text" class="form-control"  name="name" required>
                         </div>
                      </div>
 
@@ -159,7 +129,7 @@
                            </div>
                         <div class="input-group col-lg-8">
                                          
-                          <input id="name" type="text" class="form-control" placeholder="Please Enter Your Name" name="name" required>
+                          <input  type="text" class="form-control" [(ngModel)]="ORD_REF_POS"  name="transactionID" required>
                         </div>
                      </div>
                                 </div>
@@ -177,7 +147,7 @@
                                
                                 <div class="input-group col-lg-7">
                                                    
-                                  <input id="name" type="text" class="form-control" placeholder="Please Enter Your Name" name="name" required>
+                                  <input id="name" type="text" class="form-control"  name="name" required>
                                 </div>
                              </div>
 
@@ -189,7 +159,7 @@
                                    </div>
                                 <div class="input-group col-lg-7">
                                                      
-                                  <input id="name" type="text" class="form-control" placeholder="Please Enter Your Name" name="name" required>
+                                  <input  type="text" class="form-control" [(ngModel)]="ORD_REQ_QTY" name="quantity" required>
                                 </div>
                              </div>
                         </div>

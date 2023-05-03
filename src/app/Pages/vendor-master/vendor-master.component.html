@@ -242,7 +242,8 @@
                                           *ngFor="let data of vendor_Filterlist | orderBy : key : reverse | paginate:{itemsPerPage:itemsPerPage, currentPage: pageSize }; let i=index ">
                                           <tr>
                                             <tr>
-                                              <td>{{i + 1}}</td>
+                                              <!-- <td>{{i + 1}}</td> -->
+                                              <td>{{i+(itemsPerPage*pageSize)-(itemsPerPage-1)}}</td>
                                               <td>{{data.VED_PRD_COD}}</td>
                                               <td>{{data.VED_PRD_GRP_COD}}</td>
                                               <td>{{data.VED_PRD_DESC}}</td>
