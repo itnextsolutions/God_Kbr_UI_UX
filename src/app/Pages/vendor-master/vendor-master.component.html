@@ -117,13 +117,14 @@
                         <div class="col-sm-3">
                           <p *ngIf="notFoundMessage">{{ notFoundMessage }}</p>
                           <label [for]="materialCode" class="font-medium text-900"> Material Code : </label>
-                          
+                        </div> 
+                          <div class="input-group col-sm-6">
                           <input type="text" class="form-control" (input)="applyfilter($event)" formControlName="materialCode" (keydown)="onKeyDown($event)" (click)="Onclick()" [readonly]="isFieldreadonly"  (keydown.enter)="onKeyEnter($event)" [(ngModel)]="selectedRowDataCOD">
                          
                           <span class="error"
                           *ngIf="vendorForm.controls['materialCode'].touched && vendorForm.controls['materialCode'].invalid">
                           Material Code required</span>
-
+                        
                           <app-material-code-description  #material [category]="materialCategory" [dataSource]="dataSource" (bookTitleCreated)="onKeyEnter($event)" (selectedRow)="onSelectedRow($event)"></app-material-code-description>
                         </div>
 
