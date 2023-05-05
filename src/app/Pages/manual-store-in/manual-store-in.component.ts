@@ -55,11 +55,18 @@ export class ManualStoreInComponent {
   dor: string = "";
   grnNo: string = "";
   uom: string = "";
-  uomKG: string = "";
-  uomMeter: string = "";
-  uomNos: string = "";
+  uomKG: string = "Kg";
+  uomMeter: string = "Meter";
+  uomNos: string = "Nos";
   materialTypeList: any=[];
   isFieldreadonly=true;
+  fieldreadonly=true;
+
+  lengthreadonly=true;
+  weightReadonly=true;
+  noOfSoolReadonly=true;
+  
+
   selectedRowDataMaterialCOD: any;
   selectedRowDataMaterialDESC: any;
   selectedRowDataVendorCOD:any;
@@ -101,9 +108,9 @@ export class ManualStoreInComponent {
       projectID: ['', [Validators.required]],
       dor: ['', [Validators.required]],
       grnNo: ['', [Validators.required]],
-      uomKG: ['', [Validators.required]],
-      uomMeter: ['', [Validators.required]],
-      uomNos: ['', [Validators.required]],
+       uomKG: ['', [Validators.required]],
+       uomMeter: ['', [Validators.required]],
+       uomNos: ['', [Validators.required]],
 
     });
 
@@ -201,7 +208,7 @@ export class ManualStoreInComponent {
 }
 
  onCategoryClick(val:any){
-  debugger
+  debugger;
   this.materialCategory = val.GRP_COD;
   this.service.GetMaterialData().subscribe(resp =>{
     this.materialData_list = resp;
@@ -211,6 +218,18 @@ export class ManualStoreInComponent {
     // this.material.dataSource=this.materialData_list
     // this.materialComponent.callmateial();
   })
+if(val.GRP_COD=='SW'){
+  this.lengthreadonly=false;
+  this.noOfSoolReadonly=false;
+  this.weightReadonly=true;
+
+}
+if(val.GRP_COD=='DF'){
+  this.weightReadonly=false;
+  this.lengthreadonly=false;
+  this.noOfSoolReadonly=true;
+}
+
  }
 
   onContainerClick(){

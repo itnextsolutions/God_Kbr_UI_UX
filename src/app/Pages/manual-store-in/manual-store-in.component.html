@@ -1,4 +1,4 @@
-<div id="wrapper"  (click)="onContainerClick()">
+<div id="wrapper" (click)="onContainerClick()">
 
     <!-- Sidebar -->
     <app-sidebar></app-sidebar>
@@ -41,44 +41,21 @@
                                 <div clas="container">
                                     <form [formGroup]="storeInForm">
                                         <div class="grid formgrid p-fluid">
-                                            <!-- <div class="field mb-4 col-12">
-                                                <label [for]="materialCategory" class="font-medium text-900"> Material Category:</label>
-                                                <input type="radio" [(ngModel)]="materialCategory" value="2" formControlName="materialCategory" />Dip
-                                                Roll
-                                                <input type="radio" [(ngModel)]="materialCategory" value="1" formControlName="materialCategory" />Wire
-                                
-                                              
-                                                <span class="error"
-                                                    *ngIf="storeInForm.controls['materialCategory'].touched && storeInForm.controls['materialCategory'].invalid">
-                                                    Material Category required</span>
-                                            </div> -->
+
 
                                             <div class="row manual-storein-radio">
                                                 <div class="col-lg-2">
                                                     <label [for]="materialCategory" class="font-medium text-900">
                                                         Material Category:</label>
                                                 </div>
-
-                                                <!-- <div class="col-lg-3">
-                                                    <input type="radio" [(ngModel)]="materialCategory" value="2"
-                                                        formControlName="materialCategory" />Dip
-                                                    Roll
-                                                    <input type="radio" [(ngModel)]="materialCategory" value="1"
-                                                        formControlName="materialCategory" />Wire
-                                                    <span class="error"
-                                                        *ngIf="storeInForm.controls['materialCategory'].touched && storeInForm.controls['materialCategory'].invalid">
-                                                        Material Category required</span>
-                                                </div> -->
                                                 <div class="col-sm-9">
                                                     <label *ngFor="let radiobutton of radioItems"
-                                                        formControlName="materialCategory" name="options" ngDefaultControl>
+                                                        formControlName="materialCategory" name="options"
+                                                        ngDefaultControl>
                                                         <input type="radio" (click)=onCategoryClick(radiobutton)
                                                             (click)="materialCategory = radiobutton.GRP_COD"
                                                             [checked]="radiobutton.GRP_COD === materialCategory">{{radiobutton.GRP_DESC}}
                                                     </label>
-
-                                                   
-                                                    
                                                     <span class="error"
                                                         *ngIf="storeInForm.controls['materialCategory'].touched && storeInForm.controls['materialCategory'].invalid">
                                                         Material Category required</span>
@@ -89,11 +66,6 @@
 
                                         <div class="row">
                                             <div class="col-lg-5">
-                                                <!-- <label [for]="materialBarcode" class="font-medium text-900 label-w control-label"> Material Barcode:</label>
-                                                <input type="text" [(ngModel)]="materialBarcode" formControlName="materialBarcode" />
-                                                <span class="error"
-                                                    *ngIf="storeInForm.controls['materialBarcode'].touched && storeInForm.controls['materialBarcode'].invalid">
-                                                    Material Code required</span> &nbsp; -->
 
                                                 <div class="row form-group">
                                                     <div class="col-lg-5">
@@ -125,11 +97,11 @@
                                                     </div>
 
                                                     <div class="input-group col-lg-9">
-                                                        <input type="text" class="form-control" [(ngModel)]="weight"
+                                                        <input type="text" class="form-control" [(ngModel)]="weight" [readOnly]="weightReadonly"
                                                             formControlName="weight" />
-                                                        <span class="error"
+                                                        <!-- <span class="error"
                                                             *ngIf="storeInForm.controls['weight'].touched && storeInForm.controls['weight'].invalid">
-                                                            Weight is required</span>
+                                                            Weight is required</span> -->
 
                                                     </div>
                                                 </div>
@@ -144,11 +116,11 @@
 
                                                     <div class="input-group col-lg-9">
 
-                                                        <input type="text" class="form-control" [(ngModel)]="uomKG"
-                                                            formControlName="uomKG" />
-                                                        <span class="error"
+                                                        <input type="text" class="form-control" [(ngModel)]="uomKG"  
+                                                            [readonly]="fieldreadonly" formControlName="uomKG" />
+                                                        <!-- <span class="error"
                                                             *ngIf="storeInForm.controls['uomKG'].touched && storeInForm.controls['uomKG'].invalid">
-                                                            UOM is required</span>
+                                                            UOM is required</span> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -165,18 +137,21 @@
                                                     </div>
 
                                                     <div class="input-group col-lg-7">
-                                                        <!-- <input type="text" class="form-control"
-                                                            [(ngModel)]="materialCode" formControlName="materialCode" /> -->
-                                                            
-                                                         <input type="text" class="form-control" (input)="applyfilterformaterial($event)" formControlName="materialCode" 
-                                                          (click)="OnclickMaterial()" [readonly]="isFieldreadonly"  
-                                                          [(ngModel)]="selectedRowDataMaterialCOD">
-                         
+
+                                                        <input type="text" class="form-control"
+                                                            (input)="applyfilterformaterial($event)"
+                                                            formControlName="materialCode" (click)="OnclickMaterial()"
+                                                            [readonly]="isFieldreadonly"
+                                                            [(ngModel)]="selectedRowDataMaterialCOD">
+
                                                         <span class="error"
                                                             *ngIf="storeInForm.controls['materialCode'].touched && storeInForm.controls['materialCode'].invalid">
                                                             Material Code required</span>
 
-                                                            <app-material-code-description  #material [category]="materialCategory" [dataSource]="dataSource" (selectedRow)="onSelectedRowofMaterial($event)" ></app-material-code-description>
+                                                        <app-material-code-description #material
+                                                            [category]="materialCategory" [dataSource]="dataSource"
+                                                            (selectedRow)="onSelectedRowofMaterial($event)">
+                                                        </app-material-code-description>
 
                                                     </div>
                                                 </div>
@@ -191,10 +166,10 @@
                                                     <div class="input-group col-lg-9">
 
                                                         <input type="text" class="form-control" [(ngModel)]="length"
-                                                            formControlName="length" />
-                                                        <span class="error"
+                                                            formControlName="length" [readOnly]="lengthreadonly" />
+                                                        <!-- <span class="error"
                                                             *ngIf="storeInForm.controls['length'].touched && storeInForm.controls['length'].invalid">
-                                                            Length is required</span>
+                                                            Length is required</span> -->
                                                     </div>
                                                 </div>
 
@@ -209,11 +184,12 @@
 
                                                     <div class="input-group col-lg-9">
 
-                                                        <input type="text" class="form-control" [(ngModel)]="uomMeter"
+                                                        <input type="text" class="form-control" [(ngModel)]="uomMeter" value="meter"
+                                                            [readonly]="fieldreadonly"
                                                             formControlName="uomMeter" />
-                                                        <span class="error"
+                                                        <!-- <span class="error"
                                                             *ngIf="storeInForm.controls['uomMeter'].touched && storeInForm.controls['uomMeter'].invalid">
-                                                            UOM is required</span>
+                                                            UOM is required</span> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -234,7 +210,8 @@
 
                                                     <div class="input-group col-lg-7">
                                                         <input type="text" class="form-control"
-                                                            [(ngModel)]="selectedRowDataMaterialDESC" readonly formControlName="materialDesc" />
+                                                            [(ngModel)]="selectedRowDataMaterialDESC" readonly
+                                                            formControlName="materialDesc" />
                                                         <span class="error"
                                                             *ngIf="storeInForm.controls['materialDesc'].touched && storeInForm.controls['materialDesc'].invalid">
                                                             Material Description required</span>
@@ -255,10 +232,10 @@
                                                     <div class="input-group col-lg-9">
 
                                                         <input type="text" class="form-control" [(ngModel)]="noOfSpool"
-                                                            formControlName="noOfSpool" />
-                                                        <span class="error"
+                                                            formControlName="noOfSpool" [readOnly]="noOfSoolReadonly" />
+                                                        <!-- <span class="error"
                                                             *ngIf="storeInForm.controls['noOfSpool'].touched && storeInForm.controls['noOfSpool'].invalid">
-                                                            No Of Spool/Box is required</span>
+                                                            No Of Spool/Box is required</span> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -273,10 +250,11 @@
                                                     <div class="input-group col-lg-9">
 
                                                         <input type="text" class="form-control" [(ngModel)]="uomNos"
+                                                           [readonly]="fieldreadonly" value="nos"
                                                             formControlName="uomNos" />
-                                                        <span class="error"
+                                                        <!-- <span class="error"
                                                             *ngIf="storeInForm.controls['uomNos'].touched && storeInForm.controls['uomNos'].invalid">
-                                                            UOM is required</span>
+                                                            UOM is required</span> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -293,19 +271,11 @@
                                                             class="font-medium text-900 control-label"> Material
                                                             Type:</label>
                                                     </div>
-
-                                                    <!-- <div class="input-group col-lg-7">
-                                                        <input type="text" class="form-control"
-                                                            [(ngModel)]="materialType" formControlName="materialType" />
-                                                        <span class="error"
-                                                            *ngIf="storeInForm.controls['materialType'].touched && storeInForm.controls['materialType'].invalid">
-                                                            Material Type required</span>
-                                                    </div> -->
                                                     <div class="input-group col-lg-7">
 
                                                         <select class="form-control" name="Name"
                                                             formControlName="materialType" [(ngModel)]="materialType">
-                                                            <option value="0" disabled selected>Select</option>
+                                                            <option value="" disabled selected>Select</option>
                                                             <option *ngFor="let tablename of materialTypeList"
                                                                 [value]="tablename.GPARM_VALUE">
                                                                 {{tablename.GPARM_VALUE}}</option>
@@ -331,9 +301,9 @@
 
                                                         <select class="form-control" formControlName="materialStatus"
                                                             [(ngModel)]="materialStatus">
-                                                            <option value="">Select</option>
+                                                            <option value="" disabled selected>Select</option>
                                                             <option *ngFor="let tablename of m_StatusItems"
-                                                            [value]="tablename.GPARM_VALUE">
+                                                                [value]="tablename.GPARM_VALUE">
                                                                 {{tablename.GPARM_VALUE}}</option>
                                                         </select>
                                                         <span class="error"
@@ -343,26 +313,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- <div class="col-lg-3">
-                                    
-                                 
-
-                                        <div class="row form-group">
-                                            <div class="col-lg-3">
-                                                <label [for]="uomMeter" class="font-medium text-900 control-label">pending:</label>
-                                            </div>
-                                           
-                                            <div class="input-group col-lg-9">
-                                                               
-                                                <input type="text" class="form-control" [(ngModel)]="uomMeter" formControlName="uomMeter" />
-                                                <span class="error"
-                                                    *ngIf="storeInForm.controls['uomMeter'].touched && storeInForm.controls['uomMeter'].invalid">
-                                                    UOM is required</span>
-                                            </div>
-                                         </div>
-                                 </div> -->
-
-                                        <!--  -->
 
 
                                         <div class="row">
@@ -395,16 +345,6 @@
 
                                                     <div class="input-group col-lg-8">
 
-                                                        <!-- <label *ngFor="let chkBox of chkBox">
-                                                <input type="checkbox"  class="form-control" name="options" (click)="partial = chkBox" [checked]="chkBox === partial"
-                                                    formControlName="partial">{{chkBox}}
-                                            </label>
-                                            <span class="error"
-                                                *ngIf="storeInForm.controls['partial'].touched && storeInForm.controls['partial'].invalid">
-                                                Partial is required</span> -->
-
-
-
                                                         <input type="radio" [(ngModel)]="partial" value="2"
                                                             formControlName="partial" />Yes
                                                         <input type="radio" [(ngModel)]="partial" value="1"
@@ -415,25 +355,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <!-- <div class="col-lg-3">
-                                
-                             
-
-                                    <div class="row form-group">
-                                        <div class="col-lg-3">
-                                            <label [for]="uomNos" class="font-medium text-900 control-label">UOM:</label>
-                                        </div>
-                                       
-                                        <div class="input-group col-lg-9">
-                                                           
-                                            <input type="text" class="form-control" [(ngModel)]="uomNos" formControlName="uomNos" />
-                                            <span class="error"
-                                                *ngIf="storeInForm.controls['uomNos'].touched && storeInForm.controls['uomNos'].invalid">
-                                                UOM is required</span>
-                                        </div>
-                                     </div>
-                             </div> -->
                                         </div>
 
 
@@ -480,29 +401,9 @@
                                                             Transaction ID is required</span>
                                                     </div>
                                                 </div>
-
-
-
                                             </div>
 
-                                            <!-- <div class="col-lg-3">
-                            
-                         
 
-                                <div class="row form-group">
-                                    <div class="col-lg-3">
-                                        <label [for]="uomNos" class="font-medium text-900 control-label">UOM:</label>
-                                    </div>
-                                   
-                                    <div class="input-group col-lg-9">
-                                                       
-                                        <input type="text" class="form-control" [(ngModel)]="uomNos" formControlName="uomNos" />
-                                        <span class="error"
-                                            *ngIf="storeInForm.controls['uomNos'].touched && storeInForm.controls['uomNos'].invalid">
-                                            UOM is required</span>
-                                    </div>
-                                 </div>
-                         </div> -->
                                         </div>
 
 
@@ -523,11 +424,16 @@
                                                     <div class="input-group col-lg-7">
                                                         <!-- <input type="text" class="form-control" [(ngModel)]="vendorCode"
                                                             formControlName="vendorCode" /> -->
-                                                            <input type="text" class="form-control" (input)="applyfilterforvendor($event)" formControlName="vendorCode" 
-                                                          (click)="OnclickVendor()" [readonly]="isFieldreadonly"  
-                                                          [(ngModel)]="selectedRowDataVendorCOD">
-                                                          
-                                                          <app-vendor-mat-code-description  #vendor [category]="materialCategory" [dataSource]="dataSource" (selectedRowVendor)="onSelectedRowofVendor($event)" ></app-vendor-mat-code-description>
+                                                        <input type="text" class="form-control"
+                                                            (input)="applyfilterforvendor($event)"
+                                                            formControlName="vendorCode" (click)="OnclickVendor()"
+                                                            [readonly]="isFieldreadonly"
+                                                            [(ngModel)]="selectedRowDataVendorCOD">
+
+                                                        <app-vendor-mat-code-description #vendor
+                                                            [category]="materialCategory" [dataSource]="dataSource"
+                                                            (selectedRowVendor)="onSelectedRowofVendor($event)">
+                                                        </app-vendor-mat-code-description>
 
                                                         <span class="error"
                                                             *ngIf="storeInForm.controls['vendorCode'].touched && storeInForm.controls['vendorCode'].invalid">
@@ -559,29 +465,8 @@
                                                             Project ID required</span>
                                                     </div>
                                                 </div>
-
-
-
                                             </div>
 
-                                            <!-- <div class="col-lg-3">
-                        
-                     
-
-                            <div class="row form-group">
-                                <div class="col-lg-3">
-                                    <label [for]="uomNos" class="font-medium text-900 control-label">UOM:</label>
-                                </div>
-                               
-                                <div class="input-group col-lg-9">
-                                                   
-                                    <input type="text" class="form-control" [(ngModel)]="uomNos" formControlName="uomNos" />
-                                    <span class="error"
-                                        *ngIf="storeInForm.controls['uomNos'].touched && storeInForm.controls['uomNos'].invalid">
-                                        UOM is required</span>
-                                </div>
-                             </div>
-                     </div> -->
                                         </div>
 
 
@@ -601,7 +486,8 @@
                                                     <div class="input-group col-lg-7">
 
 
-                                                        <input type="text" class="form-control" [(ngModel)]="selectedRowDataVendorDESC"
+                                                        <input type="text" class="form-control"
+                                                            [(ngModel)]="selectedRowDataVendorDESC"
                                                             formControlName="vendordesc" readonly />
                                                         <span class="error"
                                                             *ngIf="storeInForm.controls['vendordesc'].touched && storeInForm.controls['vendordesc'].invalid">
@@ -638,25 +524,6 @@
 
 
                                             </div>
-
-                                            <!-- <div class="col-lg-3">
-                        
-                     
-
-                            <div class="row form-group">
-                                <div class="col-lg-3">
-                                    <label [for]="uomNos" class="font-medium text-900 control-label">UOM:</label>
-                                </div>
-                               
-                                <div class="input-group col-lg-9">
-                                                   
-                                    <input type="text" class="form-control" [(ngModel)]="uomNos" formControlName="uomNos" />
-                                    <span class="error"
-                                        *ngIf="storeInForm.controls['uomNos'].touched && storeInForm.controls['uomNos'].invalid">
-                                        UOM is required</span>
-                                </div>
-                             </div>
-                     </div> -->
                                         </div>
 
 
@@ -740,7 +607,6 @@
                             <div class="card-header d-sm-flex py-3 justify-content-between ">
                                 <h6 class="m-0 font-weight-bold" style="color:#fff; padding: 5px 0 0 0;">Manual Store In
                                     Requests</h6>
-                                <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i Class="fas fa-download fa-sm text-white-50"></i> Export Excel</a> -->
                             </div>
 
                             <div class="card-body">
