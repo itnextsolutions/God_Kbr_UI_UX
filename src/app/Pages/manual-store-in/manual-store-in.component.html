@@ -1,4 +1,4 @@
-<div id="wrapper">
+<div id="wrapper"  (click)="onContainerClick()">
 
     <!-- Sidebar -->
     <app-sidebar></app-sidebar>
@@ -72,10 +72,13 @@
                                                 <div class="col-sm-9">
                                                     <label *ngFor="let radiobutton of radioItems"
                                                         formControlName="materialCategory" name="options" ngDefaultControl>
-                                                        <input type="radio" 
+                                                        <input type="radio" (click)=onCategoryClick(radiobutton)
                                                             (click)="materialCategory = radiobutton.GRP_COD"
                                                             [checked]="radiobutton.GRP_COD === materialCategory">{{radiobutton.GRP_DESC}}
                                                     </label>
+
+                                                   
+                                                    
                                                     <span class="error"
                                                         *ngIf="storeInForm.controls['materialCategory'].touched && storeInForm.controls['materialCategory'].invalid">
                                                         Material Category required</span>
@@ -162,11 +165,18 @@
                                                     </div>
 
                                                     <div class="input-group col-lg-7">
-                                                        <input type="text" class="form-control"
-                                                            [(ngModel)]="materialCode" formControlName="materialCode" />
+                                                        <!-- <input type="text" class="form-control"
+                                                            [(ngModel)]="materialCode" formControlName="materialCode" /> -->
+                                                            
+                                                         <input type="text" class="form-control" (input)="applyfilterformaterial($event)" formControlName="materialCode" 
+                                                          (click)="OnclickMaterial()" [readonly]="isFieldreadonly"  
+                                                          [(ngModel)]="selectedRowDataMaterialCOD">
+                         
                                                         <span class="error"
                                                             *ngIf="storeInForm.controls['materialCode'].touched && storeInForm.controls['materialCode'].invalid">
                                                             Material Code required</span>
+
+                                                            <app-material-code-description  #material [category]="materialCategory" [dataSource]="dataSource" (selectedRow)="onSelectedRowofMaterial($event)" ></app-material-code-description>
 
                                                     </div>
                                                 </div>
@@ -224,7 +234,7 @@
 
                                                     <div class="input-group col-lg-7">
                                                         <input type="text" class="form-control"
-                                                            [(ngModel)]="materialDesc" formControlName="materialDesc" />
+                                                            [(ngModel)]="selectedRowDataMaterialDESC" readonly formControlName="materialDesc" />
                                                         <span class="error"
                                                             *ngIf="storeInForm.controls['materialDesc'].touched && storeInForm.controls['materialDesc'].invalid">
                                                             Material Description required</span>
@@ -511,8 +521,14 @@
                                                     </div>
 
                                                     <div class="input-group col-lg-7">
-                                                        <input type="text" class="form-control" [(ngModel)]="vendorCode"
-                                                            formControlName="vendorCode" />
+                                                        <!-- <input type="text" class="form-control" [(ngModel)]="vendorCode"
+                                                            formControlName="vendorCode" /> -->
+                                                            <input type="text" class="form-control" (input)="applyfilterforvendor($event)" formControlName="vendorCode" 
+                                                          (click)="OnclickVendor()" [readonly]="isFieldreadonly"  
+                                                          [(ngModel)]="selectedRowDataVendorCOD">
+                                                          
+                                                          <app-vendor-mat-code-description  #vendor [category]="materialCategory" [dataSource]="dataSource" (selectedRowVendor)="onSelectedRowofVendor($event)" ></app-vendor-mat-code-description>
+
                                                         <span class="error"
                                                             *ngIf="storeInForm.controls['vendorCode'].touched && storeInForm.controls['vendorCode'].invalid">
                                                             Vendor Code required</span>
@@ -585,8 +601,8 @@
                                                     <div class="input-group col-lg-7">
 
 
-                                                        <input type="text" class="form-control" [(ngModel)]="vendordesc"
-                                                            formControlName="vendordesc" />
+                                                        <input type="text" class="form-control" [(ngModel)]="selectedRowDataVendorDESC"
+                                                            formControlName="vendordesc" readonly />
                                                         <span class="error"
                                                             *ngIf="storeInForm.controls['vendordesc'].touched && storeInForm.controls['vendordesc'].invalid">
                                                             Vendor Description required</span>

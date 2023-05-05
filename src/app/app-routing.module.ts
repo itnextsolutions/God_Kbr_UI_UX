@@ -10,6 +10,8 @@ import { VendorMasterComponent } from './Pages/vendor-master/vendor-master.compo
 import { DynamicHtmlTableConfigurationComponent } from './Pages/dynamic-html-table-configuration/dynamic-html-table-configuration.component';
 import { StoreInOrderViewComponent } from './Pages/store-in-order-view/store-in-order-view.component';
 import { PalletizationProcessComponent } from './Pages/palletization-process/palletization-process.component';
+import { VendorMatCodeDescriptionComponent } from './Pages/vendor-mat-code-description/vendor-mat-code-description.component';
+import { MaterialCodeDescriptionComponent } from './Pages/material-code-description/material-code-description.component';
 
 
 const routes: Routes = [
@@ -21,7 +23,9 @@ const routes: Routes = [
   {path:'vendorMaster',component:VendorMasterComponent},
   {path:'tableConfiguration',component:DynamicHtmlTableConfigurationComponent},
   {path:'storeInOrderview',component:StoreInOrderViewComponent},
-  {path:'palletizationProcess',component:PalletizationProcessComponent}
+  {path:'palletizationProcess',component:PalletizationProcessComponent},
+  {path:'materialcodedescription',component:MaterialCodeDescriptionComponent},
+  {path:'vendormatcodedescription',component:VendorMatCodeDescriptionComponent}
 ];
 
 @NgModule({

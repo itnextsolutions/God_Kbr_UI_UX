@@ -9,10 +9,13 @@
 
 // }
 
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormGroup, UntypedFormBuilder, FormBuilder, Validators, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MyService } from 'src/app/services/api.service';
+import { MaterialCodeDescriptionComponent } from '../material-code-description/material-code-description.component';
+import { VendorMatCodeDescriptionComponent } from '../vendor-mat-code-description/vendor-mat-code-description.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
@@ -20,11 +23,7 @@ import { MyService } from 'src/app/services/api.service';
   templateUrl: './manual-store-in.component.html',
   styleUrls: ['./manual-store-in.component.css']
 })
-// @Component({
-//   selector: 'app-manual-store-in',
-//   templateUrl: './manual-store-in.component.html',
-//   styleUrls: ['./manual-store-in.component.css']
-// })
+
 export class ManualStoreInComponent {
 
   public pageName: string = "Manual StoreIN";
@@ -60,9 +59,18 @@ export class ManualStoreInComponent {
   uomMeter: string = "";
   uomNos: string = "";
   materialTypeList: any=[];
+  isFieldreadonly=true;
+  selectedRowDataMaterialCOD: any;
+  selectedRowDataMaterialDESC: any;
+  selectedRowDataVendorCOD:any;
+  selectedRowDataVendorDESC:any;
+  materialData_list:any;
 
-
-
+  @ViewChild(MaterialCodeDescriptionComponent) materialComponent!: MaterialCodeDescriptionComponent;
+  @ViewChild(VendorMatCodeDescriptionComponent) vendorComponent!: VendorMatCodeDescriptionComponent;
+  @ViewChild('material') material!: MaterialCodeDescriptionComponent;
+  @ViewChild('vendor') vendor!: MaterialCodeDescriptionComponent;
+  dataSource!:MatTableDataSource<any>;
 
   constructor(public fb: UntypedFormBuilder, private router: Router, private service: MyService) {
 
@@ -125,13 +133,13 @@ export class ManualStoreInComponent {
       var val = {
         materialCategory: this.materialCategory,
         materialBarcode: this.materialBarcode,
-        materialCode: this.materialCode,
-        materialDesc: this.materialDesc,
+        materialCode: this.selectedRowDataMaterialCOD,
+        materialDesc: this.selectedRowDataMaterialDESC,
         materialType: this.materialType,
         dom: this.dom,
         doe: this.doe,
-        vendorCode: this.vendorCode,
-        vendordesc: this.vendordesc,
+        vendorCode: this.selectedRowDataVendorCOD,
+        vendordesc: this.selectedRowDataVendorDESC,
         dipRollNo: this.dipRollNo,
         weight: this.weight,
         length: this.length,
@@ -156,10 +164,93 @@ export class ManualStoreInComponent {
     }
   }
 
+
+ notFoundMessage:any;
+ applyfilterformaterial(event:Event){
+   debugger
+   const filtervalue=(event.target as HTMLInputElement).value
+   this.material.dataSource.filter=filtervalue.trim().toLowerCase();
+   if(this.material.dataSource.paginator)
+   {
+     this.material.dataSource.paginator.firstPage();
+   }
+   if(this.material.dataSource.filteredData.length==0)
+   {
+   this.notFoundMessage = 'No matching data found';
+   }
+   else {
+     this.notFoundMessage = '';
+   }
+ }
+
+ applyfilterforvendor(event:Event){
+  debugger
+  const filtervalue=(event.target as HTMLInputElement).value
+  this.vendor.dataSource.filter=filtervalue.trim().toLowerCase();
+  if(this.vendor.dataSource.paginator)
+  {
+    this.vendor.dataSource.paginator.firstPage();
+  }
+  if(this.vendor.dataSource.filteredData.length==0)
+  {
+  this.notFoundMessage = 'No matching data found';
+  }
+  else {
+    this.notFoundMessage = '';
+  }
+}
+
+ onCategoryClick(val:any){
+  debugger
+  this.materialCategory = val.GRP_COD;
+  this.service.GetMaterialData().subscribe(resp =>{
+    this.materialData_list = resp;
+    this.materialData_list=this.materialData_list.filter((x: any) => x.PRD_GRP_COD === val.GRP_COD)
+    this.isFieldreadonly=false
+    //console.log(this.materialData_list);
+    // this.material.dataSource=this.materialData_list
+    // this.materialComponent.callmateial();
+  })
+ }
+
+  onContainerClick(){
+  debugger
+  this.material.closeTable();
+  this.vendor.closeTable();
+  }
+  
+  OnclickMaterial(){
+    debugger
+    const data =this.materialComponent.onclick();
+    console.log(data);
+  }
+
+  OnclickVendor(){
+    debugger
+    const data =this.vendorComponent.onclick();
+    console.log(data);
+  }
+   
+  onSelectedRowofMaterial(selectedRowData: any) {
+    debugger
+    console.log (selectedRowData);
+    this.selectedRowDataMaterialCOD = selectedRowData.PRD_COD;
+    this.selectedRowDataMaterialDESC = selectedRowData.PRD_DESC;
+    // do something with the selected row data
+  }
+
+  onSelectedRowofVendor(selectedRowVendor: any) {
+    debugger
+    console.log (selectedRowVendor);
+    this.selectedRowDataVendorCOD = selectedRowVendor.VED_COD;
+    this.selectedRowDataVendorDESC = selectedRowVendor.VED_DESC;
+    // do something with the selected row data
+  }
+
   Reset() {
     this.storeInForm.reset();
   }
   
-
+ 
 }
 

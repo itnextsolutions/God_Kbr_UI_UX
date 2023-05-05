@@ -26,6 +26,7 @@ import { BreadcrumbNavComponent } from './SharedPages/breadcrumb-nav/breadcrumb-
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { MaterialCodeDescriptionComponent } from './Pages/material-code-description/material-code-description.component';
+import { VendorMatCodeDescriptionComponent } from './Pages/vendor-mat-code-description/vendor-mat-code-description.component';
 
 
 
@@ -46,7 +47,8 @@ import { MaterialCodeDescriptionComponent } from './Pages/material-code-descript
     PalletizationProcessComponent,
    
     BreadcrumbNavComponent,
-    MaterialCodeDescriptionComponent
+    MaterialCodeDescriptionComponent,
+    VendorMatCodeDescriptionComponent
          
   
   ],
