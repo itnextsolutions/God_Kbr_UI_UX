@@ -273,8 +273,8 @@
                                                     </div>
                                                     <div class="input-group col-lg-7">
 
-                                                        <select class="form-control" name="Name"
-                                                            formControlName="materialType" [(ngModel)]="materialType">
+                                                        <select class="form-control" name="Name" 
+                                                            formControlName="materialType" [(ngModel)]="materialType" (change)='onDropdownClick(materialType)'>
                                                             <option value="" disabled selected>Select</option>
                                                             <option *ngFor="let tablename of materialTypeList"
                                                                 [value]="tablename.GPARM_VALUE">
