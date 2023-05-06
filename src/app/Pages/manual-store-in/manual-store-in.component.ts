@@ -296,6 +296,7 @@ export class ManualStoreInComponent {
     const datePipe = new DatePipe('en-US');
     const formattedDate = this.datePipe.transform(date1, 'dd-MM-yyyy');
 
+    
     // this.doedate = formattedDate;
 
     console.log(date1);
