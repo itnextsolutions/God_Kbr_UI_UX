@@ -52,5 +52,8 @@ export class MyService {
     return this.http.get(this.apiEndpoint + 'Palletization/GetOrderItems');
   }
 
+  public postOrderItems(val :any =[]){
 
+    return this.http.post(this.apiEndpoint + 'HostToWms/InsertOrderItem' ,val);
+  }
 }

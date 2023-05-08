@@ -45,7 +45,7 @@ export class ManualStoreInComponent {
   partial: string = "";
   transactionID: string = "";
   projectID: string = "";
-  dor: Date = new Date();
+  dor: string="";
   grnNo: string = "";
   uom: string = "";
   uomKG: string = "Kg";
@@ -54,7 +54,7 @@ export class ManualStoreInComponent {
   materialTypeList: any = [];
   isFieldreadonly = true;
   fieldreadonly = true;
-  
+
   lengthreadonly = true;
   weightReadonly = true;
   noOfSoolReadonly = true;
@@ -74,6 +74,7 @@ export class ManualStoreInComponent {
   shelfLife: any;
   datePipe: any;
   manualStoreInList: any = [];
+  confirmList: any = [];
 
   constructor(public fb: UntypedFormBuilder, private router: Router, private service: MyService) {
 
@@ -83,6 +84,7 @@ export class ManualStoreInComponent {
   form: FormGroup<{}> | undefined;
 
   ngOnInit(): void {
+
 
     this.storeInForm = this.fb.group({
       materialCategory: ['', [Validators.required]],
@@ -102,7 +104,7 @@ export class ManualStoreInComponent {
       partial: ['', [Validators.required]],
       transactionID: ['', [Validators.required]],
       projectID: ['', [Validators.required]],
-      dor: ['', [Validators.required]],
+      dor: [new Date(), [Validators.required]],
       grnNo: ['', [Validators.required]],
       uomKG: ['', [Validators.required]],
       uomMeter: ['', [Validators.required]],
@@ -130,50 +132,83 @@ export class ManualStoreInComponent {
     return this.storeInForm.controls;
   }
 
-  
-  key:string='id';
-  reverse: boolean= false;
-  sort(key: any){
-    this.key=key;
-    this.reverse =! this.reverse
+
+  key: string = 'id';
+  reverse: boolean = false;
+  sort(key: any) {
+    this.key = key;
+    this.reverse = !this.reverse
   }
 
   Add() {
 
     debugger
     // if (this.storeInForm.valid) {
-    var val = {
-      materialCategory: this.materialCategory,
-      materialBarcode: this.materialBarcode,
-      materialCode: this.selectedRowDataMaterialCOD,
-      materialDesc: this.selectedRowDataMaterialDESC,
-      materialType: this.materialType,
-      dom: this.dom,
-      doe: this.doe,
-      vendorCode: this.selectedRowDataVendorCOD,
-      vendordesc: this.selectedRowDataVendorDESC,
-      dipRollNo: this.dipRollNo,
-      weight: this.weight,
-      length: this.length,
-      noOfSpool: this.noOfSpool,
-      materialStatus: this.materialStatus,
-      partial: this.partial,
-      transactionID: this.transactionID,
-      projectID: this.projectID,
-      dor: this.dor,
-      grnNo: this.grnNo,
-      uomKG: this.uomKG,
-      uomMeter: this.uomMeter,
-      uomNos: this.uomNos,
-    };
+  
+var val={
+    MSG_MATERIAL_CATEGORY: this.materialCategory,
+    MSG_MATERIAL_CODE: this.selectedRowDataMaterialCOD,
+    MSG_DESCRIPTION: this.selectedRowDataMaterialDESC,
+    MSG_VENDOR_CODE: this.selectedRowDataVendorCOD,
+    MSG_VENDOR_DESC: this.selectedRowDataVendorDESC,
+    MSG_MATERIAL_BARCODE: this.materialBarcode,
+    MSG_MATERIAL_TYPE: this.materialType,
+   // MSG_PAL_TYPE: this.palletType,
+    MSG_DOM: this.dom,
+    MSG_DOE: this.doe,
+    MSG_DIP_ROLL_NO: this.dipRollNo,
+    MSG_QUANTITY: this.weight,
+    MSG_LENG_QTY: this.length,
+    MSG_NO_OF_SP_BOX: this.noOfSpool,
+    MSG_MATERIAL_STATUS: this.materialStatus,
+    MSG_PART_FLAG: this.partial,
+    MSG_TRANS_ID: this.transactionID,
+    MSG_PROJECT_ID: this.projectID,
+    MSG_DOR: this.dor,
+    MSG_GRN_NUM: this.grnNo,
+}
     this.manualStoreInList.push(val)
     console.log(this.manualStoreInList)
-    // this.service.insertHostToWms(val).subscribe(res => {
-    //   alert(res.toString());
-    // })
-    // }
-    // else {
-    //   this.storeInForm.markAllAsTouched();
+  }
+
+  confirmButton() {
+    debugger
+    // this.confirmList
+
+    this.service.postOrderItems(this.confirmList).subscribe(res=>{
+
+    });
+
+    
+    // var val = {
+    //   MATERIAL_CATEGORY: this.confirmList.materialCategory,
+    //   MATERIAL_CODE: this.confirmList.materialCode,
+    //   DESCRIPTION: this.confirmList.materialDesc,
+    //   VENDOR_CODE: this.confirmList.vendorCode,
+    //   VENDOR_DESC: this.confirmList.vendordesc,
+    //   MATERIAL_BARCODE: this.confirmList.material_list,
+    //   MATERIAL_TYPE: this.confirmList.materialType,
+    //   MSG_PAL_TYPE: this.confirmList.palletType,
+    //   DOM: this.confirmList.dom,
+    //   DOE: this.confirmList.doe,
+    //   DIP_ROLL_NO: this.confirmList.dipRollNo,
+    //   QUANTITY: this.confirmList.weight,
+    //   MSG_LENG_QTY: this.confirmList.length,
+    //   NO_OF_SP_BOX: this.confirmList.noOfSpool,
+    //   MATERIAL_STATUS: this.confirmList.materialStatus,
+    //   PART_FLAG: this.confirmList.partial,
+    //   TRANS_ID: this.confirmList.transactionID,
+    //   PROJECT_ID: this.confirmList.projectID,
+    //   DOR: this.confirmList.dor,
+    //   GRN_NUM: this.confirmList.grnNo,
+    //   //INVOICE_NO : this.confirmList.invoiceNo,
+    //   //MSG_ID :   ,
+    //   MSG_STAT: 'DEF',
+    //   // MSG_DT_DEF : currentDate
+    //   // MSG_DT_TRM : current date
+    //   MSG_SOURCE: 'MANUAL',
+    //   MSG_TRANS_TYPE: 'MASTER',
+    //   MSG_TYPE: 'SAP'
     // }
   }
 
@@ -296,9 +331,26 @@ export class ManualStoreInComponent {
     const datePipe = new DatePipe('en-US');
     this.doe = datePipe.transform(date1, 'yyyy-MM-dd');
   }
-confirm(val : any){
-  debugger
-}
+
+  isCheked(val: any) {
+    debugger
+
+    // this.confirmList.push(val);
+
+    const index = this.confirmList.indexOf(val);
+
+
+    if (this.confirmList.includes(val)) {
+      this.confirmList.splice(index, 1);
+    }
+    else {
+      this.confirmList.push(val);
+    }
+
+    console.log(this.confirmList);
+
+
+  }
 
 }
 

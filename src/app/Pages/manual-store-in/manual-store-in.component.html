@@ -722,24 +722,30 @@
                                             <tr>
                                                 <td>
                                                         <div class="custom-control custom-checkbox small">
-                                                            <input type="checkbox" (click)="confirm(data)">
+                                                            <input type="checkbox" (click)="isCheked(data)">
                                                         </div>
                                                 </td>
-                                                <td>{{data.transactionID}}</td>
-                                                <td>{{data.materialCode}}</td>
+                                                <td>{{data.MSG_TRANS_ID}}</td>
+                                                <td>{{data.MSG_MATERIAL_CODE}}</td>
                                                 <td></td>
                                                 <td></td>
-                                                <td>{{data.dom}}</td>
-                                                <td>{{data.doe}}</td>
-                                                <td>{{data.materialStatus}} </td>
-                                                <td>{{data.materialType}}</td>
+                                                <td>{{data.MSG_DOM}}</td>
+                                                <td>{{data.MSG_DOE}}</td>
+                                                <td>{{data.MSG_MATERIAL_STATUS}} </td>
+                                                <td>{{data.MSG_MATERIAL_TYPE}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <!-- <pagination-controls (pageChange)="pageSize  =  $event"></pagination-controls> -->
                                 </div>
 
-                                
+                                <div class="form-group row">
+                                    <div class="col-sm-10   submit-button">
+                                        <button type="submit" class="btn btn-primary "
+                                            style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;"
+                                            (click)="confirmButton()" aria-pressed="true">Add</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
