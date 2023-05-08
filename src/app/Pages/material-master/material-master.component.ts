@@ -35,13 +35,14 @@ export class MaterialMasterComponent {
   PRD_CTRL_TYPE: String = "1";
   PRD_PACK_QTY: number | undefined;
   PRD_MEAS_UNIT: string = "";
-  PRD_HUPT_ID: number | undefined;
+  PRD_HUPT_ID: string="";
   disable: boolean = false;
 
   radio1 = false;
   readOnly = false;
   isChecked = false;
   material_list: any=[];
+
   pageSize : number =1;
   itemsPerPage : number=10;
   pageSizeOptions = [5, 10, 25, 50];

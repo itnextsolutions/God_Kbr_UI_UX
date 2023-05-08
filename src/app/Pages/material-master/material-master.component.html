@@ -164,7 +164,7 @@
 
                                                     <select class="form-control" name="Name"
                                                         formControlName="PRD_HUPT_ID" [(ngModel)]="PRD_HUPT_ID">
-                                                        <option value="0" disabled selected>Select</option>
+                                                        <option value="" disabled selected>Select</option>
                                                         <option *ngFor="let tablename of palletType"
                                                             [value]="tablename.HUT_PT_ID">
                                                             {{tablename.HUT_DESC}}</option>

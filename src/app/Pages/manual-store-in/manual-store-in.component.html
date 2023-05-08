@@ -97,8 +97,8 @@
                                                     </div>
 
                                                     <div class="input-group col-lg-9">
-                                                        <input type="text" class="form-control" [(ngModel)]="weight" [readOnly]="weightReadonly"
-                                                            formControlName="weight" />
+                                                        <input type="text" class="form-control" [(ngModel)]="weight"
+                                                            [readOnly]="weightReadonly" formControlName="weight" />
                                                         <!-- <span class="error"
                                                             *ngIf="storeInForm.controls['weight'].touched && storeInForm.controls['weight'].invalid">
                                                             Weight is required</span> -->
@@ -116,7 +116,7 @@
 
                                                     <div class="input-group col-lg-9">
 
-                                                        <input type="text" class="form-control" [(ngModel)]="uomKG"  
+                                                        <input type="text" class="form-control" [(ngModel)]="uomKG"
                                                             [readonly]="fieldreadonly" formControlName="uomKG" />
                                                         <!-- <span class="error"
                                                             *ngIf="storeInForm.controls['uomKG'].touched && storeInForm.controls['uomKG'].invalid">
@@ -184,8 +184,8 @@
 
                                                     <div class="input-group col-lg-9">
 
-                                                        <input type="text" class="form-control" [(ngModel)]="uomMeter" value="meter"
-                                                            [readonly]="fieldreadonly"
+                                                        <input type="text" class="form-control" [(ngModel)]="uomMeter"
+                                                            value="meter" [readonly]="fieldreadonly"
                                                             formControlName="uomMeter" />
                                                         <!-- <span class="error"
                                                             *ngIf="storeInForm.controls['uomMeter'].touched && storeInForm.controls['uomMeter'].invalid">
@@ -250,7 +250,7 @@
                                                     <div class="input-group col-lg-9">
 
                                                         <input type="text" class="form-control" [(ngModel)]="uomNos"
-                                                           [readonly]="fieldreadonly" value="nos"
+                                                            [readonly]="fieldreadonly" value="nos"
                                                             formControlName="uomNos" />
                                                         <!-- <span class="error"
                                                             *ngIf="storeInForm.controls['uomNos'].touched && storeInForm.controls['uomNos'].invalid">
@@ -273,8 +273,9 @@
                                                     </div>
                                                     <div class="input-group col-lg-7">
 
-                                                        <select class="form-control" name="Name" 
-                                                            formControlName="materialType" [(ngModel)]="materialType" (change)='onDropdownClick(materialType)'>
+                                                        <select class="form-control" name="Name"
+                                                            formControlName="materialType" [(ngModel)]="materialType"
+                                                            (change)='onDropdownClick(materialType)'>
                                                             <option value="" disabled selected>Select</option>
                                                             <option *ngFor="let tablename of materialTypeList"
                                                                 [value]="tablename.GPARM_VALUE">
@@ -327,7 +328,7 @@
 
                                                     <div class="input-group col-lg-7">
                                                         <input type="date" class="form-control" [(ngModel)]="dom"
-                                                            formControlName="dom" />
+                                                            (change)="onDateChage(dom)" formControlName="dom" />
                                                         <span class="error"
                                                             *ngIf="storeInForm.controls['dom'].touched && storeInForm.controls['dom'].invalid">
                                                             DOE required</span>
@@ -370,7 +371,7 @@
 
                                                     <div class="input-group col-lg-7">
                                                         <input type="date" class="form-control" [(ngModel)]="doe"
-                                                            formControlName="doe" />
+                                                            formControlName="doe" [readOnly]="true" />
                                                         <span class="error"
                                                             *ngIf="storeInForm.controls['doe'].touched && storeInForm.controls['doe'].invalid">
                                                             Doe is required</span>
@@ -600,7 +601,7 @@
             </div>
 
             <!--Details grid start-->
-            <div class="container-fluid">
+            <!-- <div class="container-fluid">
                 <div class="tab-content">
                     <div id="storeout" class="">
                         <div class="card shadow mb-4">
@@ -615,17 +616,6 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr style="background-color:  #eeebf6; color: #361374;">
-                                                <!-- <th>Action</th>
-                                                <th>Order Ref No</th>
-                                                <th>Order Type</th>
-                                                <th>SKU Code</th>
-                                                <th>Batch No</th>
-                                                <th>Quantity</th>
-                                                <th>SKU_Wt</th>
-                                                <th>UOM</th>
-                                                <th>MFG Date</th>
-                                                <th>Supplier Code</th> -->
-
                                                 <th>Action</th>
                                                 <th>Trans ID</th>
                                                 <th>Material Code</th>
@@ -690,6 +680,66 @@
                                         </tbody>
                                     </table>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="container-fluid" *ngIf="manualStoreInList.length>0">
+                <div class="tab-content">
+                    <div id="storein" class="">
+                        <div class="card shadow mb-4">
+                            <div class="card-header d-sm-flex py-3 justify-content-between ">
+                                <h6 class="m-0 font-weight-bold" style="color:#fff; padding: 5px 0 0 0;">Order Details</h6>
+                                <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                        Class="fas fa-download fa-sm text-white-50"></i> Export Excel</a> -->
+
+                            </div>
+                            <div class="card-body">
+                                <!-- <input type="text" placeholder="search" style="margin-left: 709px" (keyup)="filterData($event)"> -->
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr style="background-color:  #eeebf6; color: #361374;">
+                                                <th>Action</th>
+                                                <th (click)="sort('id')"> Trans ID&nbsp;<i class="fa fa-sort"></i>
+                                                </th>
+                                                <th (click)="sort('id')">Material Code &nbsp;<i
+                                                        class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">Pallet ID&nbsp;<i
+                                                        class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">OTY&nbsp;<i class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">DOM&nbsp;<i
+                                                        class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">DOE&nbsp;<i class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">Status&nbsp;<i class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">Material Type&nbsp;<i class="fa fa-sort"></i>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="let data of manualStoreInList let i=index ">
+                                            <tr>
+                                                <td>
+                                                        <div class="custom-control custom-checkbox small">
+                                                            <input type="checkbox" (click)="confirm(data)">
+                                                        </div>
+                                                </td>
+                                                <td>{{data.transactionID}}</td>
+                                                <td>{{data.materialCode}}</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>{{data.dom}}</td>
+                                                <td>{{data.doe}}</td>
+                                                <td>{{data.materialStatus}} </td>
+                                                <td>{{data.materialType}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- <pagination-controls (pageChange)="pageSize  =  $event"></pagination-controls> -->
+                                </div>
+
+                                
                             </div>
                         </div>
                     </div>

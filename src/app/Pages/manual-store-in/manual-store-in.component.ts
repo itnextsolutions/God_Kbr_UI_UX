@@ -1,14 +1,3 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-manual-store-in',
-//   templateUrl: './manual-store-in.component.html',
-//   styleUrls: ['./manual-store-in.component.css']
-// })
-// export class ManualStoreInComponent {
-
-// }
-
 import { Component, ViewChild } from '@angular/core';
 import { FormGroup, UntypedFormBuilder, FormBuilder, Validators, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -17,6 +6,7 @@ import { MaterialCodeDescriptionComponent } from '../material-code-description/m
 import { VendorMatCodeDescriptionComponent } from '../vendor-mat-code-description/vendor-mat-code-description.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatePipe } from '@angular/common';
+
 
 
 @Component({
@@ -42,7 +32,9 @@ export class ManualStoreInComponent {
   materialDesc: string = "";
   materialType: string = "";
   dom: string = "";
-  doe: string = "";
+  doe: string | null | undefined;
+
+  //doe: string = "";
   vendorCode: any;
   vendordesc: any;
   dipRollNo: string = "";
@@ -53,7 +45,7 @@ export class ManualStoreInComponent {
   partial: string = "";
   transactionID: string = "";
   projectID: string = "";
-  dor: string = "";
+  dor: Date = new Date();
   grnNo: string = "";
   uom: string = "";
   uomKG: string = "Kg";
@@ -62,10 +54,7 @@ export class ManualStoreInComponent {
   materialTypeList: any = [];
   isFieldreadonly = true;
   fieldreadonly = true;
-
-  doedate = new Date();
-  domdate = new Date();
-
+  
   lengthreadonly = true;
   weightReadonly = true;
   noOfSoolReadonly = true;
@@ -83,8 +72,10 @@ export class ManualStoreInComponent {
   @ViewChild('vendor') vendor!: MaterialCodeDescriptionComponent;
   dataSource!: MatTableDataSource<any>;
   shelfLife: any;
+  datePipe: any;
+  manualStoreInList: any = [];
 
-  constructor(public fb: UntypedFormBuilder, private router: Router, private service: MyService,private datePipe: DatePipe) {
+  constructor(public fb: UntypedFormBuilder, private router: Router, private service: MyService) {
 
     this.chkBox = ['Yes', 'No'];
   }
@@ -139,41 +130,51 @@ export class ManualStoreInComponent {
     return this.storeInForm.controls;
   }
 
-  Add() {
-    debugger
-    if (this.storeInForm.valid) {
-      var val = {
-        materialCategory: this.materialCategory,
-        materialBarcode: this.materialBarcode,
-        materialCode: this.selectedRowDataMaterialCOD,
-        materialDesc: this.selectedRowDataMaterialDESC,
-        materialType: this.materialType,
-        dom: this.dom,
-        doe: this.doe,
-        vendorCode: this.selectedRowDataVendorCOD,
-        vendordesc: this.selectedRowDataVendorDESC,
-        dipRollNo: this.dipRollNo,
-        weight: this.weight,
-        length: this.length,
-        noOfSpool: this.noOfSpool,
-        materialStatus: this.materialStatus,
-        partial: this.partial,
-        transactionID: this.transactionID,
-        projectID: this.projectID,
-        dor: this.dor,
-        grnNo: this.grnNo,
-        uomKG: this.uomKG,
-        uomMeter: this.uomMeter,
-        uomNos: this.uomNos,
-      };
+  
+  key:string='id';
+  reverse: boolean= false;
+  sort(key: any){
+    this.key=key;
+    this.reverse =! this.reverse
+  }
 
-      this.service.insertHostToWms(val).subscribe(res => {
-        alert(res.toString());
-      })
-    }
-    else {
-      this.storeInForm.markAllAsTouched();
-    }
+  Add() {
+
+    debugger
+    // if (this.storeInForm.valid) {
+    var val = {
+      materialCategory: this.materialCategory,
+      materialBarcode: this.materialBarcode,
+      materialCode: this.selectedRowDataMaterialCOD,
+      materialDesc: this.selectedRowDataMaterialDESC,
+      materialType: this.materialType,
+      dom: this.dom,
+      doe: this.doe,
+      vendorCode: this.selectedRowDataVendorCOD,
+      vendordesc: this.selectedRowDataVendorDESC,
+      dipRollNo: this.dipRollNo,
+      weight: this.weight,
+      length: this.length,
+      noOfSpool: this.noOfSpool,
+      materialStatus: this.materialStatus,
+      partial: this.partial,
+      transactionID: this.transactionID,
+      projectID: this.projectID,
+      dor: this.dor,
+      grnNo: this.grnNo,
+      uomKG: this.uomKG,
+      uomMeter: this.uomMeter,
+      uomNos: this.uomNos,
+    };
+    this.manualStoreInList.push(val)
+    console.log(this.manualStoreInList)
+    // this.service.insertHostToWms(val).subscribe(res => {
+    //   alert(res.toString());
+    // })
+    // }
+    // else {
+    //   this.storeInForm.markAllAsTouched();
+    // }
   }
 
 
@@ -238,6 +239,9 @@ export class ManualStoreInComponent {
     if (val == 'REGULAR') {
       this.materialStatus = 'HOLD';
     }
+    else {
+      this.materialStatus = '';
+    }
   }
 
   onContainerClick() {
@@ -280,29 +284,21 @@ export class ManualStoreInComponent {
 
   onDateChage(val: any) {
     debugger
-    this.shelfLife;
-    this.doedate.setDate(val + 5);
-
-    console.log(this.doedate)
-
-    const date = new Date(val); // Current date
-    const date1 = new Date(); // Current date
-
-    const numberOfDaysToAdd = 5;
-    date1.setDate(date.getDate() + numberOfDaysToAdd);
+    this.materialData_list = this.materialData_list.filter((x: any) => x.PRD_COD === this.selectedRowDataMaterialCOD)
+    this.shelfLife = this.materialData_list[0].PRD_LENG;
 
 
+    const date = new Date(val); // DOM date
+    const date1 = new Date(); // DOE date
+
+    date1.setDate(date.getDate() + this.shelfLife);
 
     const datePipe = new DatePipe('en-US');
-    const formattedDate = this.datePipe.transform(date1, 'dd-MM-yyyy');
-
-    
-    // this.doedate = formattedDate;
-
-    console.log(date1);
-    console.log(formattedDate);
-
+    this.doe = datePipe.transform(date1, 'yyyy-MM-dd');
   }
+confirm(val : any){
+  debugger
+}
 
 }
 
