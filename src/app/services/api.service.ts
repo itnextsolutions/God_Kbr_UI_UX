@@ -8,7 +8,7 @@ export class MyService {
 
   apiEndpoint = 'https://localhost:44363/api/';
 
-
+  
 
   public insertHostToWms(val :any){
     return this.http.post(this.apiEndpoint + 'HostToWms/InsertInToHostToWms',val);
@@ -41,7 +41,7 @@ export class MyService {
     return this.http.get(this.apiEndpoint + 'MaterialMaster/GetPalletType');
   }
 
-  
+
 
   public getMaterialStatus() {
     return this.http.get(this.apiEndpoint + 'MaterialMaster/GetMaterialStatus');

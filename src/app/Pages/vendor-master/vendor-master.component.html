@@ -117,14 +117,17 @@
                         <div class="col-sm-3">
                           <p *ngIf="notFoundMessage">{{ notFoundMessage }}</p>
                           <label [for]="materialCode" class="font-medium text-900"> Material Code : </label>
-                          
+                        </div> 
+                          <div class="input-group col-sm-6">
                           <input type="text" class="form-control" (input)="applyfilter($event)" formControlName="materialCode" (keydown)="onKeyDown($event)" (click)="Onclick()" [readonly]="isFieldreadonly"  (keydown.enter)="onKeyEnter($event)" [(ngModel)]="selectedRowDataCOD">
                          
                           <span class="error"
                           *ngIf="vendorForm.controls['materialCode'].touched && vendorForm.controls['materialCode'].invalid">
                           Material Code required</span>
-
+                        <div>
                           <app-material-code-description  #material [category]="materialCategory" [dataSource]="dataSource" (bookTitleCreated)="onKeyEnter($event)" (selectedRow)="onSelectedRow($event)"></app-material-code-description>
+                        </div>
+                          
                         </div>
 
                         <!-- </div> -->
@@ -242,7 +245,8 @@
                                           *ngFor="let data of vendor_Filterlist | orderBy : key : reverse | paginate:{itemsPerPage:itemsPerPage, currentPage: pageSize }; let i=index ">
                                           <tr>
                                             <tr>
-                                              <td>{{i + 1}}</td>
+                                              <!-- <td>{{i + 1}}</td> -->
+                                              <td>{{i+(itemsPerPage*pageSize)-(itemsPerPage-1)}}</td>
                                               <td>{{data.VED_PRD_COD}}</td>
                                               <td>{{data.VED_PRD_GRP_COD}}</td>
                                               <td>{{data.VED_PRD_DESC}}</td>

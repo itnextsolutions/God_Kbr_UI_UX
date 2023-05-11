@@ -1,4 +1,3 @@
-
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MyService } from 'src/app/services/api.service';
 import { Component, HostListener, ViewChild ,Renderer2, Output, EventEmitter, ElementRef,Input} from '@angular/core';
@@ -7,22 +6,16 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatSelect } from '@angular/material/select';
 
-
-
 @Component({
-  selector: 'app-material-code-description',
-  templateUrl: './material-code-description.component.html',
-  styleUrls: ['./material-code-description.component.css']
-  
+  selector: 'app-vendor-mat-code-description',
+  templateUrl: './vendor-mat-code-description.component.html',
+  styleUrls: ['./vendor-mat-code-description.component.css']
 })
-
-
-
-export class MaterialCodeDescriptionComponent {
+export class VendorMatCodeDescriptionComponent {
  
      @Input() dataSource = new MatTableDataSource<any>();
      @Input() category: string="";
-     displayedColumns: string[]=['PRD_COD','PRD_GRP_COD','PRD_DESC'];
+     displayedColumns: string[]=['VED_COD','VED_PRD_GRP_COD','VED_DESC'];
      //dataSource:MatTableDataSource<any>=new MatTableDataSource<any>();
      @ViewChild(MatTable) table!: MatTable<any>;
      @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -33,18 +26,18 @@ export class MaterialCodeDescriptionComponent {
      ishidden1=true;
      isTableOpen=false;
     //  @ViewChild('material') material:any=[];
-    material : any;
-     @Output() selectedRow = new EventEmitter<any>();
+    vendor : any;
+     @Output() selectedRowVendor = new EventEmitter<any>();
      selectedRowIndex = -1;
      @Output() bookTitleCreated = new EventEmitter<any>();
    
 
-    constructor( private service: MyService,private renderer: Renderer2,private elRef: ElementRef,private router: Router) {
+    constructor( private service: MyService,private renderer: Renderer2,private elRef: ElementRef,private router:Router) {
     }
 
     ngAfterViewInit1() {
       debugger
-      this.renderer.listen(this.material.nativeElement, 'keydown', (event) => {
+      this.renderer.listen(this.vendor.nativeElement, 'keydown', (event) => {
         if (event.key === 'ArrowDown') {
           this.selectNextRow();
         }
@@ -55,12 +48,12 @@ export class MaterialCodeDescriptionComponent {
     onKeyEnter(event: any) {
       debugger;
       console.log(event.target.value);
-      this.material_list =this.material.filter( (res : any) =>{
+      this.material_list =this.vendor.filter( (res : any) =>{
         return res.materialCode.toLocaleLowerCase().match(event.target.value.toLocaleLowerCase())
        })
       //  this.selectedRowDataCOD = event.materialCode;
       // this.selectedRowDataDESC = event.materialDesc;
-      this.selectedRow.emit()
+      this.selectedRowVendor.emit()
       this.ishidden=true;
       
     }
@@ -68,9 +61,8 @@ export class MaterialCodeDescriptionComponent {
     onRowClicked(rowData: any) {
       debugger
       // emit selected row data to parent component
-      this.selectedRow.emit(rowData);
+      this.selectedRowVendor.emit(rowData);
       this.isTableOpen = false;
-      this.ishidden1=true;
     }
 
     handleKeyDown(event: KeyboardEvent) {
@@ -81,23 +73,21 @@ export class MaterialCodeDescriptionComponent {
         // select the next row in the table
       }
     }
-    
+
     onclick(){
       debugger
-      this.service.GetMaterialData().subscribe((data:any) => {
-          this.material = data;
+      this.service.getVendorMaster().subscribe((data:any) => {
+          this.vendor = data;
           
-            this.material=this.material.filter((x: any) => x.PRD_GRP_COD === this.category)
-            this.dataSource=new MatTableDataSource<any>(this.material)
-            this.bookTitleCreated.emit({ title: this.material });
+            this.vendor=this.vendor.filter((x: any) => x.VED_PRD_GRP_COD === this.category)
+            this.dataSource=new MatTableDataSource<any>(this.vendor)
             this.dataSource.paginator=this.paginator
             this.dataSource.sort=this.sort
             this.isTableOpen = true;
-            this.ishidden1=true;
             console.log(this.category);
           
           
-  });
+     });
     }
 
 
@@ -106,23 +96,22 @@ export class MaterialCodeDescriptionComponent {
         console.log(event);
       }
     }
+
+    
    
 
     ngOnInit(): any {
-    //   debugger
-    //     this.service.GetMaterialData().subscribe((data:any) => {
-    //         this.material = data;  
-    //         this.dataSource=new MatTableDataSource<any>(this.material)
+    //     this.service.getVendorMaster().subscribe((data:any) => {
+    //         this.vendor = data;  
+    //         this.dataSource=new MatTableDataSource<any>(this.vendor)
     //          this.dataSource.paginator=this.paginator
     //           this.dataSource.sort=this.sort
-    //           this.isTableOpen=true
-    //           this.ishidden1=false
+    //         this.ishidden=false
     // });
     }
 
     closeTable() {
       this.isTableOpen = false;
-      this.ishidden1=true;
     }
 
     
@@ -147,19 +136,19 @@ export class MaterialCodeDescriptionComponent {
     onKeydown1(){
       debugger
           this.service.GetMaterialData().subscribe((data:any) => {
-              this.material = data;  
-              this.dataSource=new MatTableDataSource<any>(this.material)
+              this.vendor = data;  
+              this.dataSource=new MatTableDataSource<any>(this.vendor)
                this.dataSource.paginator=this.paginator
                 this.dataSource.sort=this.sort
               this.ishidden=false
       });
     }
 
-   callmateial(){
+   callvendor(){
     debugger
-        this.service.GetMaterialData().subscribe((data:any) => {
-            this.material = data;  
-            this.dataSource=new MatTableDataSource<any>(this.material)
+        this.service.getVendorMaster().subscribe((data:any) => {
+            this.vendor = data;  
+            this.dataSource=new MatTableDataSource<any>(this.vendor)
              this.dataSource.paginator=this.paginator
               this.dataSource.sort=this.sort
             this.ishidden=false
@@ -188,3 +177,4 @@ export class MaterialCodeDescriptionComponent {
   }
   
 }
+

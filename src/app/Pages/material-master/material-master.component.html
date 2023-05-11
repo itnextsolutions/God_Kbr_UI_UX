@@ -164,7 +164,7 @@
 
                                                     <select class="form-control" name="Name"
                                                         formControlName="PRD_HUPT_ID" [(ngModel)]="PRD_HUPT_ID">
-                                                        <option value="0" disabled selected>Select</option>
+                                                        <option value="" disabled selected>Select</option>
                                                         <option *ngFor="let tablename of palletType"
                                                             [value]="tablename.HUT_PT_ID">
                                                             {{tablename.HUT_DESC}}</option>
@@ -239,7 +239,7 @@
                                     <table class="table table-bordered" id="" width="100%" cellspacing="0">
                                         <thead>
                                             <tr style="background-color:  #eeebf6; color: #361374;">
-                                                <th >Action</th>
+                                                <th>Id</th>
                                                 <th (click)="sort('id')">  Material Code&nbsp;<i class="fa fa-sort"></i></th>
                                                 <th (click)="sort('id')">Material Category&nbsp;<i class="fa fa-sort"></i></th>
                                                 <th (click)="sort('id')">Material Description&nbsp;<i class="fa fa-sort"></i></th>
@@ -248,16 +248,13 @@
                                                 <th (click)="sort('id')">Spool/Box&nbsp;<i class="fa fa-sort"></i></th>
                                                 <th (click)="sort('id')">Uom&nbsp;<i class="fa fa-sort"></i></th>
                                                 <th (click)="sort('id')">pallet Type&nbsp;<i class="fa fa-sort"></i></th>
+                                                <th >Action</th>
                                             </tr>
                                         </thead>
                                         <tbody
-                                            *ngFor="let data of material_list| orderBy : key : reverse | paginate:{itemsPerPage:itemsPerPage, currentPage: pageSize }">
+                                            *ngFor="let data of material_list| orderBy : key : reverse | paginate:{itemsPerPage:itemsPerPage, currentPage: pageSize }; let i=index ">
                                             <tr>
-                                                <td>
-                                                    <button type="button" class="btn btn-primary" class="btn btn-link"
-                                                        (click)="Edit(data)"><i
-                                                            class="material-icons text-sm me-2"></i>Edit</button>
-                                                </td>
+                                                <td>{{i+(itemsPerPage*pageSize)-(itemsPerPage-1)}}</td>
                                                 <td>{{data.PRD_COD}}</td>
                                                 <td>{{data.PRD_GRP_COD}}</td>
                                                 <td>{{data.PRD_DESC}}</td>
@@ -273,6 +270,11 @@
                                                         NULL
                                                     </td>
                                                 </ng-template>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary" class="btn btn-link"
+                                                        (click)="Edit(data)"><i
+                                                            class="material-icons text-sm me-2"></i>Edit</button>
+                                                </td>
                                             </tr>
                                         </tbody>
 

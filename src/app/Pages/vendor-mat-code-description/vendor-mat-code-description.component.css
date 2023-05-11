@@ -1,0 +1,23 @@
+.container {
+    position: relative;
+  }
+  
+  table {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    z-index: 1;
+    background-color:rgb(243, 237, 237)
+  }
+  tr:nth-child(even) {
+    background-color:lightblue
+}
+
+  input {
+    /* position: static; (this is the default value) */
+    z-index: 2;
+  }
+
+  tr.selected {
+    background-color: #d60a0a;
+  }
