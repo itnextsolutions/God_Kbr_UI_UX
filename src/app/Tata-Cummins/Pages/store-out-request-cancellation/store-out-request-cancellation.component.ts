@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class StoreOutRequestCancellationComponent {
 
+  pageSizeOptions = [5, 10, 25, 50];
 }

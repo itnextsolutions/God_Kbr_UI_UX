@@ -28,63 +28,87 @@
 
 
                 <!--Details grid start-->
-                <div class="container-fluid" style="padding: 0;">
+                <div class="container-fluid">
                     <div class="tab-content">
                         <div id="storeout" class="">
                             <div class="card shadow mb-4">
                                 <div class="card-header d-sm-flex py-3 justify-content-between ">
-                                    <h6 class="m-0 font-weight-bold" style="color:#fff; padding: 5px 0 0 0;">Order
+                                    <h6 class="m-0 font-weight-bold" style="color:#fff; padding: 5px 0 0 0;">Pallet
                                         Details :
                                     </h6>
                                     <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i Class="fas fa-download fa-sm text-white-50"></i> Export Excel</a> -->
                                 </div>
-
+    
                                 <div class="card-body">
+                                    <label>Show:
+                                        <select>
+                                            <option></option>
+                                        </select>
+                                        entries
+                                    </label>
+          
+                                        <input type="text" placeholder="search" style="margin-left: 709px">
                                     <div class="table-responsive">
-
+                                        
                                         <table class="table table-bordered" id="" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr style="background-color:  #eeebf6; color: #361374;">
-
-                                                    <th>Action</th>
+                                                    <!-- <th>Select</th> -->
                                                     <th>Dispatch Order No</th>
+                                                    <!-- <th>Pallet Id</th> -->
                                                     <th>Material Code</th>
                                                     <th>Batch No</th>
-                                                    <th>QTY</th>
-                                                    <th>Material Type</th>
-                                                    <th>DOM</th>
-                                                    <th>DOE</th>
+                                                    <th>Pallet QTY</th>
+                                                    <!-- <th>DOM</th>
+                                                    <th>DOE</th> -->
                                                     <th>Status</th>
-                                                    
+                                                    <th>Material Type</th>
                                                 </tr>
                                             </thead>
-
+    
                                             <tbody>
                                                 <tr>
                                                     <!-- <td>
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="customCheck">
-                                                        <label class="custom-control-label"
-                                                            for="customCheck"></label>
-                                                    </div>
-                                                </td> -->
-                                                <td> <input type="checkbox"></td>
-                                               
+                                                        <div class="custom-control custom-checkbox small">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="customCheck">
+                                                            <label class="custom-control-label" for="customCheck"></label>
+                                                        </div>
+                                                    </td> -->
+                                                     <!-- <td> <input type="checkbox"></td> -->
+                                                    <td></td>
+                                                    <!-- <td></td> -->
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <!-- <td></td>
+                                                    <td></td> -->
                                                     <td></td>
                                                     <td></td>
                                                 </tr>
-                                            </tbody>
+                                                <tr>
+                                                    <!-- <td>
+                                                        <div class="custom-control custom-checkbox small">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="customCheck">
+                                                            <label class="custom-control-label" for="customCheck"></label>
+                                                        </div>
+                                                    </td> -->
+                                                     <!-- <td> <input type="checkbox"></td> -->
+                                                    <td></td>
+                                                    <!-- <td></td> -->
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <!-- <td></td>
+                                                    <td></td> -->
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                           </tbody>
                                         </table>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -194,8 +218,16 @@
                             </div>
 
                             <div class="card-body">
+                                <label>Show:
+                                    <select>
+                                        <option></option>
+                                    </select>
+                                    entries
+                                </label>
+      
+                                    <input type="text" placeholder="search" style="margin-left: 709px">
                                 <div class="table-responsive">
-
+                                    
                                     <table class="table table-bordered" id="" width="100%" cellspacing="0">
                                         <thead>
                                             <tr style="background-color:  #eeebf6; color: #361374;">
@@ -230,11 +262,36 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
+                                                <td></td>
                                             </tr>
                                        </tbody>
                                     </table>
+                                    <pagination-controls (pageChange)="pageSize  =  $event"></pagination-controls>
                                 </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-1 "></div>
+                                    <div class="col-lg-1 "></div>
+                                    <div class="col-lg-10   submit-button">
+                                        <!-- <button type="submit" class="btn btn-primary "
+                                            style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;">
+                                            Add
+                                        </button> -->
+                                        <button type="submit" class="btn btn-info "
+                                            style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;">
+                                            Confirm  
+                                        </button>
+                                        <button type="submit" class="btn btn-primary "
+                                            style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;">
+                                            Return
+                                        </button>
+                                        <button type="submit" class=" btn btn-info"
+                                            style="padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" >
+                                            Reset
+                                        </button>
+                                    </div>
                             </div>
+                            
+                        
                         </div>
                     </div>
                 </div>
