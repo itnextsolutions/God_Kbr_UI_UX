@@ -31,96 +31,19 @@
                     <div class="col-xl-12 col-lg-12">
                         <div class="card shadow mb-4">
                             <!-- Card Header - Dropdown -->
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Order Details :</h6>
-                            </div>
+                            
 
                             <!-- Card Body -->
-                            <div class="card-body">
+                            
                                 <div clas="container">
                                     <form>
                                         <div class="grid formgrid p-fluid">
-                                            <!-- <div class="field mb-4 col-12">
-                                                <label [for]="materialCategory" class="font-medium text-900"> Material Category:</label>
-                                                <input type="radio" [(ngModel)]="materialCategory" value="2" formControlName="materialCategory" />Dip
-                                                Roll
-                                                <input type="radio" [(ngModel)]="materialCategory" value="1" formControlName="materialCategory" />Wire
-                                
-                                              
-                                                <span class="error"
-                                                    *ngIf="storeInForm.controls['materialCategory'].touched && storeInForm.controls['materialCategory'].invalid">
-                                                    Material Category required</span>
-                                            </div> -->
-
                                            
-
-                                        </div>
-
-                                        <div class="row">
+                                         </div>
                                           
-
-
-                                            <div class="col-lg-12">
-
-                                                <div class="row form-group">
-                                                    <div class="col-lg-2">
-                                                        <label for="" class="font-medium text-900 control-label">Order Validity (in HR)</label>
-
-                                                       
-                                                    </div>
-
-                                                    <div class="input-group col-lg-4">
-                                                       
-                                                            <input type="text" class="form-control"/>
-                                                        <span class="error"></span>
-                                                          
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-12">
-
-                                                <div class="row form-group">
-                                                    <div class="col-lg-2">
-                                                        <label for="" class="font-medium text-900 control-label">Order Validity (in HR)</label>
-
-                                                       
-                                                    </div>
-
-                                                    <div class="input-group col-lg-4">
-                                                       
-                                                            <input type="text" class="form-control"/>
-                                                        <span class="error"></span>
-                                                          
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                         
-                                        </div>
-
-                                      
-                                      
-                                      
-
-                                        <div class="form-group row">
-                                            <div class="col-sm-2 "></div>
-                                            <div class="col-sm-10   submit-button">
-                                                <button type="submit" class="btn btn-primary "
-                                                    style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;"
-                                                     >Add</button>
-
-                                                <button type="submit" class=" btn btn-info"
-                                                    style="padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;">
-                                                     Reset</button>
-                                            </div>
-                                        </div>
                                     </form>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -138,76 +61,64 @@
                             </div>
 
                             <div class="card-body">
+                                <label>Show:
+                                    <select [(ngModel)]="itemsPerPage">
+                                        <option *ngFor="let option of pageSizeOptions" [value]="option">{{option}}</option>
+                                    </select>
+                                    entries
+                                </label>
+                                <input type="text" placeholder="search" style="margin-left: 709px" (keyup)="filterData($event)">
                                 <div class="table-responsive">
-
-                                    <table class="table table-bordered" id="dataTable" width="100%"
+                                    
+                                    <table class="table table-bordered" id="" width="100%"
                                         cellspacing="0">
                                         <thead>
                                             <tr style="background-color:  #eeebf6; color: #361374;">
-                                                <!-- <th>Action</th>
-                                        <th>Order Ref No</th>
-                                        <th>Order Type</th>
-                                        <th>SKU Code</th>
-                                        <th>Batch No</th>
-                                        <th>Quantity</th>
-                                        <th>SKU_Wt</th>
-                                        <th>UOM</th>
-                                        <th>MFG Date</th>
-                                        <th>Supplier Code</th> -->
-
-                                                <th>Action</th>
-                                                <th>Trans ID</th>
-                                                <th>Material Code</th>
-                                                <th>Pallet ID</th>
-                                                <th>QTY</th>
+                                                <th (click)="sort('id')">  Action&nbsp;<i class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">  Trans ID&nbsp;<i class="fa fa-sort"></i></th>
+                                                <!-- <th>Action</th> -->
+                                               <!--  <th>Trans ID</th> -->
+                                                <th (click)="sort('id')">  material Code&nbsp;<i class="fa fa-sort"></i></th>
+                                                <!-- <th>Material Code</th> -->
+                                                <th (click)="sort('id')">  Pallet ID&nbsp;<i class="fa fa-sort"></i></th>
+                                                <!-- <th>Pallet ID</th> -->
+                                                <th (click)="sort('id')">  QTY&nbsp;<i class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">  DOM &nbsp;<i class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">  DOE &nbsp;<i class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">  Status&nbsp;<i class="fa fa-sort"></i></th>
+                                                <th (click)="sort('id')">  Material Type&nbsp;<i class="fa fa-sort"></i></th>
+                                               <!--  <th>QTY</th>
                                                 <th>DOM</th>
                                                 <th>DOE</th>
                                                 <th>Status</th>
-                                                <th>Material Type</th>
+                                                <th>Material Type</th> -->
                                             </tr>
                                         </thead>
                                         
-                                        <tbody>
+                                        <tbody  *ngFor="let data of Storeview_list | orderBy : key : reverse | paginate:{itemsPerPage:itemsPerPage, currentPage: pageSize }; let i=index">
                                             <tr>
-                                                <td>
+                                                <!-- <td>
                                                     <div class="custom-control custom-checkbox small">
                                                         <input type="checkbox" class="custom-control-input"
-                                                            id="customCheck">
+                                                            id="customCheck"  (change)="onChange(data)">
                                                         <label class="custom-control-label"
                                                             for="customCheck"></label>
                                                     </div>
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="customCheck">
-                                                        <label class="custom-control-label"
-                                                            for="customCheck"></label>
-                                                    </div>
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-
+                                                </td> -->
+                                                <td><input type="checkbox" (change)="onSelect(data)"></td>
+                                                <td>{{data.ORD_ID}}</td>
+                                                <td>{{data.ORD_PRD_COD}}</td>
+                                                <td>{{data.ORD_REF_POS}}</td>
+                                                <td>{{data.ORD_REQ_QTY}}</td>
+                                                <td>{{data.ORD_DT_PRD}}</td>
+                                                <td>{{data.ORD_DT_EXPIRAT}}</td>
+                                                <td>{{data.ORD_CUSTOM_NR}}</td>
+                                                <td>{{data.ORD_PRD_COD_TYPE}}</td> 
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <pagination-controls (pageChange)="pageSize  =  $event"></pagination-controls>
+
                                 </div>
                             </div>
                         </div>
@@ -216,7 +127,75 @@
             </div>
             <!-- Details grid end -->
 
+            <!-- Content Row -->
+ <div class="row">
+
+    <!-- Area Chart -->
+    
+    <div class="col-xl-12 col-lg-12">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Order Details :</h6>
+                <!--- Options grid rows--->
+                 <!-- <label>Show:
+                     <select [(ngModel)]="itemsPerPage">
+                                        <option *ngFor="let option of pageSizeOptions" [value]="option">{{option}}</option>
+                                    </select>
+                                    entries
+                                </label> -->
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div clas="container">
+                    <form>
+                        <div class="grid formgrid p-fluid">
+                            <!-- <div class="field mb-4 col-12">
+                                <label [for]="materialCategory" class="font-medium text-900"> Material Category:</label>
+                                <input type="radio" [(ngModel)]="materialCategory" value="2" formControlName="materialCategory" />Dip
+                                Roll
+                                <input type="radio" [(ngModel)]="materialCategory" value="1" formControlName="materialCategory" />Wire
+
+                                <span class="error"
+                                    *ngIf="storeInForm.controls['materialCategory'].touched && storeInForm.controls['materialCategory'].invalid">
+                                    Material Category required</span>
+                            </div> -->
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                            <div class="row form-group">
+                                    <div class="col-lg-2">
+                                        <label for="" class="font-medium text-900 control-label">Order Validity (in HR)</label>
+
+                                    </div>
+
+                                    <div class="input-group col-lg-4">
+                                       <input type="text" class="form-control" [(ngModel)]="Hrs" name="Hrs"/>
+                                        <label for="" class="font-medium text-900 control-label">(By-default validity 48 hr for each order)</label>
+                                        <span class="error"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                                            
+                        <div class="form-group row">
+                            <div class="col-sm-2 "></div>
+                            <div class="col-sm-10   submit-button">
+                                <button type="submit" class="btn btn-primary "
+                                    style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;"
+                                    (click)="Edit()"   >Add</button>
+
+                                <button type="submit" class=" btn btn-info"
+                                    style="padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;">
+                                     Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
+    </div>
+</div>
+</div>
         <!-- End of Main Content -->
 
         <!-- Footer -->
@@ -232,9 +211,8 @@
     </div>
     <!-- End of Content Wrapper -->
 
-</div>
-<!-- End of Page Wrapper -->
 
+<!-- End of Page Wrapper -->
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>

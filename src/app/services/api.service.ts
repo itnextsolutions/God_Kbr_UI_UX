@@ -46,6 +46,18 @@ export class MyService {
   public getMaterialStatus() {
     return this.http.get(this.apiEndpoint + 'MaterialMaster/GetMaterialStatus');
   }
+ 
+  getStoreInOrderView(){
+    return this.http.get(this.apiEndpoint + 'OrderINView/GetOrderdetail');
+  }
 
+  public UpdateStoreInOrderView(val :any, Hrs :string){
+
+    const data = {
+      wmsModels: val,
+      hr: Hrs
+    };
+    return this.http.post(this.apiEndpoint + 'OrderInnView/UpdateInOrderInView',data);
+  }
 
 }
