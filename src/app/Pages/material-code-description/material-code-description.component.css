@@ -7,11 +7,18 @@
     top: 50px;
     left: 50px;
     z-index: 1;
-    background-color:rgb(243, 237, 237)
+    background-color:#9a7fc7;
+    width: 100px;
   }
+  
   tr:nth-child(even) {
-    background-color:lightblue
+    background-color:#eeebf6;
 }
+
+tr:nth-child(odd) {
+  background-color:#c4b6db;
+}
+
 th{
   background-color: darkgray;
 }
@@ -19,7 +26,19 @@ th{
     /* position: static; (this is the default value) */
     z-index: 2;
   }
-
-  tr.selected {
-    background-color: #d60a0a;
+ 
+  td{
+    color: #000;
   }
+
+  .table-wrapper {
+    position: relative;
+    height: 100%;
+  }
+  
+  .pagination{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  

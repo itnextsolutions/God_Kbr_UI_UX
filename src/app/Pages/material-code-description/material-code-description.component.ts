@@ -109,12 +109,14 @@ export class MaterialCodeDescriptionComponent {
    
 
     ngOnInit(): any {
+    //   debugger
     //     this.service.GetMaterialData().subscribe((data:any) => {
     //         this.material = data;  
     //         this.dataSource=new MatTableDataSource<any>(this.material)
     //          this.dataSource.paginator=this.paginator
     //           this.dataSource.sort=this.sort
-    //         this.ishidden=false
+    //           this.isTableOpen=true
+    //           this.ishidden1=false
     // });
     }
 
