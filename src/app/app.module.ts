@@ -27,6 +27,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { MaterialCodeDescriptionComponent } from './Pages/material-code-description/material-code-description.component';
 import { VendorMatCodeDescriptionComponent } from './Pages/vendor-mat-code-description/vendor-mat-code-description.component';
+import { StoreOutProcessComponent } from './Tata-Cummins/Pages/store-out-process/store-out-process.component';
+import { StockCountProcessComponent } from './Tata-Cummins/Pages/stock-count-process/stock-count-process.component';
+import { EmptyPalletInProcessComponent } from './Tata-Cummins/Pages/empty-pallet-in-process/empty-pallet-in-process.component';
+import { EmptyPalletStoreOutProcessComponent } from './Tata-Cummins/Pages/empty-pallet-store-out-process/empty-pallet-store-out-process.component';
+import { StoreInRequestCancellationComponent } from './Tata-Cummins/Pages/store-in-request-cancellation/store-in-request-cancellation.component';
+import { StoreOutRequestCancellationComponent } from './Tata-Cummins/Pages/store-out-request-cancellation/store-out-request-cancellation.component';
 
 
 
@@ -48,7 +54,13 @@ import { VendorMatCodeDescriptionComponent } from './Pages/vendor-mat-code-descr
    
     BreadcrumbNavComponent,
     MaterialCodeDescriptionComponent,
-    VendorMatCodeDescriptionComponent
+    VendorMatCodeDescriptionComponent,
+    StoreOutProcessComponent,
+    StockCountProcessComponent,
+    EmptyPalletInProcessComponent,
+    EmptyPalletStoreOutProcessComponent,
+    StoreInRequestCancellationComponent,
+    StoreOutRequestCancellationComponent
          
   
   ],
