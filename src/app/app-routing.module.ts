@@ -13,6 +13,11 @@ import { PalletizationProcessComponent } from './Pages/palletization-process/pal
 import { VendorMatCodeDescriptionComponent } from './Pages/vendor-mat-code-description/vendor-mat-code-description.component';
 import { MaterialCodeDescriptionComponent } from './Pages/material-code-description/material-code-description.component';
 import { StoreOutProcessComponent } from './Tata-Cummins/Pages/store-out-process/store-out-process.component';
+import { StockCountProcessComponent } from './Tata-Cummins/Pages/stock-count-process/stock-count-process.component';
+import { EmptyPalletInProcessComponent } from './Tata-Cummins/Pages/empty-pallet-in-process/empty-pallet-in-process.component';
+import { EmptyPalletStoreOutProcessComponent } from './Tata-Cummins/Pages/empty-pallet-store-out-process/empty-pallet-store-out-process.component';
+import { StoreInRequestCancellationComponent } from './Tata-Cummins/Pages/store-in-request-cancellation/store-in-request-cancellation.component';
+import { StoreOutRequestCancellationComponent } from './Tata-Cummins/Pages/store-out-request-cancellation/store-out-request-cancellation.component';
 
 
 const routes: Routes = [
@@ -27,7 +32,12 @@ const routes: Routes = [
   {path:'palletizationProcess',component:PalletizationProcessComponent},
   {path:'materialcodedescription',component:MaterialCodeDescriptionComponent},
   {path:'vendormatcodedescription',component:VendorMatCodeDescriptionComponent},
-  {path:'storeOutProcess',component:StoreOutProcessComponent}
+  {path:'storeOutProcess',component:StoreOutProcessComponent},
+  {path:'stockCountProcess',component:StockCountProcessComponent},
+  {path:'emptyPalletIn',component:EmptyPalletInProcessComponent},
+  {path:'emptyPalletStoreOut',component:EmptyPalletStoreOutProcessComponent},
+  {path:'storeInRequestCancellation', component:StoreInRequestCancellationComponent},
+  {path:'storeOutRequestCancellation', component:StoreOutRequestCancellationComponent}
 ];
 
 @NgModule({
