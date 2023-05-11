@@ -12,6 +12,7 @@ import { StoreInOrderViewComponent } from './Pages/store-in-order-view/store-in-
 import { PalletizationProcessComponent } from './Pages/palletization-process/palletization-process.component';
 import { VendorMatCodeDescriptionComponent } from './Pages/vendor-mat-code-description/vendor-mat-code-description.component';
 import { MaterialCodeDescriptionComponent } from './Pages/material-code-description/material-code-description.component';
+import { StoreOutProcessComponent } from './Tata-Cummins/Pages/store-out-process/store-out-process.component';
 
 
 const routes: Routes = [
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path:'storeInOrderview',component:StoreInOrderViewComponent},
   {path:'palletizationProcess',component:PalletizationProcessComponent},
   {path:'materialcodedescription',component:MaterialCodeDescriptionComponent},
-  {path:'vendormatcodedescription',component:VendorMatCodeDescriptionComponent}
+  {path:'vendormatcodedescription',component:VendorMatCodeDescriptionComponent},
+  {path:'storeOutProcess',component:StoreOutProcessComponent}
 ];
 
 @NgModule({

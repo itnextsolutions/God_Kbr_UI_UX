@@ -14,7 +14,7 @@
             <app-navbar></app-navbar>
             <!-- End of Topbar -->
 
-            <app-breadcrumb-nav [child_page]="pageName"></app-breadcrumb-nav>
+            <!-- <app-breadcrumb-nav [child_page]="pageName"></app-breadcrumb-nav> -->
 
 
 
@@ -22,9 +22,9 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800"> Palletization Process </h1>
-                </div> -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800"> Store Out Process </h1>
+                </div>
 
 
                 <!--Details grid start-->
@@ -47,18 +47,19 @@
                                                 <tr style="background-color:  #eeebf6; color: #361374;">
 
                                                     <th>Action</th>
-                                                    <th>Trans ID</th>
+                                                    <th>Dispatch Order No</th>
                                                     <th>Material Code</th>
-                                                    <th>Material Description</th>
+                                                    <th>Batch No</th>
                                                     <th>QTY</th>
+                                                    <th>Material Type</th>
                                                     <th>DOM</th>
                                                     <th>DOE</th>
                                                     <th>Status</th>
-                                                    <th>Material Type</th>
+                                                    
                                                 </tr>
                                             </thead>
 
-                                            <tbody *ngFor="let data of orderData;let i=index;">
+                                            <tbody>
                                                 <tr>
                                                     <!-- <td>
                                                     <div class="custom-control custom-checkbox small">
@@ -68,16 +69,16 @@
                                                             for="customCheck"></label>
                                                     </div>
                                                 </td> -->
-                                                <td> <input type="checkbox" [(ngModel)]="order_id" [checked]="orderData[i].ORD_ID == order_id"    (click)="onSelect(data)"></td>
+                                                <td> <input type="checkbox"></td>
                                                
-                                                    <td>{{data.ORD_ID}}</td>
-                                                    <td>{{data.ORD_PRD_COD}}</td>
                                                     <td></td>
-                                                    <td>{{data.ORD_REQ_QTY}}</td>
-                                                    <td>{{data.ORD_DT_PRD}}</td>
-                                                    <td>{{data.ORD_DT_EXPIRAT}}</td>
                                                     <td></td>
-                                                    <td>{{data.ORD_PRD_COD_TYPE}}</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -90,21 +91,19 @@
                 <!-- Details grid end -->
 
                 <!-- Content Row -->
-                <div class="row">
-
-                    <!-- Area Chart -->
+                <!-- <div class="row">
                     <div class="col-xl-12 col-lg-12">
                         <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
+        
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                 <h6 class="m-0 font-weight-bold text-primary">heading:</h6>
                             </div>
 
-                            <!-- Card Body -->
+                            
                             <div class="card-body">
                                 <div clas="container">
                                     <div id="form-content" class="col-md-12">
-                                        <form [formGroup]="palletizationForm"> <!-- open form -->
+                                        <form [formGroup]="palletizationForm">
                                             <div class="row">
                                                 <div class="col-lg-5">
                                                     <div class="row form-group">
@@ -172,13 +171,13 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                        </form> <!-- close form -->
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
 
@@ -200,11 +199,12 @@
                                     <table class="table table-bordered" id="" width="100%" cellspacing="0">
                                         <thead>
                                             <tr style="background-color:  #eeebf6; color: #361374;">
-                                                <th>Action</th>
-                                                <th>Pallet No</th>
+                                                <th>Select</th>
+                                                <th>Dispatch Order No</th>
+                                                <th>Pallet Id</th>
                                                 <th>Material Code</th>
-                                                <th>No Of SP Box</th>
-                                                <th>QTY</th>
+                                                <th>Batch No</th>
+                                                <th>Pallet QTY</th>
                                                 <th>DOM</th>
                                                 <th>DOE</th>
                                                 <th>Status</th>
@@ -212,7 +212,7 @@
                                             </tr>
                                         </thead>
 
-                                        <tbody  *ngFor="let item of selectedItems">
+                                        <tbody>
                                             <tr>
                                                 <!-- <td>
                                                     <div class="custom-control custom-checkbox small">
@@ -221,8 +221,8 @@
                                                         <label class="custom-control-label" for="customCheck"></label>
                                                     </div>
                                                 </td> -->
-                                                <td> <input type="checkbox" (change)="onChange(item)"></td>
-                                                <td>{{item.ORD_ID}}</td>
+                                                <td> <input type="checkbox"></td>
+                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>

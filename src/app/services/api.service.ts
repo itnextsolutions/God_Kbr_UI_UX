@@ -56,4 +56,10 @@ export class MyService {
 
     return this.http.post(this.apiEndpoint + 'HostToWms/InsertOrderItem' ,val);
   }
+
+  public updateOrder(val : any){
+
+    return this.http.post(this.apiEndpoint  + 'Palletization/UpdateOrders',val);
+
+  }
 }
