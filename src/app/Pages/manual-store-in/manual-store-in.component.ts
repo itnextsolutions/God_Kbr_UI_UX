@@ -60,10 +60,10 @@ export class ManualStoreInComponent {
   noOfSoolReadonly = true;
 
 
-  selectedRowDataMaterialCOD: any;
-  selectedRowDataMaterialDESC: any;
-  selectedRowDataVendorCOD: any;
-  selectedRowDataVendorDESC: any;
+  selectedRowDataMaterialCOD: string="";
+  selectedRowDataMaterialDESC: string="";
+  selectedRowDataVendorCOD: string="";
+  selectedRowDataVendorDESC: string="";
   materialData_list: any;
 
   @ViewChild(MaterialCodeDescriptionComponent) materialComponent!: MaterialCodeDescriptionComponent;
@@ -154,8 +154,8 @@ var val={
     MSG_MATERIAL_BARCODE: this.materialBarcode,
     MSG_MATERIAL_TYPE: this.materialType,
    // MSG_PAL_TYPE: this.palletType,
-    DOM: this.dom,
-    DOE: this.doe,
+    MSG_DOM: this.dom,
+    MSG_DOE: this.doe,
     MSG_DIP_ROLL_NO: this.dipRollNo,
     MSG_QUANTITY: this.weight,
     MSG_LENG_QTY: this.length,
@@ -164,9 +164,10 @@ var val={
     MSG_PART_FLAG: this.partial,
     MSG_TRANS_ID: this.transactionID,
     MSG_PROJECT_ID: this.projectID,
-    DOR: this.dor,
+    MSG_DOR: this.dor,
     MSG_GRN_NUM: this.grnNo,
-}
+    MSG_TRANS_TYPE :'IN',
+  }
     this.manualStoreInList.push(val)
     console.log(this.manualStoreInList)
   }
