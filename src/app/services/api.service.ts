@@ -60,4 +60,17 @@ export class MyService {
     return this.http.post(this.apiEndpoint + 'OrderInnView/UpdateInOrderInView',data);
   }
 
+  public getOrderItems(){
+    return this.http.get(this.apiEndpoint + 'Palletization/GetOrderItems');
+  }
+
+  public postOrderItems(val : any =[]){
+    return this.http.post(this.apiEndpoint + 'HostToWms/InsertOrderitem',val);
+  }
+
+  public updateOrder(val : any){
+    return this.http.post(this.apiEndpoint + 'Palletization/UpdateOrders',val);
+  }
+
+
 }
