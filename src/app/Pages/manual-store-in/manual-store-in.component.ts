@@ -38,9 +38,9 @@ export class ManualStoreInComponent {
   vendorCode: any;
   vendordesc: any;
   dipRollNo: string = "";
-  weight: string = "";
-  length: string = "";
-  noOfSpool: string = "";
+  weight: any;
+  length: any;
+  noOfSpool: any;
   materialStatus: string = "";
   partial: string = "";
   transactionID: string = "";
@@ -154,8 +154,8 @@ var val={
     MSG_MATERIAL_BARCODE: this.materialBarcode,
     MSG_MATERIAL_TYPE: this.materialType,
    // MSG_PAL_TYPE: this.palletType,
-    MSG_DOM: this.dom,
-    MSG_DOE: this.doe,
+    DOM: this.dom,
+    DOE: this.doe,
     MSG_DIP_ROLL_NO: this.dipRollNo,
     MSG_QUANTITY: this.weight,
     MSG_LENG_QTY: this.length,
@@ -164,7 +164,7 @@ var val={
     MSG_PART_FLAG: this.partial,
     MSG_TRANS_ID: this.transactionID,
     MSG_PROJECT_ID: this.projectID,
-    MSG_DOR: this.dor,
+    DOR: this.dor,
     MSG_GRN_NUM: this.grnNo,
 }
     this.manualStoreInList.push(val)
