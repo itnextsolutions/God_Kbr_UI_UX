@@ -33,9 +33,8 @@ import { EmptyPalletInProcessComponent } from './Tata-Cummins/Pages/empty-pallet
 import { EmptyPalletStoreOutProcessComponent } from './Tata-Cummins/Pages/empty-pallet-store-out-process/empty-pallet-store-out-process.component';
 import { StoreInRequestCancellationComponent } from './Tata-Cummins/Pages/store-in-request-cancellation/store-in-request-cancellation.component';
 import { StoreOutRequestCancellationComponent } from './Tata-Cummins/Pages/store-out-request-cancellation/store-out-request-cancellation.component';
-
-
-
+import { BarcodeScannerLivestreamModule } from "ngx-barcode-scanner";
+import { TataService } from './services/TataCumminsapi.service';
 
 @NgModule({
   declarations: [
@@ -60,8 +59,7 @@ import { StoreOutRequestCancellationComponent } from './Tata-Cummins/Pages/store
     EmptyPalletInProcessComponent,
     EmptyPalletStoreOutProcessComponent,
     StoreInRequestCancellationComponent,
-    StoreOutRequestCancellationComponent
-         
+    StoreOutRequestCancellationComponent,
   
   ],
   imports: [
@@ -76,9 +74,10 @@ import { StoreOutRequestCancellationComponent } from './Tata-Cummins/Pages/store
      MatTableModule,
      MatSortModule,
      NgxPaginationModule,
-     Ng2OrderModule
+     Ng2OrderModule,
+     BarcodeScannerLivestreamModule
   ],
-  providers: [MyService],
+  providers: [MyService,TataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
