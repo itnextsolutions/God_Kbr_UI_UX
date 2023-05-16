@@ -51,7 +51,7 @@ export class MyService {
     return this.http.get(this.apiEndpoint + 'OrderINView/GetOrderdetail');
   }
 
-  public UpdateStoreInOrderView(val :any, Hrs :string){
+  public UpdateStoreInOrderView(val :any, Hrs :any){
 
     const data = {
       wmsModels: val,
