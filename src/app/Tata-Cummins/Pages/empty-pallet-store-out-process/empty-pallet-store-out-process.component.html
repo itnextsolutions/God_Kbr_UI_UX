@@ -43,7 +43,7 @@
                   <div clas="container">
                     <div id="form-content" class="col-md-8">
   
-                      <form  id="survey-form" > <!-- open form -->
+                      <form [formGroup]="EmptyPalletOutForm" > <!-- open form -->
                       
                         <div class="row form-group">
   
@@ -51,7 +51,7 @@
                             <label  class="font-medium text-900">Number of Empty Pallet Stacks:</label>
                           </div> 
                             <div class="input-group col-sm-6">
-                            <input type="text" class="form-control" />
+                            <input type="number" class="form-control" formControlName="NoOfPalletStacks" [(ngModel)]="NoOfPalletStacks"/>
                            
                             <!-- <span class="error">
                             Material Code required</span> -->
@@ -68,6 +68,7 @@
                           <div class="col-sm-9   submit-button">
                             <button type="submit" class="btn btn-primary "
                               style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" aria-pressed="true"
+                              (click)="EmptyPalletOut()"
                               >Add</button>
                             <button type="submit" class=" btn btn-info"
                               style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" >

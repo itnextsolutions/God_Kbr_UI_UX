@@ -9,6 +9,8 @@ export class TataService {
   apiEndpoint = 'https://localhost:44363/api/';
 
 public getemptypalletout(val:any){
-  return this.http.get(this.apiEndpoint+'EmptyPalletOut/GetEmptyPalletOut',val)
+  debugger
+  const params = { parameter: val}
+  return this.http.get(this.apiEndpoint+'EmptyPalletOut/GetEmptyPalletOut',{params})
 }
 }
