@@ -1,4 +1,4 @@
-<div id="wrapper" >
+<div id="wrapper" (click)="onContainerClick()" >
 
   <!-- Sidebar -->
   <app-sidebar></app-sidebar>
@@ -35,7 +35,7 @@
             <div class="card shadow mb-4">
               <!-- Card Header - Dropdown -->
               <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Request Details</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Stock Details</h6>
               </div>
 
               <!-- Card Body -->
@@ -43,18 +43,20 @@
                 <div clas="container">
                   <div id="form-content" class="col-md-8">
 
-                    <form  id="survey-form" > <!-- open form -->
+                    <form  id="survey-form" [formGroup]="StockCountForm"> <!-- open form -->
                     
                       <div class="row form-group">
 
                         <div class="col-sm-3">
-                          <label  class="font-medium text-900"> Material Code : </label>
+                          <label  class="font-medium text-900"> Select Part No: </label>
                         </div> 
                           <div class="input-group col-sm-6">
-                          <input type="text" class="form-control" />
+                          <input type="text" class="form-control" formControlName="PartNo" [(ngModel)]="PartNo" (click)="GetStockCount()" (input)="applyfilter($event)"/>
                          
                           <!-- <span class="error">
                           Material Code required</span> -->
+
+                          <app-part-no-dropdown (selectedRow)="Selectedrow($event)"></app-part-no-dropdown>
                         
                         </div>
 
@@ -63,11 +65,11 @@
 
                     <div class="row form-group">
                       <div class="col-sm-3">
-                        <label  class="font-medium text-900 control-label">Description:</label>
+                        <label  class="font-medium text-900 control-label">GR Number:</label>
                       </div>
 
                         <div class="input-group col-sm-6">
-                          <input type="text" class="form-control"/>
+                          <input type="text" class="form-control" formControlName="GrNo" [(ngModel)]="GrNo" readonly/>
                           <!-- <div class="error">
                             Material Description required</div> -->
 
@@ -76,42 +78,13 @@
 
 
 
-                      <div class="row form-group">
-                        <div class="col-sm-3">
-
-                          <label  class="font-medium text-900 control-label"> Batch No :</label>
-                        </div>
-
-                        <div class="input-group col-sm-6">
-                          <select type="text" class="form-control" >
-                            <option ></option>
-                        </select>
-                          <!-- <div class="error">
-                            Vendor Code required</div> -->
-
-
-                        </div>
-                      </div>
-
-                      <div class="row form-group">
-                        <div class="col-sm-3">
-                          <label class="font-medium text-900 control-label"> Request Type :
-                            </label>
-                        </div>
-                        <div class="input-group col-sm-6">
-                          <select type="text" class="form-control" >
-                            <option ></option>
-                        </select>
-                          <!-- <div class="error">
-                            Vendor Description required</div> -->
-                        </div>
-                      </div>
-
+                     
                       <div class="form-group row">
                         <div class="col-sm-3 "></div>
                         <div class="col-sm-9   submit-button">
                           <button type="submit" class="btn btn-primary "
                             style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" aria-pressed="true"
+                            (click)="GetPalletDetails()"
                             >Add</button>
                           <button type="submit" class=" btn btn-info"
                             style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" >
@@ -143,7 +116,7 @@
                           </div>
                           <div class="card-body">
                             
-
+<!-- 
                               <label>Show:
                               <select >
                                   <option ></option>
@@ -151,21 +124,43 @@
                               entries
                           </label>
 
-                              <input type="text" placeholder="search" style="margin-left: 709px">
+                              <input type="text" placeholder="search" style="margin-left: 709px"> -->
                               <div class="table-responsive">
                                   <table class="table table-bordered" id="" width="100%" cellspacing="0">
                                       <thead>
                                           <tr style="background-color:  #eeebf6; color: #361374;">
                                               <th >Select</th>
-                                              <th >Pallet Id</th>
-                                              <th >Product Code</th>
-                                              <th >Batch No</th>
+                                              <th >Pallet No</th>
+                                              <th >Part No</th>
+                                              <th >Pallet Description</th>
                                               <th >Pallet Quantity</th>
-                                              <th >Reserved qty</th>
                                               <th >Aisle</th>
-                                              <th>X</th>
+                                              <th >X Pos</th>
+                                              <th >Y Pos</th>
+                                              <th >Direction</th>
+                                              <th >Position</th>
                                           </tr>
                                       </thead>
+
+                                      <tbody *ngFor="let data of PalletdetailsList let i=index ">
+                                        
+                                        <tr>
+                                            <td>
+                                            <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox" checked >
+                                            </div>
+                                            </td>
+                                            <td>{{data.HU_ID}}</td>
+                                            <td>{{data.STK_PRD_COD}}</td>
+                                            <td>{{data.STK_REC_POS}}</td>
+                                            <td>{{data.STK_PRD_QTY}}</td>
+                                            <td>{{data.LOC_AISL_ID}}</td>
+                                            <td>{{data.LOC_X}}</td>
+                                            <td>{{data.LOC_Y}} </td>
+                                            <td>{{data.LOC_Z}}</td>
+                                            <td>{{data.LOC_P}}</td>
+                                        </tr>
+                                    </tbody>
                                      
 
                                   </table>

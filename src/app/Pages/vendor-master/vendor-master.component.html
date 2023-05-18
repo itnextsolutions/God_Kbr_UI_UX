@@ -125,7 +125,7 @@
                           *ngIf="vendorForm.controls['materialCode'].touched && vendorForm.controls['materialCode'].invalid">
                           Material Code required</span>
                         <div>
-                          <app-material-code-description  #material [category]="materialCategory" [dataSource]="dataSource" (bookTitleCreated)="onKeyEnter($event)" (selectedRow)="onSelectedRow($event)"></app-material-code-description>
+                          <app-material-code-description  [category]="materialCategory"  (bookTitleCreated)="onKeyEnter($event)" (selectedRow)="onSelectedRow($event)"></app-material-code-description>
                         </div>
                           
                         </div>

@@ -18,6 +18,7 @@ import { EmptyPalletInProcessComponent } from './Tata-Cummins/Pages/empty-pallet
 import { EmptyPalletStoreOutProcessComponent } from './Tata-Cummins/Pages/empty-pallet-store-out-process/empty-pallet-store-out-process.component';
 import { StoreInRequestCancellationComponent } from './Tata-Cummins/Pages/store-in-request-cancellation/store-in-request-cancellation.component';
 import { StoreOutRequestCancellationComponent } from './Tata-Cummins/Pages/store-out-request-cancellation/store-out-request-cancellation.component';
+import { PartNoDropdownComponent } from './Tata-Cummins/Pages/part-no-dropdown/part-no-dropdown.component';
 
 
 const routes: Routes = [
@@ -37,7 +38,8 @@ const routes: Routes = [
   {path:'emptyPalletIn',component:EmptyPalletInProcessComponent},
   {path:'emptyPalletStoreOut',component:EmptyPalletStoreOutProcessComponent},
   {path:'storeInRequestCancellation', component:StoreInRequestCancellationComponent},
-  {path:'storeOutRequestCancellation', component:StoreOutRequestCancellationComponent}
+  {path:'storeOutRequestCancellation', component:StoreOutRequestCancellationComponent},
+  {path:'partdropdown', component:PartNoDropdownComponent}
 ];
 
 @NgModule({

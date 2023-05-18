@@ -35,6 +35,7 @@ import { StoreInRequestCancellationComponent } from './Tata-Cummins/Pages/store-
 import { StoreOutRequestCancellationComponent } from './Tata-Cummins/Pages/store-out-request-cancellation/store-out-request-cancellation.component';
 import { BarcodeScannerLivestreamModule } from "ngx-barcode-scanner";
 import { TataService } from './services/TataCumminsapi.service';
+import { PartNoDropdownComponent } from './Tata-Cummins/Pages/part-no-dropdown/part-no-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { TataService } from './services/TataCumminsapi.service';
     EmptyPalletStoreOutProcessComponent,
     StoreInRequestCancellationComponent,
     StoreOutRequestCancellationComponent,
+    PartNoDropdownComponent,
   
   ],
   imports: [

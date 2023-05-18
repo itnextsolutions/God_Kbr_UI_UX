@@ -48,12 +48,12 @@ export class VendorMasterComponent {
  applyfilter(event:Event){
    debugger
    const filtervalue=(event.target as HTMLInputElement).value
-   this.material.dataSource.filter=filtervalue.trim().toLowerCase();
-   if(this.material.dataSource.paginator)
+   this.materialComponent.dataSource.filter=filtervalue.trim().toLowerCase();
+   if(this.materialComponent.dataSource.paginator)
    {
-     this.material.dataSource.paginator.firstPage();
+     this.materialComponent.dataSource.paginator.firstPage();
    }
-   if(this.material.dataSource.filteredData.length==0)
+   if(this.materialComponent.dataSource.filteredData.length==0)
    {
    this.notFoundMessage = 'No matching data found';
    }
