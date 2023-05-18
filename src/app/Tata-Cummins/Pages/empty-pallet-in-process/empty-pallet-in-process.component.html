@@ -43,7 +43,7 @@
                   <div clas="container">
                     <div id="form-content" class="col-md-8">
   
-                      <form  id="survey-form" > <!-- open form -->
+                      <form  id="survey-form"  [formGroup]="EmptyPalletForm"> <!-- open form -->
                       
                         <div class="row form-group">
   
@@ -51,10 +51,15 @@
                             <label  class="font-medium text-900"> Base Pallet Id:</label>
                           </div> 
                             <div class="input-group col-sm-6">
-                            <input type="text" class="form-control" />
+                            <input type="number" formControlName="palletId" [(ngModel)]="palletId" class="form-control" min="1" />
                            
-                            <!-- <span class="error">
-                            Material Code required</span> -->
+                            <span class="error"
+                              *ngIf="EmptyPalletForm.controls['palletId'].touched && EmptyPalletForm.controls['palletId'].invalid">
+                              Pallet Id is required
+                            </span>
+                        <!-- <span class="error" *ngIf="48 < Hrs">
+                            Validity must be less than 48.
+                        </span> -->
                           
                           </div>
   
@@ -67,9 +72,13 @@
                         </div>
   
                           <div class="input-group col-sm-6">
-                            <input type="text" class="form-control"/>
-                            <!-- <div class="error">
-                              Material Description required</div> -->
+                            <input type="number"  formControlName="palletCount" [(ngModel)]="palletCount"  class="form-control" min="1" max="7"/>
+                            <!-- <span class="error"  *ngIf="EmptyPalletForm.controls['palletCount'].touched && EmptyPalletForm.controls['palletCount'].invalid">
+                              Pallet Count is required
+                            </span> -->
+                            <span class="error" *ngIf="palletCount < 1 || palletCount > 7">
+                                Pallet Count Should be  min 1 and max 7.
+                            </span>
   
                           </div>
                         </div>
@@ -80,10 +89,10 @@
                           <div class="col-sm-3 "></div>
                           <div class="col-sm-9   submit-button">
                             <button type="submit" class="btn btn-primary "
-                              style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" aria-pressed="true"
+                              style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" aria-pressed="true" (click)="addEmptyPallet()"
                               >Add</button>
                             <button type="submit" class=" btn btn-info"
-                              style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" >
+                              style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="Reset()" >
                               Reset</button>
                           </div>
                         </div>
