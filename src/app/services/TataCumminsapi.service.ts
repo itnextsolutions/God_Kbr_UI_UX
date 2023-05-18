@@ -9,8 +9,21 @@ export class TataService {
   apiEndpoint = 'https://localhost:44363/api/';
 
 public getemptypalletout(val:any){
+  
   const params = { parameter: val}
   return this.http.get(this.apiEndpoint+'EmptyPalletOut/GetEmptyPalletOut',{params})
+}
+
+public insertEmptyPalletData(val:any){
+  return this.http.post(this.apiEndpoint + 'EmptyPalletOut/InsertEmptyPalletData', val);
+}
+
+public getStoreOutData(){
+  return this.http.get(this.apiEndpoint + 'StoreOut/GetStoreOutData');
+}
+
+public getStoreOutPalletDetails(){
+  return this.http.get(this.apiEndpoint + 'StoreOut/GetPalletDetails')
 }
 
 GetStockCountPartNo(){
