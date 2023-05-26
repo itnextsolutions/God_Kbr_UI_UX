@@ -44,7 +44,7 @@ export class PartNoDropdownComponent {
         this.dataSource=new MatTableDataSource<any>( this.stockcountlist)
         this.dataSource.paginator=this.paginator
           this.isTableOpen=true
-          this.ishidden1=false
+          //this.ishidden1=false
       })
 
     }

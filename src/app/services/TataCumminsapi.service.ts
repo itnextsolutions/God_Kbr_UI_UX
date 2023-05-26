@@ -35,4 +35,11 @@ GetPalletDetails(val1:any,val2:any){
   const params = { partno: val1,grno:val2}
   return this.http.get(this.apiEndpoint+'StockCount/GetPalletDetails',{params})
 }
+
+UpdateInsert(data:any){
+  debugger
+
+  return this.http.post(this.apiEndpoint+'StockCount/UpdateInsert',data)
+}
+
 }

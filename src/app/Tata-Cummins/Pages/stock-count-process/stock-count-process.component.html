@@ -45,36 +45,110 @@
 
                     <form  id="survey-form" [formGroup]="StockCountForm"> <!-- open form -->
                     
-                      <div class="row form-group">
+                      <div class="row form-group" *ngIf="edited1">
 
                         <div class="col-sm-3">
                           <label  class="font-medium text-900"> Select Part No: </label>
                         </div> 
                           <div class="input-group col-sm-6">
                           <input type="text" class="form-control" formControlName="PartNo" [(ngModel)]="PartNo" (click)="GetStockCount()" (input)="applyfilter($event)"/>
-                         
-                          <!-- <span class="error">
-                          Material Code required</span> -->
-
+                         <div>
                           <app-part-no-dropdown (selectedRow)="Selectedrow($event)"></app-part-no-dropdown>
-                        
+                         </div>
                         </div>
 
                         <!-- </div> -->
                       </div>
 
-                    <div class="row form-group">
+                     <div class="row form-group" *ngIf="edited1">
                       <div class="col-sm-3">
                         <label  class="font-medium text-900 control-label">GR Number:</label>
                       </div>
 
                         <div class="input-group col-sm-6">
                           <input type="text" class="form-control" formControlName="GrNo" [(ngModel)]="GrNo" readonly/>
-                          <!-- <div class="error">
-                            Material Description required</div> -->
+                          
 
                         </div>
+                     </div>
+
+                    <div class="row form-group" *ngIf="edited">
+
+                      <div class="col-sm-3">
+                        <label  class="font-medium text-900"> Pallet ID: </label>
+                      </div> 
+                        <div class="input-group col-sm-6">
+                        <input type="text" class="form-control" formControlName="PalletID" [(ngModel)]="PalletID" />
+                       
                       </div>
+
+                      <!-- </div> -->
+                    </div>
+
+                    <div class="row form-group" *ngIf="edited">
+
+                      <div class="col-sm-3">
+                        <label  class="font-medium text-900"> Part No: </label>
+                      </div> 
+                        <div class="input-group col-sm-6">
+                        <input type="text" class="form-control" formControlName="PartNo" [(ngModel)]="PartNo"/>
+                       
+                      </div>
+
+                      <!-- </div> -->
+                    </div>
+
+                    <div class="row form-group" *ngIf="edited">
+
+                      <div class="col-sm-3">
+                        <label  class="font-medium text-900"> Part Description: </label>
+                      </div> 
+                        <div class="input-group col-sm-6">
+                        <input type="text" class="form-control" formControlName="PartDesc" [(ngModel)]="PartDesc" />
+                       
+                      </div>
+
+                      <!-- </div> -->
+                    </div>
+
+                    <div class="row form-group" *ngIf="edited">
+
+                      <div class="col-sm-3">
+                        <label  class="font-medium text-900"> Pallet Quantity: </label>
+                      </div> 
+                        <div class="input-group col-sm-6">
+                        <input type="text" class="form-control" formControlName="PalletQTY" [(ngModel)]="PalletQTY" />
+                       
+                      </div>
+
+                      <!-- </div> -->
+                    </div>
+
+                    <div class="row form-group" *ngIf="edited">
+
+                      <div class="col-sm-3">
+                        <label  class="font-medium text-900"> Available Quantity: </label>
+                      </div> 
+                        <div class="input-group col-sm-6">
+                        <input type="text" class="form-control" formControlName="AvailableQTY" [(ngModel)]="AvailableQTY" />
+                      
+                      </div>
+
+                      <!-- </div> -->
+                    </div>
+
+                    <div class="row form-group" *ngIf="edited">
+
+                      <div class="col-sm-3">
+                        <label  class="font-medium text-900"> Remark: </label>
+                      </div> 
+                        <div class="input-group col-sm-6">
+                        <input type="text" class="form-control" formControlName="Remark" [(ngModel)]="Remark" />
+                       
+                      </div>
+
+                      <!-- </div> -->
+                    </div>
 
 
 
@@ -87,8 +161,9 @@
                             (click)="GetPalletDetails()"
                             >Add</button>
                           <button type="submit" class=" btn btn-info"
-                            style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" >
-                            Reset</button>
+                            style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" 
+                            (click)="Reset()"
+                            > Reset</button>
                         </div>
                       </div>
 
@@ -114,7 +189,7 @@
                                       Class="fas fa-download fa-sm text-white-50"></i> Export Excel</a> -->
 
                           </div>
-                          <div class="card-body">
+                          <div class="card-body" >
                             
 <!-- 
                               <label>Show:
@@ -132,6 +207,7 @@
                                               <th >Select</th>
                                               <th >Pallet No</th>
                                               <th >Part No</th>
+                                              <th >GR NO</th>
                                               <th >Pallet Description</th>
                                               <th >Pallet Quantity</th>
                                               <th >Aisle</th>
@@ -146,13 +222,13 @@
                                         
                                         <tr>
                                             <td>
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" checked >
-                                            </div>
+                                                <input type="checkbox" (change)="isCheked(data)"  >
+                                            
                                             </td>
                                             <td>{{data.HU_ID}}</td>
                                             <td>{{data.STK_PRD_COD}}</td>
                                             <td>{{data.STK_REC_POS}}</td>
+                                            <td>{{data.PRD_DESC}}</td>
                                             <td>{{data.STK_PRD_QTY}}</td>
                                             <td>{{data.LOC_AISL_ID}}</td>
                                             <td>{{data.LOC_X}}</td>
@@ -160,10 +236,19 @@
                                             <td>{{data.LOC_Z}}</td>
                                             <td>{{data.LOC_P}}</td>
                                         </tr>
-                                    </tbody>
-                                     
 
+                                        
+                                    </tbody>
                                   </table>
+
+                                  <div class="form-group row">
+                                    <div class="col-sm-10   submit-button">
+                                        <button type="submit" class="btn btn-primary "
+                                            style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;"
+                                            (click)="Alert()" aria-pressed="true">Confirm</button>
+                                    </div>
+                                </div>
+                                  
                               </div>
                           </div>
                       </div>

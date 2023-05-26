@@ -1,8 +1,9 @@
-import { Component ,ViewChild} from '@angular/core';
+import { Component ,EventEmitter,Output,ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TataService } from 'src/app/services/TataCumminsapi.service';
 import { PartNoDropdownComponent } from '../part-no-dropdown/part-no-dropdown.component';
 import { MatTableDataSource } from '@angular/material/table';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-stock-count-process',
@@ -11,22 +12,41 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class StockCountProcessComponent {
 
-  PartNo:string="";
-  GrNo:string="";
-  StockCountForm!:FormGroup;
-  dataSource!:MatTableDataSource<any>;
-  PalletdetailsList:any=[];
+   PartNo:string="";
+   GrNo:string="";
+   PalletID:string="";
+   PartDesc:string="";
+   PalletQTY:string="";
+   AvailableQTY:string="";
+   Remark:string="";
+   message:string="";
+   notFoundMessage:string="";
 
-  @ViewChild(PartNoDropdownComponent) PartNoDrop!:PartNoDropdownComponent;
+   StockCountForm!:FormGroup;
+   dataSource!:MatTableDataSource<any>;
+   PalletdetailsList:any=[];
+   Confirmlist:any=[];
+   edited=false;
+   edited1=true
 
-  constructor(private fb : FormBuilder ,private tataservice : TataService){}
+   @ViewChild(PartNoDropdownComponent) PartNoDrop!:PartNoDropdownComponent;
+   @Output() UpdateRow = new EventEmitter<any>();
+  secondList: any=[];
+  
 
-  ngOnInit(){
+   constructor(private fb : FormBuilder ,private tataservice : TataService){}
 
-    this.StockCountForm=this.fb.group({
-    PartNo:["",Validators.required],
-    GrNo:["",Validators.required]
-    })
+    ngOnInit(){
+     this.StockCountForm=this.fb.group({
+     PartNo:["",Validators.required],
+     GrNo:["",Validators.required],
+     PalletID:["",Validators.required],
+     PartDesc:["",Validators.required],
+     PalletQTY:["",Validators.required],
+     AvailableQTY:["",Validators.required],
+     Remark:["",Validators.required]
+     })
+
 
     }
 
@@ -38,14 +58,68 @@ export class StockCountProcessComponent {
       {
         this.PartNoDrop.dataSource.paginator.firstPage();
       }
-      // if(this.PartNoDrop.dataSource.filteredData.length==0)
-      // {
-      //    this.PartNoDrop = 'No matching data found';
-      // }
-      // else {
-      //   this.notFoundMessage = '';
-      // }
+      if(this.PartNoDrop.dataSource.filteredData.length==0)
+      {
+         this.message = 'No matching data found';
+      }
+      else {
+        this.notFoundMessage = '';
+      }
    
+    }
+
+    Alert(){
+       Swal.fire({
+        title: 'Are you sure want to Continue',
+        icon: 'success',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Confirm!',
+        cancelButtonText: 'Not, Confirm'
+      }).then((result) => {
+        if (result.value) {
+        this.confirmButton()
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire(
+            'You Can not Continue With Your Operation',
+          )
+        }
+      })
+    }
+    
+
+    confirmButton(){
+      debugger
+    
+       this.Confirmlist.forEach((Element:any)=>{
+            let val={
+             HU_ID :Element.HU_ID,
+             STK_PRD_COD :Element.STK_PRD_COD,
+             STK_REC_POS :Element.STK_REC_POS,
+             PRD_DESC :Element.PRD_DESC,
+             STK_PRD_QTY :Element.STK_PRD_QTY,
+             LOC_AISL_ID :Element.LOC_AISL_ID
+     
+           }
+            this.secondList.push(val);
+          })
+          console.log(this.secondList);
+          this.tataservice.UpdateInsert(this.secondList).subscribe(resp=>{
+            Swal.fire({
+            title: resp,
+            icon: 'success',
+            showCancelButton: true,
+            confirmButtonText: '',
+          }).then((result) => {
+            if (result.value) {
+            location.reload();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+              Swal.fire(
+                'You Can not Continue With Your Operation',
+              )
+            }
+          })
+        })
+  
     }
 
     GetStockCount(){
@@ -56,8 +130,37 @@ export class StockCountProcessComponent {
       debugger
       return this.tataservice.GetPalletDetails(this.PartNo,this.GrNo).subscribe(resp=>{
         this.PalletdetailsList=resp
+        //this.Confirmlist=this.PalletdetailsList
+        // this.PalletID=this.PalletdetailsList[0].HU_ID
+        // this.PartDesc=this.PalletdetailsList[0].PRD_DESC
+        // this.PalletQTY=this.PalletdetailsList[0].STK_PRD_QTY
+        // this.AvailableQTY=this.PalletdetailsList[0].STK_AVA_QTY
       })
     }
+
+    Reset(){
+      debugger
+      Swal.fire({
+        title: 'Are you sure want to Reset',
+        text: 'You will not be able to recover this operation',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Reset It!',
+        cancelButtonText: 'Not, Reset'
+      }).then((result) => {
+        if (result.value) {
+        
+          this.StockCountForm.reset();
+          this.PalletdetailsList =[];
+          this.Confirmlist =[];
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire(
+            'You Can Continue With Your Operation',
+          )
+        }
+      })
+    }
+    
 
     onContainerClick(){
       this.PartNoDrop.closeTable()
@@ -69,6 +172,20 @@ export class StockCountProcessComponent {
       this.GrNo=out.STK_REC_POS
     }
 
-  }
-  
+    isCheked(data:any){
+      debugger
+      const index = this.Confirmlist.indexOf(data);
 
+
+      if (this.Confirmlist.includes(data)) {
+        this.Confirmlist.splice(index, 1);
+      }
+      else {
+        this.Confirmlist.push(data);
+      }
+  
+      console.log(this.Confirmlist);
+
+    }
+  
+}

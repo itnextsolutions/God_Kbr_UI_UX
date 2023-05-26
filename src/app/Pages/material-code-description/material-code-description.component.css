@@ -9,6 +9,7 @@
     z-index: 1;
     background-color:#9a7fc7;
     width: 100px;
+    white-space:nowrap
   }
   
   tr:nth-child(even) {
