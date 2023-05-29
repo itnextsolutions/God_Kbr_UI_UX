@@ -1,167 +1,195 @@
-<div id="wrapper" >
+<div id="wrapper">
 
-    <!-- Sidebar -->
-    <app-sidebar></app-sidebar>
-    <!-- End of Sidebar -->
-  
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-  
-      <!-- Main Content -->
-      <div id="content">
-  
-        <!-- Topbar -->
-        <app-navbar></app-navbar>
-        <!-- End of Topbar -->
-  
-        <app-breadcrumb-nav ></app-breadcrumb-nav>      
-  
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
-  
-          <!-- Page Heading -->
-          <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <!-- Sidebar -->
+  <app-sidebar> </app-sidebar>
+  <!-- End of Sidebar -->
+
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+      <!-- Topbar -->
+      <app-navbar></app-navbar>
+      <!-- End of Topbar -->
+      <!-- <app-breadcrumb-nav [child_page]="pageName"></app-breadcrumb-nav> -->
+
+      <app-breadcrumb-nav [child_page]="pageName"></app-breadcrumb-nav>
+
+
+      <!-- <app-breadcrumb-nav></app-breadcrumb-nav> -->
+
+      <!-- Begin Page Content -->
+      <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Vendor Data Entry</h1>
             Breadcrumb
             <app-breadcrumb-nav [child_page]="pageName"></app-breadcrumb-nav>
           </div> -->
-  
-          <!-- Content Row -->
-  
-          <div class="row">
-  
-            <!-- Area Chart -->
-            <div class="col-xl-12 col-lg-12">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Pallet Requirement</h6>
-                </div>
-  
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div clas="container">
-                    <div id="form-content" class="col-md-8">
-  
-                      <form [formGroup]="EmptyPalletOutForm" > <!-- open form -->
-                      
-                        <div class="row form-group">
-  
-                          <div class="col-sm-3">
-                            <label  class="font-medium text-900">Number of Empty Pallet Stacks:</label>
-                          </div> 
-                            <div class="input-group col-sm-6">
-                            <input type="number" class="form-control" formControlName="NoOfPalletStacks" [(ngModel)]="NoOfPalletStacks"/>
-                           
-                            <!-- <span class="error">
+
+        <!-- Content Row -->
+
+        <div class="row">
+
+          <!-- Area Chart -->
+          <div class="col-xl-12 col-lg-12">
+            <div class="card shadow mb-4">
+              <!-- Card Header - Dropdown -->
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Pallet Requirement</h6>
+              </div>
+
+              <!-- Card Body -->
+              <div class="card-body">
+                <div clas="container">
+                  <div id="form-content" class="col-md-8">
+
+                    <form [formGroup]="EmptyPalletOutForm"> <!-- open form -->
+
+                      <div class="row form-group">
+
+                        <div class="col-sm-3">
+                          <label class="font-medium text-900">Number of Empty Pallet Stacks:</label>
+                        </div>
+                        <div class="input-group col-sm-4">
+                          <input type="number" class="form-control" formControlName="NoOfPalletStacks"
+                            [(ngModel)]="NoOfPalletStacks" />
+                          <!--  <label for="" class="font-medium text-900 control-label">(Add Minimum 1 and Maximum 7 Number
+                            Pallets)
+                          </label> -->
+                          <!-- <span class="error">
                             Material Code required</span> -->
-                          
-                          </div>
-  
-                          <!-- </div> -->
+                          <!-- <div *ngIf="myForm.controls.numberInput.invalid && (myForm.controls.numberInput.dirty || myForm.controls.numberInput.touched)">
+                              <div *ngIf="myForm.controls.numberInput.errors.required">This field is required.</div>
+                              <div *ngIf="myForm.controls.numberInput.errors.pattern">Please enter only numbers.</div>
+                            </div> -->
                         </div>
-  
-  
-  
-                        <div class="form-group row">
-                          <div class="col-sm-3 "></div>
-                          <div class="col-sm-9   submit-button">
-                            <button type="submit" class="btn btn-primary "
-                              style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" aria-pressed="true"
-                              (click)="EmptyPalletOut()"
-                              >Add</button>
-                            <button type="submit" class=" btn btn-info"
-                              style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" >
-                              Reset</button>
-                          </div>
+
+                        <!-- </div> -->
+                      </div>
+
+                      <div class="form-group row">
+                        <div class="col-sm-3 "></div>
+                        <div class="col-sm-9   submit-button">
+                          <button type="submit" class="btn btn-primary "
+                            style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" aria-pressed="true"
+                            (click)="onAddClick()">Add</button>
+                          <!--  <button type="submit" class=" btn btn-info"
+                            style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;">
+                            Res</button> -->
                         </div>
-  
-                      </form> <!-- close form -->
-                    </div> <!-- close form content div -->
+                      </div>
+
+                    </form> <!-- close form -->
+                  </div> <!-- close form content div -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+
+      <!--Details grid start-->
+      <div class="container-fluid">
+        <div class="tab-content">
+          <div id="storein" class="">
+            <div class="card shadow mb-4">
+              <div class="card-header d-sm-flex py-3 justify-content-between ">
+                <h6 class="m-0 font-weight-bold" style="color:#fff; padding: 5px 0 0 0;">Pallet Details
+                </h6>
+                <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                    Class="fas fa-download fa-sm text-white-50"></i> Export Excel</a> -->
+              </div>
+              <div class="card-body">
+                <label>Show
+                  <select [(ngModel)]="itemsPerPage">
+                    <option *ngFor="let option of pageSizeOptions" [value]="option">{{option}}</option>
+                  </select>
+                  entries
+
+                </label>
+
+                <input type="text" placeholder="search" style="margin-left: 900px" (keyup)="filterData($event)">
+                <div class="table-responsive">
+                  <div class="custom-control custom-checkbox small">
+                    <input type="checkbox" class="custom-control-input" id="customCheck">
+                    <label class="custom-control-label" for="customCheck">Select All</label>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-bordered" id="" width="100%" cellspacing="0">
+                      <thead>
+                        <tr style="background-color:  #eeebf6; color: #361374;">
+                          <!-- <th (click)="sort('id')">Action &nbsp;<i class="fa-fa-sort"></i></th> -->
+                          <th (click)="sort('id')">Action &nbsp;<i class="fa fa-sort"></i></th>
+                          <!--  <th >Select</th> -->
+                          <th (click)="sort('id')">Pallet Id &nbsp;<i class="fa fa-sort"></i></th>
+                          <th (click)="sort('id')"> No of Pallets&nbsp;<i class="fa fa-sort"></i></th>
+                          <th (click)="sort('id')"> Aisle&nbsp;<i class="fa fa-sort"></i></th>
+                          <th (click)="sort('id')"> X&nbsp;<i class="fa fa-sort"></i></th>
+                          <th (click)="sort('id')"> Y&nbsp;<i class="fa fa-sort"></i></th>
+                          <th (click)="sort('id')"> Direction&nbsp;<i class="fa fa-sort"></i></th>
+                          <th (click)="sort('id')"> Deep&nbsp;<i class="fa fa-sort"></i></th>
+
+                        </tr>
+                      </thead>
+                      <tbody
+                        *ngFor="let data of EmptyPalletList | orderBy : key : reverse | paginate:{itemsPerPage:itemsPerPage, currentPage: pageSize }; let i=index">
+                        <td><input type="checkbox" checked (change)="OnSelect(data)"></td>
+
+                        <!-- <td>
+                                           <div class="custom-control custom-checkbox small">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                        id="customCheck">
+                                                    <label class="custom-control-label"
+                                                        for="customCheck"></label>
+                                                </div>
+                        
+                                              </td> -->
+                        <!-- <input type="checkbox" [(ngModel)]="record.isChecked" (change)="updateSelectedCount()"/> -->
+                        <!--  <tr *ngFor="let data of EmptyPalletList"> -->
+                        <!---<td><input type="checkbox" [(ngModel)]="item.isSelected"(change)="updateSelectedCount()" /> --->
+                        <td>{{data.HU_ID}}</td>
+                        <td>{{data.HU_VOL}}</td>
+                        <td>{{data.HU_ACTUAL_AISL}}</td>
+                        <td>{{data.HU_ACTUAL_X}}</td>
+                        <td>{{data.HU_ACTUAL_Y}}</td>
+                        <td>{{data.HU_ACTUAL_Z}}</td>
+                        <td>{{data.HU_DEPT}}</td>
+
+                      </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="pageSize  =$event"></pagination-controls>
+
+                  </div>
+                  <!--Submit and reset button for update the selected pallet f-->
+
+                  <div class="form-group row">
+                    <div class="col-sm-3 "></div>
+
+                    <!-- <button type="submit" class="btn btn-primary" [disabled]="isReadOnly"
+                  style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;"
+                  (click)="Edit()">Update</button> -->
+                    <div class="col-sm-9   submit-button">
+                      <button type="submit" class="btn btn-primary"
+                        style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="Alert()">Confirm</button>
+                      <button type="submit" class=" btn btn-info"
+                        style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="Reset()">
+                        Reset</button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- /.container-fluid -->
-  
-           <!--Details grid start-->
-           <div class="container-fluid">
-            <div class="tab-content">
-                <div id="storein" class="">
-                    <div class="card shadow mb-4">
-                        <div class="card-header d-sm-flex py-3 justify-content-between ">
-                            <h6 class="m-0 font-weight-bold" style="color:#fff; padding: 5px 0 0 0;">Pallet Details
-                            </h6>
-                            <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    Class="fas fa-download fa-sm text-white-50"></i> Export Excel</a> -->
-
-                        </div>
-                        <div class="card-body">
-                          
-
-                            <label>Show:
-                            <select >
-                                <option ></option>
-                            </select>
-                            entries
-                        </label>
-                            <input type="text" placeholder="search" style="margin-left: 709px">
-                            <div class="custom-control custom-checkbox small">
-                                <input type="checkbox" class="custom-control-input"
-                                    id="customCheck">
-                                <label class="custom-control-label"
-                                    for="customCheck">Select All</label>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr style="background-color:  #eeebf6; color: #361374;">
-                                            <th >Select</th>
-                                            <th >Pallet Id</th>
-                                            <th >No of Pallets</th>
-                                            <th >Aisle</th>
-                                            <th >X</th>
-                                            <th >Y</th>
-                                            <th >Direction</th>
-                                            <th >Deep</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox small">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        id="customCheck">
-                                                    <label class="custom-control-label"
-                                                        for="customCheck"></label>
-                                                </div>
-                                            </td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-
-                                        </tr>
-                                    </tbody>
-                                 </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Details grid end -->    
-  
-  
+        <!-- Details grid end -->
       </div>
       <!-- End of Main Content -->
-  
+
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
@@ -171,18 +199,17 @@
         </div>
       </footer>
       <!-- End of Footer -->
-  
     </div>
     <!-- End of Content Wrapper -->
-  
+
   </div>
   <!-- End of Page Wrapper -->
-  
+
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-  
+
   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -202,7 +229,3 @@
       </div>
     </div>
   </div>
-  
-  
-  
-
