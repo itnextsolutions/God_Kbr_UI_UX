@@ -47,7 +47,7 @@
                                         entries
                                     </label>
           
-                                        <input type="text" placeholder="search" style="margin-left: 709px">
+                                        <input type="text" [(ngModel)]="term" placeholder="Search" style="margin-left: 950px">
                                     <div class="table-responsive">
                                         
                                         <table class="table table-bordered" id="" width="100%" cellspacing="0">
@@ -66,7 +66,7 @@
                                             </thead>
     
                                             <tbody>
-                                                <tr *ngFor="let data of storeOutData">
+                                                <tr *ngFor="let data of order_details | filter: term">
                                                     <td> <input type="checkbox" [checked]="data.ORD_ID == order_id"    (change)="onSelectOrderDetail(data)"></td>
                                                     <td>{{data.ORD_ID}}</td>
                                                     <td>{{data.ORD_REC_POS}}</td>
@@ -82,7 +82,7 @@
                                             <div class="col-lg-1 "></div>
                                             <div class="col-lg-10   submit-button">
                                                 <button type="submit" class="btn btn-primary "
-                                                    style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;">
+                                                    style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="onAddClick()">
                                                     Add
                                                 </button>
                                             </div>
@@ -160,7 +160,7 @@
                                     entries
                                 </label>
       
-                                    <input type="text" placeholder="search" style="margin-left: 709px">
+                                    <input type="text" placeholder="Search" style="margin-left: 950px">
                                 <div class="table-responsive">
                                     
                                     <table class="table table-bordered" id="" width="100%" cellspacing="0">
@@ -172,6 +172,7 @@
                                                 <th>Part No</th>
                                                 <th>Part Description</th>
                                                 <th>Quantity</th>
+                                                <th>Reserved Qty</th>
                                                 <th>Aisle</th>
                                                 <th>X</th>
                                                 <th>Y</th>
@@ -181,18 +182,19 @@
                                         </thead>
 
                                         <tbody>
-                                            <tr>
+                                            <tr *ngFor = "let item of pallet">
                                                 <!-- <td> <input type="checkbox"></td> -->
+                                                <td>{{item.HU_ID}}</td>
+                                                <td>{{item.STK_REC_POS}}</td>
+                                                <td>{{item.STK_PRD_COD}}</td>
                                                 <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>{{item.STK_PRD_QTY}}</td>
+                                                <td>{{item.STK_RSV_QTY}}</td>
+                                                <td>{{item.LOC_AISL_ID}}</td>
+                                                <td>{{item.LOC_X}}</td>
+                                                <td>{{item.LOC_Y}}</td>
+                                                <td>{{item.LOC_Z}}</td>
+                                                <td>{{item.LOC_P}}</td>
                                             </tr>
                                        </tbody>
                                     </table>
@@ -200,7 +202,7 @@
                                         <div class="col-lg-1 "></div>
                                         <div class="col-lg-10   submit-button">
                                             <button type="submit" class="btn btn-primary "
-                                                style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;">
+                                                style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="onConfirmClick()">
                                                 Confirm
                                             </button>
                                             <button type="submit" class="btn btn-primary "
