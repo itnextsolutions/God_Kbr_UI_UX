@@ -1,15 +1,7 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-login',
-//   templateUrl: './login.component.html',
-//   styleUrls: ['./login.component.css']
-// })
-// export class LoginComponent {
-
-// }
 import { Component, Input } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TataService } from 'src/app/services/TataCumminsapi.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,51 +10,61 @@ import { Router } from '@angular/router';
 
 export class LoginComponent {
 
-  signupUsers: any[] = [];
-  signupObj: any = {
-    username: '',
-    email: '',
-    password: ''
-  }
-
-
-  loginObj: any = {
-    username: '',
-    password: ''
-  }
-
-  id: string = "";
+  loginForm !: FormGroup;
+  
   username: string = "";
   password: string = "";
-  email: string = "";
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private fb :FormBuilder,
+              public tataservice: TataService) { }
 
   ngOnInit(): void {
-    console.log(this.username);
-    console.log(this.password);
+   
+    this.loginForm = this.fb.group({
+
+      username : ['',Validators.required],
+      password : ['',Validators.required]
+
+    })
 
   }
 
-  onSingUp(){
-   // this.signupUsers.push(this.signupObj);
-    //localStorage.setItem('signupUsers',JSON.stringify(this.signupUsers));
+  
+  login(){
+      debugger;
+
+      if(this.loginForm.valid){
+            
+            var data ={
+
+              username : this.username,
+              password : this.password
+            }
+
+            this.tataservice.login(data).subscribe( (resp:any) =>{
+
+              if(resp == 'Success'){
+                
+                this.router.navigate(['/emptyPalletStoreOut']);
+              }
+              else{
+                alert("fail");
+              }
+
+            })
+
+
+            this.loginForm.reset();
+      }
+      else{
+        this.loginForm.markAllAsTouched();
+      }
+    
+  }
 
     
-    var val = {
-      Id: this.signupObj.email,
-      username: this.signupObj.username,
-      password: this.signupObj.password
-    };
-  }
-
-  login() {
-debugger
-    var val = {
-      username: this.loginObj.username,
-      password: this.loginObj.password
-    };
-    localStorage.setItem('loginUser',JSON.stringify(this.loginObj));
-  }
+  
+  
 }
 

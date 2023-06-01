@@ -22,11 +22,26 @@
 		</div> -->
 
 		<div class="signup">
-			<form>
+			<form [formGroup]="loginForm">
 				<label for="chk" aria-hidden="true">Login</label>
-				<input type="email" name="email" placeholder="Email" >
-				<input type="password" name="pswd" placeholder="Password">
-				<button (click)=" login()">Login</button>
+				<div class="input-group col-sm-12">
+				<input type="text" placeholder="Username" formControlName="username" [(ngModel)]="username" >
+
+				<span clas="error"
+				*ngIf="loginForm.controls['username'].touched  && loginForm.controls['username'].invalid"
+				>
+				Username is required
+				</span>
+				</div>
+				<div class="input-group col-sm-12">
+				<input type="password"  placeholder="Password" formControlName ="password" [(ngModel)]="password">
+				<span clas="error"
+				*ngIf="loginForm.controls['password'].touched  && loginForm.controls['password'].invalid"
+				>
+				Username is required
+				</span>
+				</div>
+				<button  (click)=" login()">Login</button>
 			</form>
 		</div>
 	</div>
