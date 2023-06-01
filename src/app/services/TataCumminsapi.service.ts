@@ -36,10 +36,30 @@ GetPalletDetails(val1:any,val2:any){
   return this.http.get(this.apiEndpoint+'StockCount/GetPalletDetails',{params})
 }
 
+GetPalletDetails1(){
+  return this.http.get(this.apiEndpoint+'StockCount/GetPalletDetails1')
+}
+
 UpdateInsert(data:any){
   debugger
 
   return this.http.post(this.apiEndpoint+'StockCount/UpdateInsert',data)
+}
+
+
+updateEmptypallet(val:any){
+  debugger
+
+  return this.http.post(this.apiEndpoint+'EmptyPallet/UpdateEmptyPallet',val)
+}
+
+GetStoreOutRequest(){
+  return this.http.get(this.apiEndpoint +'StoreRequestCancellation/GetStoreOutRequestCancellation')
+}
+
+UpdateOrderItem(val:any){
+  debugger
+  return this.http.post(this.apiEndpoint +'StoreRequestCancellation/UpdateOrderItem', val)
 }
 
 }

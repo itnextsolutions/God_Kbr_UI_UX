@@ -1,7 +1,7 @@
 <div id="wrapper" (click)="onContainerClick()" >
 
   <!-- Sidebar -->
-  <app-sidebar></app-sidebar>
+  <app-tata-cummins-sidebar></app-tata-cummins-sidebar>
   <!-- End of Sidebar -->
 
   <!-- Content Wrapper -->
@@ -52,7 +52,11 @@
                         </div> 
                           <div class="input-group col-sm-6">
                           <input type="text" class="form-control" formControlName="PartNo" [(ngModel)]="PartNo" (click)="GetStockCount()" (input)="applyfilter($event)"/>
-                         <div>
+                         
+                          <span class="error"
+                          *ngIf="StockCountForm.controls['PartNo'].touched && StockCountForm.controls['PartNo'].invalid">
+                          PartNo Is required</span> 
+                          <div>
                           <app-part-no-dropdown (selectedRow)="Selectedrow($event)"></app-part-no-dropdown>
                          </div>
                         </div>
@@ -68,6 +72,9 @@
                         <div class="input-group col-sm-6">
                           <input type="text" class="form-control" formControlName="GrNo" [(ngModel)]="GrNo" readonly/>
                           
+                          <span class="error"
+                                *ngIf="StockCountForm.controls['GrNo'].touched && StockCountForm.controls['GrNo'].invalid">
+                                GrNo Is required</span>
 
                         </div>
                      </div>
