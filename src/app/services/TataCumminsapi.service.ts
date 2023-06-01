@@ -78,8 +78,5 @@ Insert_StockMovt_Update_StockItm(val:any){
 
  }
 
-public updateEmptypallet(val:any){
-  debugger
-  return this.http.post(this.apiEndpoint+'EmptyPallet/UpdateEmptyPallet',val)
-  }
+
 }
