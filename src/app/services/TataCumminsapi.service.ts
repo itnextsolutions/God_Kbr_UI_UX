@@ -8,6 +8,15 @@ export class TataService {
 
   apiEndpoint = 'https://localhost:44363/api/';
 
+
+public login(val:any){
+
+ return this.http.post(this.apiEndpoint + 'login/login', val);
+}
+
+
+
+
 public getemptypalletout(val:any){
   
   const params = { parameter: val}
@@ -22,8 +31,9 @@ public getStoreOutData(){
   return this.http.get(this.apiEndpoint + 'StoreOut/GetStoreOutData');
 }
 
-public getStoreOutPalletDetails(){
-  return this.http.get(this.apiEndpoint + 'StoreOut/GetPalletDetails')
+public getStoreOutPalletDetails(val : any){
+  const params = { parameter: val}
+  return this.http.get(this.apiEndpoint + 'StoreOut/GetPalletDetails',{params})
 }
 
 GetStockCountPartNo(){
@@ -42,4 +52,14 @@ UpdateInsert(data:any){
   return this.http.post(this.apiEndpoint+'StockCount/UpdateInsert',data)
 }
 
+Insert_StockMovt_Update_StockItm(val:any){
+  
+    return this.http.post(this.apiEndpoint + 'storeOut/Insert_StockMovt_Update_StockItm',val);
+
+ }
+
+public updateEmptypallet(val:any){
+  debugger
+  return this.http.post(this.apiEndpoint+'EmptyPallet/UpdateEmptyPallet',val)
+  }
 }

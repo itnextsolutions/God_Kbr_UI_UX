@@ -22,6 +22,7 @@ import { PartNoDropdownComponent } from './Tata-Cummins/Pages/part-no-dropdown/p
 
 
 const routes: Routes = [
+  {path:'',component:LoginComponent},
   {path:'Dashboard',component:HomeComponent},
   {path:'storein',component:StoreInComponent},
   {path:'login',component:LoginComponent},
