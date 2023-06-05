@@ -109,7 +109,7 @@ export class StockCountProcessComponent {
       // this.PalletdetailsList=resp
       // this.PalletdetailsList = this.PalletdetailsList.filter((x: any) => x.STK_PRD_COD === this.PartNo && x.STK_REC_POS ===this.GrNo)
       
-      if(this.PalletdetailsList == null){
+      if(this.PalletdetailsList != null){
 
         this.Confirmlist.forEach((Element:any)=>{
           let val={
@@ -141,9 +141,22 @@ export class StockCountProcessComponent {
         })
       })
       }
-      
-    
-         
+      else{
+        Swal.fire({
+          title:"These record already has been updated",
+          icon: 'success',
+          showCancelButton: true,
+          confirmButtonText: 'Ok',
+        }).then((result) => {
+          if (result.value) {
+          location.reload();
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire(
+              'You Can not Continue With Your Operation',
+            )
+          }
+        })
+      }
     }
 
     GetStockCount(){
