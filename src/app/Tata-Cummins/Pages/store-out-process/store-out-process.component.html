@@ -10,8 +10,9 @@
         <!-- Main Content -->
         <div id="content">
 
-            <!-- Topbar -->
             <app-navbar></app-navbar>
+            <!-- Topbar -->
+            <app-breadcrumb-nav [child_page]="pageName"></app-breadcrumb-nav> 
             <!-- End of Topbar -->
 
             <!-- <app-breadcrumb-nav [child_page]="pageName"></app-breadcrumb-nav> -->
@@ -22,9 +23,9 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800"> Store Out Process </h1>
-                </div>
+                </div> -->
 
 
                 <!--Details grid start-->
@@ -67,7 +68,7 @@
     
                                             <tbody>
                                                 <tr *ngFor="let data of order_details | filter: term">
-                                                    <td> <input type="checkbox" [checked]="data.ORD_ID == order_id"    (change)="onSelectOrderDetail(data)"></td>
+                                                    <td> <input type="checkbox" [checked]="data.ORD_ID == order_id"  #mycheckbox   (change)="onSelectOrderDetail(data)"></td>
                                                     <td>{{data.ORD_ID}}</td>
                                                     <td>{{data.ORD_REC_POS}}</td>
                                                     <td>{{data.ORD_PRD_COD}}</td>
@@ -81,7 +82,7 @@
                                         <div class="form-group row">
                                             <div class="col-lg-1 "></div>
                                             <div class="col-lg-10   submit-button">
-                                                <button type="submit" class="btn btn-primary "
+                                                <button  type="submit" class="btn btn-primary "
                                                     style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="onAddClick()">
                                                     Add
                                                 </button>
@@ -92,51 +93,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Details grid end -->
-
-                <!-- Content Row -->
-                <!-- <div class="row">
-                    <div class="col-xl-12 col-lg-12">
-                        <div class="card shadow mb-4">
-        
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">heading:</h6>
-                            </div>
-
-                            
-                            <div class="card-body">
-                                <div clas="container">
-                                    <div id="form-content" class="col-md-12">
-                                        
-                                            
-                                            <div class="form-group row">
-                                                <div class="col-lg-1 "></div>
-                                                <div class="col-lg-10   submit-button">
-                                                    <button type="submit" class="btn btn-primary "
-                                                        style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;">
-                                                        Add
-                                                    </button>
-                                                    <button type="submit" class="btn btn-info "
-                                                        style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;">
-                                                        Confirm  
-                                                    </button>
-                                                    <button type="submit" class="btn btn-primary "
-                                                        style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;">
-                                                        Return
-                                                    </button>
-                                                    <button type="submit" class=" btn btn-info"
-                                                        style="padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;">
-                                                        Reset
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
 
 
@@ -188,7 +144,7 @@
                                                 <td>{{item.STK_REC_POS}}</td>
                                                 <td>{{item.STK_PRD_COD}}</td>
                                                 <td></td>
-                                                <td>{{item.STK_PRD_QTY}}</td>
+                                                <td>{{item.cal_qty}}</td>
                                                 <td>{{item.STK_RSV_QTY}}</td>
                                                 <td>{{item.LOC_AISL_ID}}</td>
                                                 <td>{{item.LOC_X}}</td>
@@ -201,17 +157,17 @@
                                     <div class="form-group row">
                                         <div class="col-lg-1 "></div>
                                         <div class="col-lg-10   submit-button">
-                                            <button type="submit" class="btn btn-primary "
-                                                style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="onConfirmClick()">
+                                            <button   [disabled]="pallet.length == 0" type="submit" class="btn btn-primary "
+                                                style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="confirmationAlert()">
                                                 Confirm
                                             </button>
-                                            <button type="submit" class="btn btn-primary "
-                                                style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;">
+                                            <button [disabled]="pallet.length == 0" type="submit" class="btn btn-primary "
+                                                style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="resetAlert()">
                                                 Reset
                                             </button>
                                         </div>
                                     </div>
-                                    <pagination-controls (pageChange)="pageSize  =  $event"></pagination-controls>
+                                    <!-- <pagination-controls (pageChange)="pageSize  =  $event"></pagination-controls> -->
                                 </div>
                            </div>
                     </div>

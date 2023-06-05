@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 
 export class EmptyPalletStoreOutProcessComponent {
 
-  NoOfPalletStacks: number = 0;
+  NoOfPalletStacks: number | undefined;
   EmptyPalletOutForm!: FormGroup;
   EmptyPalletList: any = [];
   Emptypalletout : any=[];
@@ -24,6 +24,8 @@ export class EmptyPalletStoreOutProcessComponent {
 
   public pageName: string = "Empty Pallet Out Process";
 
+
+  term='';
   pageSize: number = 1;
   itemsPerPage: number = 10;
   key: string = 'id';
@@ -60,6 +62,15 @@ export class EmptyPalletStoreOutProcessComponent {
     })
   }
 
+ //Use for Prevent (e,+,-) in input field
+ handleKeyDown(event: any) {
+  const forbiddenKeys = ['e', '+', '-', '.'];
+  
+  if (forbiddenKeys.includes(event.key)) {
+    event.preventDefault();
+  }
+}
+
   OnSelect(val: any) {
     debugger
     // var data = {
@@ -88,20 +99,19 @@ export class EmptyPalletStoreOutProcessComponent {
     })
   }
   onAddClick() {
-    debugger
-    this.confirmList=[];
-    // var val={
-    //   PALLET_NUMBER: this.NoOfPalletStacks
-
-    // }
-    console.log(this.NoOfPalletStacks)
-    this.tataservice.getemptypalletout(this.NoOfPalletStacks).subscribe(resp => {
-
-      this.EmptyPalletList = resp
-      this.finalList = this.EmptyPalletList;
-    });
-
     
+    this.confirmList=[];
+    
+    if(this.EmptyPalletOutForm.valid){
+      this.tataservice.getemptypalletout(this.NoOfPalletStacks).subscribe(resp => {
+
+        this.EmptyPalletList = resp
+        this.finalList = this.EmptyPalletList;
+      });
+    }
+    else{
+      this.EmptyPalletOutForm.markAllAsTouched();
+    }
   }
 
   Reset() {

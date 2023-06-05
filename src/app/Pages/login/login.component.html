@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-	<title>Slide Navbar</title>
-
-	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
-</head>
-
-<body>
 	<div class="main">
-		<input type="checkbox" id="chk" aria-hidden="true">
+		
 
 		<!-- <div class="signup">
 			<form>
@@ -21,7 +12,7 @@
 			</form>
 		</div> -->
 
-		<div class="signup">
+		<!-- <div class="signup">
 			<form [formGroup]="loginForm">
 				<label for="chk" aria-hidden="true">Login</label>
 				<div class="input-group col-sm-12">
@@ -43,10 +34,35 @@
 				</div>
 				<button  (click)=" login()">Login</button>
 			</form>
-		</div>
-	</div>
-</body>
+		</div> -->
 
-</html>
+
+		<div class="login-page">
+			<div class="form" >
+				 <img src="/assets/img/godrej logo.png" alt="" style="margin-top: -22px; width: 215px;">
+				 
+			  <form  [formGroup]="loginForm" class="login-form">
+				
+				<input type="text" placeholder="Username" formControlName="username" [(ngModel)]="username" >
+				<span class="error"
+						*ngIf="loginForm.controls['username'].touched  && loginForm.controls['username'].invalid"
+					>
+					Username is required
+				</span>
+												
+				<input type="password"  placeholder="Password" formControlName ="password" [(ngModel)]="password">
+				<span class="error"
+					*ngIf="loginForm.controls['password'].touched  && loginForm.controls['password'].invalid"
+					>
+					password is required
+				</span>
+				
+				<button (click)="login()">Login</button>
+				<!-- <p class="message">Not registered? <a href="#">Create an account</a></p> -->
+			  </form>
+			  
+			</div>
+		  </div>
+	</div>
 
 

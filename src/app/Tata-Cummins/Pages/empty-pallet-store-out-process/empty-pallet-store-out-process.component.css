@@ -1,0 +1,14 @@
+.sidebar .nav-item .nav-link span {
+    font-size: 13px;
+    display: inline;
+    color: #fff;
+    font-weight: 500;
+}
+
+.form-control{
+    width: 100%;
+}
+.error {
+    font-size: 12px;
+    color: red;
+  }

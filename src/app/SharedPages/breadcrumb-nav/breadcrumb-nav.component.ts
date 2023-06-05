@@ -39,5 +39,41 @@ export class BreadcrumbNavComponent {
       return
     }
 
+    if(this.child_page === "Empty Pallet In Process"){
+
+      this.current_page = "Empty Pallet";
+      return
+    }
+
+    if(this.child_page === "Empty Pallet Out Process"){
+
+      this.current_page = "Empty Pallet";
+      return
+    }
+
+    if(this.child_page === "Stock Count Process"){
+
+      this.current_page = "Stock Count";
+      return
+    }
+
+    if(this.child_page === "Store Out Process"){
+
+      this.current_page = "Store Out";
+      return
+    }
+
+    if(this.child_page === "Store In Request Cancellation"){
+
+      this.current_page = "Others";
+      return
+    }
+
+    if(this.child_page === "Store Out Request Cancellation"){
+
+      this.current_page = "Others";
+      return
+    }
+
   }
 }

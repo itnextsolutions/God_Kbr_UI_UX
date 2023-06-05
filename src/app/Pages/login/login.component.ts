@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TataService } from 'src/app/services/TataCumminsapi.service';
+import { NgToastService } from 'ng-angular-popup';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +19,8 @@ export class LoginComponent {
 
   constructor(private router: Router,
               private fb :FormBuilder,
-              public tataservice: TataService) { }
+              public tataservice: TataService,
+              private toast: NgToastService) { }
 
   ngOnInit(): void {
    
@@ -32,9 +35,8 @@ export class LoginComponent {
 
   
   login(){
-      debugger;
-
-      if(this.loginForm.valid){
+    
+    if(this.loginForm.valid){
             
             var data ={
 
@@ -43,19 +45,21 @@ export class LoginComponent {
             }
 
             this.tataservice.login(data).subscribe( (resp:any) =>{
-
-              if(resp == 'Success'){
-                
-                this.router.navigate(['/emptyPalletStoreOut']);
+             
+              if(resp.message == 'Success'){
+                this.toast.success({detail:"Login Successfully",duration:5000});
+                this.router.navigate(['/Dashboard']);
               }
               else{
-                alert("fail");
+                
+                this.toast.warning({detail:'Login Failed',duration:5000});
+                this.loginForm.reset();
               }
 
             })
 
 
-            this.loginForm.reset();
+            
       }
       else{
         this.loginForm.markAllAsTouched();

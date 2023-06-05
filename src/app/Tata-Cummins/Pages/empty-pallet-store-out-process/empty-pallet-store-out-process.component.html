@@ -51,25 +51,19 @@
 
                       <div class="row form-group">
 
-                        <div class="col-sm-3">
-                          <label class="font-medium text-900">Number of Empty Pallet Stacks:</label>
-                        </div>
-                        <div class="input-group col-sm-4">
-                          <input type="number" class="form-control" formControlName="NoOfPalletStacks"
-                            [(ngModel)]="NoOfPalletStacks" />
-                          <!--  <label for="" class="font-medium text-900 control-label">(Add Minimum 1 and Maximum 7 Number
-                            Pallets)
-                          </label> -->
-                          <!-- <span class="error">
-                            Material Code required</span> -->
-                          <!-- <div *ngIf="myForm.controls.numberInput.invalid && (myForm.controls.numberInput.dirty || myForm.controls.numberInput.touched)">
-                              <div *ngIf="myForm.controls.numberInput.errors.required">This field is required.</div>
-                              <div *ngIf="myForm.controls.numberInput.errors.pattern">Please enter only numbers.</div>
-                            </div> -->
-                        </div>
-
-                        <!-- </div> -->
-                      </div>
+                          <div class="col-sm-3">
+                            <label class="font-medium text-900">Number of Empty Pallet Stacks:</label>
+                          </div>
+                          <div class="input-group col-sm-4">
+                            <input type="number" (keydown)="handleKeyDown($event)" class="form-control" formControlName="NoOfPalletStacks"
+                              [(ngModel)]="NoOfPalletStacks" min="0" />
+                              <span class="error"
+                            *ngIf="EmptyPalletOutForm.controls['NoOfPalletStacks'].touched && EmptyPalletOutForm.controls['NoOfPalletStacks'].invalid">
+                            Pallet Id is required.
+                          </span>
+                          </div>
+                        
+                     </div>
 
                       <div class="form-group row">
                         <div class="col-sm-3 "></div>
@@ -101,8 +95,6 @@
               <div class="card-header d-sm-flex py-3 justify-content-between ">
                 <h6 class="m-0 font-weight-bold" style="color:#fff; padding: 5px 0 0 0;">Pallet Details
                 </h6>
-                <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    Class="fas fa-download fa-sm text-white-50"></i> Export Excel</a> -->
               </div>
               <div class="card-body">
                 <label>Show
@@ -113,14 +105,14 @@
 
                 </label>
 
-                <input type="text" placeholder="search" style="margin-left: 900px" (keyup)="filterData($event)">
+                <input type="text" [(ngModel)]="term"  placeholder="search" style="margin-left: 900px">
                 <div class="table-responsive">
-                  <div class="custom-control custom-checkbox small">
+                  <!-- <div class="custom-control custom-checkbox small">
                     <input type="checkbox" class="custom-control-input" id="customCheck">
                     <label class="custom-control-label" for="customCheck">Select All</label>
-                  </div>
+                  </div> -->
                   <div class="table-responsive">
-                    <table class="table table-bordered" id="" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="" width="100%" cellspacing="0"  >
                       <thead>
                         <tr style="background-color:  #eeebf6; color: #361374;">
                           <!-- <th (click)="sort('id')">Action &nbsp;<i class="fa-fa-sort"></i></th> -->
@@ -136,22 +128,10 @@
 
                         </tr>
                       </thead>
-                      <tbody
-                        *ngFor="let data of EmptyPalletList | orderBy : key : reverse | paginate:{itemsPerPage:itemsPerPage, currentPage: pageSize }; let i=index">
-                        <td><input type="checkbox" checked (change)="OnSelect(data)"></td>
-
-                        <!-- <td>
-                                           <div class="custom-control custom-checkbox small">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        id="customCheck">
-                                                    <label class="custom-control-label"
-                                                        for="customCheck"></label>
-                                                </div>
+                      <tbody>
                         
-                                              </td> -->
-                        <!-- <input type="checkbox" [(ngModel)]="record.isChecked" (change)="updateSelectedCount()"/> -->
-                        <!--  <tr *ngFor="let data of EmptyPalletList"> -->
-                        <!---<td><input type="checkbox" [(ngModel)]="item.isSelected"(change)="updateSelectedCount()" /> --->
+                        <tr *ngFor="let data of EmptyPalletList | filter: term | orderBy : key : reverse | paginate:{itemsPerPage:itemsPerPage, currentPage: pageSize }; let i=index">
+                        <td><input type="checkbox" checked (change)="OnSelect(data)"></td>
                         <td>{{data.HU_ID}}</td>
                         <td>{{data.HU_VOL}}</td>
                         <td>{{data.HU_ACTUAL_AISL}}</td>
@@ -159,7 +139,7 @@
                         <td>{{data.HU_ACTUAL_Y}}</td>
                         <td>{{data.HU_ACTUAL_Z}}</td>
                         <td>{{data.HU_DEPT}}</td>
-
+                      </tr>
                       </tbody>
                     </table>
                     <pagination-controls (pageChange)="pageSize  =$event"></pagination-controls>
@@ -174,9 +154,9 @@
                   style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;"
                   (click)="Edit()">Update</button> -->
                     <div class="col-sm-9   submit-button">
-                      <button type="submit" class="btn btn-primary"
+                      <button   type="submit" [disabled]="finalList == 0" class="btn btn-primary"
                         style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="Alert()">Confirm</button>
-                      <button type="submit" class=" btn btn-info"
+                      <button type="submit" [disabled]="finalList == 0" class=" btn btn-info"
                         style="  padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="Reset()">
                         Reset</button>
                     </div>
@@ -204,28 +184,5 @@
 
   </div>
   <!-- End of Page Wrapper -->
-
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
+ 
+  

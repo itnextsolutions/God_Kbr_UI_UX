@@ -37,7 +37,8 @@ import { StoreOutRequestCancellationComponent } from './Tata-Cummins/Pages/store
 import { TataService } from './services/TataCumminsapi.service';
 import { PartNoDropdownComponent } from './Tata-Cummins/Pages/part-no-dropdown/part-no-dropdown.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
+import { TataCumminsSidebarComponent } from './SharedPages/tata-cummins-sidebar/tata-cummins-sidebar.component';
+import { NgToastModule } from 'ng-angular-popup';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +64,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     StoreInRequestCancellationComponent,
     StoreOutRequestCancellationComponent,
     PartNoDropdownComponent,
+    TataCumminsSidebarComponent
   
   ],
   imports: [
@@ -78,7 +80,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
      MatSortModule,
      NgxPaginationModule,
      Ng2OrderModule,
-     Ng2SearchPipeModule
+     Ng2SearchPipeModule,
+     NgToastModule
   ],
   providers: [MyService,TataService],
   bootstrap: [AppComponent]
