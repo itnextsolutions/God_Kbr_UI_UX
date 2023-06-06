@@ -87,7 +87,7 @@ Insert_StockMovt_Update_StockItm(val_1:any,val_2: any){
  }
 
  UpdateHU_ID(val:any){
-  return this.http.get(this.apiEndpoint +'api/RequestCancelletion/UpdateRequestCancelletion',val)
+  return this.http.post(this.apiEndpoint +'RequestCancelletion/UpdateRequestCancelletion',val)
  }
 
 }
