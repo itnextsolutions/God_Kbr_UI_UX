@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TataService } from 'src/app/services/TataCumminsapi.service';
+import { NgToastService } from 'ng-angular-popup';
+
 import { MyService } from 'src/app/services/api.service';
 
 @Component({
@@ -20,7 +22,8 @@ export class LoginComponent {
   constructor(private router: Router,
               private auth : MyService,
               private fb :FormBuilder,
-              public tataservice: TataService) { }
+              public tataservice: TataService,
+              private toast: NgToastService) { }
 
   ngOnInit(): void {
    
@@ -62,7 +65,7 @@ export class LoginComponent {
             })
 
 
-            this.loginForm.reset();
+            
       }
       else{
         this.loginForm.markAllAsTouched();

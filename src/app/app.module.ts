@@ -68,6 +68,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     StoreOutRequestCancellationComponent,
     PartNoDropdownComponent,
     TataCumminsSidebarComponent
+  
   ],
   imports: [
     BrowserModule,

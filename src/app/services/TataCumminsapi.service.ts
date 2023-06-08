@@ -72,11 +72,22 @@ UpdateOrderItem(val:any){
   return this.http.post(this.apiEndpoint +'StoreRequestCancellation/UpdateOrderItem', val)
 }
 
-Insert_StockMovt_Update_StockItm(val:any){
+Insert_StockMovt_Update_StockItm(val_1:any,val_2: any){
   
-    return this.http.post(this.apiEndpoint + 'storeOut/Insert_StockMovt_Update_StockItm',val);
+  var data={
+    storeOutData: val_1,
+    orderData: val_2
+  }
+    return this.http.post(this.apiEndpoint + 'storeOut/Insert_StockMovt_Update_StockItm',data);
 
  }
 
+ GetStoreInRequest(){
+  return this.http.get(this.apiEndpoint +'StoreRequestCancellation/GetStoreInRequestCancelletion')
+ }
+
+ UpdateHU_ID(val:any){
+  return this.http.post(this.apiEndpoint +'RequestCancelletion/UpdateRequestCancelletion',val)
+ }
 
 }

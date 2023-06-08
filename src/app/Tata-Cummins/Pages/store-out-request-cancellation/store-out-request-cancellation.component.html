@@ -2,7 +2,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <app-sidebar></app-sidebar>
+    <app-tata-cummins-sidebar></app-tata-cummins-sidebar>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -63,23 +63,19 @@
                                             </tr>
                                         </thead>
 
-                                        <tbody>
+                                        <tbody *ngFor="let data of StoreOutRequestCancellationlist let i=index " >
                                             <tr>
-                                                <!-- <td>
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck"></label>
-                                                    </div>
-                                                </td> -->
-                                                <td> <input type="checkbox"></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>
+                                                    <input type="checkbox" (change)="isCheked(data)"  >
+                                                
+                                                </td>
+                                                <td>{{data.ORD_ID}}</td>
+                                                <td>{{data.ORD_HU_ID}}</td>
+                                                <td>{{data.ORD_PRD_COD}}</td>
+                                                <td>{{data.ORD_ID}}</td>
+                                                <td>{{data.ORD_ID}}</td>
+                                                <td>{{data.ORD_ID}}</td>
+                                                <td>{{data.ORD_ID}}</td>
                                                 
                                             </tr>
                                        </tbody>
@@ -95,14 +91,16 @@
                                             Add
                                         </button> -->
                                         
+                                        <div *ngIf="Confirmlist.length > 0" >
                                         <button type="submit" class="btn btn-primary "
-                                            style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;">
+                                            style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="Alert()">
                                             Discard
                                         </button>
                                         <button type="submit" class=" btn btn-info"
-                                            style="padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" >
+                                            style="padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="Reset()" >
                                             Reset
                                         </button>
+                                        </div>
                                     </div>
                             </div>
                             
@@ -136,4 +134,3 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-

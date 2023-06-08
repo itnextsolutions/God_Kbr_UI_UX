@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class EmptyPalletInProcessComponent {
 
+  public pageName: string = "Empty Pallet In Process";
   EmptyPalletForm !: FormGroup;
   palletId :number | undefined;
   palletCount : number | undefined;
@@ -63,6 +64,7 @@ export class EmptyPalletInProcessComponent {
       
       this.tataservice.insertEmptyPalletData(val).subscribe( resp =>{
         
+        debugger;
         if(resp == "Success"){
           this.sucessAlert();
           
@@ -70,8 +72,9 @@ export class EmptyPalletInProcessComponent {
         else{
           this.errorAlert();
         }
-        this.Reset();
+        
       })
+      // this.Reset();
     }
     else{
       this.EmptyPalletForm.markAllAsTouched();
@@ -87,6 +90,14 @@ export class EmptyPalletInProcessComponent {
       title: 'Data has been saved',  
       showConfirmButton: true,  
        timer: 3000
+    }).then((result) => {
+      if (result.value) {
+        window.location.reload();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'You Can not Continue With Your Operation',
+        )
+      }
     })
     
   }
@@ -97,7 +108,7 @@ export class EmptyPalletInProcessComponent {
       position: 'top', 
       icon: 'error',  
       title: 'Oops...',  
-      text: 'Something went wrong!',  
+      text: 'Duplicate Entry!',  
       showConfirmButton: true,  
       timer: 3000 
     })  
@@ -105,7 +116,7 @@ export class EmptyPalletInProcessComponent {
 
   //Use for Reset Form
   Reset(){
-    // this.EmptyPalletForm.reset();
+    //this.EmptyPalletForm.reset();
       window.location.reload();
   }
 
