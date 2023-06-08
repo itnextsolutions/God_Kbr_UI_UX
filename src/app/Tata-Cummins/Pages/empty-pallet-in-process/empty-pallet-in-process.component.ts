@@ -27,16 +27,6 @@ export class EmptyPalletInProcessComponent {
   }
 
 
-  // validateInput(event: any) {
-  //   const input = event.target.value;
-  //   const pattern = /^[^e+-]*$/i; // Regular expression pattern excluding 'e', '+' and '-'
-    
-  //   if (!pattern.test(input)) {
-  //     event.target.value = input.replace(/[e+-]/gi, ''); // Remove 'e', '+' and '-' from the input value
-  //   }
-  // }
-
-
   //Use for Prevent (e,+,-) in input field
   handleKeyDown(event: any) {
     const forbiddenKeys = ['e', '+', '-', '.'];
@@ -102,6 +92,25 @@ export class EmptyPalletInProcessComponent {
     
   }
 
+  confirmationAlert(){
+    Swal.fire({
+    title: 'Are you sure want to Continue',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Yes',
+    cancelButtonText: 'Not'
+  }).then((result) => {
+    if (result.value) {
+    this.addEmptyPallet();
+    
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      // Swal.fire(
+      //   'You Can not Continue With Your Operation',
+      // )
+    }
+  })
+}
+
   errorAlert(){  
    
     Swal.fire({  
@@ -115,9 +124,25 @@ export class EmptyPalletInProcessComponent {
   }
 
   //Use for Reset Form
-  Reset(){
-    //this.EmptyPalletForm.reset();
-      window.location.reload();
+  resetAlert(){
+    
+    Swal.fire({
+      title: 'Are you sure want to Reset',
+      text: 'You will not be able to recover this operation',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Reset It',
+      cancelButtonText: 'Not, Reset'
+    }).then((result) => {
+      if (result.value) {
+      
+        window.location.reload();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Swal.fire(
+        //   'You Can Continue With Your Operation',
+        // )
+      }
+    })
   }
 
 }

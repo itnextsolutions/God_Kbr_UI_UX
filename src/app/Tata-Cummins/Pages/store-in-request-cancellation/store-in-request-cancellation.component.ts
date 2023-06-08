@@ -14,6 +14,7 @@ export class StoreInRequestCancellationComponent {
   Confirmlist:any=[]
   secondList:any=[];
   ORD_ID:number=0;
+  term ='';
 
   constructor( private router: TataService){
 
@@ -32,7 +33,7 @@ export class StoreInRequestCancellationComponent {
      cancelButtonText: 'Not, Confirm'
    }).then((result) => {
      if (result.value) {
-     this.Discard()
+     this.Discard();
      } else if (result.dismiss === Swal.DismissReason.cancel) {
        Swal.fire(
          'You Can not Continue With Your Operation',
@@ -43,43 +44,51 @@ export class StoreInRequestCancellationComponent {
 
   Discard(){
 
-    debugger
-    this.Confirmlist.forEach((Element:any)=>{
-      let val={
-        HU_ID:Element.HU_ID
+    debugger;
+    this.Confirmlist.forEach((element:any)=>{
+      var val={
+        HU_ID : element.HU_ID
       }
 
       this.secondList.push(val)
     })
-    
+    console.log(this.secondList);
     this.router.UpdateHU_ID(this.secondList).subscribe(resp =>{
-      Swal.fire({
-        title: resp,
-        icon: 'success',
-        showCancelButton: true,
-        confirmButtonText: 'Ok',
-      }).then((result) => {
-        if (result.value) {
-        location.reload();
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-          Swal.fire(
-            'You Can not Continue With Your Operation',
-          )
-        }
-      })
+      // Swal.fire({
+      //   title: resp,
+      //   icon: 'success',
+      //   showCancelButton: true,
+      //   confirmButtonText: 'Ok',
+      // }).then((result) => {
+      //   if (result.value) {
+      //   location.reload();
+      //   } else if (result.dismiss === Swal.DismissReason.cancel) {
+      //     Swal.fire(
+      //       'You Can not Continue With Your Operation',
+      //     )
+      //   }
+      // })
+
+      if(resp == 'Success'){
+
+        this.successAlert();
+      }
+      else{
+        this.errorAlert();
+      }
     })
   }
 
 
   GetStoreOutRequest(){
-    debugger
+    
     return this.router.GetStoreInRequest().subscribe(res=>{
           this.StoreInRequestCancellationlist=res
       })
   }
 
   isCheked(data:any){
-    debugger
+    
     const index = this.Confirmlist.indexOf(data);
 
 
@@ -94,8 +103,44 @@ export class StoreInRequestCancellationComponent {
 
   }
 
+
+
+  successAlert(){
+
+      Swal.fire({
+      title: 'Pallet has been Discarded',
+      icon: 'success',
+      showCancelButton: true,
+      confirmButtonText: 'Ok',
+    }).then((result) => {
+      if (result.value) {
+      location.reload();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Swal.fire(
+        //   'You Can not Continue With Your Operation',
+        // )
+      }
+    })
+
+  }
+
+    errorAlert(){  
+   
+      Swal.fire({  
+        position: 'top', 
+        icon: 'error',  
+        title: 'Oops...',  
+        text: 'Something Went Wrong!',  
+        showConfirmButton: true,  
+        timer: 3000 
+      })  
+    }
+
+  
+  
+
   Reset(){
-    debugger
+  
     Swal.fire({
       title: 'Are you sure want to Reset',
       text: 'You will not be able to recover this operation',

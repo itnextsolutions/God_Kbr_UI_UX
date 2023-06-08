@@ -13,7 +13,8 @@ export class NavbarComponent {
   }
 
   logout(){
-    // debugger;
+    
+     localStorage.clear();
     this.auth.signOut();
     // this.router.navigate(['/login']);
   }
