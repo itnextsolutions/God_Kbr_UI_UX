@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TataService } from 'src/app/services/TataCumminsapi.service';
+import { MyService } from 'src/app/services/api.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,6 +18,7 @@ export class LoginComponent {
   password: string = "";
 
   constructor(private router: Router,
+              private auth : MyService,
               private fb :FormBuilder,
               public tataservice: TataService) { }
 
@@ -32,7 +35,7 @@ export class LoginComponent {
 
   
   login(){
-      debugger;
+      // debugger;
 
       if(this.loginForm.valid){
             
@@ -43,12 +46,16 @@ export class LoginComponent {
             }
 
             this.tataservice.login(data).subscribe( (resp:any) =>{
+              // debugger;
+              console.log(resp);
 
-              if(resp == 'Success'){
-                
-                this.router.navigate(['/emptyPalletStoreOut']);
+              if(resp.message == 'Success'){
+                console.log("User Logged in"+resp.message);
+                this.auth.storageToken(resp.jwtToken);
+                this.router.navigate(['/Dashboard']);
               }
               else{
+                console.log("User Logged Failed");
                 alert("fail");
               }
 
@@ -62,9 +69,6 @@ export class LoginComponent {
       }
     
   }
-
-    
-  
   
 }
 

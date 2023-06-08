@@ -7,7 +7,7 @@ import { StoreInComponent } from './Pages/store-in/store-in.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { ManualStoreInComponent } from './Pages/manual-store-in/manual-store-in.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MyService } from './services/api.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialMasterComponent } from './Pages/material-master/material-master.component';
@@ -37,6 +37,10 @@ import { StoreOutRequestCancellationComponent } from './Tata-Cummins/Pages/store
 import { TataService } from './services/TataCumminsapi.service';
 import { PartNoDropdownComponent } from './Tata-Cummins/Pages/part-no-dropdown/part-no-dropdown.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { TataCumminsSidebarComponent } from './SharedPages/tata-cummins-sidebar/tata-cummins-sidebar.component';
+import { NgToastModule } from 'ng-angular-popup';
+import { TokenInterceptor } from './interceptors/token.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -63,7 +67,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     StoreInRequestCancellationComponent,
     StoreOutRequestCancellationComponent,
     PartNoDropdownComponent,
-  
+    TataCumminsSidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -78,9 +82,14 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
      MatSortModule,
      NgxPaginationModule,
      Ng2OrderModule,
-     Ng2SearchPipeModule
+     Ng2SearchPipeModule,
+     NgToastModule
+  
   ],
-  providers: [MyService,TataService],
+  providers: [MyService,TataService,{provide:HTTP_INTERCEPTORS, 
+    useClass:TokenInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { Router } from '@angular/router';
 
 @Injectable()
 export class MyService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   apiEndpoint = 'https://localhost:44363/api/';
 
@@ -16,6 +17,10 @@ export class MyService {
 
   getUserData() {
     return this.http.get('https://jsonplaceholder.typicode.com/users')
+  }
+
+  getUsers(){
+    return this.http.get(this.apiEndpoint + 'Users')
   }
 
   GetMaterialData() {
@@ -72,5 +77,22 @@ export class MyService {
     return this.http.post(this.apiEndpoint + 'Palletization/UpdateOrders',val);
   }
 
+  //@VIP_05062023
+  storageToken(tokenValue: string){
+    localStorage.setItem('token', tokenValue)
+  }
 
+  getToken(){
+    return localStorage.getItem('token')
+  }
+
+  isLoggedin():boolean{
+    return !!localStorage.getItem('token')
+  }
+
+  signOut(){
+    // localStorage.clear();
+    this.router.navigateByUrl('/login');
+    location.reload();
+  }
 }

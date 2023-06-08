@@ -19,28 +19,29 @@ import { EmptyPalletStoreOutProcessComponent } from './Tata-Cummins/Pages/empty-
 import { StoreInRequestCancellationComponent } from './Tata-Cummins/Pages/store-in-request-cancellation/store-in-request-cancellation.component';
 import { StoreOutRequestCancellationComponent } from './Tata-Cummins/Pages/store-out-request-cancellation/store-out-request-cancellation.component';
 import { PartNoDropdownComponent } from './Tata-Cummins/Pages/part-no-dropdown/part-no-dropdown.component';
+import { AuthGuard } from './Pages/guards/auth.guard';
 
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
-  {path:'Dashboard',component:HomeComponent},
-  {path:'storein',component:StoreInComponent},
+  {path:'Dashboard',component:HomeComponent, canActivate:[AuthGuard]},
+  {path:'storein',component:StoreInComponent, canActivate:[AuthGuard]},
   {path:'login',component:LoginComponent},
-  {path:'manualStoreIn',component:ManualStoreInComponent},
-  {path:'materialMaster',component:MaterialMasterComponent},
-  {path:'vendorMaster',component:VendorMasterComponent},
-  {path:'tableConfiguration',component:DynamicHtmlTableConfigurationComponent},
-  {path:'storeInOrderview',component:StoreInOrderViewComponent},
-  {path:'palletizationProcess',component:PalletizationProcessComponent},
-  {path:'materialcodedescription',component:MaterialCodeDescriptionComponent},
-  {path:'vendormatcodedescription',component:VendorMatCodeDescriptionComponent},
-  {path:'storeOutProcess',component:StoreOutProcessComponent},
-  {path:'stockCountProcess',component:StockCountProcessComponent},
-  {path:'emptyPalletIn',component:EmptyPalletInProcessComponent},
-  {path:'emptyPalletStoreOut',component:EmptyPalletStoreOutProcessComponent},
-  {path:'storeInRequestCancellation', component:StoreInRequestCancellationComponent},
-  {path:'storeOutRequestCancellation', component:StoreOutRequestCancellationComponent},
-  {path:'partdropdown', component:PartNoDropdownComponent}
+  {path:'manualStoreIn',component:ManualStoreInComponent, canActivate:[AuthGuard]},
+  {path:'materialMaster',component:MaterialMasterComponent, canActivate:[AuthGuard]},
+  {path:'vendorMaster',component:VendorMasterComponent, canActivate:[AuthGuard]},
+  {path:'tableConfiguration',component:DynamicHtmlTableConfigurationComponent, canActivate:[AuthGuard]},
+  {path:'storeInOrderview',component:StoreInOrderViewComponent, canActivate:[AuthGuard]},
+  {path:'palletizationProcess',component:PalletizationProcessComponent, canActivate:[AuthGuard]},
+  {path:'materialcodedescription',component:MaterialCodeDescriptionComponent, canActivate:[AuthGuard]},
+  {path:'vendormatcodedescription',component:VendorMatCodeDescriptionComponent, canActivate:[AuthGuard]},
+  {path:'storeOutProcess',component:StoreOutProcessComponent, canActivate:[AuthGuard]},
+  {path:'stockCountProcess',component:StockCountProcessComponent, canActivate:[AuthGuard]},
+  {path:'emptyPalletIn',component:EmptyPalletInProcessComponent, canActivate:[AuthGuard]},
+  {path:'emptyPalletStoreOut',component:EmptyPalletStoreOutProcessComponent, canActivate:[AuthGuard]},
+  {path:'storeInRequestCancellation', component:StoreInRequestCancellationComponent, canActivate:[AuthGuard]},
+  {path:'storeOutRequestCancellation', component:StoreOutRequestCancellationComponent, canActivate:[AuthGuard]},
+  {path:'partdropdown', component:PartNoDropdownComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({
