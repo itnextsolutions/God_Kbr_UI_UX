@@ -68,7 +68,8 @@
     
                                             <tbody>
                                                 <tr *ngFor="let data of order_details | filter: term">
-                                                    <td> <input type="checkbox" [checked]="data.ORD_ID == order_id"  #mycheckbox   (change)="onSelectOrderDetail(data)"></td>
+                                                    <td> <input type="checkbox" [checked]="data.ORD_ID == order_id"    (change)="onSelectOrderDetail_Multi(data)"></td>
+                                                    <!-- <td> <input type="checkbox"  (change)="onSelectOrderDetail_1(data)"></td> -->
                                                     <td>{{data.ORD_ID}}</td>
                                                     <td>{{data.ORD_REC_POS}}</td>
                                                     <td>{{data.ORD_PRD_COD}}</td>
@@ -82,8 +83,8 @@
                                         <div class="form-group row">
                                             <div class="col-lg-1 "></div>
                                             <div class="col-lg-10   submit-button">
-                                                <button  type="submit" class="btn btn-primary "
-                                                    style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="onAddClick()">
+                                                <button  [disabled]="checkList == 0" type="submit" class="btn btn-primary "
+                                                    style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="onAddClick_2()">
                                                     Add
                                                 </button>
                                             </div>
@@ -116,7 +117,7 @@
                                     entries
                                 </label>
       
-                                    <input type="text" placeholder="Search" style="margin-left: 950px">
+                                    <input type="text" [(ngModel)]="pallet_search" placeholder="Search" style="margin-left: 950px">
                                 <div class="table-responsive">
                                     
                                     <table class="table table-bordered" id="" width="100%" cellspacing="0">
@@ -138,14 +139,14 @@
                                         </thead>
 
                                         <tbody>
-                                            <tr *ngFor = "let item of pallet">
+                                            <tr *ngFor = "let item of pallet | filter: pallet_search">
                                                 <!-- <td> <input type="checkbox"></td> -->
                                                 <td>{{item.HU_ID}}</td>
                                                 <td>{{item.STK_REC_POS}}</td>
                                                 <td>{{item.STK_PRD_COD}}</td>
                                                 <td></td>
+                                                <td>{{item.STK_PRD_QTY}}</td>
                                                 <td>{{item.cal_qty}}</td>
-                                                <td>{{item.STK_RSV_QTY}}</td>
                                                 <td>{{item.LOC_AISL_ID}}</td>
                                                 <td>{{item.LOC_X}}</td>
                                                 <td>{{item.LOC_Y}}</td>

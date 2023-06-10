@@ -31,9 +31,14 @@ public getStoreOutData(){
   return this.http.get(this.apiEndpoint + 'StoreOut/GetStoreOutData');
 }
 
-public getStoreOutPalletDetails(val : any){
+public getStoreOutPalletDetailsSingleCheck(val : any){
   const params = { parameter: val}
-  return this.http.get(this.apiEndpoint + 'StoreOut/GetPalletDetails',{params})
+  return this.http.get(this.apiEndpoint + 'StoreOut/GetPalletDetails_Single_Check',{params})
+}
+
+public getStoreOutPalletDetailsMultiCheck(val : any){
+  const params = { parameter: val}
+  return this.http.get(this.apiEndpoint + 'StoreOut/GetPalletDetails_Multi_Check',{params})
 }
 
 GetStockCountPartNo(){

@@ -21,13 +21,20 @@ export class StoreOutProcessComponent {
    qty:number=0;
   pallet: any=[];
   outDetails: any=[];
-  quantity : number=0;
-  product_code:string="";
+  ord_quantity : number=0;
+  product_code:any=[];
   order_details: any=[];
   term = ''; 
+  pallet_search ='';
   confirmList: any=[];
   checkList:any=[];
   orderData:any=[];
+  filter_pallet: any=[];
+  palletOut: any=[];
+  total_count =0;
+  filter_order: any=[];
+  order_quantity: number=0;
+  // b :number= 0;
 
 
 
@@ -48,178 +55,252 @@ export class StoreOutProcessComponent {
    }
 
 
-  //  getStoreOutPalletData(){
-  
-  //   this.tataservice.getStoreOutPalletDetails(this.product_code).subscribe(resp =>{
-  //     this.palletOutDetails = resp;
-  //     this.outDetails = this.palletOutDetails;
-  //     console.log(this.qty);
-  //     console.log(this.palletOutDetails);
-  //     console.log(this.pallet);
-      
-  //   })
-  //  }
+   
 
-   onAddClick(){
-    
-      this.pallet=[];
-      this.tataservice.getStoreOutPalletDetails(this.product_code).subscribe(resp =>{
-      this.palletOutDetails = resp;
-      // this.outDetails = this.palletOutDetails;
-        
-        debugger;
-        
-      let  a = this.quantity
-      let b =0;
-      let c =0;
-      let partial_value = 0;
-      let  PARTIAL;
-      let cal_qty =0;
-      // for(let i=0; i < this.palletOutDetails.length; i++){
-  
-      //   if(this.palletOutDetails[i].STK_PRD_QTY <= a){
-  
-      //     b = b + this.palletOutDetails[i].STK_PRD_QTY;
-      //     a = a- this.palletOutDetails[i].STK_PRD_QTY;
-
-          
-      //     this.palletOutDetails[i].PARTIAL = partial_value;
-
-      //     this.pallet.push(this.palletOutDetails[i]);
-      //   }
-      //   else
-      //   {
-      //     b = b + a;
-      //     c = this.palletOutDetails[i].STK_PRD_QTY - a;
-      //     this.palletOutDetails[i].STK_PRD_QTY = a;
-      //     partial_value =1;
-      //     this.palletOutDetails[i].PARTIAL = partial_value;
-          
-      //     this.pallet.push(this.palletOutDetails[i]);
-      //   }
-  
-      //   if(b == this.quantity){
-      //     console.log(this.pallet);
-      //     return;
-      //   }
-        
-      // }
-
-
-
-      for(let i=0; i < this.palletOutDetails.length; i++){
-  
-        let remain_qty = this.palletOutDetails[i].STK_PRD_QTY  - this.palletOutDetails[i].STK_RSV_QTY;
-        if(remain_qty<= a){
-  
-          b = b + remain_qty;
-          a = a- remain_qty;
-
-          this.palletOutDetails[i].cal_qty = remain_qty;
-          // this.palletOutDetails[i].STK_PRD_QTY = remain_qty;
-          this.palletOutDetails[i].PARTIAL = partial_value;
-
-          this.pallet.push(this.palletOutDetails[i]);
-        }
-        else
-        {
-          b = b + a;
-          // c = remain_qty - a;
-          // this.palletOutDetails[i].STK_PRD_QTY = a;
-          this.palletOutDetails[i].cal_qty = a;
-          partial_value =1;
-          this.palletOutDetails[i].PARTIAL = partial_value;
-          
-          this.pallet.push(this.palletOutDetails[i]);
-        }
-  
-        if(b == this.quantity){
-          var data ={
-
-            ORD_ID : this.order_id,
-            RSV_QTY: this.quantity
-          }
-
-          this.orderData.push(data);
-
-          return;
-        }
-        
-      }
-      
-      })
-      
-    
-  }
-
-   onSelectOrderDetail(val:any){
+   onSelectOrderDetail_Single(val:any){
     
     this.pallet=[];
-    this.order_id = val.ORD_ID;
+    this.orderData =[]; 
+    // this.order_id = val.ORD_ID;
     if ( this.checkList.includes(val)) {
       this.checkList = this.checkList.filter((selected: any) => selected !== val);
     }
     else
     {
-    this.checkList=[];
+    // this.checkList=[];
      this.checkList.push(val);
     }
     
    console.log(this.checkList);
    if(this.checkList.length > 0){
-    // this.order_id = this.checkList[0].ORD_ID;
-    this.quantity = this.checkList[0].ORD_REQ_QTY;
+     this.order_id = this.checkList[0].ORD_ID;
+    this.ord_quantity = this.checkList[0].ORD_REQ_QTY;
     this.product_code = this.checkList[0].ORD_PRD_COD;
    }
 
    else{
-    this.quantity =0;
+    this.ord_quantity =0;
     this.product_code="";
    }
    
   }
 
 
+  onSelectOrderDetail_Multi(val : any){
 
-  confirmationAlert(){
-      Swal.fire({
-      title: 'Are you sure want to Continue',
-      icon: 'success',
-      showCancelButton: true,
-      confirmButtonText: 'Yes',
-      cancelButtonText: 'Not'
-    }).then((result) => {
-      if (result.value) {
-      this.onConfirmClick();
-      
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'You Can not Continue With Your Operation',
-        )
-      }
-    })
+    debugger;
+    this.pallet=[];
+    this.orderData =[]; 
+    this.total_count =0
+    // this.order_id = val.ORD_ID;
+    if ( this.checkList.includes(val)) {
+      this.checkList = this.checkList.filter((selected: any) => selected !== val);
+    }
+    else
+    {
+    // this.checkList=[];
+     this.checkList.push(val);
+    }
+
+    // console.log("Order_Selected",this.checkList);
+
+    this.product_code = Array.from(new Set(this.checkList.map((x:any) => x.ORD_PRD_COD).sort()));    
+    // console.log("Material",this.product_code);
   }
 
-  resetAlert(){
+
+  onAddClick(){
     
-    Swal.fire({
-      title: 'Are you sure want to Reset',
-      text: 'You will not be able to recover this operation',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, Reset It',
-      cancelButtonText: 'Not, Reset'
-    }).then((result) => {
-      if (result.value) {
+    this.pallet=[];
+    this.tataservice.getStoreOutPalletDetailsSingleCheck(this.product_code).subscribe(resp =>{
+    this.palletOutDetails = resp;
+    // this.outDetails = this.palletOutDetails;
+              
+    let  a = this.ord_quantity
+    let b =0;
+    let c =0;
+    let partial_value = 0;
+    let  PARTIAL;
+    let cal_qty =0;
+    
+
+    for(let i=0; i < this.palletOutDetails.length; i++){
+
+      let pallet_qty = this.palletOutDetails[i].STK_PRD_QTY  - this.palletOutDetails[i].STK_RSV_QTY;
+      if(pallet_qty<= a){
+
+        b = b + pallet_qty;
+        a = a- pallet_qty;
+
+        this.palletOutDetails[i].cal_qty = pallet_qty;
+        // this.palletOutDetails[i].STK_PRD_QTY = remain_qty;
+        this.palletOutDetails[i].PARTIAL = partial_value;
+
+        this.pallet.push(this.palletOutDetails[i]);
+      }
+      else
+      {
+        b = b + a;
+        // c = remain_qty - a;
+        // this.palletOutDetails[i].STK_PRD_QTY = a;
+        this.palletOutDetails[i].cal_qty = a;
+        partial_value =1;
+        this.palletOutDetails[i].PARTIAL = partial_value;
+        
+        this.pallet.push(this.palletOutDetails[i]);
+      }
+
+      if(b == this.ord_quantity){
+        var data ={
+
+          ORD_ID : this.order_id,
+          RSV_QTY: this.ord_quantity,
+          // ORD_PARTIAL : 0
+        }
+
+        this.orderData.push(data);
+
+        return;
+        }
       
-        window.location.reload();
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        // Swal.fire(
-        //   'You Can Continue With Your Operation',
-        // )
       }
     })
+       
   }
+
+  onAddClick_2(){
+    
+    this.pallet=[];
+    this.orderData =[];
+    
+    this.tataservice.getStoreOutPalletDetailsMultiCheck(this.product_code).subscribe((resp:any) =>{
+    this.palletOutDetails = resp;
+    this.palletOut =this.palletOutDetails
+    // console.log("Pallet",this.palletOutDetails);
+    
+ 
+    for(let i =0; i < this.product_code.length; i++){
+      this.total_count =0;
+       
+        for(let k =0; k < this.checkList.length; k++){
+          if(this.checkList[k].ORD_PRD_COD == this.product_code[i]){
+            this.total_count = this.total_count + this.checkList[k].ORD_REQ_QTY;
+          }
+        }
+
+      // console.log("Total_qty_out",this.total_count);
+
+    let  a :any = this.total_count;
+    let b :any  =0;
+    let c =0;
+    let partial_value = 0;
+    let  PARTIAL;
+    let cal_qty =0;
+    this.filter_pallet= this.palletOut.filter((x:any)=>x.STK_PRD_COD == this.product_code[i])
+    
+    for(let j=0; j < this.filter_pallet.length; j++){
+
+      
+      let pallet_qty = this.filter_pallet[j].STK_PRD_QTY  - this.filter_pallet[j].STK_RSV_QTY;
+      if(pallet_qty<= a){
+
+        b = b + pallet_qty;
+        a = a- pallet_qty;
+
+        this.filter_pallet[j].cal_qty = pallet_qty;
+        // this.palletOutDetails[i].STK_PRD_QTY = remain_qty;
+        this.filter_pallet[j].PARTIAL = partial_value;
+        this.pallet.push(this.filter_pallet[j]);
+      
+       }
+      else if(pallet_qty > a)
+      {
+        b = b + a;
+        // c = remain_qty - a;
+        // this.palletOutDetails[i].STK_PRD_QTY = a;
+        this.filter_pallet[j].cal_qty = a;
+        partial_value =1;
+        this.filter_pallet[j].PARTIAL = partial_value;
+        
+        this.pallet.push(this.filter_pallet[j]);      
+      }
+
+      // console.log(this.pallet);
+  
+       if(b == this.total_count){        
+        break;
+        }       
+      
+      }
+        
+      let  a_order :number = b;
+      let b_order = 0;
+      let cal_ord = 0;
+
+       this.filter_order= this.checkList.filter((x:any)=>x.ORD_PRD_COD == this.product_code[i]);
+      // console.log("Filter_order",this.filter_order);
+
+      for(let l =0; l < this.filter_order.length; l++){
+
+        this.order_quantity = this.filter_order[l].ORD_REQ_QTY - this.filter_order[l].ORD_RSV_QTY;
+        if(this.order_quantity <= a_order){
+
+          b_order = b_order + this.order_quantity;
+          a_order = a_order - this.order_quantity;
+          
+          var data ={
+  
+                     ORD_ID : this.filter_order[l].ORD_ID,
+                     ORD_PRD_COD:this.filter_order[l].ORD_PRD_COD,
+                     ORD_REQ_QTY : this.filter_order[l].ORD_REQ_QTY - this.filter_order[l].ORD_RSV_QTY,
+                     RSV_QTY: this.order_quantity,
+                     ORD_PARTIAL : 0
+                   }
+
+                   this.orderData.push(data); 
+        }
+        else{
+
+          if( b_order == b ){
+            
+            let final: number =this.filter_order[l].ORD_RSV_QTY;
+            var data ={
+  
+              ORD_ID : this.filter_order[l].ORD_ID,
+              ORD_PRD_COD:this.filter_order[l].ORD_PRD_COD,
+              ORD_REQ_QTY : this.filter_order[l].ORD_REQ_QTY - this.filter_order[l].ORD_RSV_QTY,
+              RSV_QTY: final,
+              ORD_PARTIAL : 2
+            }
+            this.orderData.push(data);
+          }
+          else{
+            b_order = b_order + a_order;
+            var data ={
+  
+              ORD_ID : this.filter_order[l].ORD_ID,
+              ORD_PRD_COD:this.filter_order[l].ORD_PRD_COD,
+              ORD_REQ_QTY : this.filter_order[l].ORD_REQ_QTY - this.filter_order[l].ORD_RSV_QTY,
+              RSV_QTY: a_order,
+              ORD_PARTIAL : 1
+            }
+            this.orderData.push(data); 
+          }
+        
+        }
+
+
+
+      }
+
+      // console.log("Order_status",this.orderData);
+    
+    }
+  })
+       
+  }
+
+
 
   onConfirmClick(){
 
@@ -228,9 +309,9 @@ export class StoreOutProcessComponent {
       var data ={
 
         STK_PRD_COD : element.STK_PRD_COD,
-        //  STK_RSV_QTY : element.STK_RSV_QTY,
-         STK_RSV_QTY : element.cal_qty,
-         STK_PRD_QTY : element.STK_PRD_QTY,
+        // STK_RSV_QTY : element.STK_RSV_QTY,
+        STK_RSV_QTY : element.cal_qty,
+        STK_PRD_QTY : element.STK_PRD_QTY,
         HU_ID   : element.HU_ID,
         PARTIAL : element.PARTIAL
       }
@@ -252,10 +333,49 @@ export class StoreOutProcessComponent {
     })
     debugger;
     
-    this.pallet=[];
-   
+    this.pallet=[];  
       
   }
+
+  confirmationAlert(){
+    Swal.fire({
+    title: 'Are you sure want to Continue',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Yes',
+    cancelButtonText: 'Not'
+  }).then((result) => {
+    if (result.value) {
+    this.onConfirmClick();
+    
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      // Swal.fire(
+      //   'You Can not Continue With Your Operation',
+      // )
+    }
+  })
+}
+
+resetAlert(){
+  
+  Swal.fire({
+    title: 'Are you sure want to Reset',
+    text: 'You will not be able to recover this operation',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, Reset It',
+    cancelButtonText: 'Not, Reset'
+  }).then((result) => {
+    if (result.value) {
+    
+      window.location.reload();
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      // Swal.fire(
+      //   'You Can Continue With Your Operation',
+      // )
+    }
+  })
+}
 
   sucessAlert(){
 
