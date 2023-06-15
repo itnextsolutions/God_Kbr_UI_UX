@@ -10,6 +10,8 @@ import { MyService } from 'src/app/services/api.service';
 export class HomeComponent {
 
   public users:any =[];
+
+  username:any;
   constructor(private auth: MyService, private router: Router){
 
   }
@@ -19,10 +21,12 @@ export class HomeComponent {
       this.users = res;
       console.log(this.users);
     })
+    this.username=localStorage.getItem("Username")
+
   }
 
   logout(){
-    // debugger;
+    // ;
     localStorage.clear();
     this.auth.signOut();
     // this.router.navigate(['/login']);

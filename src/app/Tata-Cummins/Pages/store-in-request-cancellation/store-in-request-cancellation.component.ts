@@ -44,7 +44,7 @@ export class StoreInRequestCancellationComponent {
 
   Discard(){
 
-    debugger;
+    ;
     this.Confirmlist.forEach((element:any)=>{
       var val={
         HU_ID : element.HU_ID
@@ -82,8 +82,26 @@ export class StoreInRequestCancellationComponent {
 
   GetStoreOutRequest(){
     
-    return this.router.GetStoreInRequest().subscribe(res=>{
-          this.StoreInRequestCancellationlist=res
+    return this.router.GetStoreInRequest().subscribe(resp=>{
+      if(resp != null && resp == undefined)
+      {
+        this.StoreInRequestCancellationlist=resp
+      }
+      else
+      {
+        Swal.fire({
+          title: resp,
+          icon:'error',
+          confirmButtonText: 'Ok',
+        }).then((result) => {
+          if (result.value) {
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire(
+              'You Can not Continue With Your Operation',
+            )
+          }
+        })
+      }
       })
   }
 

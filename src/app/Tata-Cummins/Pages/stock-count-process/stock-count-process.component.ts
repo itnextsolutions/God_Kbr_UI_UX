@@ -51,7 +51,7 @@ export class StockCountProcessComponent {
     }
 
     applyfilter(event:Event){
-      debugger
+      
       const filtervalue=(event.target as HTMLInputElement).value
       this.PartNoDrop.dataSource.filter=filtervalue.trim().toLowerCase();
       if(this.PartNoDrop.dataSource.paginator)
@@ -93,8 +93,8 @@ export class StockCountProcessComponent {
 
     newlist:any=[];
     confirmButton(){
-      debugger
       
+      debugger
        this.tataservice.GetPalletDetails1().subscribe(resp=>{
         this.newlist=resp
         this.PalletdetailsList = this.newlist.filter((x: any) => x.STK_PRD_COD === localStorage.getItem("PartNo") && x.STK_REC_POS ===localStorage.getItem("GrNo"))
@@ -113,7 +113,7 @@ export class StockCountProcessComponent {
 
         this.Confirmlist.forEach((Element:any)=>{
           let val={
-           HU_ID :Element.HU_ID,
+          HU_ID :Element.HU_ID,
            STK_PRD_COD :Element.STK_PRD_COD,
            STK_REC_POS :Element.STK_REC_POS,
            PRD_DESC :Element.PRD_DESC,
@@ -128,7 +128,6 @@ export class StockCountProcessComponent {
           Swal.fire({
           title: resp,
           icon: 'success',
-          showCancelButton: true,
           confirmButtonText: 'Ok',
         }).then((result) => {
           if (result.value) {
@@ -163,8 +162,9 @@ export class StockCountProcessComponent {
       this.PartNoDrop.GetStockCount()
     }
 
-    GetPalletDetails(){
-      debugger
+    GetPalletDetails()
+    {
+      
       localStorage.setItem("PartNo",this.PartNo)
       
       localStorage.setItem("GrNo",this.GrNo)
@@ -179,30 +179,38 @@ export class StockCountProcessComponent {
       })
     }
 
-    Reset(){
-      debugger
-      Swal.fire({
-        title: 'Are you sure want to Reset',
-        text: 'You will not be able to recover this operation',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, Reset It!',
-        cancelButtonText: 'Not, Reset'
-      }).then((result) => {
-        if (result.value) {
-        
-          this.StockCountForm.reset();
-          this.PalletdetailsList =[];
-          this.Confirmlist =[];
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-          Swal.fire(
-            'You Can Continue With Your Operation',
-          )
-        }
-      })
+    Reset()
+    {
+      if(this.PartNo == "" || this.GrNo == "")
+      {
+        location.reload()
+      }
+
+      else
+      {
+        Swal.fire({
+          title: 'Are you sure want to Reset',
+          text: 'You will not be able to recover this operation',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, Reset It!',
+          cancelButtonText: 'Not, Reset'
+        }).then((result) => {
+          if (result.value) {
+          
+            this.StockCountForm.reset();
+            this.PalletdetailsList =[];
+            this.Confirmlist =[];
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire(
+              'You Can Continue With Your Operation',
+            )
+          }
+        })
+      }
+      
     }
     
-
     onContainerClick(){
       this.PartNoDrop.closeTable()
     }
@@ -213,10 +221,9 @@ export class StockCountProcessComponent {
       this.GrNo=out.STK_REC_POS
     }
 
-    isCheked(data:any){
-      debugger
+    isCheked(data:any)
+    {
       const index = this.Confirmlist.indexOf(data);
-
 
       if (this.Confirmlist.includes(data)) {
         this.Confirmlist.splice(index, 1);
@@ -224,9 +231,7 @@ export class StockCountProcessComponent {
       else {
         this.Confirmlist.push(data);
       }
-  
       console.log(this.Confirmlist);
-
     }
   
 }

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TataService } from 'src/app/services/TataCumminsapi.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-part-no-dropdown',
@@ -40,17 +41,38 @@ export class PartNoDropdownComponent {
     GetStockCount(){
       return this.tataservice.GetStockCountPartNo().subscribe(resp =>{
 
-        this.stockcountlist=resp
-        this.dataSource=new MatTableDataSource<any>( this.stockcountlist)
-        this.dataSource.paginator=this.paginator
+        if(resp == null && resp == undefined)
+        {
+          Swal.fire({
+            title:resp,
+            icon:"error",
+            showCancelButton: true,
+            confirmButtonText: 'Ok'
+          }).then((result) => {
+            if (result.value) {
+            location.reload();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+              Swal.fire(
+                'You Can not Continue With Your Operation',
+              )
+            }
+          })
+        }
+        else
+        {
+          this.stockcountlist=resp
+          this.dataSource=new MatTableDataSource<any>( this.stockcountlist)
+          this.dataSource.paginator=this.paginator
           this.isTableOpen=true
+        }
+      
           //this.ishidden1=false
       })
 
     }
 
     onRowClicked(rowData: any) {
-      debugger
+      
       // emit selected row data to parent component
       this.selectedRow.emit(rowData);
       this.isTableOpen = false;
@@ -59,7 +81,7 @@ export class PartNoDropdownComponent {
 
 
     applyfilter(event:Event){
-    debugger
+    
     const filtervalue=(event.target as HTMLInputElement).value
     this.dataSource.filter=filtervalue.trim().toLowerCase();
     if(this.dataSource.paginator)
