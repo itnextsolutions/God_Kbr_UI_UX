@@ -32,6 +32,7 @@ export class StoreOutProcessComponent {
   filter_pallet: any=[];
   palletOut: any=[];
   total_count =0;
+  order_total_qty =0;
   filter_order: any=[];
   order_quantity: number=0;
   // b :number= 0;
@@ -181,10 +182,13 @@ export class StoreOutProcessComponent {
  
     for(let i =0; i < this.product_code.length; i++){
       this.total_count =0;
+      this.order_total_qty =0;
        
         for(let k =0; k < this.checkList.length; k++){
           if(this.checkList[k].ORD_PRD_COD == this.product_code[i]){
-            this.total_count = this.total_count + this.checkList[k].ORD_REQ_QTY;
+            
+            this.order_total_qty = this.checkList[k].ORD_REQ_QTY - this.checkList[k].ORD_RSV_QTY;
+            this.total_count = this.total_count + this.order_total_qty;
           }
         }
 
@@ -307,7 +311,7 @@ export class StoreOutProcessComponent {
     this.pallet.forEach((element:any) => {
 
       var data ={
-
+        STK_ID :element.STK_ID,
         STK_PRD_COD : element.STK_PRD_COD,
         // STK_RSV_QTY : element.STK_RSV_QTY,
         STK_RSV_QTY : element.cal_qty,
@@ -331,7 +335,7 @@ export class StoreOutProcessComponent {
        }
        
     })
-    debugger;
+    
     
     this.pallet=[];  
       

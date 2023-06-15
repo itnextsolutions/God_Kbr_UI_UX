@@ -148,9 +148,10 @@ debugger
     
     this.tataservice.updateEmptypallet(this.confirmList).subscribe(resp => {
       
-      if (resp == "Success") {
+      if (resp == 1) {
         this.sucessAlert();
         // this.onAddClick();
+        this.finalList=[];
         this.EmptyPalletOutForm.reset();
       
         // window.

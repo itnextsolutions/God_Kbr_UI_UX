@@ -14,6 +14,7 @@ export class EmptyPalletInProcessComponent {
   EmptyPalletForm !: FormGroup;
   palletId :number | undefined;
   palletCount : number | undefined;
+  msg : string='';
 
   constructor(private fb :FormBuilder,
               private tataservice: TataService){}
@@ -54,13 +55,25 @@ export class EmptyPalletInProcessComponent {
       
       this.tataservice.insertEmptyPalletData(val).subscribe( resp =>{
         
-        debugger;
-        if(resp == "Success"){
+        if(resp == 1){
           this.sucessAlert();
           
         }
+        else if(resp == 2){
+          this.msg ="Pallet Is Already Exist"
+          this.errorAlert(this.msg);
+        }
+        else if(resp == 3){
+          this.msg ="Pallet Is Not In DataBase"
+          this.errorAlert(this.msg);
+        }
+       else if(resp == 4){
+          this.msg ="Location Not Available"
+          this.errorAlert(this.msg);
+        }
         else{
-          this.errorAlert();
+          this.msg ="Error"
+          this.errorAlert(this.msg);
         }
         
       })
@@ -79,7 +92,7 @@ export class EmptyPalletInProcessComponent {
       icon: 'success',  
       title: 'Data has been saved',  
       showConfirmButton: true,  
-       timer: 3000
+       timer: 5000
     }).then((result) => {
       if (result.value) {
         window.location.reload();
@@ -111,15 +124,15 @@ export class EmptyPalletInProcessComponent {
   })
 }
 
-  errorAlert(){  
+  errorAlert(msg:any){  
    
     Swal.fire({  
       position: 'top', 
       icon: 'error',  
       title: 'Oops...',  
-      text: 'Duplicate Entry!',  
+      text: msg,  
       showConfirmButton: true,  
-      timer: 3000 
+      timer: 5000 
     })  
   }
 
