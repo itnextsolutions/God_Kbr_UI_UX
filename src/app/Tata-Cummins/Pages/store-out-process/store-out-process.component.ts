@@ -47,7 +47,7 @@ export class StoreOutProcessComponent {
 
   
    getStoreOutOrderData(){
-    debugger;
+    ;
       this.tataservice.getStoreOutData().subscribe(resp=>{
         this.storeOutData = resp;
         this.order_details = this.storeOutData;
@@ -88,7 +88,7 @@ export class StoreOutProcessComponent {
 
   onSelectOrderDetail_Multi(val : any){
 
-    debugger;
+    ;
     this.pallet=[];
     this.orderData =[]; 
     this.total_count =0
@@ -319,7 +319,7 @@ export class StoreOutProcessComponent {
       this.confirmList.push(data);
     });
 
-      debugger
+      
      this.tataservice.Insert_StockMovt_Update_StockItm(this.confirmList,this.orderData).subscribe(resp =>{
 
        if(resp == 'Success'){
@@ -331,7 +331,7 @@ export class StoreOutProcessComponent {
        }
        
     })
-    debugger;
+    ;
     
     this.pallet=[];  
       

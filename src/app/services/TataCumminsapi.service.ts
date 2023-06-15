@@ -6,16 +6,17 @@ import { Observable } from "rxjs";
 export class TataService {
   constructor(private http: HttpClient) { }
 
-  apiEndpoint = 'https://localhost:44363/api/';
+ apiEndpoint = 'https://localhost:44363/api/';
+
+ //apiEndpoint = 'http://localhost:806/api/';
+
+ //apiEndpoint = 'https://localhost:443/api/';
 
 
 public login(val:any){
 
  return this.http.post(this.apiEndpoint + 'login/login', val);
 }
-
-
-
 
 public getemptypalletout(val:any){
   
@@ -46,7 +47,7 @@ GetStockCountPartNo(){
 }
 
 GetPalletDetails(val1:any,val2:any){
-  debugger
+  
   const params = { partno: val1,grno:val2}
   return this.http.get(this.apiEndpoint+'StockCount/GetPalletDetails',{params})
 }
@@ -56,14 +57,14 @@ GetPalletDetails1(){
 }
 
 UpdateInsert(data:any){
-  debugger
+  
 
   return this.http.post(this.apiEndpoint+'StockCount/UpdateInsert',data)
 }
 
 
 updateEmptypallet(val:any){
-  debugger
+  
 
   return this.http.post(this.apiEndpoint+'EmptyPallet/UpdateEmptyPallet',val)
 }
@@ -73,7 +74,7 @@ GetStoreOutRequest(){
 }
 
 UpdateOrderItem(val:any){
-  debugger
+  
   return this.http.post(this.apiEndpoint +'StoreRequestCancellation/UpdateOrderItem', val)
 }
 
@@ -95,4 +96,11 @@ Insert_StockMovt_Update_StockItm(val_1:any,val_2: any){
   return this.http.post(this.apiEndpoint +'RequestCancelletion/UpdateRequestCancelletion',val)
  }
 
+ GetMenuList(val:any){
+
+  const params = { userid: val}
+  return this.http.get(this.apiEndpoint +'GetMenuList/GetMenu',{params})
+
+ }
+ 
 }

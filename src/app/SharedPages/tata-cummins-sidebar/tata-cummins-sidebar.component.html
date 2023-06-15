@@ -8,82 +8,30 @@
 
     <!-- Divider -->
     
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+
+    <div  *ngFor="let data of MenuList">
+        
+        <li class="nav-item" *ngIf="data.OP_ISPARENT == 1">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
             aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Empty Pallet</span>
-        </a>
-        <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="emptyPalletIn">Empty Pallet In Process</a>
-                <a class="collapse-item" href="emptyPalletStoreOut">Empty Pallet Out Process</a> 
+            <i class="fas fa-fw fa-angle-up"></i>
+            <span (click)="trigger(data.OP_OPTION)">{{data.OP_DESC}}</span>
+            </a>
+        </li>
+      
+        <div *ngFor="let childData of child" id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div *ngIf="data.OP_OPTION == childData.OP_PARENTID" class="bg-white py-2 collapse-inner rounded">
+                <a  class="collapse-item" href="{{childData.OP_URL}}">{{childData.OP_DESC}}</a>
             </div>
         </div>
-    </li>
-    <hr class="sidebar-divider">
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Stock Count</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="stockCountProcess">Stock Count Process</a>
-            </div>
-        </div>
-    </li>
-    <hr class="sidebar-divider">
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
-            aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Store Out</span>
-        </a>
-        <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="storeOutProcess">Store Out Process</a>
-            </div>
-        </div>
-    </li>
-
-    <hr class="sidebar-divider">
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsefive"
-            aria-expanded="true" aria-controls="collapsefive">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Others</span>
-        </a>
-        <div id="collapsefive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="storeInRequestCancellation">Store IN Request</a>
-                <a class="collapse-item" href="storeOutRequestCancellation">Store Out Request</a>
-            </div>
-        </div>
-    </li>
-    
-    <!-- Divider -->
-    <!-- <hr class="sidebar-divider">
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsefour"
-            aria-expanded="true" aria-controls="collapsefour">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Palletization</span>
-        </a>
-        <div id="collapsefour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="palletizationProcess"> Palletization Process</a>
-            </div>
-        </div>
-    </li> -->
-
-
-  
-
+    </div>
 
    <!-- Sidebar Toggler (Sidebar) -->
    <div class="text-center d-none d-md-inline">
        <button class="rounded-circle border-0" id="sidebarToggle"></button>
    </div>
 </ul>
+
+
+
+

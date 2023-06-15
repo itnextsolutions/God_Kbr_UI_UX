@@ -18,6 +18,7 @@ export class LoginComponent {
   
   username: string = "";
   password: string = "";
+  UserRole:any=[];
 
   constructor(private router: Router,
               private auth : MyService,
@@ -38,7 +39,7 @@ export class LoginComponent {
 
   
   login(){
-      // debugger;
+      ;
 
       if(this.loginForm.valid){
             
@@ -49,11 +50,14 @@ export class LoginComponent {
             }
 
             this.tataservice.login(data).subscribe( (resp:any) =>{
-              // debugger;
+              // ;
               console.log(resp);
 
               if(resp.message == 'Success'){
                 console.log("User Logged in"+resp.message);
+                this.UserRole=resp.role;
+                localStorage.setItem("Username",this.username)
+                localStorage.setItem("User_Id",this.UserRole)
                 this.auth.storageToken(resp.jwtToken);
                 this.router.navigate(['/Dashboard']);
               }

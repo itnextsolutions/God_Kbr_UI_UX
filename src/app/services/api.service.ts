@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
 export class MyService {
   constructor(private http: HttpClient, private router: Router) { }
 
-  apiEndpoint = 'https://localhost:44363/api/';
+  //apiEndpoint = 'https://localhost:44363/api/';
 
-  
+  apiEndpoint = 'https://localhost:443/api/';
 
   public insertHostToWms(val :any){
     return this.http.post(this.apiEndpoint + 'HostToWms/InsertInToHostToWms',val);
@@ -84,6 +84,10 @@ export class MyService {
 
   getToken(){
     return localStorage.getItem('token')
+  }
+
+  getUserName(){
+    return localStorage.getItem('Username')
   }
 
   isLoggedin():boolean{

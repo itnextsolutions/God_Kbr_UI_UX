@@ -45,7 +45,7 @@ export class StoreOutRequestCancellationComponent {
 
   Discard(){
 
-    debugger
+    
     this.Confirmlist.forEach((Element:any)=>{
       let val={
         ORD_ID:Element.ORD_ID
@@ -74,14 +74,33 @@ export class StoreOutRequestCancellationComponent {
 
 
   GetStoreOutRequest(){
-    debugger
-    return this.router.GetStoreOutRequest().subscribe(res=>{
-          this.StoreOutRequestCancellationlist=res
+    
+    return this.router.GetStoreOutRequest().subscribe(resp=>{
+      if(resp != null && resp != undefined)
+      {
+        this.StoreOutRequestCancellationlist=resp
+      }
+      else
+      {
+        Swal.fire({
+          title: resp,
+          icon:'error',
+          confirmButtonText: 'Ok',
+        }).then((result) => {
+          if (result.value) {
+          location.reload();
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire(
+              'You Can not Continue With Your Operation',
+            )
+          }
+        })
+      }
       })
   }
 
   isCheked(data:any){
-    debugger
+    
     const index = this.Confirmlist.indexOf(data);
 
 
@@ -97,7 +116,7 @@ export class StoreOutRequestCancellationComponent {
   }
 
   Reset(){
-    debugger
+    
     Swal.fire({
       title: 'Are you sure want to Reset',
       text: 'You will not be able to recover this operation',
