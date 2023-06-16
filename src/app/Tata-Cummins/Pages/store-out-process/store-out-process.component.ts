@@ -114,7 +114,10 @@ export class StoreOutProcessComponent {
     
     this.pallet=[];
     this.tataservice.getStoreOutPalletDetailsSingleCheck(this.product_code).subscribe(resp =>{
-    this.palletOutDetails = resp;
+    
+    if(resp != null || resp != undefined)
+    {
+      this.palletOutDetails = resp;
     // this.outDetails = this.palletOutDetails;
               
     let  a = this.ord_quantity
@@ -165,6 +168,12 @@ export class StoreOutProcessComponent {
         }
       
       }
+
+    }
+    else{
+      this.errorAlert();
+    }
+    
     })
        
   }
@@ -175,8 +184,11 @@ export class StoreOutProcessComponent {
     this.orderData =[];
     
     this.tataservice.getStoreOutPalletDetailsMultiCheck(this.product_code).subscribe((resp:any) =>{
-    this.palletOutDetails = resp;
-    this.palletOut =this.palletOutDetails
+    if(resp != null || resp != undefined)
+    {
+
+        this.palletOutDetails = resp;
+        this.palletOut =this.palletOutDetails
     // console.log("Pallet",this.palletOutDetails);
     
  
@@ -290,21 +302,21 @@ export class StoreOutProcessComponent {
             }
             this.orderData.push(data); 
           }
-        
         }
-
-
-
       }
 
       // console.log("Order_status",this.orderData);
     
     }
-  })
+
+    }
+    else{
+      this.errorAlert();
+    }
+
+    })
        
   }
-
-
 
   onConfirmClick(){
 

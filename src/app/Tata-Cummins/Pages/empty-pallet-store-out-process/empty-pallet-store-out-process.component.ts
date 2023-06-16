@@ -101,8 +101,16 @@ export class EmptyPalletStoreOutProcessComponent {
     if(this.EmptyPalletOutForm.valid){
       this.tataservice.getemptypalletout(this.NoOfPalletStacks).subscribe(resp => {
 
-        this.EmptyPalletList = resp
-        this.finalList = this.EmptyPalletList;
+        if(resp != null || resp != undefined)
+        {
+          this.EmptyPalletList = resp
+          this.finalList = this.EmptyPalletList;
+        }
+        else
+        {
+          this.errorAlert();
+        }
+        
       });
     }
     else{
@@ -133,9 +141,10 @@ export class EmptyPalletStoreOutProcessComponent {
      }
    })
  }
-  update() {
+  update() 
+  {
     
-  this.finalList.forEach((element:any) => {
+     this.finalList.forEach((element:any) => {
       var val={
           HU_ID :element.HU_ID
       }

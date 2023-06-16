@@ -22,6 +22,8 @@ export class StockCountProcessComponent {
    Remark:string="";
    message:string="";
    notFoundMessage:string="";
+   msg:string="";
+   Message:any;
 
    StockCountForm!:FormGroup;
    dataSource!:MatTableDataSource<any>;
@@ -86,6 +88,18 @@ export class StockCountProcessComponent {
       })
     }
     
+    errorAlert(msg:any){  
+   
+      Swal.fire({  
+        position: 'top', 
+        icon: 'error',  
+        title: 'Oops...',  
+        text: msg,  
+        showConfirmButton: true,  
+        timer: 5000 
+      })  
+    }
+
     refreshData() {
       // Navigate to the same route with a different query parameter to clear the cache
       this.router.navigate(['stockCountProcess'], { queryParams: { timestamp: new Date().getTime() } });
@@ -94,10 +108,10 @@ export class StockCountProcessComponent {
     newlist:any=[];
     confirmButton(){
       
-      debugger
+      
        this.tataservice.GetPalletDetails1().subscribe(resp=>{
         this.newlist=resp
-        this.PalletdetailsList = this.newlist.filter((x: any) => x.STK_PRD_COD === localStorage.getItem("PartNo") && x.STK_REC_POS ===localStorage.getItem("GrNo"))
+        this.PalletdetailsList = this.newlist.filter((x: any) => x.STK_PRD_COD == this.PartNo && x.STK_REC_POS == this.GrNo)
        })
        
        //window.location.reload();
@@ -109,42 +123,78 @@ export class StockCountProcessComponent {
       // this.PalletdetailsList=resp
       // this.PalletdetailsList = this.PalletdetailsList.filter((x: any) => x.STK_PRD_COD === this.PartNo && x.STK_REC_POS ===this.GrNo)
       
-      if(this.PalletdetailsList != null){
-
-        this.Confirmlist.forEach((Element:any)=>{
-          let val={
-          HU_ID :Element.HU_ID,
-           STK_PRD_COD :Element.STK_PRD_COD,
-           STK_REC_POS :Element.STK_REC_POS,
-           PRD_DESC :Element.PRD_DESC,
-           STK_PRD_QTY :Element.STK_PRD_QTY,
-           LOC_AISL_ID :Element.LOC_AISL_ID
-   
-         }
-          this.secondList.push(val);
-        })
-        console.log(this.secondList);
-        this.tataservice.UpdateInsert(this.secondList).subscribe(resp=>{
+      if(this.PalletdetailsList != null)
+      {
+        if(this.Confirmlist.length > 0)
+        {
+          this.Confirmlist.forEach((Element:any)=>{
+            let val={
+             HU_ID :Element.HU_ID,
+             STK_PRD_COD :Element.STK_PRD_COD,
+             STK_REC_POS :Element.STK_REC_POS,
+             PRD_DESC :Element.PRD_DESC,
+             STK_PRD_QTY :Element.STK_PRD_QTY,
+             LOC_AISL_ID :Element.LOC_AISL_ID
+     
+           }
+            this.secondList.push(val);
+          })
+          console.log(this.secondList);
+          this.tataservice.UpdateInsert(this.secondList).subscribe(resp=>{
+            if(resp == 1)
+            {
+              Swal.fire({
+                title: "Data Has Been Updated & Inserted Sucessfully",
+                icon: 'success',
+                confirmButtonText: 'Ok',
+              }).then((result) => {
+                if (result.value) {
+                location.reload();
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                  Swal.fire(
+                    'You Can not Continue With Your Operation',
+                  )
+                }
+              })
+            }
+            else if(resp == 0)
+            {
+              Swal.fire({
+                title:"Data Has Not Been Updated & Inserted",
+                icon: 'error',
+                confirmButtonText: 'Ok',
+              }).then((result) => {
+                if (result.value) {
+                location.reload();
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                  Swal.fire(
+                    'You Can not Continue With Your Operation',
+                  )
+                }
+              })
+            }
+          })
+        }
+        else{
           Swal.fire({
-          title: resp,
-          icon: 'success',
-          confirmButtonText: 'Ok',
-        }).then((result) => {
-          if (result.value) {
-          location.reload();
-          } else if (result.dismiss === Swal.DismissReason.cancel) {
-            Swal.fire(
-              'You Can not Continue With Your Operation',
-            )
-          }
-        })
-      })
+            title:"Please Select Atleast One Record!!!",
+            icon: 'info',
+            confirmButtonText: 'Ok',
+          }).then((result) => {
+            if (result.value) {
+            location.reload();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+              Swal.fire(
+                'You Can not Continue With Your Operation',
+              )
+            }
+          })
+        }
       }
       else{
         Swal.fire({
           title:"These record already has been updated",
           icon: 'success',
-          showCancelButton: true,
           confirmButtonText: 'Ok',
         }).then((result) => {
           if (result.value) {
@@ -165,17 +215,15 @@ export class StockCountProcessComponent {
     GetPalletDetails()
     {
       
-      localStorage.setItem("PartNo",this.PartNo)
-      
-      localStorage.setItem("GrNo",this.GrNo)
-
       return this.tataservice.GetPalletDetails(this.PartNo,this.GrNo).subscribe(resp=>{
-        this.PalletdetailsList=resp
-        //this.Confirmlist=this.PalletdetailsList
-        // this.PalletID=this.PalletdetailsList[0].HU_ID
-        // this.PartDesc=this.PalletdetailsList[0].PRD_DESC
-        // this.PalletQTY=this.PalletdetailsList[0].STK_PRD_QTY
-        // this.AvailableQTY=this.PalletdetailsList[0].STK_AVA_QTY
+        if(resp != null || resp != undefined){
+          this.PalletdetailsList=resp
+        }
+        else{
+          this.Message="There Is no Data of These Part_No ="+this.PartNo+" And GR_NO ="+this.GrNo
+          this.errorAlert(this.Message);
+        }
+        
       })
     }
 
@@ -234,4 +282,39 @@ export class StockCountProcessComponent {
       console.log(this.Confirmlist);
     }
   
+    SucessAlert(Message:any){
+      Swal.fire({
+        title: Message,
+        icon: 'success',
+        confirmButtonText: 'Ok',
+      }).then((result) => {
+        if (result.value) {
+        location.reload();
+        } 
+      })
+    }
+  
+    FailAlert(Message:any){
+      Swal.fire({
+        title: Message,
+        icon: 'info',
+        confirmButtonText: 'Ok',
+      }).then((result) => {
+        if (result.value) {
+        location.reload();
+        } 
+      })
+  
+    }
+    
+    ErrorAlert(Message:any){
+      Swal.fire({  
+        position: 'top', 
+        icon: 'error',  
+        title: 'Oops...',
+        text:Message,
+        showConfirmButton: true,  
+        timer: 5000 
+      })
+    }
 }

@@ -16,6 +16,7 @@ export class StoreOutRequestCancellationComponent {
   Confirmlist:any=[]
   secondList:any=[];
   ORD_ID:number=0;
+  Message:any;
 
   constructor( private router: TataService){
 
@@ -55,20 +56,25 @@ export class StoreOutRequestCancellationComponent {
     })
     
     this.router.UpdateOrderItem(this.secondList).subscribe(resp =>{
-      Swal.fire({
-        title: resp,
-        icon: 'success',
-        showCancelButton: true,
-        confirmButtonText: 'Ok',
-      }).then((result) => {
-        if (result.value) {
-        location.reload();
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-          Swal.fire(
-            'You Can not Continue With Your Operation',
-          )
+      if(resp != null || resp != undefined)
+      {
+        if(resp == 0){
+          this.Message="Data Has Not Been Updated & Inserted"
+          this.FailAlert(this.Message);
         }
-      })
+        else if(resp == 1){
+          this.Message="Data Has Been Updated & Inserted Sucessfully "
+          this.SucessAlert(this.Message);
+        }
+        else{
+          this.ErrorAlert();
+        }
+       
+      }
+      else{
+       this.ErrorAlert
+      }
+     
     })
   }
 
@@ -88,12 +94,7 @@ export class StoreOutRequestCancellationComponent {
           confirmButtonText: 'Ok',
         }).then((result) => {
           if (result.value) {
-          location.reload();
-          } else if (result.dismiss === Swal.DismissReason.cancel) {
-            Swal.fire(
-              'You Can not Continue With Your Operation',
-            )
-          }
+          } 
         })
       }
       })
@@ -136,5 +137,41 @@ export class StoreOutRequestCancellationComponent {
       }
     })
   }
+
+  SucessAlert(Message:any){
+    Swal.fire({
+      title: Message,
+      icon: 'success',
+      confirmButtonText: 'Ok',
+    }).then((result) => {
+      if (result.value) {
+      location.reload();
+      } 
+    })
+  }
+
+  FailAlert(Message:any){
+    Swal.fire({
+      title: Message,
+      icon: 'info',
+      confirmButtonText: 'Ok',
+    }).then((result) => {
+      if (result.value) {
+      location.reload();
+      } 
+    })
+
+  }
+  
+  ErrorAlert(){
+    Swal.fire({  
+      position: 'top', 
+      icon: 'error',  
+      title: 'Oops...',
+      showConfirmButton: true,  
+      timer: 5000 
+    })
+  }
+ 
 
 }

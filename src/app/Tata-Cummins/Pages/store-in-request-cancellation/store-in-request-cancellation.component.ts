@@ -15,6 +15,7 @@ export class StoreInRequestCancellationComponent {
   secondList:any=[];
   ORD_ID:number=0;
   term ='';
+  Message:any;
 
   constructor( private router: TataService){
 
@@ -54,27 +55,24 @@ export class StoreInRequestCancellationComponent {
     })
     console.log(this.secondList);
     this.router.UpdateHU_ID(this.secondList).subscribe(resp =>{
-      // Swal.fire({
-      //   title: resp,
-      //   icon: 'success',
-      //   showCancelButton: true,
-      //   confirmButtonText: 'Ok',
-      // }).then((result) => {
-      //   if (result.value) {
-      //   location.reload();
-      //   } else if (result.dismiss === Swal.DismissReason.cancel) {
-      //     Swal.fire(
-      //       'You Can not Continue With Your Operation',
-      //     )
-      //   }
-      // })
-
-      if(resp == 'Success'){
-
-        this.successAlert();
+     
+      if(resp != null || resp != undefined)
+      {
+        if(resp == 0){
+          this.Message="Data Has Not Been Updated & Inserted"
+          this.FailAlert(this.Message);
+        }
+        else if(resp == 1){
+          this.Message="Data Has Been Updated & Inserted Sucessfully "
+          this.SucessAlert(this.Message);
+        }
+        else{
+          this.ErrorAlert();
+        }
+       
       }
       else{
-        this.errorAlert();
+       this.ErrorAlert
       }
     })
   }
@@ -83,24 +81,13 @@ export class StoreInRequestCancellationComponent {
   GetStoreOutRequest(){
     
     return this.router.GetStoreInRequest().subscribe(resp=>{
-      if(resp != null && resp == undefined)
+      if(resp != null && resp != undefined)
       {
         this.StoreInRequestCancellationlist=resp
       }
       else
       {
-        Swal.fire({
-          title: resp,
-          icon:'error',
-          confirmButtonText: 'Ok',
-        }).then((result) => {
-          if (result.value) {
-          } else if (result.dismiss === Swal.DismissReason.cancel) {
-            Swal.fire(
-              'You Can not Continue With Your Operation',
-            )
-          }
-        })
+        this.ErrorAlert();
       }
       })
   }
@@ -176,6 +163,41 @@ export class StoreInRequestCancellationComponent {
           'You Can Continue With Your Operation',
         )
       }
+    })
+  }
+
+  SucessAlert(Message:any){
+    Swal.fire({
+      title: Message,
+      icon: 'success',
+      confirmButtonText: 'Ok',
+    }).then((result) => {
+      if (result.value) {
+      location.reload();
+      } 
+    })
+  }
+
+  FailAlert(Message:any){
+    Swal.fire({
+      title: Message,
+      icon: 'info',
+      confirmButtonText: 'Ok',
+    }).then((result) => {
+      if (result.value) {
+      location.reload();
+      } 
+    })
+
+  }
+  
+  ErrorAlert(){
+    Swal.fire({  
+      position: 'top', 
+      icon: 'error',  
+      title: 'Oops...',
+      showConfirmButton: true,  
+      timer: 5000 
     })
   }
 

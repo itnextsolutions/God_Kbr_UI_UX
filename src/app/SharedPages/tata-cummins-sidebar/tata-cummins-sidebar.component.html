@@ -11,7 +11,7 @@
 
     <div  *ngFor="let data of MenuList">
         
-        <li class="nav-item" *ngIf="data.OP_ISPARENT == 1">
+        <li class="nav-item" *ngIf="data.OP_PAR5 == 1">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-angle-up"></i>
@@ -20,8 +20,8 @@
         </li>
       
         <div *ngFor="let childData of child" id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div *ngIf="data.OP_OPTION == childData.OP_PARENTID" class="bg-white py-2 collapse-inner rounded">
-                <a  class="collapse-item" href="{{childData.OP_URL}}">{{childData.OP_DESC}}</a>
+            <div *ngIf="data.OP_OPTION == childData.OP_PAR6" class="bg-white py-2 collapse-inner rounded">
+                <a  class="collapse-item" href="{{childData.OP_PAR4}}">{{childData.OP_DESC}}</a>
             </div>
         </div>
     </div>
