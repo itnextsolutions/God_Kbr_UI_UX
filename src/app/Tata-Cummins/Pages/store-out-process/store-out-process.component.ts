@@ -43,12 +43,12 @@ export class StoreOutProcessComponent {
 
    ngOnInit(){
        this.getStoreOutOrderData();
-      //  this.getStoreOutPalletData();
+      
    }
 
   
    getStoreOutOrderData(){
-    ;
+    
       this.tataservice.getStoreOutData().subscribe(resp=>{
         this.storeOutData = resp;
         this.order_details = this.storeOutData;
@@ -89,7 +89,7 @@ export class StoreOutProcessComponent {
 
   onSelectOrderDetail_Multi(val : any){
 
-    ;
+    
     this.pallet=[];
     this.orderData =[]; 
     this.total_count =0

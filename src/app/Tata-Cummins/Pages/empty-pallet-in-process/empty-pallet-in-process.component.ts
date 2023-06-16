@@ -77,7 +77,7 @@ export class EmptyPalletInProcessComponent {
         }
         
       })
-      // this.Reset();
+      
     }
     else{
       this.EmptyPalletForm.markAllAsTouched();

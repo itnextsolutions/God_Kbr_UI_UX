@@ -72,11 +72,7 @@ export class EmptyPalletStoreOutProcessComponent {
 }
 
   OnSelect(val: any) {
-    debugger
-    // var data = {
-    //   HU_ID: val.HU_ID
-    // }
-
+   
     if (this.finalList.includes(val)) {
       this.finalList = this.finalList.filter((selected: any) => selected !== val);
     }
@@ -115,7 +111,7 @@ export class EmptyPalletStoreOutProcessComponent {
   }
 
   Reset() {
-debugger
+
    this.EmptyPalletOutForm.reset();
    this.EmptyPalletList=[];
   }
@@ -138,7 +134,7 @@ debugger
    })
  }
   update() {
-    debugger
+    
   this.finalList.forEach((element:any) => {
       var val={
           HU_ID :element.HU_ID
