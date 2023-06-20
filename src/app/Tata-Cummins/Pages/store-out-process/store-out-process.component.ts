@@ -35,6 +35,8 @@ export class StoreOutProcessComponent {
   order_total_qty =0;
   filter_order: any=[];
   order_quantity: number=0;
+  message :any;
+  part_data :any=[]
   // b :number= 0;
 
 
@@ -106,7 +108,7 @@ export class StoreOutProcessComponent {
     // console.log("Order_Selected",this.checkList);
 
     this.product_code = Array.from(new Set(this.checkList.map((x:any) => x.ORD_PRD_COD).sort()));    
-    // console.log("Material",this.product_code);
+     console.log("Material",this.product_code);
   }
 
 
@@ -171,7 +173,7 @@ export class StoreOutProcessComponent {
 
     }
     else{
-      this.errorAlert();
+      // this.errorAlert();
     }
     
     })
@@ -182,14 +184,14 @@ export class StoreOutProcessComponent {
     
     this.pallet=[];
     this.orderData =[];
-    
+    this.part_data =[];
     this.tataservice.getStoreOutPalletDetailsMultiCheck(this.product_code).subscribe((resp:any) =>{
-    if(resp != null || resp != undefined)
+    if(resp != null && resp != undefined && resp.length >0)
     {
 
         this.palletOutDetails = resp;
         this.palletOut =this.palletOutDetails
-    // console.log("Pallet",this.palletOutDetails);
+     console.log("Pallet",this.palletOutDetails);
     
  
     for(let i =0; i < this.product_code.length; i++){
@@ -204,7 +206,7 @@ export class StoreOutProcessComponent {
           }
         }
 
-      // console.log("Total_qty_out",this.total_count);
+       console.log("Total_qty_out",this.total_count);
 
     let  a :any = this.total_count;
     let b :any  =0;
@@ -212,106 +214,123 @@ export class StoreOutProcessComponent {
     let partial_value = 0;
     let  PARTIAL;
     let cal_qty =0;
-    this.filter_pallet= this.palletOut.filter((x:any)=>x.STK_PRD_COD == this.product_code[i])
     
-    for(let j=0; j < this.filter_pallet.length; j++){
+    this.filter_pallet= this.palletOut.filter((x:any)=>x.STK_PRD_COD == this.product_code[i])
+    if(this.filter_pallet.length > 0){
+      for(let j=0; j < this.filter_pallet.length; j++){
 
       
-      let pallet_qty = this.filter_pallet[j].STK_PRD_QTY  - this.filter_pallet[j].STK_RSV_QTY;
-      if(pallet_qty<= a){
-
-        b = b + pallet_qty;
-        a = a- pallet_qty;
-
-        this.filter_pallet[j].cal_qty = pallet_qty;
-        // this.palletOutDetails[i].STK_PRD_QTY = remain_qty;
-        this.filter_pallet[j].PARTIAL = partial_value;
-        this.pallet.push(this.filter_pallet[j]);
-      
-       }
-      else if(pallet_qty > a)
-      {
-        b = b + a;
-        // c = remain_qty - a;
-        // this.palletOutDetails[i].STK_PRD_QTY = a;
-        this.filter_pallet[j].cal_qty = a;
-        partial_value =1;
-        this.filter_pallet[j].PARTIAL = partial_value;
-        
-        this.pallet.push(this.filter_pallet[j]);      
-      }
-
-      // console.log(this.pallet);
+        let pallet_qty = this.filter_pallet[j].STK_PRD_QTY  - this.filter_pallet[j].STK_RSV_QTY;
+        if(pallet_qty<= a){
   
-       if(b == this.total_count){        
-        break;
-        }       
-      
-      }
+          b = b + pallet_qty;
+          a = a- pallet_qty;
+  
+          this.filter_pallet[j].cal_qty = pallet_qty;
+          // this.palletOutDetails[i].STK_PRD_QTY = remain_qty;
+          this.filter_pallet[j].PARTIAL = partial_value;
+          this.pallet.push(this.filter_pallet[j]);
         
-      let  a_order :number = b;
-      let b_order = 0;
-      let cal_ord = 0;
-
-       this.filter_order= this.checkList.filter((x:any)=>x.ORD_PRD_COD == this.product_code[i]);
-      // console.log("Filter_order",this.filter_order);
-
-      for(let l =0; l < this.filter_order.length; l++){
-
-        this.order_quantity = this.filter_order[l].ORD_REQ_QTY - this.filter_order[l].ORD_RSV_QTY;
-        if(this.order_quantity <= a_order){
-
-          b_order = b_order + this.order_quantity;
-          a_order = a_order - this.order_quantity;
+         }
+        else if(pallet_qty > a)
+        {
+          b = b + a;
+          // c = remain_qty - a;
+          // this.palletOutDetails[i].STK_PRD_QTY = a;
+          this.filter_pallet[j].cal_qty = a;
+          partial_value =1;
+          this.filter_pallet[j].PARTIAL = partial_value;
           
-          var data ={
-  
-                     ORD_ID : this.filter_order[l].ORD_ID,
-                     ORD_PRD_COD:this.filter_order[l].ORD_PRD_COD,
-                     ORD_REQ_QTY : this.filter_order[l].ORD_REQ_QTY - this.filter_order[l].ORD_RSV_QTY,
-                     RSV_QTY: this.order_quantity,
-                     ORD_PARTIAL : 0
-                   }
-
-                   this.orderData.push(data); 
+          this.pallet.push(this.filter_pallet[j]);      
         }
-        else{
-
-          if( b_order == b ){
-            
-            let final: number =this.filter_order[l].ORD_RSV_QTY;
-            var data ={
   
-              ORD_ID : this.filter_order[l].ORD_ID,
-              ORD_PRD_COD:this.filter_order[l].ORD_PRD_COD,
-              ORD_REQ_QTY : this.filter_order[l].ORD_REQ_QTY - this.filter_order[l].ORD_RSV_QTY,
-              RSV_QTY: final,
-              ORD_PARTIAL : 2
-            }
-            this.orderData.push(data);
+         console.log(this.pallet);
+    
+         if(b == this.total_count){        
+          break;
+          }       
+        
+        }
+          
+        let  a_order :number = b;
+        let b_order = 0;
+        let cal_ord = 0;
+  
+         this.filter_order= this.checkList.filter((x:any)=>x.ORD_PRD_COD == this.product_code[i]);
+         console.log("Filter_order",this.filter_order);
+  
+        for(let l =0; l < this.filter_order.length; l++){
+  
+          this.order_quantity = this.filter_order[l].ORD_REQ_QTY - this.filter_order[l].ORD_RSV_QTY;
+          if(this.order_quantity <= a_order){
+  
+            b_order = b_order + this.order_quantity;
+            a_order = a_order - this.order_quantity;
+            
+            var data ={
+    
+                       ORD_ID : this.filter_order[l].ORD_ID,
+                       ORD_PRD_COD:this.filter_order[l].ORD_PRD_COD,
+                       ORD_REQ_QTY : this.filter_order[l].ORD_REQ_QTY - this.filter_order[l].ORD_RSV_QTY,
+                       RSV_QTY: this.order_quantity,
+                       ORD_PARTIAL : 0
+                     }
+  
+                     this.orderData.push(data); 
           }
           else{
-            b_order = b_order + a_order;
-            var data ={
   
-              ORD_ID : this.filter_order[l].ORD_ID,
-              ORD_PRD_COD:this.filter_order[l].ORD_PRD_COD,
-              ORD_REQ_QTY : this.filter_order[l].ORD_REQ_QTY - this.filter_order[l].ORD_RSV_QTY,
-              RSV_QTY: a_order,
-              ORD_PARTIAL : 1
+            if( b_order == b ){
+              
+              let final: number =this.filter_order[l].ORD_RSV_QTY;
+              var data ={
+    
+                ORD_ID : this.filter_order[l].ORD_ID,
+                ORD_PRD_COD:this.filter_order[l].ORD_PRD_COD,
+                ORD_REQ_QTY : this.filter_order[l].ORD_REQ_QTY - this.filter_order[l].ORD_RSV_QTY,
+                RSV_QTY: final,
+                ORD_PARTIAL : 2
+              }
+              this.orderData.push(data);
             }
-            this.orderData.push(data); 
+            else{
+              b_order = b_order + a_order;
+              var data ={
+    
+                ORD_ID : this.filter_order[l].ORD_ID,
+                ORD_PRD_COD:this.filter_order[l].ORD_PRD_COD,
+                ORD_REQ_QTY : this.filter_order[l].ORD_REQ_QTY - this.filter_order[l].ORD_RSV_QTY,
+                RSV_QTY: a_order,
+                ORD_PARTIAL : 1
+              }
+              this.orderData.push(data); 
+            }
           }
         }
+  
+         console.log("Order_status",this.orderData);
+      
+      }
+      else{
+        
+        this.part_data.push(this.product_code[i]);
+                
       }
 
-      // console.log("Order_status",this.orderData);
-    
+
     }
+    
+    if(this.part_data.length > 0){
+
+      this.message = "Quantity Not Available for Part  : " + this.part_data
+      this.errorAlert(this.message);
+    }
+    
 
     }
     else{
-      this.errorAlert();
+      this.message ="Quantity Not Available for Part  : " + this.product_code; 
+      this.errorAlert(this.message);
     }
 
     })
@@ -343,7 +362,8 @@ export class StoreOutProcessComponent {
         //  window.location.reload();
        }
        else{
-        this.errorAlert();
+        this.message = 'Something went wrong!';
+         this.errorAlert(this.message);
        }
        
     })
@@ -414,15 +434,15 @@ resetAlert(){
     
   }
 
-  errorAlert(){  
+  errorAlert(msg :any){  
    
     Swal.fire({  
       position: 'top', 
       icon: 'error',  
       title: 'Oops...',  
-      text: 'Something went wrong!',  
+      text: msg,  
       showConfirmButton: true,  
-      timer: 3000 
+      timer: 5000 
     })  
   }
 }

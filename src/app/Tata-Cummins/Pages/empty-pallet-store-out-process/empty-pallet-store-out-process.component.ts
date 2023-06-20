@@ -24,7 +24,7 @@ export class EmptyPalletStoreOutProcessComponent {
 
   public pageName: string = "Empty Pallet Out Process";
 
-
+msg:any;
   term='';
   pageSize: number = 1;
   itemsPerPage: number = 10;
@@ -101,6 +101,7 @@ export class EmptyPalletStoreOutProcessComponent {
     if(this.EmptyPalletOutForm.valid){
       this.tataservice.getemptypalletout(this.NoOfPalletStacks).subscribe(resp => {
 
+               
         if(resp != null || resp != undefined)
         {
           this.EmptyPalletList = resp
@@ -108,7 +109,8 @@ export class EmptyPalletStoreOutProcessComponent {
         }
         else
         {
-          this.errorAlert();
+          this.msg = 'No Data Found';
+          this.errorAlert(this.msg);
         }
         
       });
@@ -165,7 +167,8 @@ export class EmptyPalletStoreOutProcessComponent {
       }
 
       else {
-        this.errorAlert();
+        this.msg = 'Something went wrong!'
+        this.errorAlert(this.msg);
       }
     });
     this.EmptyPalletList=[];
@@ -182,12 +185,12 @@ export class EmptyPalletStoreOutProcessComponent {
     })
   }
 
-  errorAlert() {
+  errorAlert(msg : any) {
     Swal.fire({
       position: 'top',
       icon: 'error',
       title: 'Oops...',
-      text: 'Something went wrong!',
+      text: msg,
       showConfirmButton: true,
       timer:3000
     })

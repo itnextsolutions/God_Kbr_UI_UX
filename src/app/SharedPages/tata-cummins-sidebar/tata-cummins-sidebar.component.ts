@@ -24,8 +24,8 @@ constructor(private router:TataService){}
   }
 
   trigger(val:any){
-   
-    this.child=this.MenuList.filter((x: any) => x.OP_PARENTID == val)
+   debugger
+    this.child=this.MenuList.filter((x: any) => x.OP_PAR6 == val)
 
   }
 
