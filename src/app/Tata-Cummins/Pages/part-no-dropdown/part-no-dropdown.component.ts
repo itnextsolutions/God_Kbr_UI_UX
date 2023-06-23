@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class PartNoDropdownComponent {
 
-     displayedColumns: string[]=['STK_PRD_COD','STK_REC_POS','PRD_DESC'];
+     displayedColumns: string[]=['STK_PRD_COD','STK_REC_NR','PRD_DESC'];
      
      selectedRowData: any;
      ishidden=true;
@@ -39,6 +39,7 @@ export class PartNoDropdownComponent {
     }
     
     GetStockCount(){
+      debugger
       return this.tataservice.GetStockCountPartNo().subscribe(resp =>{
 
         if(resp == null && resp == undefined)

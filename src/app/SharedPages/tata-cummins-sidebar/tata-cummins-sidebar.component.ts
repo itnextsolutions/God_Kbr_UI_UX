@@ -10,23 +10,23 @@ export class TataCumminsSidebarComponent {
 
   MenuList:any=[];
   child :any=[];
+  issidebaropen=true;
 
 constructor(private router:TataService){}
 
   ngOnInit(){
-
-    
-
     var userid=localStorage.getItem("User_Id")
     return this.router.GetMenuList(userid).subscribe(resp=>{
       this.MenuList=resp
+      const listString = JSON.stringify(this.MenuList);
+      localStorage.setItem("menu",listString)
   })
   }
 
   trigger(val:any){
    debugger
     this.child=this.MenuList.filter((x: any) => x.OP_PAR6 == val)
-
   }
 
+  
 }

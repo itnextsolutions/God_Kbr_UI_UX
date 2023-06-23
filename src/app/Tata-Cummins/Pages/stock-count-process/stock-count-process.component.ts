@@ -108,10 +108,9 @@ export class StockCountProcessComponent {
     newlist:any=[];
     confirmButton(){
       
-      
        this.tataservice.GetPalletDetails1().subscribe(resp=>{
         this.newlist=resp
-        this.PalletdetailsList = this.newlist.filter((x: any) => x.STK_PRD_COD == this.PartNo && x.STK_REC_POS == this.GrNo)
+        this.PalletdetailsList = this.newlist.filter((x: any) => x.STK_PRD_COD == this.PartNo && x.STK_REC_NR == this.GrNo)
        })
        
        //window.location.reload();
@@ -121,7 +120,7 @@ export class StockCountProcessComponent {
 
       //  this.tataservice.GetPalletDetails(localStorage.getItem("PartNo"),localStorage.getItem("GrNo")).subscribe(resp=>{
       // this.PalletdetailsList=resp
-      // this.PalletdetailsList = this.PalletdetailsList.filter((x: any) => x.STK_PRD_COD === this.PartNo && x.STK_REC_POS ===this.GrNo)
+      // this.PalletdetailsList = this.PalletdetailsList.filter((x: any) => x.STK_PRD_COD === this.PartNo && x.STK_REC_NR ===this.GrNo)
       
       if(this.PalletdetailsList != null)
       {
@@ -131,7 +130,7 @@ export class StockCountProcessComponent {
             let val={
              HU_ID :Element.HU_ID,
              STK_PRD_COD :Element.STK_PRD_COD,
-             STK_REC_POS :Element.STK_REC_POS,
+             STK_REC_NR :Element.STK_REC_NR,
              PRD_DESC :Element.PRD_DESC,
              STK_PRD_QTY :Element.STK_PRD_QTY,
              LOC_AISL_ID :Element.LOC_AISL_ID
@@ -266,7 +265,7 @@ export class StockCountProcessComponent {
     Selectedrow(out:any){
 
       this.PartNo=out.STK_PRD_COD
-      this.GrNo=out.STK_REC_POS
+      this.GrNo=out.STK_REC_NR
     }
 
     isCheked(data:any)

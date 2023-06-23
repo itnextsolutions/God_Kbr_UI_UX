@@ -55,11 +55,11 @@
                                                 <th>Select</th>
                                                 <th>Dispatch Order No</th>
                                                 <th>Pallet Id</th>
-                                                <th>Material Code</th>
+                                                <th>Part NO</th>
                                                 <th>Batch No</th>
                                                 <th>Pallet QTY</th>
-                                                <th>DOM</th>
-                                                <th>DOE</th>
+                                                <!-- <th>DOM</th>
+                                                <th>DOE</th> -->
                                                 <th>Status</th>
                                                 <th>Material Type</th>
                                             </tr>
@@ -69,17 +69,16 @@
                                             <tr>
                                                 <td>
                                                     <input type="checkbox" (change)="isCheked(data)"  >
-                                                
                                                 </td>
-                                                <td>{{data.ORD_ID}}</td>
+                                                <td>{{data.STK_ORD_ITM}}</td>
                                                 <td>{{data.HU_ID}}</td>
                                                 <td>{{data.HU_PRD_COD}}</td>
-                                                <td>{{data.ORD_ID}}</td>
-                                                <td>{{data.ORD_ID}}</td>
-                                                <td>{{data.ORD_ID}}</td>
-                                                <td>{{data.ORD_ID}}</td>
+                                                <td>{{data.STK_REC_NR}}</td>
+                                                <td>{{data.STK_PRD_QTY}}</td>
+                                                <!-- <td>{{data.ORD_ID}}</td>
+                                                <td>{{data.ORD_ID}}</td> -->
                                                 <td>{{data.HU_STAT}}</td>
-                                                <td>{{data.ORD_ID}}</td>
+                                                <td>FG</td>
                                                 
                                             </tr>
                                        </tbody>

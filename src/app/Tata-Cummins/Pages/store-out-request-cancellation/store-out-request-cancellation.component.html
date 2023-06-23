@@ -56,8 +56,9 @@
                                                 <th>Request Id</th>
                                                 <th>Dispatch Order No</th>
                                                 <th>Item Code</th>
-                                                <th>Batch No</th>
-                                                <th>Pallet QTY</th>
+                                                <th>GR No</th>
+                                                <th>Picklist No </th>
+                                                <th>Order QTY</th>
                                                 <th>Status</th>
                                                 <th>Material Type</th>
                                             </tr>
@@ -69,13 +70,14 @@
                                                     <input type="checkbox" (change)="isCheked(data)"  >
                                                 
                                                 </td>
+                                                <td>{{data.ORD_REQ_RSNUM_POS}}</td>
                                                 <td>{{data.ORD_ID}}</td>
-                                                <td>{{data.ORD_HU_ID}}</td>
                                                 <td>{{data.ORD_PRD_COD}}</td>
-                                                <td>{{data.ORD_ID}}</td>
-                                                <td>{{data.ORD_ID}}</td>
-                                                <td>{{data.ORD_ID}}</td>
-                                                <td>{{data.ORD_ID}}</td>
+                                                <td>{{data.ORD_REC_NR}}</td>
+                                                <td>{{data.ORD_REC_POS}}</td>
+                                                <td>{{data.ORD_REQ_QTY}}</td>
+                                                <td>{{data.ORD_ITM_STAT}}</td>
+                                                <td>FG</td>
                                                 
                                             </tr>
                                        </tbody>

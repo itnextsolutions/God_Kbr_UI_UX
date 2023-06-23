@@ -48,18 +48,19 @@
                       <div class="row form-group" *ngIf="edited1">
 
                         <div class="col-sm-3">
+                          <span class="error" *ngIf="message.length > 0 && StockCountForm.controls['PartNo'].invalid">{{ message }}</span>
                           <label  class="font-medium text-900"> Select Part No: </label>
                         </div> 
                           <div class="input-group col-sm-6">
-                          <input type="text" class="form-control" formControlName="PartNo" [(ngModel)]="PartNo" (click)="GetStockCount()" (input)="applyfilter($event)"/>
+                               <input type="text" class="form-control" formControlName="PartNo" [(ngModel)]="PartNo" (click)="GetStockCount()" (input)="applyfilter($event)"/>
                          
-                          <span class="error"
-                          *ngIf="StockCountForm.controls['PartNo'].touched && StockCountForm.controls['PartNo'].invalid">
-                          PartNo Is required</span> 
-                          <div>
-                          <app-part-no-dropdown (selectedRow)="Selectedrow($event)"></app-part-no-dropdown>
-                         </div>
-                        </div>
+                               <span class="error"
+                                         *ngIf="StockCountForm.controls['PartNo'].touched && StockCountForm.controls['PartNo'].invalid">
+                                PartNo Is required</span> 
+                               <div>
+                                    <app-part-no-dropdown (selectedRow)="Selectedrow($event)"></app-part-no-dropdown>
+                               </div>
+                          </div>
 
                         <!-- </div> -->
                       </div>
@@ -234,7 +235,7 @@
                                             </td>
                                             <td>{{data.HU_ID}}</td>
                                             <td>{{data.STK_PRD_COD}}</td>
-                                            <td>{{data.STK_REC_POS}}</td>
+                                            <td>{{data.STK_REC_NR}}</td>
                                             <td>{{data.PRD_DESC}}</td>
                                             <td>{{data.STK_PRD_QTY}}</td>
                                             <td>{{data.LOC_AISL_ID}}</td>
