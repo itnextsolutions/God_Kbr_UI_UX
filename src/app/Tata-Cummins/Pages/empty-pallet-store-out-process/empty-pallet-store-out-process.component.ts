@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormsModule, FormGroup, Validators, FormControl } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { TataService } from 'src/app/services/TataCumminsapi.service';
 import Swal from 'sweetalert2';
 //import.swal
@@ -10,6 +12,11 @@ import Swal from 'sweetalert2';
 })
 
 export class EmptyPalletStoreOutProcessComponent {
+
+
+  @ViewChild('paginator') paginator! : MatPaginator; 
+  @ViewChild(MatSort) matSort! : MatSort;
+
 
   NoOfPalletStacks: number | undefined;
   EmptyPalletOutForm!: FormGroup;

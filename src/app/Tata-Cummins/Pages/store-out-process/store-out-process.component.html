@@ -26,7 +26,17 @@
                 <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800"> Store Out Process </h1>
                 </div> -->
+                <div class="d-sm-flex align-items-center mb-4"  style="margin-left: 20px">
+                    <input
+                        #fileUploadSimple
+                        [accept]="'.csv'"
+                        type="file"
+                        class="file-input"
+                        (change)="ReadExcel($event)"
+                    />
 
+                    <button   [disabled]="ExcelData.length == 0" type="submit"   class="btn btn-primary " (click)="uploadFile()">Upload File</button>
+                </div>
 
                 <!--Details grid start-->
                 <div class="container-fluid">
@@ -42,24 +52,25 @@
     
                                 <div class="card-body">
                                     <label>Show:
-                                        <select>
-                                            <option></option>
+                                        <select [(ngModel)]="orderItemsPerPage">
+                                            <option *ngFor="let option of orderPageSizeOptions" [value]="option">{{option}}</option>
                                         </select>
                                         entries
                                     </label>
           
-                                        <input type="text" [(ngModel)]="term" placeholder="Search" style="margin-left: 950px">
+                                        <input type="text" [(ngModel)]="term" placeholder="Search" style="margin-left: 750px">
                                     <div class="table-responsive">
                                         
                                         <table class="table table-bordered" id="" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr style="background-color:  #eeebf6; color: #361374;">
-                                                    <th>Select</th>
-                                                    <th>Ord_Id</th>
-                                                    <th>PickList No</th>                                                    
-                                                    <th>Part No</th>
+                                                    <th style="width: 3%;"></th>
+                                                    <th style="width: 3%;">Select</th>
+                                                    <th style="width: 10%;">Ord_Id</th>
+                                                    <th style="width: 20%;">PickList No</th>                                                    
+                                                    <th style="width: 15%;">Part No</th>
                                                     
-                                                    <th>QTY</th>
+                                                    <th style="width: 13%;">QTY</th>
                                                     <th>Date</th>                                                    
                                                     <th>Status</th>
             
@@ -67,7 +78,8 @@
                                             </thead>
     
                                             <tbody>
-                                                <tr *ngFor="let data of order_details | filter: term">
+                                                <tr *ngFor="let data of order_details | filter: term  | paginate:{itemsPerPage:orderItemsPerPage, currentPage: orderPageSize }; let i=index">
+                                                    <td>{{i+(orderItemsPerPage*orderPageSize)-(orderItemsPerPage-1)}}</td>
                                                     <td> <input type="checkbox" [checked]="data.ORD_ID == order_id"    (change)="onSelectOrderDetail_Multi(data)"></td>
                                                     <!-- <td> <input type="checkbox"  (change)="onSelectOrderDetail_1(data)"></td> -->
                                                     <td>{{data.ORD_ID}}</td>
@@ -80,11 +92,12 @@
                                                 </tr>
                                            </tbody>
                                         </table>
+                                        <pagination-controls (pageChange)="orderPageSize  =  $event"></pagination-controls>
                                         <div class="form-group row">
                                             <div class="col-lg-1 "></div>
                                             <div class="col-lg-10   submit-button">
                                                 <button  [disabled]="checkList == 0" type="submit" class="btn btn-primary "
-                                                    style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="onAddClick_2()">
+                                                    style=" padding: 7px 40px 7px 40px;margin-left: 380px;" (click)="onAddClick_4()">
                                                     Add
                                                 </button>
                                             </div>
@@ -110,41 +123,49 @@
                             </div>
 
                             <div class="card-body">
+
+                                
                                 <label>Show:
-                                    <select>
-                                        <option></option>
+                                    <select [(ngModel)]="itemsPerPage">
+                                        <option *ngFor="let option of pageSizeOptions" [value]="option">{{option}}</option>
                                     </select>
                                     entries
                                 </label>
       
-                                    <input type="text" [(ngModel)]="pallet_search" placeholder="Search" style="margin-left: 950px">
+                                    <input type="text" [(ngModel)]="term" placeholder="Search" style="margin-left: 750px">
+                                 
+
                                 <div class="table-responsive">
                                     
                                     <table class="table table-bordered" id="" width="100%" cellspacing="0">
                                         <thead>
                                             <tr style="background-color:  #eeebf6; color: #361374;">
                                                 <!-- <th>Select</th> -->
+                                                <th style="width: 3%;"></th>
                                                 <th>Pallet Id</th>
+                                                <th>Order Id</th>
                                                 <th>PickList No</th>
-                                                <th>Part No</th>
+                                                <th style="width: 10%;">Part No</th>
                                                 <th>Part Description</th>
-                                                <th>Quantity</th>
-                                                <th>Reserved Qty</th>
-                                                <th>Aisle</th>
-                                                <th>X</th>
-                                                <th>Y</th>
-                                                <th>Z</th>
-                                                <th>P</th>
+                                                <th style="width: 8%;">Quantity</th>
+                                                <th style="width: 8%;">Reserved Qty</th>
+                                                <th style="width: 3%;">Aisle</th>
+                                                <th style="width: 3%;">X</th>
+                                                <th style="width: 3%;">Y</th>
+                                                <th style="width: 3%;">Z</th>
+                                                <th style="width: 3%;">P</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-                                            <tr *ngFor = "let item of pallet | filter: pallet_search">
+                                            <tr *ngFor = "let item of pallet | filter: pallet_search | paginate:{itemsPerPage:itemsPerPage, currentPage: pageSize }; let i=index">
                                                 <!-- <td> <input type="checkbox"></td> -->
+                                                <td>{{i+(itemsPerPage*pageSize)-(itemsPerPage-1)}}</td>
                                                 <td>{{item.HU_ID}}</td>
-                                                <td>{{item.STK_REC_NR}}</td>
+                                                <td>{{item.id_ord}}</td>
+                                                <td>{{item.ord_pos}}</td>
                                                 <td>{{item.STK_PRD_COD}}</td>
-                                                <td></td>
+                                                <td>{{item.PRD_DESC}}</td>
                                                 <td>{{item.STK_PRD_QTY}}</td>
                                                 <td>{{item.cal_qty}}</td>
                                                 <td>{{item.LOC_AISL_ID}}</td>
@@ -155,9 +176,10 @@
                                             </tr>
                                        </tbody>
                                     </table>
+                                    <pagination-controls (pageChange)="pageSize  =  $event"></pagination-controls>
                                     <div class="form-group row">
                                         <div class="col-lg-1 "></div>
-                                        <div class="col-lg-10   submit-button">
+                                        <div class="col-lg-10   submit-button" style="margin-left:410PX;">
                                             <button   [disabled]="pallet.length == 0" type="submit" class="btn btn-primary "
                                                 style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;" (click)="confirmationAlert()">
                                                 Confirm

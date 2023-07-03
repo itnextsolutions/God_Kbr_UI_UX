@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
 export class TataService {
   constructor(private http: HttpClient) { }
 
- apiEndpoint = 'https://localhost:44363/api/';
+   apiEndpoint = 'https://localhost:44363/api/';
 
  //apiEndpoint = 'http://localhost:806/api/';
 
@@ -78,13 +78,20 @@ UpdateOrderItem(val:any){
   return this.http.post(this.apiEndpoint +'StoreRequestCancellation/UpdateOrderItem', val)
 }
 
-Insert_StockMovt_Update_StockItm(val_1:any,val_2: any){
+// Insert_StockMovt_Update_StockItm(val_1:any,val_2: any){
   
-  var data={
-    storeOutData: val_1,
-    orderData: val_2
-  }
-    return this.http.post(this.apiEndpoint + 'storeOut/Insert_StockMovt_Update_StockItm',data);
+//   var data={
+//     storeOutData: val_1,
+//     orderData: val_2
+//   }
+//     return this.http.post(this.apiEndpoint + 'storeOut/Insert_StockMovt_Update_StockItm',data);
+
+//  }
+
+Insert_StockMovt_Update_StockItm(val:any){
+  
+  
+    return this.http.post(this.apiEndpoint + 'storeOut/Insert_StockMovt_Update_StockItm',val);
 
  }
 
@@ -103,4 +110,11 @@ Insert_StockMovt_Update_StockItm(val_1:any,val_2: any){
 
  }
  
+Insert_OrderItm(val : any){
+
+  return this.http.post(this.apiEndpoint + 'storeOut/InsertOrderData',val)
+}
+
+
+
 }

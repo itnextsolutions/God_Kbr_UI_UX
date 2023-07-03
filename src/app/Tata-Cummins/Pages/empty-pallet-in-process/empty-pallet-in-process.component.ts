@@ -60,11 +60,11 @@ export class EmptyPalletInProcessComponent {
           
         }
         else if(resp == 2){
-          this.msg ="Pallet Is Already Exist"
+          this.msg ="Pallet ID Already Exist"
           this.errorAlert(this.msg);
         }
         else if(resp == 3){
-          this.msg ="Pallet Is Not In DataBase"
+          this.msg ="Pallet ID Invalid"
           this.errorAlert(this.msg);
         }
        else if(resp == 4){
