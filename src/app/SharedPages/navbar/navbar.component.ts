@@ -8,13 +8,20 @@ import { MyService } from 'src/app/services/api.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+
+  username:any;
+
   constructor(private auth: MyService, private router: Router){
 
   }
 
+  ngOnInit(){
+    this.username=localStorage.getItem("Username")
+  }
+
   logout(){
     
-     localStorage.clear();
+    localStorage.clear();
     this.auth.signOut();
     // this.router.navigate(['/login']);
   }

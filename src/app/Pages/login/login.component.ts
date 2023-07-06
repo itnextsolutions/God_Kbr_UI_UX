@@ -27,7 +27,9 @@ export class LoginComponent {
               private toast: NgToastService) { }
 
   ngOnInit(): void {
-   
+    
+    
+    
     this.loginForm = this.fb.group({
 
       username : ['',Validators.required],
@@ -39,8 +41,6 @@ export class LoginComponent {
 
   
   login(){
-      ;
-
       if(this.loginForm.valid){
             
             var data ={
@@ -50,11 +50,9 @@ export class LoginComponent {
             }
 
             this.tataservice.login(data).subscribe( (resp:any) =>{
-              // ;
-              console.log(resp);
-
+              
               if(resp.message == 'Success'){
-                console.log("User Logged in"+resp.message);
+                //console.log("User Logged in"+resp.message);
                 this.UserRole=resp.role;
                 localStorage.setItem("Username",this.username)
                 localStorage.setItem("User_Id",this.UserRole)

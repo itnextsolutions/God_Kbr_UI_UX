@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { TataService } from 'src/app/services/TataCumminsapi.service';
 
 @Component({
@@ -10,9 +10,10 @@ export class TataCumminsSidebarComponent {
 
   MenuList:any=[];
   child :any=[];
-  issidebaropen=true;
+  @ViewChild('tatacumminssidebar') sidebarRef!: ElementRef;
+  isSidebarOpen = false;
 
-constructor(private router:TataService){}
+constructor(private router:TataService,private renderer: Renderer2){}
 
   ngOnInit(){
     var userid=localStorage.getItem("User_Id")
@@ -20,11 +21,28 @@ constructor(private router:TataService){}
       this.MenuList=resp
       const listString = JSON.stringify(this.MenuList);
       localStorage.setItem("menu",listString)
+      
+  this.closeSidebar()
   })
+  }
+ 
+
+  openSidebar(): void {
+    
+    this.isSidebarOpen = true;
+  }
+
+  toggleSidebar(){
+    this.isSidebarOpen=!this.isSidebarOpen;
+  }
+
+  closeSidebar() {
+    
+    this.isSidebarOpen = false;
   }
 
   trigger(val:any){
-   debugger
+   
     this.child=this.MenuList.filter((x: any) => x.OP_PAR6 == val)
   }
 

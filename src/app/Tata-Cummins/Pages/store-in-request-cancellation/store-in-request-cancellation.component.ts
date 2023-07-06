@@ -16,6 +16,9 @@ export class StoreInRequestCancellationComponent {
   ORD_ID:number=0;
   term ='';
   Message:any;
+  pallet_search ='';
+  pageSize: number = 1;
+  itemsPerPage: number = 10;
 
   constructor( private router: TataService){
 

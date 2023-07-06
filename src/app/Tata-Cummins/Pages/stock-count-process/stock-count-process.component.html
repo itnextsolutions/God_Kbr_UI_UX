@@ -14,7 +14,7 @@
       <app-navbar></app-navbar>
       <!-- End of Topbar -->
 
-      <app-breadcrumb-nav ></app-breadcrumb-nav>      
+      <app-breadcrumb-nav [child_page]="pageName"></app-breadcrumb-nav>      
 
       <!-- Begin Page Content -->
       <div class="container-fluid">
@@ -49,7 +49,7 @@
 
                         <div class="col-sm-3">
                           <span class="error" *ngIf="message.length > 0 && StockCountForm.controls['PartNo'].invalid">{{ message }}</span>
-                          <label  class="font-medium text-900"> Select Part No: </label>
+                          <label  class="font-medium text-900"> Enter Part No: </label>
                         </div> 
                           <div class="input-group col-sm-6">
                                <input type="text" class="form-control" formControlName="PartNo" [(ngModel)]="PartNo" (click)="GetStockCount()" (input)="applyfilter($event)"/>
@@ -208,6 +208,8 @@
                           </label>
 
                               <input type="text" placeholder="search" style="margin-left: 709px"> -->
+                              <input type="text" [(ngModel)]="term" placeholder="Search" style="margin-left: 950px; margin-bottom: 10px;">
+                                 
                               <div class="table-responsive">
                                   <table class="table table-bordered" id="" width="100%" cellspacing="0">
                                       <thead>
@@ -226,7 +228,7 @@
                                           </tr>
                                       </thead>
 
-                                      <tbody *ngFor="let data of PalletdetailsList let i=index ">
+                                      <tbody *ngFor="let data of PalletdetailsList | filter: term | paginate:{itemsPerPage:itemsPerPage, currentPage: pageSize }; let i=index ">
                                         
                                         <tr>
                                             <td>
@@ -249,7 +251,7 @@
                                     </tbody>
                                   </table>
 
-                                  <div class="form-group row">
+                                  <div class="form-group row" *ngIf="Confirmlist.length > 0">
                                     <div class="col-sm-10   submit-button">
                                         <button type="submit" class="btn btn-primary "
                                             style=" padding: 7px 40px 7px 40px;margin: 0 10px 0 1px;"
@@ -270,11 +272,12 @@
     <!-- End of Main Content -->
 
     <!-- Footer -->
-    <footer class="sticky-footer bg-white">
+    <footer class="sticky-footer bg-white" height="100" style="margin-right: -150px; bottom: -40px; position: relative;" >
       <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-          <span>Copyright &copy; Your Website 2021</span>
-        </div>
+        <div class="footer-text" id="footer">
+          <!--<span>Copyright &copy; Your Website 2021</span> -->
+          <P style="text-align: right;" class="footerword" id="text">Design And Devloped By <span style="color:#0061FF">Godrej Koerber</span> Supply Chain Limited </P>
+         </div>
       </div>
     </footer>
     <!-- End of Footer -->
@@ -286,9 +289,9 @@
 <!-- End of Page Wrapper -->
 
 <!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
+<!-- <a class="scroll-to-top rounded" href="#page-top">
   <i class="fas fa-angle-up"></i>
-</a>
+</a> -->
 
 <!-- Logout Modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

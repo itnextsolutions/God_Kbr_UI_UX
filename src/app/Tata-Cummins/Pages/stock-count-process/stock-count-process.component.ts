@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./stock-count-process.component.css']
 })
 export class StockCountProcessComponent {
+  
+  public pageName: string = "Stock Count Process";
 
    PartNo:string="";
    GrNo:string="";
@@ -24,6 +26,10 @@ export class StockCountProcessComponent {
    notFoundMessage:string="";
    msg:string="";
    Message:any;
+   term = ''; 
+   pallet_search ='';
+   pageSize: number = 1;
+   itemsPerPage: number = 10;
 
    StockCountForm!:FormGroup;
    dataSource!:MatTableDataSource<any>;
@@ -192,7 +198,7 @@ export class StockCountProcessComponent {
       }
       else{
         Swal.fire({
-          title:"These record already has been updated",
+          title:"These record has been Already updated",
           icon: 'success',
           confirmButtonText: 'Ok',
         }).then((result) => {
@@ -230,7 +236,8 @@ export class StockCountProcessComponent {
     {
       if(this.PartNo == "" || this.GrNo == "")
       {
-        location.reload()
+        this.PartNo = "",
+        this.GrNo = ""
       }
 
       else

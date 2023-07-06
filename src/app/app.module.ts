@@ -40,6 +40,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { TataCumminsSidebarComponent } from './SharedPages/tata-cummins-sidebar/tata-cummins-sidebar.component';
 import { NgToastModule } from 'ng-angular-popup';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { FooterComponent } from './SharedPages/footer/footer.component';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     StoreInRequestCancellationComponent,
     StoreOutRequestCancellationComponent,
     PartNoDropdownComponent,
-    TataCumminsSidebarComponent
+    TataCumminsSidebarComponent,
+    FooterComponent
   
   ],
   imports: [

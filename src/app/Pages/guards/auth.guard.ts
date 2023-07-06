@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
 
   }
   // canActivate(): boolean{
-  //   // debugger
+  //   // 
   //   if(this.auth.isLoggedin()){
   //     return true;
   //   }else{
@@ -46,7 +46,7 @@ export class AuthGuard implements CanActivate {
        }
 
        checkLogin(url: string,storedList :[]): true | UrlTree {
-          debugger
+          
           console.log("Url: " + url)
           
           if(this.auth.isLoggedin())

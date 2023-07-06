@@ -1,0 +1,128 @@
+.table-responsive{
+    max-height: 130px; 
+}
+
+.table-responsive thead{
+    position: sticky;
+    top :0;
+    z-index: 1;
+    white-space:nowrap;
+    height: 36px;
+}
+
+#palletstatus{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+#palletstatus{
+    border-radius: 10px;
+}
+
+.table-responsive table tbody tr:nth-child(odd) {
+    background-color: rgb(211, 211, 211); /* Set the background color for odd rows */
+  }
+
+  thead {
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px;
+    margin: 0;
+  } 
+
+  td {
+    padding: 5px;
+    color: #333333;
+    font-size: 12px;
+  }
+  
+  td.bold {
+    font-weight: bold;
+  }
+  
+  td.highlight {
+    background-color: #ffddcc;
+  }
+
+  
+  #footer{
+    margin-top: 100px;
+    margin-bottom: 0px;
+    }
+    
+    .sticky-footer {
+        flex-shrink: 0;
+        background-color: #fff;
+        height: 100px;
+        position: sticky;
+        bottom: 0;
+        z-index: 999;
+      }
+    
+    
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 100%;
+        padding-right: 40px;
+      }
+    
+      /* .footer-text {
+        text-align: right;
+        margin-bottom: 25px;
+      } */
+    
+      .footer-logo {
+        width: 200px;
+        height: 100px;
+        margin-bottom: 5px;
+      }
+    
+      .footerword{
+        margin-bottom: 65px;
+        text-align: right;
+      }
+       
+      #text{
+        top: -29px;
+        position: relative;
+        /* margin-top: 21px; */
+        display: inline;
+        text-align: right;
+      }
+  
+
+  @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*=table-responsive] {
+      max-height: 60px;
+      padding-top: 0%;
+    }
+
+    #palletstatus{
+     max-height: 20px;
+    }
+
+    #Summary{
+      max-height: 40px;
+    }
+
+    thead {
+      font-size: 10px;
+      font-weight: bold;
+      padding: 5px;
+      margin: 0;
+    }
+
+    td {
+      padding: 3px;
+      color: #333333;
+      font-size: 8px;
+    }
+
+    #divisons{
+      max-height: 100px;
+      max-width: 200px;
+    }
+  }

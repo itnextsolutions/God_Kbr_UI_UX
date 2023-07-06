@@ -39,7 +39,6 @@ export class PartNoDropdownComponent {
     }
     
     GetStockCount(){
-      debugger
       return this.tataservice.GetStockCountPartNo().subscribe(resp =>{
 
         if(resp == null && resp == undefined)

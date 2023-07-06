@@ -1,0 +1,5 @@
+{
+    "api": {
+      "baseURL": "https://localhost:443/api/"
+    }
+  }

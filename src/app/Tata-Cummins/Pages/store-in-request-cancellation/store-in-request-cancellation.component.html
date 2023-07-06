@@ -39,12 +39,12 @@
                             </div>
 
                             <div class="card-body">
-                                <label>Show:
+                                <!-- <label>Show:
                                     <select>
                                         <option></option>
                                     </select>
                                     entries
-                                </label>
+                                </label> -->
       
                                     <input type="text" [(ngModel)]="term" placeholder="Search" style="margin-left: 900px">
                                 <div class="table-responsive">
@@ -65,7 +65,7 @@
                                             </tr>
                                         </thead>
 
-                                        <tbody *ngFor="let data of StoreInRequestCancellationlist | filter : term" >
+                                        <tbody *ngFor="let data of StoreInRequestCancellationlist | filter: term | paginate:{itemsPerPage:itemsPerPage, currentPage: pageSize }; let i=index" >
                                             <tr>
                                                 <td>
                                                     <input type="checkbox" (change)="isCheked(data)"  >
@@ -117,13 +117,8 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2021</span>
-                </div>
-            </div>
-        </footer>
+        
+        <app-footer></app-footer>
         <!-- End of Footer -->
 
     </div>
@@ -133,6 +128,6 @@
 <!-- End of Page Wrapper -->
 
 <!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
+<!-- <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
-</a>
+</a> -->

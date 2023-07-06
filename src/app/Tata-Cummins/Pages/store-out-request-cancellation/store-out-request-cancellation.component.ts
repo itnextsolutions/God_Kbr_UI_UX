@@ -17,6 +17,10 @@ export class StoreOutRequestCancellationComponent {
   secondList:any=[];
   ORD_ID:number=0;
   Message:any;
+  term ='';
+  pallet_search ='';
+  pageSize: number = 1;
+  itemsPerPage: number = 10;
 
   constructor( private router: TataService){
 
@@ -86,17 +90,7 @@ export class StoreOutRequestCancellationComponent {
       {
         this.StoreOutRequestCancellationlist=resp
       }
-      else
-      {
-        Swal.fire({
-          title: resp,
-          icon:'error',
-          confirmButtonText: 'Ok',
-        }).then((result) => {
-          if (result.value) {
-          } 
-        })
-      }
+      
       })
   }
 

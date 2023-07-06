@@ -1,9 +1,9 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-  
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="position: relative;" (mouseenter)="openSidebar()" (mouseleave)="closeSidebar()" #tatacumminssidebar>
+   
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        
-        <div class="sidebar-brand-text mx-3">Godrej</div>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Dashboard">
+        <!-- <div class="sidebar-brand-text mx-3">Godrej</div> -->
+        <img src="assets/img/GodrejSidebarLogo.jpg" alt="mainlogo" width="200" height="100" class="center">
     </a>
 
     <!-- Divider -->
@@ -20,16 +20,16 @@
         </li>
       
         <div *ngFor="let childData of child" id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div *ngIf="data.OP_OPTION == childData.OP_PAR6" class="bg-white py-2 collapse-inner rounded">
+            <div *ngIf="data.OP_OPTION == childData.OP_PAR6"  class="bg-white py-2 collapse-inner rounded">
                 <a  class="collapse-item" href="{{childData.OP_PAR4}}">{{childData.OP_DESC}}</a>
             </div>
         </div>
     </div>
 
    <!-- Sidebar Toggler (Sidebar) -->
-   <div class="text-center d-none d-md-inline">
+   <!-- <div class="text-center d-none d-md-inline">
        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-   </div>
+   </div> -->
 </ul>
 
 

@@ -1,3 +1,26 @@
-#accordionSidebar{
+/* #accordionSidebar{
     margin-bottom: 220%;
-}
+    width: 300px;
+    height: 100%;
+    transition: width 0.3s;
+} */
+
+ .sidebar {
+    margin-bottom: 250%;
+    height: 100%;
+    width: 5rem;
+    background-color: #0061ff;
+  }
+  
+ 
+  .sidebar.close{
+    width: 50px;
+  }
+
+  .sidebar.open{
+    width: 100px;
+  } 
+
+  .collapse-item{
+    margin-left: 30px;
+  }
