@@ -239,9 +239,8 @@ export class StoreOutProcessComponent {
 
 
   onSelectOrderDetail_Multi(val : any){
-    debugger;
-    // this.checkList=[];
-    //this.order_id = val.ORD_ID;
+     this.checkList=[];
+    this.order_id = val.ORD_ID;
     this.pallet=[];
     this.orderData =[]; 
     
