@@ -1,0 +1,36 @@
+.table table-bordered{
+
+    max-height: 150px;
+   
+}
+.table-responsive thead{
+     position: sticky;
+     top: -2px;
+    z-index: 1;
+    white-space: normal;
+    height: 36px;
+}
+/* .sticky-footer{
+    position: sticky;
+    left: 0px;
+    z-index: 2;
+    background-color: rgb(253, 253, 253);
+   
+}
+
+.sticky-1{
+    position: sticky;
+    left: 40px;
+    z-index: 2;
+    background-color: rgb(253, 253, 253);
+
+   
+}
+.sticky-2{
+    position: sticky;
+    left: 84px;
+    z-index: 2;
+    background-color: rgb(253, 253, 253);
+ 
+} */
+ 

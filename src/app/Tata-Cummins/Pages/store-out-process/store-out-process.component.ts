@@ -819,7 +819,7 @@ onAddClick_4(){
         ORD_REC_POS : String(element.ord_pos),
         STK_ID :element.STK_ID,
         STK_PRD_COD : element.STK_PRD_COD,
-        PRD_DESC : element.PRD_DES,
+        PRD_DESC : element.PRD_DESC,
         STK_RSV_QTY : element.cal_qty,
         STK_PRD_QTY : element.STK_PRD_QTY,
         HU_ID   : element.HU_ID,
