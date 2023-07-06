@@ -1222,7 +1222,7 @@ pre code {
 }
 .table thead th {
     vertical-align: bottom;
-    border-bottom: 2px solid #361374;
+   border-bottom: 2px solid #f8f7fa;
 }
 .table tbody+tbody {
     border-top: 2px solid #e3e6f0;
@@ -3549,8 +3549,8 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 .card-header {
     padding: .75rem 1.25rem;
     margin-bottom: 0;
-    /* background-color: #361374; 583891db */
-    background-color: #583891db;
+    background-color:#0061ff;
+    /* background-color: #583891db; */
     border-bottom: 1px solid #e3e6f0;
 }
 
@@ -7853,7 +7853,8 @@ a:focus {
 }
 .bg-gradient-primary {
     
-        background-color: #543f97;
+        /* background-color: #543f97; */
+        background-color: #0061FF;
     
     /* background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
     background-size: cover; */
@@ -9023,7 +9024,7 @@ form.user .btn-user {
     animation: noise-anim-2 3s infinite linear alternate-reverse;
 }
 footer.sticky-footer {
-    padding: 2rem 0;
+    padding: 0rem 0;
     flex-shrink: 0;
 }
 footer.sticky-footer .copyright {
