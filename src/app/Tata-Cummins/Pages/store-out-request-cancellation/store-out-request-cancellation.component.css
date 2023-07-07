@@ -1,0 +1,11 @@
+.table-responsive{
+    max-height: 130px; 
+}
+
+.table-responsive thead{
+    position: sticky;
+    top :0;
+    z-index: 1;
+    white-space:nowrap;
+    height: 36px;
+}
