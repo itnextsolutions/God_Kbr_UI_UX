@@ -10,12 +10,14 @@ export class TataService {
 
  //apiEndpoint = 'http://localhost:806/api/';
 
- //apiEndpoint = 'https://localhost:443/api/';
+ apiEndpoint = 'https://localhost:443/api/';
 
  //config = require('./config.json');
 
  //apiEndpoint = this.config.api.baseURL 
- apiEndpoint =localStorage.getItem('baseUrl')
+//apiEndpoint =localStorage.getItem('baseUrl')
+ retryDelay = 1000; // Delay in milliseconds between each retry
+ maxRetries = 3;
  
 
  getBaseUrl(): Promise<string> {
@@ -29,31 +31,72 @@ export class TataService {
     });
 }
 
-retrieveBaseUrl() {
-  
-  this.http.get<any>('assets/config.json').subscribe(config => {
+retrieveBaseUrl(val:any,val1:string) {
+  debugger
+  this.http.get<any>('./assets/config.json').subscribe(config => {
+
     const baseUrl = config.api.baseURL;
+
     localStorage.setItem('baseUrl', baseUrl)
+
     console.log('baseUrl =',baseUrl);
-    // Use the base URL as needed
+    
+    if(val1 == 'login')
+    {
+      return this.http.post(baseUrl + 'login/login', val);
+    }
+    else if(val1 == 'GetDashBoardCount')
+    {
+      //window.location.reload()
+      return this.http.get(baseUrl + 'Dashboard/GetDashboardCount')
+     
+    }
+    else if(val1 == 'GetPalletStatus')
+    {
+      return this.http.get(baseUrl + 'Dashboard/GetPalletStatus')
+    }
+    else (val1 == 'GetPalletStatus')
+    {
+      return this.http.get(baseUrl + 'Dashboard/GetCraneStatus')
+    }
+    
+   
   });
 }
 
-async makeApiRequest(): Promise<any> {
-  
-  const baseUrl = await this.retrieveBaseUrl();
-  //const url = `${baseUrl}/${endpoint}`;
-  
-  // Make your API request using the constructed URL
+makeApiRequest(val:any) {
+  const baseUrl =  this.retrieveBaseUrl(val,val);
 }
 
+retrieveBaseUrlWithRetry(retryCount = 0) {
+  if (retryCount >= this.maxRetries) {
+    console.error('Maximum number of retries reached');
+    // Handle error or show appropriate message
+    return;
+  }
+}
 
+retrivebaseurl(){
+  debugger
+  const retryCount = 1
+  var apiEndpoint =localStorage.getItem('baseUrl')
+  for(let retryCount = 0; apiEndpoint == null; retryCount++ )
+  {
+      //this.makeApiRequest();
+      var apiEndpoint =localStorage.getItem('baseUrl');
+      this.retrieveBaseUrlWithRetry(retryCount);
+  }
+  return apiEndpoint;
+}
 
 public login(val:any){
- this.makeApiRequest();
- var apiEndpoint =localStorage.getItem('baseUrl')
- console.log(apiEndpoint +'login/login')
- return this.http.post(apiEndpoint+ 'login/login', val);
+  debugger
+ //this.retrieveBaseUrl(val,'login');
+ //var apiEndpoint =localStorage.getItem('baseUrl')
+ //console.log('apiend =' ,apiEndpoint +'login/login')
+ //var apiEndpoint1=this.retrivebaseurl()
+
+ return this.http.post(this.apiEndpoint + 'login/login', val);
 }
 
 public getemptypalletout(val:any){
@@ -70,9 +113,9 @@ public getStoreOutData(){
   return this.http.get(this.apiEndpoint + 'StoreOut/GetStoreOutData');
 }
 
-public getStoreOutPalletDetailsSingleCheck(val : any){
-  const params = { parameter: val}
-  return this.http.get(this.apiEndpoint + 'StoreOut/GetPalletDetails_Single_Check',{params})
+public getStoreOutPalletDetails(val : any){
+ // const params = { parameter: val}
+  return this.http.post(this.apiEndpoint + 'StoreOut/GetPalletDetails',val)
 }
 
 public getStoreOutPalletDetailsMultiCheck(val : any){
@@ -127,10 +170,7 @@ UpdateOrderItem(val:any){
 //  }
 
 Insert_StockMovt_Update_StockItm(val:any){
-  
-  
-    return this.http.post(this.apiEndpoint + 'storeOut/Insert_StockMovt_Update_StockItm',val);
-
+    return this.http.post(this.apiEndpoint + 'storeOut/Insert_StockMovt_Update_StockItm',val); 
  }
 
  GetStoreInRequest(){
@@ -142,7 +182,7 @@ Insert_StockMovt_Update_StockItm(val:any){
  }
 
  GetMenuList(val:any){
-
+  
   const params = { userid: val}
   return this.http.get(this.apiEndpoint +'GetMenuList/GetMenu',{params})
 
@@ -153,17 +193,25 @@ Insert_OrderItm(val : any){
   return this.http.post(this.apiEndpoint + 'storeOut/InsertOrderData',val)
 }
 
+method:string=''
+param:string=''
 GetDashBoardCount(){
   
+  //this.method='GetDashBoardCount'
+  //this.retrieveBaseUrl(this.param,this.method)
   return this.http.get(this.apiEndpoint + 'Dashboard/GetDashboardCount')
+ 
  }
 
  GetPalletStatus(){
+  //this.method='GetPalletStatus'
+  //this.retrieveBaseUrl(this.param,this.method)
   return this.http.get(this.apiEndpoint + 'Dashboard/GetPalletStatus')
  }
  
  GetCraneStatus(){
-  
+  //this.method='GetCraneStatus'
+  //this.retrieveBaseUrl(this.param,this.method)
   return this.http.get(this.apiEndpoint + 'Dashboard/GetCraneStatus')
  }
 

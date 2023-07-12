@@ -53,6 +53,7 @@ export class AuthGuard implements CanActivate {
           {
             if(url == '/Dashboard')
             {
+               
                return true
             }
             else
@@ -73,7 +74,7 @@ export class AuthGuard implements CanActivate {
           }
           else
           {
-            this.toast.warning({detail:"ERROR", summary:"Please Login!"});
+            this.toast.info({detail:"Thank You", summary:"Logged Out Successfully!"});
             return this.router.parseUrl('login');
           }
        }

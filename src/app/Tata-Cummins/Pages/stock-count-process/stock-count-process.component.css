@@ -53,3 +53,9 @@
       display: inline;
       text-align: right;
     }  
+
+    #wrapper {
+      margin-left: 220px; 
+      padding: 0px; 
+      overflow-y: auto;
+    }

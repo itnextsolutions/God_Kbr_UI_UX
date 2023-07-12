@@ -1,5 +1,5 @@
 
-	<div class="main">
+	<div class="main" >
 		
 
 		<!-- <div class="signup">
@@ -37,27 +37,31 @@
 		</div> -->
 
 
-		<div class="login-page">
-			<div class="form" >
+		<div class="login-page" >
+			<div class="form"  >
 				 <img src="/assets/img/godrej logo.png" alt="" style="margin-top: -22px; width: 215px;">
 				 
-			  <form  [formGroup]="loginForm" class="login-form">
+			  <form  [formGroup]="loginForm" class="login-form" (keyup.enter)="login()">
 				
-				<input type="text" placeholder="Username" formControlName="username" [(ngModel)]="username" >
+				<input type="text" placeholder="Username" formControlName="username" [(ngModel)]="username">
 				<span class="error"
 						*ngIf="loginForm.controls['username'].touched  && loginForm.controls['username'].invalid"
 					>
 					Username is required
 				</span>
 												
-				<input type="password"  placeholder="Password" formControlName ="password" [(ngModel)]="password">
+				<input type="password"  placeholder="Password" formControlName ="password" [(ngModel)]="password" >
 				<span class="error"
 					*ngIf="loginForm.controls['password'].touched  && loginForm.controls['password'].invalid"
 					>
 					password is required
 				</span>
 				
-				<button (click)="login()">Login</button>
+				<button type="submit" (click)="login()"  >Login</button>
+				
+				  <div class="spinner-overlay" *ngIf="loading">
+					<div class="spinner"></div>
+				  </div>
 				<!-- <p class="message">Not registered? <a href="#">Create an account</a></p> -->
 			  </form>
 			  

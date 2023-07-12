@@ -24,3 +24,11 @@
   .collapse-item{
     margin-left: 30px;
   }
+
+  .sidebar-container {
+    position: fixed; /* or position: sticky; */
+    width: 20px; 
+    z-index: 1;
+    margin-left: -225px;/* adjust the width as needed */
+    height: 800px;
+  }

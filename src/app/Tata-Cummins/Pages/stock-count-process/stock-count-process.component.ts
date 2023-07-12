@@ -218,18 +218,26 @@ export class StockCountProcessComponent {
     }
 
     GetPalletDetails()
-    {
+    {debugger
+      if(this.PartNo != "" && this.GrNo != "" )
+      {
+        return this.tataservice.GetPalletDetails(this.PartNo,this.GrNo).subscribe(resp=>{
+          if(resp != null || resp != undefined){
+            this.PalletdetailsList=resp
+          }
+          else{
+            this.Message="There Is no Data of These Part_No ="+this.PartNo+" And GR_NO ="+this.GrNo
+            this.errorAlert(this.Message);
+          }
+          
+        })
+      }
+      else
+      {
+        alert("Please Fill The Field");
+       return
+      }
       
-      return this.tataservice.GetPalletDetails(this.PartNo,this.GrNo).subscribe(resp=>{
-        if(resp != null || resp != undefined){
-          this.PalletdetailsList=resp
-        }
-        else{
-          this.Message="There Is no Data of These Part_No ="+this.PartNo+" And GR_NO ="+this.GrNo
-          this.errorAlert(this.Message);
-        }
-        
-      })
     }
 
     Reset()
