@@ -66,30 +66,36 @@
                                             <thead>
                                                 <tr style="background-color:  #eeebf6; color: #361374;">
                                                     <th class="sticky-footer" style="width: 1%; background-color: #eeebf6;">No</th>
-                                                    <th class="sticky-1 back-head1 "  style="width: 1%; background-color: #eeebf6;">Select</th>
+                                                    <th class="sticky-1 back-head1 "   style="width: 1%; background-color: #eeebf6;">Select</th>
                                                     <th class="sticky-2 back-head2 "  style="width: 4%; background-color: #eeebf6;" >Order Id</th>
+                                                    <th style="width: 6%;">Org Name</th>
                                                     <th style="width: 6%;">PickList No</th>                                                    
                                                     <th style="width: 6%;">Part No</th>
                                                     <th style="width: 6%;">Gr No</th>
-                                                    <th style="width: 6%;">QTY</th>
-                                                    <th style="width: 6%;">Date</th>                                                    
-                                                    <th style="width: 3%;">Status</th>
+                                                    <th style="width: 5%;">QTY</th>
+                                                    <th style="width: 5%;">Date</th>                                                    
+                                                    <th style="width: 2%;">Status</th>
+                                                    <th style="width: 5%;">PAR1</th>
+                                                    <th style="width: 5%;">PAR2</th>
                                                      
                                                 </tr>
                                             </thead>
     
                                             <tbody>
-                                                <tr *ngFor="let data of order_details | filter: term  | paginate:{itemsPerPage:orderItemsPerPage, currentPage: orderPageSize }; let i=index">
+                                                <tr *ngFor="let data of order_details | filter: term; let i=index">
                                                     <td class="sticky-footer">{{i+(orderItemsPerPage*orderPageSize)-(orderItemsPerPage-1)}}</td>
                                                     <td class="sticky-1 back-head1"> <input type="checkbox" [checked]="data.ORD_ID == order_id"    (change)="onSelectOrderDetail_Multi(data)"></td>
                                                     <!-- <td> <input type="checkbox"  (change)="onSelectOrderDetail_1(data)"></td> -->
                                                     <td class="sticky-2 back-head2">{{data.ORD_ID}}</td>
-                                                    <td>{{data.ORD_REC_POS}}</td>
+                                                    <td>{{data.ORD_SUPL_COD}}</td>
+                                                    <td>{{data?.ORD_REC_POS}}</td>
                                                     <td>{{data.ORD_PRD_COD}}</td>
                                                     <td>{{data.ORD_REC_NR}}</td>
                                                     <td>{{data.ORD_REQ_QTY}}</td>
                                                     <td>{{data.ORD_DT_DEF | date}}</td>
                                                     <td>{{data.ORD_ITM_STAT}}</td>
+                                                    <td>{{data.ORD_PAR1}}</td>
+                                                    <td>{{data.ORD_PAR2}}</td>
                                                 </tr>
                                            </tbody>
                                         </table>
@@ -104,7 +110,7 @@
                                             
                                             <div class="col-lg-10   submit-button">
                                                 <button  [disabled]="checkList == 0" type="submit" class="btn btn-primary "
-                                                    style=" padding: 7px 40px 7px 40px;margin-left: 380px;" (click)="onAddClick_4()">
+                                                    style=" padding: 7px 40px 7px 40px;margin-left: 380px;" (click)="onAddFetchPallet()">
                                                     Add
                                                 </button>
                                             </div>
@@ -141,72 +147,21 @@
       
                                     <input type="text" [(ngModel)]="term" placeholder="Search" style="margin-left: 750px">
                                  
-                                     <!-- dhiraj start -->
-                                    <!-- <div class="table-responsive" style="height: 320px; overflow-y: scroll;">
-                                        
-                                        <table  class="table table-bordered" id="" width="124%" cellspacing="0" style="width: 124%;" >
-                                            <thead>
-                                                <tr style="background-color:  #eeebf6; color: #361374;">
-                                                    <th class="sticky-footer" style="width: 3%; background-color: #eeebf6;">No</th>
-                                                   
-                                                    <th class="sticky-2 back-head2 "  style="width: 8%; background-color: #eeebf6;" >Order Id</th>
-                                                    <th style="width: 12%;">PickList No</th>                                                    
-                                                    <th style="width: 12%;">Part No</th>
-                                                    <th style="width: 12%;">Part Description</th>
-                                                    <th style="width: 8%;">Quantity</th>
-                                                    <th style="width: 10%;">Reserved Qty</th>                                                    
-                                                    <th style="width: 5%;">Aisle</th>
-                                                    <th style="width: 5%;">X</th>
-                                                    <th style="width: 5%;">Y</th>
-                                                    <th style="width: 5%;">Z</th>
-                                                    
-                                                     
-                                                </tr>
-                                            </thead>
-    
-                                            <tbody>
-                                                <tr *ngFor = "let item of pallet | filter: pallet_search | paginate:{itemsPerPage:itemsPerPage, currentPage: pageSize }; let i=index">
-                                                    
-                                                     <td>{{i+(itemsPerPage*pageSize)-(itemsPerPage-1)}}</td>
-                                                   
-                                                    <td>{{item.HU_ID}}</td>
-                                                    <td>{{item.id_ord}}</td>
-                                                    <td>{{item.ord_pos}}</td>
-                                                    <td>{{item.STK_PRD_COD}}</td>
-                                                    <td>{{item.PRD_DESC}}</td>
-                                                    <td>{{item.STK_PRD_QTY}}</td>
-                                                    <td>{{item.cal_qty}}</td>
-                                                    <td>{{item.LOC_AISL_ID}}</td>
-                                                    <td>{{item.LOC_X}}</td>
-                                                    <td>{{item.LOC_Y}}</td>
-                                                    <td>{{item.LOC_Z}}</td>
-                                                  
-                                                </tr>
-                                           </tbody>
-                                        </table>
-
-                                        
-                                        
-                                    </div> -->
-
-
-                                    <!-- dhiraj end -->
-
-
                                 <div class="table-responsive" style="display: block; width: 100%; overflow-x: scroll; overflow-y: scroll; height: 273px;">
                                     
-                                    <table class="table table-bordered" id="" width="100%" cellspacing="0">
+                                    <table class="table table-bordered" id="" width="100%" cellspacing="0" style="width: 120%;">
                                         <thead>
                                             <tr style="background-color:  #eeebf6; color: #361374;">
                                                 <!-- <th>Select</th> -->
-                                                <th style="width: 3%;">No</th>
-                                                <th style="width: 6%; ">Pallet Id</th>
+                                                <th style="width: 2%;">No</th>
+                                                <th style="width: 5%; ">Pallet Id</th>
                                                 <th style="width: 6%; ">Order Id</th>
-                                                <th style="width: 15%;">PickList No</th>
-                                                <th style="width: 10%;">Part No</th>
-                                                <th style="width: 20%;">Part Description</th>
-                                                <th style="width: 6%;">Quantity</th>
-                                                <th style="width: 6%;">Reserved Qty</th>
+                                                <th style="width: 6%;">Org Name</th>
+                                                <th style="width: 10%;">PickList No</th>
+                                                <th style="width: 8%;">Part No</th>
+                                                <th style="width: 15%;">Part Description</th>
+                                                <th style="width: 5%;">Quantity</th>
+                                                <th style="width: 5%;">Reserved Qty</th>
                                                 <th style="width: 3%;">Aisle</th>
                                                 <th style="width: 3%;">X</th>
                                                 <th style="width: 3%;">Y</th>
@@ -217,11 +172,12 @@
                                         </thead>
 
                                         <tbody>
-                                            <tr *ngFor = "let item of pallet | filter: pallet_search | paginate:{itemsPerPage:itemsPerPage, currentPage: pageSize }; let i=index">
+                                            <tr *ngFor = "let item of pallet | filter: pallet_search; let i=index">
                                                 <!-- <td> <input type="checkbox"></td> -->
                                                 <td>{{i+(itemsPerPage*pageSize)-(itemsPerPage-1)}}</td>
                                                 <td>{{item.HU_ID}}</td>
                                                 <td>{{item.id_ord}}</td>
+                                                <td>{{item.STK_SUPL_COD}}</td>
                                                 <td>{{item.ord_pos}}</td>
                                                 <td>{{item.STK_PRD_COD}}</td>
                                                 <td>{{item.PRD_DESC}}</td>

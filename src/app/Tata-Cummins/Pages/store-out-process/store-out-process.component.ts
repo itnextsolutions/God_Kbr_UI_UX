@@ -62,7 +62,15 @@ export class StoreOutProcessComponent {
    cal_qty : number = 0;
    ord_pos : string= '';
    id_ord : number = 0;
-  another: any=[];
+   ord_gr_no: string='';
+   org_name : string ='';
+
+   ORD_PRD_COD : string ='';
+   ORD_PAR1 : any;
+   ORD_PAR2 : string ='';
+   ORD_ORG_NAME : string ='';
+
+   fetchPalletParameter: any=[];
 
   public importedData: any = [];
   uploadList: any = [];
@@ -85,54 +93,7 @@ export class StoreOutProcessComponent {
        this.getStoreOutOrderData();
       
    }
-  //  fileContent :any =[];
-
-  //  private async getTextFromFile(event: any) {
-  //   const file: File = event.target.files[0];
-  //   let fileContent = await file.text();
-
-  //   return fileContent;
-  // }
-
-  //  public async importDataFromCSV1(event: any) {
-  //   debugger;
-  //   this.fileContent = await this.getTextFromFile(event);
-  //   // this.importedData = this.importDataFromCSV(fileContent);
-  //   console.log(this.importedData)
-  // }
-
-  // fileUploadSimple_1(){
-  //    this.importedData = this.importDataFromCSV(this.fileContent);
-  //    console.log(this.importedData)
-  // }
-
-  //  public importDataFromCSV(csvText: string): Array<any> {
-  //   debugger
-  //   const propertyNames = csvText.slice(0, csvText.indexOf('\n')).split(',');
-  //   const dataRows = csvText.slice(csvText.indexOf('\n') + 1).split('\n');
-
-  //   let dataArray: any[] = [];
-  //   dataRows.forEach((row) => {
-  //     let values = row.split(',');
-
-  //     let obj: any = new Object();
-
-  //     for (let index = 0; index < propertyNames.length; index++) {
-  //       const propertyName: string = propertyNames[index];
-
-  //       let val: any = values[index];
-  //       if (val === '') {
-  //         val = null;
-  //       }
-
-  //       obj[propertyName] = val;
-  //     }
-
-  //     dataArray.push(obj);
-  //   });
-
-  //   return dataArray;
-  // }
+ 
   ExcelData: any =[];
 
   ReadExcel(event : any){
@@ -142,7 +103,7 @@ export class StoreOutProcessComponent {
     
     if( event.target.files && event.target.files[0])
     {
-      debugger;
+     
        let file = event.target.files[0];
        
        if(file.type == "text/csv"){
@@ -167,15 +128,18 @@ export class StoreOutProcessComponent {
   }
 
   uploadFile(){
-
+    
+    this.uploadList =[];
     this.ExcelData.forEach((element :any)=>{
 
       var data ={
 
-        ORD_ID : element.ORD_ID,
-        ORD_REC_POS : element.ORD_REC_POS,
-        ORD_PRD_COD : element.ORD_PRD_COD,
-        ORD_REQ_QTY : element.QTY,
+        ORD_SUPL_COD : element.Org,
+        ORD_PRD_COD : String(element.Part_Number),
+        ORD_PAR3 : element.Part_Description,
+        ORD_REQ_QTY : element.Quantity,
+        ORD_PAR1 : element.Par1,
+        ORD_PAR2 : element.Par2
 
       }
 
@@ -186,11 +150,15 @@ export class StoreOutProcessComponent {
 
       if(resp == 1){
         this.sucessAlert();
+        this.getStoreOutOrderData();
+         this.InputVar.nativeElement.value = "";
         //  window.location.reload();
        }
        else{
         this.message = 'Something went wrong!';
          this.errorAlert(this.message);
+         this.getStoreOutOrderData();
+         this.InputVar.nativeElement.value = "";
        }
 
     })
@@ -203,43 +171,35 @@ export class StoreOutProcessComponent {
       this.tataservice.getStoreOutData().subscribe(resp=>{
         this.storeOutData = resp;
         this.order_details = this.storeOutData;
+        
       })
    }
 
 
    
 
-  //  onSelectOrderDetail_Single(val:any){
+    onSelectOrderDetail_Single(val:any){
+    // this.checkList=[];
+    // this.order_id = val.ORD_ID;
+    this.pallet=[];
+    this.orderData =[];
+    this.total_count =0 
     
-  //   this.pallet=[];
-  //   this.orderData =[]; 
-  //   // this.order_id = val.ORD_ID;
-  //   if ( this.checkList.includes(val)) {
-  //     this.checkList = this.checkList.filter((selected: any) => selected !== val);
-  //   }
-  //   else
-  //   {
-    
-  //    this.checkList.push(val);
-  //   }
-    
-  // //  console.log(this.checkList);
-  //  if(this.checkList.length > 0){
-  //    this.order_id = this.checkList[0].ORD_ID;
-  //   this.ord_quantity = this.checkList[0].ORD_REQ_QTY;
-  //   this.product_code = this.checkList[0].ORD_PRD_COD;
-  //  }
-
-  //  else{
-  //   this.ord_quantity =0;
-  //   this.product_code="";
-  //  }
-   
-  // }
+    if ( this.checkList.includes(val)) {
+      this.checkList = this.checkList.filter((selected: any) => selected !== val);
+      // this.checkList=[];
+    }
+    else
+    {
+      // this.checkList=[];
+     this.checkList.push(val);
+    }
+  }
 
 
   onSelectOrderDetail_Multi(val : any){
-     this.checkList=[];
+    // this.checkList=[];
+
     this.order_id = val.ORD_ID;
     this.pallet=[];
     this.orderData =[]; 
@@ -248,16 +208,17 @@ export class StoreOutProcessComponent {
     
     if ( this.checkList.includes(val)) {
       this.checkList = this.checkList.filter((selected: any) => selected !== val);
+      this.checkList=[];
     }
     else
     {
-    
+      this.checkList=[];
      this.checkList.push(val);
     }
 
     // console.log("Order_Selected",this.checkList);
 
-    this.product_code = Array.from(new Set(this.checkList.map((x:any) => x.ORD_PRD_COD).sort())); 
+    this.product_code = Array.from(new Set(this.checkList.map((x:any) => x.ORD_PRD_COD).sort()));
   }
 
 
@@ -655,7 +616,6 @@ onAddClick_4(){
     
     this.pallet=[];
     this.orderData =[];
-    this.part_data =[];
     this.tataservice.getStoreOutPalletDetailsMultiCheck(this.product_code).subscribe((resp:any) =>{
     if(resp != null && resp != undefined && resp.length >0)
     {
@@ -664,11 +624,12 @@ onAddClick_4(){
         this.palletOut =this.palletOutDetails
      
 
-
         for(let i = 0;  i < this.palletOut.length; i++){
           this.palletOut[i].cal_qty =0;
           this.palletOut[i].ord_pos ='';
           this.palletOut[i].id_ord =0;
+          this.palletOut[i].ord_gr_no ='';
+          this.palletOut[i].org_name ='';
         }
     
  
@@ -676,6 +637,9 @@ onAddClick_4(){
           this.total_count =0;
           this.order_total_qty =0;
           
+            if(this.checkList[i].ORD_RSV_QTY.length == undefined || this.checkList[i].ORD_RSV_QTY == null ){
+              this.checkList[i].ORD_RSV_QTY = 0;
+            }
 
               this.order_total_qty = this.checkList[i].ORD_REQ_QTY - this.checkList[i].ORD_RSV_QTY;
               this.total_count = this.total_count + this.order_total_qty;
@@ -704,19 +668,26 @@ onAddClick_4(){
             for(let j=0; j < this.palletOut.length; j++){
               
               if(this.palletOut[j].STK_PRD_COD == this.checkList[i].ORD_PRD_COD ){
-            
-                let pallet_qty = this.palletOut[j].STK_PRD_QTY  - this.palletOut[j].STK_RSV_QTY;
+               
+                if(this.palletOut[j].STK_RSV_QTY.length == undefined || this.palletOut[j].STK_RSV_QTY == null ){
+                  this.palletOut[j].STK_RSV_QTY = 0;
+                }
+
+                let pallet_qty  = this.palletOut[j].STK_PRD_QTY  - this.palletOut[j].STK_RSV_QTY;
                 if(pallet_qty > 0){
 
                 if(pallet_qty<= this.a){
           
                   b = b + pallet_qty;
-                  this.a = this.a- pallet_qty;
+                  this.a = this.a - pallet_qty;
           
                   this.palletOut[j].cal_qty = pallet_qty;
                   
                   this.palletOut[j].id_ord = this.checkList[i].ORD_ID; //ajit
                   this.palletOut[j].ord_pos = this.checkList[i].ORD_REC_POS;//ajit
+                  this.palletOut[j].ord_gr_no = this.checkList[i].ORD_REC_NR; // ajit
+                  this.palletOut[j].org_name = this.checkList[i].ORD_SUPL_COD;//ajit
+                  
                   
                   this.pallet.push(this.palletOut[j]);
                   
@@ -737,7 +708,14 @@ onAddClick_4(){
                     LOC_X: this.palletOut[j].LOC_X,
                     LOC_Y:this.palletOut[j].LOC_Y,
                     LOC_Z:this.palletOut[j].LOC_Z,
-                    LOC_P: this.palletOut[j].LOC_P
+                    LOC_P: this.palletOut[j].LOC_P,
+
+
+                    id_ord : this.palletOut[j].id_ord, //ajit
+                    ord_pos : this.palletOut[j].ord_pos, //ajit
+                    ord_gr_no : this.palletOut[j].ord_gr_no, // ajit
+                    org_name : this.palletOut[j].org_name // ajit
+
         
                   }
                 }
@@ -748,6 +726,8 @@ onAddClick_4(){
                   this.palletOut[j].cal_qty = this.a;
                   this.palletOut[j].id_ord = this.checkList[i].ORD_ID; //ajit
                   this.palletOut[j].ord_pos = this.checkList[i].ORD_REC_POS;//aji
+                  this.palletOut[j].ord_gr_no = this.checkList[i].ORD_REC_NR; // ajit
+                  this.palletOut[j].org_name = this.checkList[i].ORD_SUPL_COD;//ajit
                 
                   
                   this.pallet.push(this.palletOut[j]);
@@ -767,7 +747,12 @@ onAddClick_4(){
                     LOC_X: this.palletOut[j].LOC_X,
                     LOC_Y:this.palletOut[j].LOC_Y,
                     LOC_Z:this.palletOut[j].LOC_Z,
-                    LOC_P: this.palletOut[j].LOC_P
+                    LOC_P: this.palletOut[j].LOC_P,
+
+                    id_ord : this.palletOut[j].id_ord, //ajit
+                    ord_pos : this.palletOut[j].ord_pos, //ajit
+                    ord_gr_no : this.palletOut[j].ord_gr_no, // ajit
+                    org_name : this.palletOut[j].org_name // ajit
         
                   }
                                         
@@ -807,6 +792,223 @@ onAddClick_4(){
   }
 
 
+  onAddFetchPallet(){
+    
+    
+    this.fetchPalletParameter=[];
+    this.pallet=[];
+    this.orderData =[];
+    this.part_data=[];
+
+
+    this.checkList.forEach((element:any) =>{
+
+        if(element.ORD_PAR1.length == undefined){
+        
+          this.ORD_PAR1 = ''
+        }
+        else{
+          
+          this.ORD_PAR1 = element.ORD_PAR1
+        }
+    
+        if(element.ORD_PAR2.length == undefined){
+        
+          this.ORD_PAR2 = ''
+        }else{
+          
+          this.ORD_PAR2 = element.ORD_PAR2
+        }
+        var data = {
+
+          ORD_PRD_COD : element.ORD_PRD_COD,
+          ORD_SUPL_COD : element.ORD_SUPL_COD,
+          ORD_PAR1 : this.ORD_PAR1,
+          ORD_PAR2 : this.ORD_PAR2
+        }
+
+        this.fetchPalletParameter.push(data);
+    })
+
+
+    this.tataservice.getStoreOutPalletDetails(this.fetchPalletParameter).subscribe((resp:any) =>{
+    if(resp != null && resp != undefined && resp.length >0)
+    {
+        
+        this.palletOutDetails = resp;
+        this.palletOut =this.palletOutDetails
+     
+
+        for(let i = 0;  i < this.palletOut.length; i++){
+          this.palletOut[i].cal_qty =0;
+          this.palletOut[i].ord_pos ='';
+          this.palletOut[i].id_ord =0;
+          this.palletOut[i].ord_gr_no ='';
+          this.palletOut[i].org_name ='';
+        }
+    
+ 
+        for(let i =0; i < this.checkList.length; i++){
+          this.total_count =0;
+          this.order_total_qty =0;
+                     
+              this.order_total_qty = this.checkList[i].ORD_REQ_QTY - this.checkList[i].ORD_RSV_QTY;
+              this.total_count = this.total_count + this.order_total_qty;
+              console.log("Order_ID",this.checkList[i].ORD_ID);
+              console.log("Total_qty_out",this.total_count);
+          
+              
+              this.a = this.total_count;
+              let b :any  =0;
+              let c:any;
+              
+              let partial_value = 0;
+              let  PARTIAL;
+                
+              this.palletOut.forEach((element:any) => {
+      
+                if(element.STK_PRD_QTY  == element.STK_RSV_QTY){
+                  const index = this.palletOut.indexOf(element);//ajit
+                      this.palletOut.splice(index,1);//ajit
+                }
+              })
+        
+         
+          this.filter_pallet= this.palletOut.filter((x:any)=>x.STK_PRD_COD == this.checkList[i].ORD_PRD_COD && x.STK_SUPL_COD == this.checkList[i].ORD_SUPL_COD)
+          
+          if(this.filter_pallet.length > 0){
+            for(let j=0; j < this.palletOut.length; j++){
+              
+              if(this.palletOut[j].STK_PRD_COD == this.checkList[i].ORD_PRD_COD  && this.palletOut[j].STK_SUPL_COD == this.checkList[i].ORD_SUPL_COD ){
+               
+                let pallet_qty  = this.palletOut[j].STK_PRD_QTY  - this.palletOut[j].STK_RSV_QTY;
+                if(pallet_qty > 0){
+
+                if(pallet_qty<= this.a){
+          
+                  b = b + pallet_qty;
+                  this.a = this.a - pallet_qty;
+          
+                  this.palletOut[j].cal_qty = pallet_qty;
+                  
+                  this.palletOut[j].id_ord = this.checkList[i].ORD_ID; //ajit
+                  this.palletOut[j].ord_pos = this.checkList[i].ORD_REC_POS;//ajit
+                  this.palletOut[j].ord_gr_no = this.checkList[i].ORD_REC_NR; // ajit
+                 // this.palletOut[j].org_name = this.checkList[i].ORD_SUPL_COD;//ajit
+                  
+                  
+                  this.pallet.push(this.palletOut[j]);
+                  
+
+                  this.palletOut[j] = {
+                    STK_ID : this.palletOut[j].STK_ID,
+                    STK_REC_POS : this.palletOut[j].STK_REC_POS,
+                    HU_ID : this.palletOut[j].HU_ID,
+                    STK_PRD_COD : this.palletOut[j].STK_PRD_COD,
+                    STK_REC_NR : this.palletOut[j].STK_REC_NR,
+                    STK_PRD_QTY:this.palletOut[j].STK_PRD_QTY,
+                    PRD_DESC : this.palletOut[j].PRD_DESC,
+        
+                    STK_RSV_QTY : this.palletOut[j].STK_RSV_QTY + pallet_qty,
+        
+                    HU_USAGE : this.palletOut[j].HU_USAGE,
+                    LOC_AISL_ID : this.palletOut[j].LOC_AISL_ID,
+                    LOC_X: this.palletOut[j].LOC_X,
+                    LOC_Y:this.palletOut[j].LOC_Y,
+                    LOC_Z:this.palletOut[j].LOC_Z,
+                    LOC_P: this.palletOut[j].LOC_P,
+
+
+                    id_ord : this.palletOut[j].id_ord, //ajit
+                    ord_pos : this.palletOut[j].ord_pos, //ajit
+                    ord_gr_no : this.palletOut[j].ord_gr_no, // ajit
+                   // org_name : this.palletOut[j].org_name // ajit
+                    STK_SUPL_COD : this.palletOut[j].STK_SUPL_COD // ajit
+
+        
+                  }
+                }
+                else if(pallet_qty > this.a)
+                {
+                  b = b + this.a;
+                  
+                  this.palletOut[j].cal_qty = this.a;
+                  this.palletOut[j].id_ord = this.checkList[i].ORD_ID; //ajit
+                  this.palletOut[j].ord_pos = this.checkList[i].ORD_REC_POS;//aji
+                  this.palletOut[j].ord_gr_no = this.checkList[i].ORD_REC_NR; // ajit
+                //  this.palletOut[j].org_name = this.checkList[i].ORD_SUPL_COD;//ajit
+                
+                  
+                  this.pallet.push(this.palletOut[j]);
+
+                  this.palletOut[j] = {
+                    STK_ID : this.palletOut[j].STK_ID,
+                    STK_REC_POS : this.palletOut[j].STK_REC_POS,
+                    HU_ID : this.palletOut[j].HU_ID,
+                    STK_PRD_COD : this.palletOut[j].STK_PRD_COD,
+                    STK_REC_NR : this.palletOut[j].STK_REC_NR,
+                    STK_PRD_QTY:this.palletOut[j].STK_PRD_QTY,
+                    PRD_DESC : this.palletOut[j].PRD_DESC,
+                    STK_RSV_QTY : this.palletOut[j].STK_RSV_QTY + this.a,
+        
+                    HU_USAGE : this.palletOut[j].HU_USAGE,
+                    LOC_AISL_ID : this.palletOut[j].LOC_AISL_ID,
+                    LOC_X: this.palletOut[j].LOC_X,
+                    LOC_Y:this.palletOut[j].LOC_Y,
+                    LOC_Z:this.palletOut[j].LOC_Z,
+                    LOC_P: this.palletOut[j].LOC_P,
+
+                    id_ord : this.palletOut[j].id_ord, //ajit
+                    ord_pos : this.palletOut[j].ord_pos, //ajit
+                    ord_gr_no : this.palletOut[j].ord_gr_no, // ajit
+                   // org_name : this.palletOut[j].org_name // ajit
+                    STK_SUPL_COD : this.palletOut[j].STK_SUPL_COD // ajit
+        
+                  }
+                                        
+                }
+          
+                if(b == this.total_count){  
+                        
+                  break;
+                } 
+              }
+              }
+              
+            } 
+                        
+          }
+          else{      
+            // this.part_data.push(this.checkList[i].ORD_PRD_COD);
+            this.part_data.push(this.checkList[i].ORD_ID);               
+          }
+              
+        }
+    
+        if(this.part_data.length > 0){
+
+          this.message = "Quantity Not Available for Order Id  : " + this.part_data
+          this.errorAlert(this.message);
+        }
+        
+        }
+        else{
+
+          this.fetchPalletParameter.forEach((element : any) =>{
+          this.part_data.push(element.ORD_PRD_COD + ' ');
+          })
+
+          this.message ="Quantity Not Available for Part  : " + this.part_data; 
+          this.errorAlert(this.message);
+        }
+
+    })
+      
+  }
+
+
+
+
   onConfirmClick(){
     
     this.confirmList =[];
@@ -816,33 +1018,20 @@ onAddClick_4(){
 
         ORD_ID : element.id_ord,
         ORD_REC_POS : String(element.ord_pos),
+        ORD_REC_NR : element.ord_gr_no,
         STK_ID :element.STK_ID,
         STK_PRD_COD : element.STK_PRD_COD,
         PRD_DESC : element.PRD_DESC,
         STK_RSV_QTY : element.cal_qty,
         STK_PRD_QTY : element.STK_PRD_QTY,
         HU_ID   : element.HU_ID,
-        // PARTIAL : element.PARTIAL
+        ORD_SUPL_COD : element.STK_SUPL_COD
         
       }
 
       this.confirmList.push(data);
     });
-
-      
-    //  this.tataservice.Insert_StockMovt_Update_StockItm(this.confirmList,this.orderData).subscribe(resp =>{
-
-    //    if(resp == 'Success'){
-    //     this.sucessAlert();
-    //     //  window.location.reload();
-    //    }
-    //    else{
-    //     this.message = 'Something went wrong!';
-    //      this.errorAlert(this.message);
-    //    }
        
-    // })
-    
     this.tataservice.Insert_StockMovt_Update_StockItm(this.confirmList).subscribe(resp =>{
 
       if(resp != null && resp != undefined){
@@ -936,7 +1125,7 @@ resetAlert(){
       title: 'Oops...',  
       text: msg,  
       showConfirmButton: true,  
-      timer: 5000 
+      timer: 6000 
     })  
   }
 }
