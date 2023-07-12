@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 })
 export class StoreInRequestCancellationComponent {
 
+  pageName='Store In Cancellation'
   pageSizeOptions = [5, 10, 25, 50];
   StoreInRequestCancellationlist:any=[]
   Confirmlist:any=[]

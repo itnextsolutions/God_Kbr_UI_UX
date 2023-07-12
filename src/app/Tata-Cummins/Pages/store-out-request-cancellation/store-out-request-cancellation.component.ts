@@ -10,7 +10,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./store-out-request-cancellation.component.css']
 })
 export class StoreOutRequestCancellationComponent {
-
+ 
+  pageName='Store Out Cancellation';
   pageSizeOptions = [5, 10, 25, 50];
   StoreOutRequestCancellationlist:any=[]
   Confirmlist:any=[]

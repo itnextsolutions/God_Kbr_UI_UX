@@ -63,15 +63,15 @@ export class BreadcrumbNavComponent {
       return
     }
 
-    if(this.child_page === "Store In Request Cancellation"){
+    if(this.child_page === "Store In Cancellation"){
 
-      this.current_page = "Others";
+      this.current_page = "Cancellation";
       return
     }
 
-    if(this.child_page === "Store Out Request Cancellation"){
+    if(this.child_page === "Store Out Cancellation"){
 
-      this.current_page = "Others";
+      this.current_page = "Cancellation";
       return
     }
 

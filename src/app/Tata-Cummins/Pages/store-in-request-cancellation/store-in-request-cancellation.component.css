@@ -9,3 +9,9 @@
     white-space:nowrap;
     height: 36px;
 }
+
+#wrapper {
+    margin-left: 220px; 
+    padding: 0px; 
+    overflow-y: auto;
+  }
