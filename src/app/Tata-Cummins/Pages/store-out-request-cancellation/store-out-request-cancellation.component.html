@@ -46,9 +46,10 @@
                                 <input type="text" [(ngModel)]="term" placeholder="Search" style="margin-left: 750px; margin-bottom: 10px;">
                                 <div class="table-responsive">
                                     
-                                    <table class="table table-bordered" id="" width="100%" cellspacing="0">
+                                    <table class="table table-bordered" id="" width="100%" cellspacing="0" style="width: 100%;">
                                         <thead>
                                             <tr style="background-color:  #eeebf6; color: #361374;">
+                                                <th>No</th>
                                                 <th>Select</th>
                                                 <th>Request Id</th>
                                                 <th>Dispatch Order No</th>
@@ -63,6 +64,7 @@
 
                                         <tbody *ngFor="let data of StoreOutRequestCancellationlist | filter: term; let i=index " >
                                             <tr>
+                                                <td>{{i+(itemsPerPage*pageSize)-(itemsPerPage-1)}}</td>
                                                 <td>
                                                     <input type="checkbox" (change)="isCheked(data)"  >
                                                 

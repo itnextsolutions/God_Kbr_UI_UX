@@ -14,9 +14,11 @@
   }
 
   .table-responsive{
-    max-height: 130px; 
-    overflow-y: scroll;
+    /* max-height: 250px;  */
+    height: 250px;
+    /* overflow-y: scroll; */
   }
+
 
   .table-responsive thead{
     position: sticky;
