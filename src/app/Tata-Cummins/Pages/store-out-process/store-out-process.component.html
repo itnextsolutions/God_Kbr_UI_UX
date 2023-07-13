@@ -29,7 +29,7 @@
                 <div class="d-sm-flex align-items-center mb-4"  style="margin-left: 20px">
                     <input
                         #fileUploadSimple
-                        [accept]="'.csv'"
+                        accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                         type="file"
                         class="file-input"
                         (change)="ReadExcel($event)"

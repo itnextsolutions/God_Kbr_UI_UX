@@ -97,6 +97,8 @@ export class StoreOutProcessComponent {
   ExcelData: any =[];
 
   ReadExcel(event : any){
+
+    debugger;
     this.ExcelData =[];
     this.uploadList =[];
     
@@ -106,7 +108,7 @@ export class StoreOutProcessComponent {
      
        let file = event.target.files[0];
        
-       if(file.type == "text/csv"){
+       if(file.type == "text/csv" || file.type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
        let fileReader = new FileReader();
        fileReader.readAsBinaryString(file);
 
